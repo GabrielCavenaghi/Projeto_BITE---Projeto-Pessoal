@@ -1,0 +1,40 @@
+C:\Users\kacri\Downloads\Ilha de Tomoe\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.exe.config
+C:\Users\kacri\Downloads\Ilha de Tomoe\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.exe
+C:\Users\kacri\Downloads\Ilha de Tomoe\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.pdb
+C:\Users\kacri\Downloads\Ilha de Tomoe\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.AssemblyReference.cache
+C:\Users\kacri\Downloads\Ilha de Tomoe\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora_de_Passos_de_Dano.Form1.resources
+C:\Users\kacri\Downloads\Ilha de Tomoe\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora_de_Passos_de_Dano.Properties.Resources.resources
+C:\Users\kacri\Downloads\Ilha de Tomoe\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.GenerateResource.cache
+C:\Users\kacri\Downloads\Ilha de Tomoe\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.CoreCompileInputs.cache
+C:\Users\kacri\Downloads\Ilha de Tomoe\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.exe
+C:\Users\kacri\Downloads\Ilha de Tomoe\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.pdb
+C:\Users\kacri\Downloads\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.AssemblyReference.cache
+C:\Users\kacri\Downloads\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora_de_Passos_de_Dano.Form1.resources
+C:\Users\kacri\Downloads\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora_de_Passos_de_Dano.Properties.Resources.resources
+C:\Users\kacri\Downloads\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.GenerateResource.cache
+C:\Users\kacri\Downloads\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.CoreCompileInputs.cache
+C:\Users\kacri\Downloads\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.exe
+C:\Users\kacri\Downloads\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.pdb
+C:\Users\kacri\Downloads\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.exe.config
+C:\Users\kacri\Downloads\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.exe
+C:\Users\kacri\OneDrive\Área de Trabalho\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.exe.config
+C:\Users\kacri\OneDrive\Área de Trabalho\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.exe
+C:\Users\kacri\OneDrive\Área de Trabalho\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.pdb
+C:\Users\kacri\OneDrive\Área de Trabalho\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.AssemblyReference.cache
+C:\Users\kacri\OneDrive\Área de Trabalho\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora_de_Passos_de_Dano.Form1.resources
+C:\Users\kacri\OneDrive\Área de Trabalho\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora_de_Passos_de_Dano.Properties.Resources.resources
+C:\Users\kacri\OneDrive\Área de Trabalho\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.GenerateResource.cache
+C:\Users\kacri\OneDrive\Área de Trabalho\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.CoreCompileInputs.cache
+C:\Users\kacri\OneDrive\Área de Trabalho\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.exe
+C:\Users\kacri\OneDrive\Área de Trabalho\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.pdb
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.exe.config
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.exe
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\bin\Debug\Calculadora de Passos de Dano.pdb
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.AssemblyReference.cache
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.exe.config
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora_de_Passos_de_Dano.Form1.resources
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora_de_Passos_de_Dano.Properties.Resources.resources
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.GenerateResource.cache
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.csproj.CoreCompileInputs.cache
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.exe
+C:\Users\kacri\OneDrive\Área de Trabalho\RPG\Calculadora de Passos de Dano\Calculadora de Passos de Dano\obj\Debug\Calculadora de Passos de Dano.pdb
