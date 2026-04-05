@@ -1,0 +1,1239 @@
+[
+  {
+    "nome": "Detecção de Energia Amaldiçoada",
+    "classe": "Geral",
+    "grau_base": 4,
+    "descricao_base": "Você se concentra em sentir toda a energia amaldiçoada ao seu redor.\nPode gastar 1 PE para enxergar TUDO que possui energia amaldiçoada ( Tudo que é Paranormal ) em alcance Curto (cena).",
+    "versoes": {
+      "GRAU 3": "Pode gastar 1 PE para enxergar TUDO que possui energia amaldiçoada ( Tudo que é Paranormal ) em alcance Médio (cena)",
+      "GRAU 2": "Pode gastar 1 PE para enxergar TUDO que possui energia amaldiçoada ( Tudo que é Paranormal ) em alcance Longo (cena)",
+      "GRAU 1": "Pode gastar 1 PE para enxergar TUDO que possui energia amaldiçoada ( Tudo que é Paranormal ) em alcance Extremo (cena) ; Você também consegue distinguir quantidades massivas de energia amaldiçoada concentrada em numerais, assim conseguindo analisar o potencial de energia amaldiçoada de um ser, e conseguindo analisar a quantidade de energia amaldiçoada massiva em um ataque ( ambos em porcentagem )",
+      "ESPECIAL": "Pode gastar 1 PE para enxergar TUDO que possui energia amaldiçoada ( Tudo que é Paranormal ) em alcance Extremo (Permanente)"
+    }
+  },
+  {
+    "nome": "Versatilidade de Feiticeiro",
+    "classe": "Geral",
+    "grau_base": 4,
+    "descricao_base": "Devido a sua experiência como feiticeiro jujutsu você aprende algumas formas de “burlar” o sistema com o seu conhecimento.\n\nUma vez por cena, pode trocar um teste por Energia Amaldiçoada (exceto Luta ou Pontaria) por 1PE.",
+    "versoes": {
+      "GRAU 3": "2 vezes por cena pode trocar um teste por Energia Amaldiçoada (exceto Luta ou Pontaria) por 1PE.",
+      "GRAU 2": "3 vezes por cena pode trocar um teste por Energia Amaldiçoada (exceto luta ou pontaria) por 1PE; Adicionalmente você pode gastar 3 PE para somar seu treinamento em energia amaldiçoada na DT de um ataque ou habilidade, você pode fazer isso com a metade (arredondando pra cima) das vezes de uso original.",
+      "GRAU 1": "4 vezes por cena pode trocar um teste por Energia Amaldiçoada (exceto Luta ou Pontaria) por 1PE; Adicionalmente você pode gastar 3 PE para somar seu treinamento em Energia Amaldiçoada na DT de um ataque ou habilidade, você pode fazer isso com a mesma quantidade das vezes de uso original.",
+      "ESPECIAL": "Sempre que quiser (a quesito do Mestre) pode trocar um teste por Energia Amaldiçoada por 2PE.",
+      "ULTRA ESPECIAL": "Você pode gastar +2 PE, e ao invés de trocar por um teste de Energia Amaldiçoada, você soma seu bônus de Energia Amaldiçoada no teste."
+    }
+  },
+  {
+    "nome": "Fanático",
+    "classe": "Geral",
+    "grau_base": 4,
+    "descricao_base": "Você adquire maestria em combate, aprimorando a sua resistência em combate.\nIgnora penalidades de armadura, terreno difícil.",
+    "versoes": {
+      "GRAU 3": "Soma o seu LP em RD GERAL",
+      "GRAU 2": "Soma o DOBRO de seu LP no RD GERAL",
+      "GRAU 1": "Soma o QUÁDRUPLO de seu LP+AB no RD GERAL",
+      "ESPECIAL": "Soma o DOBRO do seu NEX em RD GERAL e some o seu treinamento em Energia amaldiçoada para RD Paranormal",
+      "ULTRA ESPECIAL": "Soma o seu treinamento em Energia amaldiçoada em RD GERAL e some o seu NEX*AB/4 para RD Paranormal"
+    }
+  },
+  {
+    "nome": "Reflexos Defensivos",
+    "classe": "Geral",
+    "grau_base": 4,
+    "descricao_base": "Você recebe +2 em Defesa e em testes de resistência.",
+    "versoes": {
+      "GRAU 3": "Muda o bônus para +5 na defesa e +3 nos testes de resistência.",
+      "GRAU 2": "Muda o bônus para +10 na defesa e +7 nos testes de resistência.",
+      "GRAU 1": "Muda o bônus para +LP*2 na defesa e +LP nos testes de resistência.",
+      "ESPECIAL": "Muda o bônus para +LP*(AB/2) na defesa e +LP*2 nos testes de resistência."
+    }
+  },
+  {
+    "nome": "Sentido Tático",
+    "classe": "Geral",
+    "grau_base": 4,
+    "descricao_base": "Você pode gastar uma ação de movimento e 2 PE para analisar o ambiente. Se fizer isso, recebe um bônus em Defesa e em testes de resistência igual ao seu Intelecto ou Agilidade até o final da cena.",
+    "versoes": {
+      "GRAU 3": "Dobra o bônus de defesa e recebe +LP em testes de resistência relacionados ao ambiente",
+      "GRAU 2": "Triplica o bônus de defesa e dobra o bônus em testes de resistência, além disso você recebe +3m de deslocamento",
+      "GRAU 1": "Você pode usar essa habilidade como ação livre"
+    }
+  },
+  {
+    "nome": "Pensamento Ágil",
+    "classe": "Geral",
+    "grau_base": 4,
+    "descricao_base": "Uma vez por rodada, durante uma cena de investigação, você pode gastar 2 PE para fazer uma ação de procurar pistas adicionais.",
+    "versoes": {}
+  },
+  {
+    "nome": "Movimento Estratégico",
+    "classe": "Geral",
+    "grau_base": 4,
+    "descricao_base": "Sua defesa agora é baseada na estratégia, somando com o Intelecto invés de somar com a Agilidade.",
+    "versoes": {}
+  },
+  {
+    "nome": "Na mira",
+    "classe": "Geral",
+    "grau_base": 4,
+    "descricao_base": "Ao gastar uma ação para mirar, você não só ganha o +1D20 de ataque como ganha +5 adicionais no teste final.",
+    "versoes": {
+      "GRAU 3": "Ganha +7 ao invés de +5",
+      "GRAU 2": "Ganha +10 ao invés de +5",
+      "GRAU 1": "Ganha +12 ao invés de +5",
+      "ESPECIAL": "Ganha +15 ao invés de +5"
+    }
+  },
+  {
+    "nome": "Passo Vertical",
+    "classe": "Geral",
+    "grau_base": 4,
+    "descricao_base": "Você ganha Deslocamento de Escalada igual a seu Deslocamento Normal.",
+    "versoes": {}
+  },
+  {
+    "nome": "Explosivo Improvisado",
+    "classe": "Geral",
+    "grau_base": 4,
+    "descricao_base": "Você pode gastar uma ação completa e 2 PE para sacrificar um pacote de munição para o transformar em uma granada. Balas curtas geram uma granada que causa 3d6 de dano de impacto e balas longas e cartuchos geram uma granada que causa 6d6 de dano de impacto.",
+    "versoes": {}
+  },
+  {
+    "nome": "Mochila de Maldições",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Você imbuí energia amaldiçoada na bolsa ou item que usa para carregar suas coisas, podendo diminuir o espaço que um dos itens ocupa. Também pode escolher um tipo de item amaldiçoado para reduzir 1 categoria e 1 espaço.",
+    "versoes": {
+      "GRAU 2": "Também pode escolher 2 tipos de item amaldiçoado para reduzir 1 categoria e 1 espaço.",
+      "GRAU 1": "Também pode escolher 6 tipos de item amaldiçoado para reduzir 3 categorias e 3 espaços.",
+      "ESPECIAL": "Sua Energia Amaldiçoada ganha a propriedade de se expandir sem ocupar o espaço de forma quase infinita, podendo armazenar até NEX espaços em sua própria EA."
+    }
+  },
+  {
+    "nome": "Exorcismo",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Um dos deveres de um feiticeiro jujutsu é exorcizar maldições, podendo expressar uma maldição independente, ou uma maldição que habita em um corpo.\nRealiza um teste de Ocultismo com Presença (DT varia conforme a maldição) se falhar não consegue exorcizar e recebe dano de sanidade igual a presença perturbadora da criatura.\nRealiza um teste de (Ocultismo com Presença) para tentar tirar uma maldição de algo ou alguém, extraindo-a e podendo destruí-la ou usá-la para outra coisa (Só pode exorcizar maldições de grau 4).",
+    "versoes": {
+      "GRAU 2": "pode exorcizar maldições de grau 3",
+      "GRAU 1": "pode exorcizar maldições de grau 2.",
+      "ESPECIAL": "pode exorcizar maldições de grau 1."
+    }
+  },
+  {
+    "nome": "Ataque Especial",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Quando faz um ataque, você pode gastar 2 PE para receber +5 no teste de ataque ou na rolagem de dano. A cada +20% de NEX pode gastar +1 PE para receber +5 nesse bônus que pode ser adicionado em qualquer combinação que você queira.",
+    "versoes": {
+      "GRAU 2": "O bônus no ataque muda para +7 ao invés de +5.",
+      "GRAU 1": "O bônus no ataque muda para +15 ao invés de +7.",
+      "ESPECIAL": "Para cada PE gasto nessa habilidade você adiciona +5% de dano, além de mudar o bônus de ataque para +NEX/2."
+    }
+  },
+  {
+    "nome": "Flashback",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Um novo trauma recente desbloqueia um conhecimento adormecido. Talvez fosse uma memória enterrada fundo em sua mente, ou uma habilidade desenvolvida por seu cérebro como um mecanismo de defesa. Escolha uma origem que não seja a sua. Você recebe o poder dessa origem.",
+    "versoes": {}
+  },
+  {
+    "nome": "Combate Defensivo",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Quando usa a ação para agredir um ser, você pode combater defensivamente. Se fizer isso, até seu próximo turno, sofre -5 em testes de ataque, mas recebe +5 na defesa e +VIG RD geral.",
+    "versoes": {
+      "GRAU 2": "Muda o bônus para +7 na defesa e +VIG*2+LP de RD geral, porém passa a sofrer -7 em testes de ataque.",
+      "GRAU 1": "Muda o bônus para +10 na defesa e +VIG*AB+LP*AB de RD geral, porém passa a sofrer -10 em testes de ataque.",
+      "ESPECIAL": "Muda o bônus para +15 na defesa e +VIG*LP+NEX*AB de RD geral, porém passa a sofrer -15 em testes de ataque."
+    }
+  },
+  {
+    "nome": "Poder Latente",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Devido ao seu treinamento intenso, você aprimora suas habilidades físicas puras.\nAumenta um dado do mesmo tipo em todo dano corpo a corpo",
+    "versoes": {
+      "GRAU 2": "Aumenta 10 dados do mesmo tipo em todo dano armado ou desarmado e aumenta em 1 o passo de dano de qualquer arma.",
+      "GRAU 1": "Aumenta 20 dados do mesmo tipo em todo dano armado ou desarmado e aumenta em 2 o passo de dano de qualquer arma.",
+      "ESPECIAL": "Aumenta 50 dados do mesmo tipo em todo dano armado ou desarmado e aumenta em 4 o passo de dano de qualquer arma."
+    }
+  },
+  {
+    "nome": "Aura Reforçada",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Reforçando o fluxo da sua aura, você se torna capaz de pausar e anular uma parcela do dano que recebe fisicamente, tornando mais difícil de realmente atingir seu corpo. Você recebe redução contra dano físico - igual ao dobro do seu NEX",
+    "versoes": {
+      "GRAU 2": "Melhorando ainda mais o fluxo, você se torna capaz de transformar a sua aura em uma fortaleza impenetrável contra simples golpes físicos. Ao obter essa habilidade, você pode, como uma ação de movimento, transformar a sua aura em impenetrável por 1 rodada, gastando 3 PE. Enquanto sua aura estiver impenetrável, você recebe RDP de 50% a dano cortante, perfurante e de impacto",
+      "GRAU 1": "Evoluindo ao limite o fluxo da aura, você consegue a deixar tão densa e maciça que se torna um casulo protetivo. Ao obter essa habilidade você pode, como uma ação Padrão, formar um casulo de energia por 1 rodada, gastando 6 PE. Enquanto o casulo estiver ativo, você recebe imunidade a dano cortante, perfurante e de impacto."
+    }
+  },
+  {
+    "nome": "Aura Macabra",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Maldita e vil, sua aura é macabra e perturba aqueles que estejam sendo afetados por ela. Toda criatura agressiva que começar um turno dentro de 1,5 metros de você precisa realizar um teste de resistência de vontade (atributo principal da técnica). Em uma falha, ela mesma recebe sua presença perturbadora, se não tiver, ela recebe a condição amedrontada.",
+    "versoes": {}
+  },
+  {
+    "nome": "Sangue de Xamã",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Recebe cura acelerada no valor do seu LP por rodada.",
+    "versoes": {
+      "GRAU 2": "Recebe cura acelerada no valor do DOBRO seu LP por rodada e é imune a doenças mundanas.",
+      "GRAU 1": "Recebe cura acelerada no valor do TRIPLO seu LP por rodada e é imune a doenças mundanas.",
+      "ESPECIAL": "Recebe cura acelerada no valor do dobro do seu NEX."
+    }
+  },
+  {
+    "nome": "Estudo Assombroso",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Ao escolher esse poder você pode escolher dois rituais de círculos que já tenha acesso, que não contam no seu limite de rituais aprendidos. Pré-Requisito: INT 3 e treinado em Ocultismo.",
+    "versoes": {}
+  },
+  {
+    "nome": "Armadura de Pele",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "O inimigo bate em você e ele que se machuca. \nToda vez que um inimigo te atinge com um ataque corpo-a-corpo ele perde PV equivalentes a (VIG)d4+VIG. Requer VIG 3 e NEX 40%.",
+    "versoes": {
+      "GRAU 2": "O dano muda para (5*VIG)d6",
+      "GRAU 1": "O dano muda para (5xVIG)d4+VIG",
+      "ESPECIAL": "O dano muda para 1/10 do dano recebido.",
+      "ULTRA ESPECIAL": "O dano muda para 1/(20-AB) do dano recebido."
+    }
+  },
+  {
+    "nome": "Revidar",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Sempre que utilizar a reação bloquear e o inimigo te acertar, você pode gastar uma reação e 2 PE para fazer um ataque corpo a corpo neste inimigo.",
+    "versoes": {
+      "GRAU 2": "Ao errar um ataque contra um alvo, você pode gastar 3 PE para mesmo assim causar metade do dano. Por mais que o ataque tenha sido um crítico, você causará apenas metade do dano de um ataque normal"
+    }
+  },
+  {
+    "nome": "Tudo que Vai, Volta",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Sempre que um aliado adjacente sofrer um ataque corpo-a-corpo, você pode gastar 3 PE para fazer um ataque no inimigo que o atacou como uma reação. Requer NEX 40% e ser Mestre em Reflexos.",
+    "versoes": {}
+  },
+  {
+    "nome": "Extensão do Corpo",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Sua arma se torna praticamente uma extensão do seu próprio corpo: você não pode ser desarmado, você recebe +5 para acertar ataques e em rolagens de dano e o alcance de seus ataques aumentam em 1,5 metros a cada Grau.",
+    "versoes": {}
+  },
+  {
+    "nome": "Ataque Infalível",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Ao rolar o dano de um ataque com arma, quando rolar 1 ou 2, você pode rolar novamente, ficando com o novo resultado, mesmo se for igual. Você também não pode ter os níveis de dano da sua arma reduzidos.",
+    "versoes": {
+      "GRAU 2": "Muda para resultados abaixo de 5.",
+      "GRAU 1": "Muda para resultados abaixo de 10 e pode re-rolar 2 vezes.",
+      "ESPECIAL": "Recebe +10 em deslocamento de 15 e pode re-rolar 4 vezes."
+    }
+  },
+  {
+    "nome": "Condicionamento Brutal",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Você ganha mais +2m de Deslocamento e tem +3 em Atletismo.",
+    "versoes": {
+      "GRAU 2": "Recebe +3m de Deslocamento e +5 Atletismo",
+      "GRAU 1": "Recebe +5m de Deslocamento e +10 em Atletismo",
+      "ESPECIAL": "Recebe +10m em deslocamento e +20 em Atletismo.",
+      "ULTRA ESPECIAL": "Recebe +LPm em deslocamento e +NEX/2 em Atletismo."
+    }
+  },
+  {
+    "nome": "Queimar a largada",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "No primeiro turno de todo combate você age primeiro, independente do valor tirado na rolagem de iniciativa, após esse turno você volta a ordem normal de iniciativa.",
+    "versoes": {
+      "GRAU 2": "Além disso, você tem +1d20 e +5 em testes de Iniciativa.",
+      "GRAU 1": "Recebe +1d20 e +10 em testes de Iniciativa.",
+      "ESPECIAL": "Passa a ter um crítico garantido em iniciativa e recebe +20 em testes de Iniciativa.",
+      "ULTRA ESPECIAL": "Recebe +35 em iniciativa e passa a sempre ser o primeiro."
+    }
+  },
+  {
+    "nome": "Laços da Irmandade",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Ao adquirir este poder, você deve um escolher um aliado voluntário para se tornar o seu “parceiro”, este também deve adquirir este feitiço, cada um pode ter apenas um parceiro, ou seja, não pode usar o mesmo poder em outra pessoa, você pode mudar o parceiro caso ele morra ou caso queira encerrar essa relação, porém, dessa forma você pode ter um novo parceiro após uma semana.\nVocê e seu parceiro sempre sabem a direção em que o outro está, além disso, como uma ação livre você pode transmitir uma emoção para ele. Ao ver o seu parceiro ser atacado, você pode gastar 2 PE e uma reação para ele ganhar uma resistência igual seu Vigor a esse dano.",
+    "versoes": {
+      "GRAU 2": "Adicionalmente, ao ver o seu parceiro recebendo dano mental, você pode gastar 4 PE para que o dano seja dividido igualmente entre vocês dois",
+      "GRAU 1": "Ao deixar de usar alguma ação em seu turno, seja ela padrão, movimento, reação ou mesmo completa, você a transmite para seu parceiro e idem.",
+      "ESPECIAL": "Com as mentes trincadas, os dois partilham uma soma do RD mental de vocês."
+    }
+  },
+  {
+    "nome": "Físico Incomum",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Você ganha RD 10 em um dos tipos a seguir: Eletricidade, Fogo, Frio e Químico.",
+    "versoes": {
+      "GRAU 2": "RD igual a 10+2*LP.",
+      "GRAU 1": "RD igual a 10+AB*LP.",
+      "ESPECIAL": "RD igual a LP*(NEX/2)."
+    }
+  },
+  {
+    "nome": "Gastroterapia",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Ao usar a ação relaxar você pode usar uma ação de alimentar-se como ação livre.",
+    "versoes": {}
+  },
+  {
+    "nome": "Brutalidade Aplicada",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Quando faz um ataque corpo a corpo, você pode sofrer –2 na defesa para receber +5 na rolagem de dano.",
+    "versoes": {
+      "GRAU 2": "+10 na rolagem de dano",
+      "GRAU 1": "+15 na rolagem de dano e -4 na defesa"
+    }
+  },
+  {
+    "nome": "Investigador Enxerido",
+    "classe": "Geral",
+    "grau_base": 3,
+    "descricao_base": "Você recebe treino em ciências, caso você já seja treinado, você ganha +2 em todos os testes dessa perícia. Além disso, uma quantidade de vezes igual 1 + seu valor em INT, você pode gastar 2 PE para analisar uma aspecto de uma cena de investigação e conseguir uma das seguintes respostas:\n*Danos: Você analisa um rasgo, impacto ou até buraco de bala e deduz o que gerou esse estrago. Mecanicamente, seu Mestre revela a você a arma usada, o tipo de arma corpo-a-corpo ou a quanto tempo aproximadamente esse estrago foi feito, além de qualquer outra informação a critério do Mestre.\n*Analisar resíduo: Você analisa um resíduo de alguma substância na cena, ao usar essa habilidade você recebe +5 em um teste de Ciências ou Ocultismo para averiguar essa pista.\n*Dupla-checagem: Você pode realizar um teste de Investigação ao fim de uma cena para saber se ainda há algum ponto de interesse ou alguma pista que foi deixada para trás. Se esse teste é possível ou não e sua dificuldade é decidida pelo Mestre.\n*Passagem rápida: Você pode analisar dois pontos de interesse na mesma cena de investigação.",
+    "versoes": {}
+  },
+  {
+    "nome": "Kokusen (Raio Negro)",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "(10PE) (Instantaneo) ( REQS: 2FOR, 2AGI e 2PRE )\nO kokusen é quando aplicamos energia amaldiçoada no timing de um milésimo de segundo no punho assim que ele atinge o alvo. O poder destrutivo de seu golpe é explosivamente maior, igual a um golpe normal 2.5x mais forte, para isso, é necessário fazer o teste do kokusen gastando 10 PE, você deve realizar um teste de Energia Amaldiçoada com Presença de DT inicial de NEX-LP, caso tenha sucesso você consegue soltar energia amaldiçoada no timing correto, causando um raio negro. O dano deve ser calculado da seguinte maneira: Dano_Padrão*2.5-Dano_Padrão (A diferença de seu dano padrão pro seu dano do primeiro Kokusen), essa diferença será a constante(x ou r), que será somada a cada novo kokusen, como uma PA... Exemplo: \"Dano Padrão: 10 ; Dano Kokusen inicial: 10*2.5 = 25.\n1° = 25 ; 2° = 25 (+15) ; 3° = 40 (+15) ; 5° = 55 (+15)\"\n\nApós ter feito um kokusen, pode-se tentar combar e desferir outro kokusen, assim a cada novo kokusen, o custo de PE aumenta em +AB, e a DT aumentá + LP novamente... fazendo assim cada vez mais difícil de desferir um novo kokusen consecutivo. \n(Caso tire 20 no resultado do dado no teste do kokusen o alvo tem que fazer um teste de Fortitude com a DT igual á do seu kokusen atual, caso não passe ele fica inconsciente, caso passe fica enjoado por 1d4 rodadas)",
+    "versoes": {}
+  },
+  {
+    "nome": "Pegando o Embalo",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "Ao eliminar LP/2 inimigos você recebe uma ação de movimento extra por uma rodada.",
+    "versoes": {
+      "GRAU 1": "Recebe uma reação.",
+      "ESPECIAL": "Recebe uma ação padrão."
+    }
+  },
+  {
+    "nome": "Combatente Analista",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "Você pode usar Luta ou Pontaria com Intelecto e pode substituir qualquer teste por um de Intelecto (por 2 PE).",
+    "versoes": {}
+  },
+  {
+    "nome": "Evasão",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "Você está treinado para escapar dos efeitos em área. Sempre que fizer um teste de Reflexos para reduzir o dano de um ataque em área pela metade, você não recebe dano se passar, e recebe metade do dano caso falhe. Esta habilidade não surte efeito caso você esteja imóvel, indefeso, ou lento.",
+    "versoes": {}
+  },
+  {
+    "nome": "Especialista Diletante",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "A vida lhe ensinou que todo tipo de conhecimento pode ser útil. Você aprende um feitiço que não pertence à sua classe (exceto poderes de trilha ou de restringidos), à sua escolha, cujos pré-requisitos possa cumprir.",
+    "versoes": {}
+  },
+  {
+    "nome": "Ataque de Oportunidade",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "Sempre que um ser sair voluntariamente de um espaço adjacente ao seu, você pode gastar uma reação e 1 PE para fazer um ataque corpo a corpo contra ele.",
+    "versoes": {
+      "GRAU 1": "Sempre que um ser adjacente a você estiver com uma condição negativa, você pode gastar uma ação livre e 3 PE para fazer um ataque adicional a ele, limitado a uma vez por turno",
+      "ESPECIAL": "Você é um oportunista perfeito, ignore qualquer efeito que impossibilite o uso dessa habilidade"
+    }
+  },
+  {
+    "nome": "Liderar",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "Uma vez por cena, você pode liderar alguém, fazendo com que o alvo possa atacar mais uma vez. Esta pessoa atacará com o seu valor de Intelecto, mas com o próprio valor de Luta ou Pontaria. (4 PE)",
+    "versoes": {
+      "GRAU 1": "Pode realizar 3 vezes pela cena."
+    }
+  },
+  {
+    "nome": "GRANDÃO",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "Você é considerado uma categoria maior de tamanho, com um porte brutal desses você aumenta em 1 passo de dano corpo a corpo, mas em testes de Furtividade e testes de manobra diminui 10 de treinamento. Requer FOR 4 e VIG 4",
+    "versoes": {
+      "GRAU 1": "Aumenta mais uma vez em 1 passo do dano corpo a corpo.",
+      "ESPECIAL": "Aumenta mais uma vez em 1 passo de dano corpo a corpo e recebe +1x de multiplicador."
+    }
+  },
+  {
+    "nome": "Último suspiro",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "A primeira vez que um ser reduzir seus pontos de vida a 0 em uma cena, você pode gastar 2 PE e uma reação para atacar uma vez antes de cair.",
+    "versoes": {
+      "GRAU 1": "Pode agora ter uma ação padrão + uma ação de agredir, por 4 PE",
+      "ESPECIAL": "Ao zerar os PV e suas rodadas em morrendo, você pode gastar 5 PE para permanecer em uma última luta e não cairá enquanto a luta não acabar ( após a luta, o personagem morrerá instantaneamente. E durante a luta o personagem não possui ações que divirjam do combate em si )"
+    }
+  },
+  {
+    "nome": "Antecipar",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "Você consegue usar a reação bloqueio para ataques a distância.",
+    "versoes": {
+      "GRAU 1": "Além disso, você tem duas reações especiais de defesa por turno ao invés de uma"
+    }
+  },
+  {
+    "nome": "Empenho Recompensador",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "Ao estar com menos de 1/4 de seu PE total, você pode escolher um atributo a sua escolha para ganhar um dado extra em todas as suas rolagens até o fim da cena.",
+    "versoes": {}
+  },
+  {
+    "nome": "Devaneio",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "Ao realizar uma ação de “Identificar Criatura”, você recebe uma informação adicional sobre a criatura analisada caso tenha sucesso no teste.",
+    "versoes": {
+      "GRAU 1": "Adicionalmente, você pode realizar essa a ação de “Identificar Criatura” agora como ação de movimento, além disso, você recebe +5 na defesa contra ataque de uma criatura que você tenha analisado com sucesso",
+      "ESPECIAL": "Você reduz a defesa da criatura em 25 e descobre o Enigma do Medo, caso haja."
+    }
+  },
+  {
+    "nome": "Aura Elemental",
+    "classe": "Geral",
+    "grau_base": 2,
+    "descricao_base": "Você converte as propriedades da sua aura, imbuindo-a com um elemento, para assim ser capaz de alterar o tipo de dano causado pelos seus ataques com armas. Ao obter essa habilidade, você pode escolher um dos tipos de danos elementais para ser o novo tipo de dano dos seus ataques com armas. São eles: químico, chocante, frio, fogo, radiante, venenoso ou do elemento da sua técnica. Dentro de combate, como uma ação livre, você pode desabilitar a aura elemental, retornando os seus ataques ao tipo de dano padrão. Para elementos paranormais você deve ter afinidade com ele.",
+    "versoes": {
+      "GRAU 1": "Ao já ter uma aura elemental, você se foca em melhorar tal propriedade, aumentando o dano causado e tornando-se resistente a ele. Ao obter essa habilidade, todo ataque feito com corpo-a-corpo ou com arma causa 1d8 de dano adicional do tipo escolhido previamente. Além disso, você recebe RD% de 50% ao tipo de dano escolhido. O dano aumenta +1 passo para cada grau, além de escalar com Verdadeiro Jujutsu",
+      "ESPECIAL": "Você pode expandir sua aura e aplicar os mesmos bônus que você recebe da aura elemental para todos no alcance do ataque."
+    }
+  },
+  {
+    "nome": "Técnica de Reversão",
+    "classe": "Geral",
+    "grau_base": 1,
+    "descricao_base": "(Req: Experiência de Quase Morte e Sangue de Xamã)\n\nUma vez por rodada pode recuperar 75% do dano causado em você, gastando LP*3 PE, você pode usar essa habilidade até AB/2 vezes sem nenhum tipo de efeito colateral, ao passar disso você recebe 1 ponto de exaustão a cada 2 usos.",
+    "versoes": {
+      "ESPECIAL": "Toda cura é igual ao dano recebido, além disso muda a quantidade de vezes que se pode usar para AB vezes, adicionalmente pode se curar de condições que estejam te afetando gastando NEX PE, você pode realizar essa ação metade das vezes do efeito original.",
+      "ULTRA ESPECIAL": "Alternativamente, você pode usar essa habilidade para recuperar todos os seus PE ou sanidade, destruindo sua mente e reconstruindo ela, porém apenas uma vez na cena, esse efeito vem com a chance de falha, que depende puramente da sua habilidade, você deve rolar 1d20 + 1 a cada 10 de EA, com a DT igual seu LP+AB/2 +1,5 a cada vez usada."
+    }
+  },
+  {
+    "nome": "Surto de Adrenalina",
+    "classe": "Geral",
+    "grau_base": 1,
+    "descricao_base": "Gastando 15 PE você pode realizar mais uma ação padrão no seu turno, uma vez por cena.",
+    "versoes": {
+      "ESPECIAL": "Ao invés de uma vez por cena, é uma vez por rodada, porém muda o custo para 35 PE independente do LP."
+    }
+  },
+  {
+    "nome": "Sombra da Morte",
+    "classe": "Geral",
+    "grau_base": 1,
+    "descricao_base": "Quando atacar furtivamente, você poderá realizar o teste somando metade da sua Furtividade.",
+    "versoes": {
+      "ESPECIAL": "Quando atacar furtivamente, você poderá realizar o teste somando sua Furtividade."
+    }
+  },
+  {
+    "nome": "Aprendizado Ritualístico",
+    "classe": "Geral",
+    "grau_base": 1,
+    "descricao_base": "Libera um número de rituais igual ao seu Intelecto e 1 a cada NEX ímpar, esse poder é retroativo.",
+    "versoes": {}
+  },
+  {
+    "nome": "Técnicas de Barreira",
+    "classe": "Geral",
+    "grau_base": 1,
+    "descricao_base": "Barreiras são zonas ou territórios estabelecidos com jujutsu, de vários tamanhos e efeitos que qualquer pessoa com energia amaldiçoada suficiente pode aprender a criar. Barreiras são geralmente usadas para ocultar, conter ou negar a entrada de entidades dentro desse espaço. Técnicas amaldiçoadas que erguem barreiras são conhecidas como técnicas de barreira.\n\nDentre as técnicas de barreira existem outros tipos variados de se formar uma barreira, algumas barreiras, como cortinas, possuem uma camada externa para proteger a borda, enquanto outras não. Cercar e proteger o usuário é o uso básico de uma barreira.\n\nBarreiras complexas podem ser personalizadas com certas condições usando votos vinculativos e talismãs, mas isso requer um certo grau de habilidade para ser realizado de forma eficaz, ou seja, barrar certas pessoas de uma barreira e permitir a entrada de outras é complicado de conseguir. As barreiras reconhecem apenas indivíduos com energia amaldiçoada e ignoram completamente objetos e edifícios inanimados.\n\nCortina:\nUma cortina é criada com o mesmo processo geral de qualquer barreira simples. A técnica de barreira é ativada com o encantamento:\n\"Emerja da escuridão, mais negro que a escuridão. Purifique o que é impuro.\"\nGasta 2 PE para você criar uma ilusão do tamanho da sua área da Expansão de Domínio onde todos que estão fora dela vêem uma imagem a sua escolha (imagem comum: o local normal sem feiticeiros ou sem o paranormal)\n\nBarreiras Ancestrais:\nSão as barreiras mais fortes que têm, mais fortes que as barreiras puras. Como a barreira aplicada anteriormente em Cloud City, esse tipo de barreira tem uma capacidade de distorção espacial gigante. Barreiras ancestrais podem durar vários séculos contínuos com os efeitos em potência completa. Barreiras ancestrais podem ter um alcance de vários quilômetros; dentro dessas barreiras quaisquer regras podem ser aplicadas pelo criador da barreira.\n(REQ CELESTIAL EM ENERGIA AMALDIÇOADA)",
+    "versoes": {}
+  },
+  {
+    "nome": "Golpe Imparável",
+    "classe": "Geral",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Quando usar uma ULT (Seja de estilo de luta ou técnica), pode gastar +20 PE para ignorar resistência a dano. Requer NEX 70%.",
+    "versoes": {}
+  },
+  {
+    "nome": "MoonWalk",
+    "classe": "Geral",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Você pode gastar 2 PE para andar no ar recebendo deslocamento de voo 9m até o fim da rodada, caso não termine a rodada sobre uma superfície estável, você cai. Pode mudar o gasto para 15 PE e a duração da habilidade muda para cena.",
+    "versoes": {}
+  },
+  {
+    "nome": "Sede de Sangue",
+    "classe": "Geral",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Quando reduz um inimigo a 0 PV, você recebe um bônus cumulativo de +1 em testes de ataque. Você começa com +FOR nesses stacks. O bônus é permanente.",
+    "versoes": {}
+  },
+  {
+    "nome": "Só Pra Garantir",
+    "classe": "Geral",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Escolha um número de perícias treinadas igual ao seu Intelecto. Com essas perícias, você pode gastar 2 PE para escolher 15 como resultado do dado em qualquer situação, exceto testes de ataque.",
+    "versoes": {}
+  },
+  {
+    "nome": "Palavras Afiadas",
+    "classe": "Geral",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Você pode gastar 10 PE para somar seu Intelecto de dano por dado rolado em apenas um ataque, técnica ou estilo.",
+    "versoes": {}
+  },
+  {
+    "nome": "Kkkkkkk, Errou, Trouxa",
+    "classe": "Geral",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Você possui uma quantidade de cargas igual a metade da sua Agilidade e pode gastar 2 cargas para ignorar um acerto de um ataque ou habilidade do inimigo. As cargas voltam após um dia.",
+    "versoes": {}
+  },
+  {
+    "nome": "Protagonismo Flash back",
+    "classe": "Geral",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Você pode gastar uma ação em uma cena de interlúdio para rever todos seus ensinamentos sobre uma perícia. Ao fazer isto, você deve rolar 2d4 para cada grau de treinamento e ponto de Intelecto que tiver, até a próxima cena de interlúdio, você se mantém com este resultado como seu bônus naquela perícia. Por exemplo, caso tenha 2 graus de treino e 2 pontos de Intelecto, deve rolar 8d4, se seu resultado cair 12, até o fim do próximo interlúdio, seu valor nesta perícia será 12 em vez do normal.",
+    "versoes": {}
+  },
+  {
+    "nome": "Estancar ferimentos",
+    "classe": "Geral",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Você pode curar 20% da sua vida pagando 6 PE e isso reduz em 3 o nível de sangramento (caso esteja sangrando).",
+    "versoes": {}
+  },
+  {
+    "nome": "Gostosão",
+    "classe": "Geral",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Você é bonito demais para falhar.\nQuando tiver um atributo base em alguma perícia ou técnica que você pode rolar dados, você pode substituir por Presença.",
+    "versoes": {}
+  },
+  {
+    "nome": "Tempo do Gênio",
+    "classe": "Geral",
+    "grau_base": "ULTRA ESPECIAL",
+    "descricao_base": "Gastando 1K PE, durante 3 rodadas o passo de todas suas ações diminui em 1, ações livres tem limite de AGI+INT vezes por rodada. Esse feitiço pode ser usado 1 vez por cena.",
+    "versoes": {}
+  },
+  {
+    "nome": "Verdadeiro Tempo do Gênio",
+    "classe": "Geral",
+    "grau_base": "ULTRA ESPECIAL",
+    "descricao_base": "Gastando 2.5K PE (independente do LP), durante 5 rodadas o passo de todas suas ações diminui em 1, ações livres tem limite de AGI*INT vezes por rodada. Esse feitiço pode ser usado 1 vez por cena.",
+    "versoes": {}
+  },
+  {
+    "nome": "Força do Prodígio",
+    "classe": "Geral",
+    "grau_base": "ULTRA ESPECIAL",
+    "descricao_base": "Recebe +AB/4 em seus passos de dano para técnica ou corpo a corpo.",
+    "versoes": {}
+  },
+  {
+    "nome": "Força do Verdadeiro Prodígio",
+    "classe": "Geral",
+    "grau_base": "ULTRA ESPECIAL",
+    "descricao_base": "Muda o buff para +AB/2 em seus passos de dano para técnica ou corpo a corpo.",
+    "versoes": {}
+  },
+  {
+    "nome": "Combate Improvisado",
+    "classe": "Invocador",
+    "grau_base": 4,
+    "descricao_base": "Você causa +2d6 de dano usando armas improvisadas. Em NEX 35%, o dano aumenta para 2d8 e, em NEX 70%, para 2d10. Além disso, você não tem penalidade por atacar com esse tipo de arma.",
+    "versoes": {
+      "GRAU 3": "Recebe mais INT dados em seu dano desarmado.",
+      "GRAU 2": "Dobra os efeitos anteriores.",
+      "GRAU 1": "Aumenta em mais INT/2 Passos seu dano desarmado.",
+      "ESPECIAL": "Recebe um estilo de luta adicional."
+    }
+  },
+  {
+    "nome": "Invocação favorita",
+    "classe": "Invocador",
+    "grau_base": 3,
+    "descricao_base": "Gasto de PE -1 para uma única invocação escolhida posteriormente.",
+    "versoes": {
+      "GRAU 1": "A invocação recebe +1 passo de dano e no início de um combate ele recebe 10% dos PV máximos em PV temporário.",
+      "ESPECIAL": "Mude o efeito para +3 passos e 25% dos PV máximos em PV temporário."
+    }
+  },
+  {
+    "nome": "Invocação Celeste",
+    "classe": "Invocador",
+    "grau_base": 3,
+    "descricao_base": "Suas invocações se tornam seres superiores elas recebem 1 característica/ação e +1 passo de dano de invocações por grau.",
+    "versoes": {}
+  },
+  {
+    "nome": "Invocação Potente",
+    "classe": "Invocador",
+    "grau_base": 3,
+    "descricao_base": "Gastando 3PE no gasto de invocar, você adiciona metade da sua vida máxima à vida total de sua invocação.\n(intrinsecamente, você adiciona seu Intelecto aos dados de dano da invocação e na DT).",
+    "versoes": {
+      "ESPECIAL": "Gastando +5PE no gasto de invocar para dobrar a vida da invocação"
+    }
+  },
+  {
+    "nome": "Especialista em invocações",
+    "classe": "Invocador",
+    "grau_base": 3,
+    "descricao_base": "Esse poder varia dependendo da sua trilha:\nInvocador Clássico:\nPode manter mais 3 invocações, totalizando 4, além disso a DT de todas as sua invocações aumenta em 5.\nInvocador Royal guard:\nPode escolher entre manter outra invocação além do guardião e receber +10 na DT do seu guardião, ou aumentar a DT do guardião em 15 e ele recebe +1 passo de dano.\nInvocador Arsenal de guerra:\nAumenta a quantidade de invocações que você pode manter em INT, e a DT delas aumenta em 3.",
+    "versoes": {}
+  },
+  {
+    "nome": "Companhia Libertadora",
+    "classe": "Invocador",
+    "grau_base": 3,
+    "descricao_base": "Estando na companhia de suas invocações, você se sente completamente livre, podendo se mover com tranquilidade pelo campo de batalha.\nEnquanto houver uma invocação dentro de 9 metros de você, você ignora terreno difícil e não recebe ataques de oportunidade ao se mover pelo espaço de inimigos.",
+    "versoes": {
+      "GRAU 2": "Muda de 9m para 12m",
+      "GRAU 1": "Muda de 9m para 18m"
+    }
+  },
+  {
+    "nome": "Mestre em invocações",
+    "classe": "Invocador",
+    "grau_base": 2,
+    "descricao_base": "Esse poder varia dependendo da sua trilha:\nInvocador Clássico:\nPode manter mais 7 invocações, totalizando 8, além disso a DT de todas as suas invocações aumenta em 10. (sobrepõe à anterior)\nInvocador Royal guard:\nPode escolher entre manter outra invocação além do guardião e receber +10 na DT do seu guardião, ou aumentar a DT do guardião em 15 e ele recebe +1 passo de dano. (Escolha novamente o efeito)\nAlém disso o seu guardião permanece ativo independentemente de condições como inconsciente, apenas a morte pode desativar o guardião.\nInvocador Arsenal de guerra:\nAumenta a quantidade de invocações que você pode manter em INT, e a DT delas aumenta em 3. (soma com o anterior)\nAlém disso, \nPré-requisito: Especialista em invocações.",
+    "versoes": {}
+  },
+  {
+    "nome": "Pensamento Tático",
+    "classe": "Invocador",
+    "grau_base": 2,
+    "descricao_base": "Você possui uma mente voltada para análises táticas e pensamento estratégico. Você recebe treinamento em Tática ou, se já for treinado nesta perícia, recebe +2 nela. Além disso, quando você passa em um teste de Tática para analisar terreno, você e seus aliados em alcance médio recebem uma ação de movimento adicional na primeira rodada do próximo combate neste terreno (desde que ele ocorra até o fim do dia).",
+    "versoes": {
+      "GRAU 1": "Muda para ação padrão ao invés de movimento"
+    }
+  },
+  {
+    "nome": "Reutilização",
+    "classe": "Invocador",
+    "grau_base": 2,
+    "descricao_base": "Suas ações podem acumular, ao não utilizar uma ação de invocação em uma rodada na próxima você terá 2 ações de invocação, não cumulativo mais que 2 vezes.",
+    "versoes": {}
+  },
+  {
+    "nome": "Camuflagem Mesclada",
+    "classe": "Invocador",
+    "grau_base": 2,
+    "descricao_base": "Você se mescla e mistura com as suas invocações, camuflando-se. Com uma ação padrão, você pode se camuflar em meio às suas invocações adjacentes a você. Para cada invocação, todo ataque feito contra você tem 10% de chance de errar (1 em 1d10). Essa camuflagem dura até que não haja mais invocações adjacentes, e a chance de erro é diminuída conforme as invocações deixam de estar adjacentes.",
+    "versoes": {}
+  },
+  {
+    "nome": "Absorção",
+    "classe": "Invocador",
+    "grau_base": 1,
+    "descricao_base": "Gastando 5 PE, Pode absorver criaturas antes de ser finalizada para que possa usar como invocação, ela fica disponível uma única vez. Ao ser morta ou esgotada (final da cena) ela não pode ser usada novamente (só se capturá-la novamente) (não conta no limite de invocações).",
+    "versoes": {}
+  },
+  {
+    "nome": "Liberação Máxima de Invocação",
+    "classe": "Invocador",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Suas Invocações possuem +3 características/ações extras, elas não contam no limite de ações ou características e você pode escolher não receber a ação ou característica extra em troca de diminuir o gasto da invocação em -2 PE.",
+    "versoes": {}
+  },
+  {
+    "nome": "Conjurar Arma",
+    "classe": "Inato",
+    "grau_base": 4,
+    "descricao_base": "Você conjura ( Criar ) qualquer Arma corpo a corpo ou de disparo com energia amaldiçoada de grau 4 e que escala com 1/5 do verdadeiro jujutsu.\nGastar 1 PE por espaço da arma que irá conjurar (+2PE para armas de fogo)",
+    "versoes": {
+      "GRAU 3": "Cria uma arma de grau 3 e que escala com 1/4 do verdadeiro jujutsu",
+      "GRAU 2": "Cria uma arma de grau 2 e que escala com 1/3 do verdadeiro jujutsu e pode ser permanente",
+      "GRAU 1": "Cria uma arma de grau 1 e que escala com metade do verdadeiro jujutsu e pode ser permanente",
+      "ESPECIAL": "Cria uma arma de grau especial e que escala com todo verdadeiro jujutsu e pode ser permanente"
+    }
+  },
+  {
+    "nome": "Ataque Pesado",
+    "classe": "Inato",
+    "grau_base": 4,
+    "descricao_base": "Gasta 1PE antes de realizar um ataque para realizar uma manobra (como ação livre) caso acerte o golpe.",
+    "versoes": {}
+  },
+  {
+    "nome": "Energia Celeste",
+    "classe": "Inato",
+    "grau_base": 3,
+    "descricao_base": "Suas habilidades de Energia Amaldiçoada, como \"Imbuir Energia Amaldiçoada, Conjurar arma ou até mesmo maldição reconstrutora\" recebem +1 passo de dano/cura de por grau de feiticeiro.",
+    "versoes": {}
+  },
+  {
+    "nome": "Apego Angustiado",
+    "classe": "Inato",
+    "grau_base": 3,
+    "descricao_base": "Não importa o quão profundos sejam seus ferimentos, você escolhe a agonia enlouquecedora da dor a perder a consciência diante da própria morte. Você não fica inconsciente por estar morrendo, mas sempre que terminar uma rodada nesta condição e consciente, perde LP pontos de sanidade.",
+    "versoes": {
+      "GRAU 2": "Muda o bônus para +5 na defesa e +5 nos testes de resistência",
+      "GRAU 1": "Muda os bônus de testes de resistência para +AB+LP/2"
+    }
+  },
+  {
+    "nome": "Empolgação",
+    "classe": "Inato",
+    "grau_base": 3,
+    "descricao_base": "Uma boa luta é empolgante e te motiva a se arriscar mais e mais, permitindo movimentos mais fortes e únicos. Para isso, você precisa continuar acertando golpes: \nVocê começa um combate com Nível de Empolgação 1, caso no seu turno você acertar pelo menos um ataque, no começo do seu próximo turno você sobe um nível de empolgação, até um máximo de 5 níveis. A empolgação te permite realizar certas manobras especiais, as quais normalmente são fortalecidas por um bônus, que é o Dado de Empolgação, cujo valor varia com o nível, seguindo a tabela abaixo:\nNível 2 | 2d4\nNível 3 | 3d6\nNível 4 | 4d8\nNível 5 | 6d10\nSempre que realizar uma manobra, você desce um nível de empolgação. Caso passe um turno sem acertar um ataque, você também desce um nível de empolgação.\n• Comando. Sua empolgação pode acabar contagiando seus aliados. Ao realizar um ataque, você comanda um aliado dentro de 1,5 metros a realizar um ataque corpo-a-corpo o acompanhando no mesmo alvo, como uma reação dele. Você ou aliado deve pagar 2 PE para realizar o ataque. Caso use essa habilidade, você não pode utilizar Ataque Extra. \n• Ajuste. Às vezes um bom golpe só precisa de um ajuste. Ao realizar um ataque, você pode adicionar seu dado de empolgação na rolagem de acerto e no dano. Você pode escolher o que fazer antes ou depois da rolagem de acerto. \n• Desarme. Uma boa luta não deve ser contida pelo porte de uma arma. Ao acertar uma criatura com um ataque você aproveita para tentar a desarmar. Você adiciona seu dado de empolgação ao dano desse ataque e o alvo deve fazer um teste de Luta contra o resultado do seu ataque. Em uma falha ele larga um item à sua escolha que esteja manejando.\n• Esquiva. Com o sangue fervendo, é mais fácil se esquivar de ataques. Ao ser acertado por um ataque corpo-a-corpo você pode usar sua reação para diminuir o dano em um valor igual a uma rolagem do seu dado de empolgação + AGI + metade do LP.\n• Trabalho de Pés. Você usa da sua empolgação para trabalhar o seu movimento. Como uma ação padrão, você pode escolher aumentar sua Defesa em um valor igual ao seu dado de empolgação, até o começo do seu próximo turno.",
+    "versoes": {
+      "GRAU 2": "• Empolgar-se. Em certos momentos a própria antecipação que você guarda para um combate pode se transformar na empolgação necessária. Uma quantidade de vezes igual ao seu LP, por cena de interlúdio, você pode escolher subir dois níveis de empolgação, ao invés de um, no começo de um turno em que ele aumentaria.",
+      "GRAU 1": "• Empolgação Máxima. Leva ao máximo o quanto você se deixa levar pelo momento e deixa isso aprimorar suas capacidades. Os seus dados de empolgação se tornam 10d6,15d8,20d10 e 30d12, respectivamente, e você passa a adicionar seu atributo dano no resultado de rolagens do dado de empolgação."
+    }
+  },
+  {
+    "nome": "Maldição Reconstrutora",
+    "classe": "Inato",
+    "grau_base": 3,
+    "descricao_base": "Ação padrão 2 PE Cura: 8d4+AB de PV temporários.",
+    "versoes": {
+      "GRAU 2": "Ação movimento e 3 PE: 12d6+LP PV temporários",
+      "GRAU 1": "Ação padrão e 4 PE: 20d8+NEX de PV temporários"
+    }
+  },
+  {
+    "nome": "Tenacidade",
+    "classe": "Inato",
+    "grau_base": 3,
+    "descricao_base": "Seu corpo desenvolveu a capacidade de suportar rigores extremos. Você recebe treinamento em Fortitude ou, se já for treinado nesta perícia, recebe +2 nela.",
+    "versoes": {
+      "GRAU 2": "Recebe +3 em Fortitude a cada 15% de NEX",
+      "GRAU 1": "Ao estar morrendo, mas consciente (com pelo menos 1 PV), você pode fazer um teste de Fortitude (DT 40 + 10+LP por teste anterior na mesma cena) como ação livre. Se for bem-sucedido, encerra a condição morrendo",
+      "GRAU ESPECIAL": "Altera o bônus para +5 em Fortitude a cada 15% de NEX"
+    }
+  },
+  {
+    "nome": "Punho Divergente",
+    "classe": "Inato",
+    "grau_base": 2,
+    "descricao_base": "Gaste 2 PE como uma ação livre, durante a cena ao acertar um crítico você causa +2 de dano por dado e recebe um ataque adicional, que a cada novo Punho Divergente seguido aumenta a margem em 1. (A margem retorna ao padrão após o fim da sequência)",
+    "versoes": {
+      "GRAU 1": "Assim que acertar um crítico e começar o combo, cada novo Punho Divergente seguido recebe +1 de Crítico.",
+      "ESPECIAL": "Assim que acertar um crítico e começar o combo, cada novo Punho Divergente recebe +3 de dano por dano. (Ficando com +5 por dado no total)",
+      "ULTRA ESPECIAL": "Caso acerte um crítico seu bônus de dano também é dobrado. Além disso, caso o alvo não tenha nenhuma resistência a acertos críticos você gira 1d20, caso tire 20 (-1 a cada 100 de EA), você multiplica novamente o dano pelo seu multiplicador de crítico."
+    }
+  },
+  {
+    "nome": "Especialista em Concussão",
+    "classe": "Inato",
+    "grau_base": 2,
+    "descricao_base": "Sempre que estiver usando uma arma que causa dano de impacto, considere o dano dela como um passo a mais. Uma vez por turno, ao acertar um ser e infligir dano de impacto, você pode movê-lo em até 3 metros para um espaço desocupado, desde que o alvo não seja muito maior do que você. Ao acertar um ataque crítico, ataques contra o alvo recebem um bônus de +5 até o começo do seu próximo turno.",
+    "versoes": {}
+  },
+  {
+    "nome": "Especialista em Cortes",
+    "classe": "Inato",
+    "grau_base": 2,
+    "descricao_base": "Sempre que estiver usando uma arma que causa dano cortante, considere o dano dela como um passo a mais. Uma vez por turno, ao acertar um ser e infligir dano cortante, você pode reduzir o movimento dela em 4,5 metros até o começo do seu próximo turno. Ao acertar um ataque crítico, o alvo receberá -10 em todas as rolagens de ataque até o seu próximo turno.",
+    "versoes": {}
+  },
+  {
+    "nome": "Especialista em Perfuração",
+    "classe": "Inato",
+    "grau_base": 2,
+    "descricao_base": "Sempre que estiver usando uma arma que causa dano perfurante, considere o dano dela como um passo a mais. Uma vez por turno, ao acertar um ser e infligir dano perfurante você pode rolar novamente os dados de dano, usando o melhor resultado total. Ao acertar um ataque crítico com dano perfurante, você recebe +1x no multiplicador de crítico.",
+    "versoes": {}
+  },
+  {
+    "nome": "Combater com Três Armas",
+    "classe": "Inato",
+    "grau_base": 2,
+    "descricao_base": "Se estiver empunhando três armas e duas forem de até uma mão e uma leve e fizer a ação de agredir, você pode fazer três ataques, um com cada arma. Se fizer isso, sofre –5 em todos os testes de ataque até o seu próximo turno.",
+    "versoes": {
+      "GRAU 1": "O debuff se alterna para -2 em todos os testes de ataque",
+      "ESPECIAL": "Não recebe penalidade alguma"
+    }
+  },
+  {
+    "nome": "Energia de Combate",
+    "classe": "Inato",
+    "grau_base": 1,
+    "descricao_base": "Você gasta 10 PE para dobrar o efeito de Energia Amaldiçoada; Req: ancião em Energia Amaldiçoada.",
+    "versoes": {}
+  },
+  {
+    "nome": "Liberação Máxima de Combate",
+    "classe": "Inato",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Tendo alcançado o ápice do seu corpo e das técnicas de combate do lutador, você está em um nível superior, encaixando um dos seus golpes rapidamente e sem muito custo. O custo para realizar um ataque desarmado como ação de movimento se torna 0, e seu uso, uma vez por rodada, é tratado como ação livre.",
+    "versoes": {}
+  },
+  {
+    "nome": "Espantar",
+    "classe": "Amaldiçoado",
+    "grau_base": 4,
+    "descricao_base": "Abala até 2 alvos (a sua escolha) em uma área de alcance curto, Vontade Anula.",
+    "versoes": {
+      "GRAU 3": "Abala até 4 alvos (a sua escolha) em uma área de alcance curto, Vontade Anula.",
+      "GRAU 2": "Abala até 4 alvos (a sua escolha) em uma área de alcance Médio, Vontade Anula.",
+      "GRAU 1": "Abala até 5 alvos (a sua escolha) em uma área de alcance Médio, Vontade Anula.",
+      "ESPECIAL": "Abala até 10 alvos (a sua escolha) em uma área de alcance curto ou 6 alvos em alcance médio, caso o alvo passe no teste ele fica alquebrado."
+    }
+  },
+  {
+    "nome": "Identificação Paranormal",
+    "classe": "Amaldiçoado",
+    "grau_base": 4,
+    "descricao_base": "Você recebe +10 em testes de Ocultismo para identificar criaturas, objetos, rituais ou qualquer coisa paranormal.",
+    "versoes": {
+      "GRAU 3": "Muda o bônus para +15",
+      "GRAU 2": "Ao identificar uma criatura você recebe um bônus em testes de ataque e em testes de resistência de +1 para cada 5 que passe da DT de presença perturbadora",
+      "GRAU 1": "Muda o bônus para +20 e ao identificar uma criatura você recebe um bônus em testes de ataque e em testes de resistência de +2 para cada 5 que passe da DT de presença perturbadora"
+    }
+  },
+  {
+    "nome": "Sentidos Amaldiçoados",
+    "classe": "Amaldiçoado",
+    "grau_base": 4,
+    "descricao_base": "Pode usar a maldição para testes de sentidos e investigativos, você pode gastar 1 PE para poder ter +5 em testes de sentidos e caso você falhe pode escolher rolar o teste novamente.",
+    "versoes": {
+      "GRAU 3": "+7 em testes de sentidos e caso você falhe pode escolher rolar o teste novamente",
+      "GRAU 2": "+10 em testes de sentidos e caso você falhe pode escolher rolar o teste novamente",
+      "GRAU 1": "+15 em testes de sentidos e caso você falhe pode escolher rolar o teste novamente",
+      "ESPECIAL": "+20 e pode re-rolar quantas vezes quiser (gastando PE adicional)"
+    }
+  },
+  {
+    "nome": "Arma Amaldiçoada Sinistra",
+    "classe": "Amaldiçoado",
+    "grau_base": 3,
+    "descricao_base": "Envolve sua maldição em sua arma causando dano adicional\naumenta 7 dados de dano do mesmo tipo +5d6 do elemento",
+    "versoes": {
+      "GRAU 2": "aumenta LP dados de dano do mesmo tipo +10d8 do elemento",
+      "GRAU 1": "aumenta NEX dados de dano do mesmo tipo +20d10 do elemento",
+      "ESPECIAL": "aumenta 1 passo de dane do mesmo tipo +NEXd12 do elemento",
+      "ULTRA ESPECIAL": "aumenta AB/4 passos de dane do mesmo tipo +NEX*LP d12 do elemento"
+    }
+  },
+  {
+    "nome": "Estigma",
+    "classe": "Amaldiçoado",
+    "grau_base": 3,
+    "descricao_base": "A adrenalina causada pela dor faz você se manter focado no que está acontecendo. Sempre que sofre dano mental de efeitos de medo, você pode converter esse dano em perda de PV (se sofre 5 pontos de dano mental de medo você pode, em vez disso, perder 5 pontos de vida).",
+    "versoes": {}
+  },
+  {
+    "nome": "Maldição Celeste",
+    "classe": "Amaldiçoado",
+    "grau_base": 3,
+    "descricao_base": "Suas habilidades de maldição, como “aparar ataques amaldiçoados” recebem +1 passo para cada grau.",
+    "versoes": {}
+  },
+  {
+    "nome": "Aparar Ataques Amaldiçoados",
+    "classe": "Amaldiçoado",
+    "grau_base": 3,
+    "descricao_base": "Quando receber um ataque que possua energia amaldiçoada, você pode gastar 2 PE e usar sua reação para tentar aparar o ataque, diminuindo o dano recebido em 2d6 + AGI + (LP/2);",
+    "versoes": {
+      "GRAU 2": "muda a redução de dano para 5d8+AGI+LP.",
+      "GRAU 1": "muda a redução de dano para 10% e o custo passa a ser 10 PE.",
+      "ESPECIAL": "muda a redução de dano para +10% e o custo passa a ser 20 PE."
+    }
+  },
+  {
+    "nome": "Ocultar nas Sombras",
+    "classe": "Amaldiçoado",
+    "grau_base": 3,
+    "descricao_base": "Você tem o dobro de sua PRE em espaços de inventário adicionais, além disso, você pode escolher um tipo de item para ocupar 0 espaços em você.",
+    "versoes": {
+      "GRAU 2": "Você pode escolher um tipo de componente de ritual para contar como 0 espaços"
+    }
+  },
+  {
+    "nome": "MENTE INSTÁVEL",
+    "classe": "Amaldiçoado",
+    "grau_base": 3,
+    "descricao_base": "O Amaldiçoado pode pagar o preço de PE em sanidade (para cada 1 PE é igual a 2 de sanidade).",
+    "versoes": {}
+  },
+  {
+    "nome": "Ele me ensina",
+    "classe": "Amaldiçoado",
+    "grau_base": 2,
+    "descricao_base": "Mais do que apenas uma força, o paranormal lentamente se torna uma voz, sussurrando segredos em sua mente. Escolha entre transcender ou receber um feitiço de classe que não seja a sua (exceto restringido e você precisa atender os pré-requisitos do poder escolhido)",
+    "versoes": {}
+  },
+  {
+    "nome": "BARRAGE!",
+    "classe": "Amaldiçoado",
+    "grau_base": 2,
+    "descricao_base": "Usa a sua maldição para desferir uma série de golpes = a metade do LP. (Precisa ter um grito como o “ora ora ora ora ora”).",
+    "versoes": {
+      "GRAU 1": "realiza +1 ataque adicional",
+      "ESPECIAL": "pode realizar uma quantidade de golpes igual ao seu LP"
+    }
+  },
+  {
+    "nome": "Sombras do Profano",
+    "classe": "Amaldiçoado",
+    "grau_base": 2,
+    "descricao_base": "Recebe +10 em Furtividade e não recebe penalidade de carga nessa perícia, além de te dar um tom ameaçador que fornece +5 em Intimidação.",
+    "versoes": {
+      "GRAU 1": "Se for detectado, você instantaneamente realiza um teste de intimidar contra o alvo, se você passar você não é detectado (uma vez por cena)",
+      "ESPECIAL": "Dobra os efeitos e se você passar o alvo toma 4d8 de dano de sanidade."
+    }
+  },
+  {
+    "nome": "Forma Inconsciente",
+    "classe": "Amaldiçoado",
+    "grau_base": 1,
+    "descricao_base": "Mesmo estando inconsciente, sua maldição permanece acordada. Você, mesmo inconsciente, pode reagir a ataques e situações com sua maldição.",
+    "versoes": {}
+  },
+  {
+    "nome": "Liberação Máxima de Maldição",
+    "classe": "Amaldiçoado",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Tornando-se um mestre das maldições, você consegue ser autossuficiente na energia para se virar sozinho nesse mundo amaldiçoado. A partir de agora você tem todos os seus efeitos de feitiços de Amaldiçoado aprimorados, todos eles multiplicados por seu AB/4.",
+    "versoes": {}
+  },
+  {
+    "nome": "Mente Rápida",
+    "classe": "Mestre Jujutsu",
+    "grau_base": 4,
+    "descricao_base": "Testes de Iniciativa são rolados com Intelecto como atributo base e recebe +INT nessa perícia e outras perícias de Agilidade.",
+    "versoes": {}
+  },
+  {
+    "nome": "Até a Última Gota",
+    "classe": "Mestre Jujutsu",
+    "grau_base": 4,
+    "descricao_base": "Você vai sempre utilizar até a última gota de energia amaldiçoada que houver em seu corpo. Uma vez por interlúdio, caso esteja com menos da metade do seu máximo de PE, você pode usar uma ação padrão para recuperar um valor igual a Xd4 + (PRE), onde X é igual ao seu INT ou PRE.",
+    "versoes": {
+      "GRAU 3": "Pode usar 2 vezes por interlúdio e muda de d4 para d6",
+      "GRAU 2": "Pode usar 3 vezes por interlúdio ou uma quantidade de vezes igual seu INT e muda de d6 para d8",
+      "GRAU 1": "X = 2x PRE ou INT e muda de d8 para d10",
+      "ESPECIAL": "Pode usar 5 vezes por interlúdio ou uma quantidade igual ao seu INT+PRE e muda de d10 para d12."
+    }
+  },
+  {
+    "nome": "Conhecimento Aplicado",
+    "classe": "Mestre Jujutsu",
+    "grau_base": 3,
+    "descricao_base": "Sempre que for realizar um teste de resistência contra o efeito de uma habilidade de técnica, você pode gastar metade do seu LP de PE’s e para cada ponto gasto, você adiciona +1 no teste de resistência.",
+    "versoes": {
+      "GRAU 2": "Substitua “Metade do LP” por LP.",
+      "GRAU 1": "Ganha +2 por ponto gasto.",
+      "ESPECIAL": "Substitua “LP” por 2xLP."
+    }
+  },
+  {
+    "nome": "Habilidades Refinadas",
+    "classe": "Mestre Jujutsu",
+    "grau_base": 3,
+    "descricao_base": "Suas habilidades como um todo são refinadas pelo seu controle de energia, sendo mais difícil resistir a elas. Você passa a somar metade do LP no cálculo de DT das suas habilidades de técnica e amaldiçoadas.",
+    "versoes": {
+      "GRAU 2": "Substitua “Metade do LP” por LP",
+      "GRAU 1": "Substitua “LP” por LP+AB",
+      "GRAU ESPECIAL": "Substitua “LP+AB” por NEX/2",
+      "GRAU ULTRA ESPECIAL": "Substitua “NEX/2” por NEX*(AB/2)"
+    }
+  },
+  {
+    "nome": "Técnica Celeste",
+    "classe": "Mestre Jujutsu",
+    "grau_base": 3,
+    "descricao_base": "Você aumenta o potencial de energia amaldiçoada em um técnica, você aumenta um passo de dano/cura das suas técnicas para cada grau que tiver.",
+    "versoes": {}
+  },
+  {
+    "nome": "Conjuração Defensiva",
+    "classe": "Mestre Jujutsu",
+    "grau_base": 2,
+    "descricao_base": "Ao usar uma habilidade de técnica, você pode gastar 2 PE para, até o começo do seu próximo turno, adicionar metade de seu LP na sua DEF, assim como recebe o mesmo valor de RD a todo tipo de dano.",
+    "versoes": {
+      "GRAU 1": "Substitua “Metade do LP” por LP"
+    }
+  },
+  {
+    "nome": "Domínio Esotérico",
+    "classe": "Mestre Jujutsu",
+    "grau_base": 1,
+    "descricao_base": "Você estudou a fundo a complexidade dos sigilos de sua técnica e dos rituais, aprendendo a combinar suas propriedades paranormais. Ao lançar um ritual ou habilidade de técnica escolha um dos seguintes efeitos, gaste 10 PE. \nAmpliar: Aumenta o alcance do ritual/habilidade de técnica em um passo (apenas de curto para médio, de médio para longo ou de longo para extremo) ou dobra a área de efeito.\nPerturbar: A DT para resistir ao ritual/habilidade de técnica aumenta em +LP. \nPotencializar: O dano do ritual/habilidade de técnica aumenta em um +1 para cada dado rolado. \nProlongar: A duração do ritual/habilidade de técnica dobra. Não funciona para rituais instantâneos ou sustentados.",
+    "versoes": {
+      "ESPECIAL": "Ao lançar um ritual ou habilidade de técnica escolha até dois dos seguintes efeitos gastando 20 PE para cada um.\nAmpliar: Aumenta o alcance do ritual/habilidade de técnica em dois passos ou triplica a área de efeito.\nPerturbar: A DT para resistir ao ritual/habilidade de técnica aumenta em +5+LP*2. \nPotencializar: O dano do ritual/habilidade de técnica aumenta em um +3 para cada dado rolado. \nProlongar: A duração do ritual/habilidade de técnica quadruplica. Para habilidades de duração instantânea o efeito é aplicado novamente na próxima rodada, porém causando apenas metade do dano. Para duração sustentada, você tem PRE de rodadas sem precisar pagar o custo."
+    }
+  },
+  {
+    "nome": "Técnica 200%",
+    "classe": "Mestre Jujutsu",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Você pode gastar o dobro do gasto padrão da técnica para dobrar seu efeito em uma única técnica.",
+    "versoes": {}
+  },
+  {
+    "nome": "Jutsu: Inversão Amaldiçoada",
+    "classe": "Shinobi",
+    "grau_base": 4,
+    "descricao_base": "Você ganha Deslocamento em qualquer tipo de superfície sólida, invertendo o seu ponto de equilíbrio.",
+    "versoes": {
+      "GRAU 3": "Quando usa esta habilidade seu deslocamento aumenta em +3m.",
+      "GRAU 2": "Quando usa esta habilidade, seu deslocamento é dobrado.",
+      "GRAU 1": "Você é imune a condição caído.",
+      "ESPECIAL": "Andar na água em meio às tempestades é um trabalho tranquilo para você, ignore qualquer tipo de terreno difícil, esta habilidade tem prioridade sob todas as outras, ou seja, ignore qualquer efeito que ignore a imunidade a terreno difícil, e aumenta +10m de deslocamento."
+    }
+  },
+  {
+    "nome": "Passos Silenciosos",
+    "classe": "Shinobi",
+    "grau_base": 4,
+    "descricao_base": "Seus passos são silenciosos, você não tem penalidades de deslocamento por ficar furtivo e não pode ser detectado pela audição.",
+    "versoes": {}
+  },
+  {
+    "nome": "Arte da Ocultação",
+    "classe": "Shinobi",
+    "grau_base": 4,
+    "descricao_base": "Uma das partes cruciais de ser um shinobi é a capacidade de ser tão furtivo quanto uma sombra. Você recebe +5 em furtividade, podendo se esconder no início do turno recebendo +10 nos ataques furtivos.",
+    "versoes": {}
+  },
+  {
+    "nome": "Taijutsu: Investida Ninja",
+    "classe": "Shinobi",
+    "grau_base": 3,
+    "descricao_base": "Faz um teste de Furtividade para se infiltrar por trás de algum ser, caso passe, tem mais uma ação de movimento.",
+    "versoes": {}
+  },
+  {
+    "nome": "Taijutsu: Golpe Fatal",
+    "classe": "Shinobi",
+    "grau_base": 3,
+    "descricao_base": "Concentrando sua energia amaldiçoada em sua palma da mão, você deve realizar um teste de Luta com Intelecto, contra a Fortitude do alvo, caso você tenha sucesso, você com um simples golpe desmaia o alvo até o fim da cena.",
+    "versoes": {}
+  },
+  {
+    "nome": "Taijutsu: Shurikens Letais",
+    "classe": "Shinobi",
+    "grau_base": 3,
+    "descricao_base": "Shurikenjutsu significa “Técnica da Espada Escondida”. Refere-se a técnicas que envolvem lançamento de Shurikens, Kunais, Dardos, ou qualquer arma de arremesso. O dano de armas de arremesso em INT passos e recebem +7 em testes de acerto.",
+    "versoes": {}
+  },
+  {
+    "nome": "Jutsu Celeste",
+    "classe": "Shinobi",
+    "grau_base": 3,
+    "descricao_base": "Suas habilidades de Ninjas, como \"Genjutsu, Ninjutsus...\" recebem +1 passo de dano/cura por grau de feiticeiro. Além de receber uma quantia de passos para técnica ou para estilo de luta equivalente a +0.5 passos de dano/cura de por grau de feiticeiro. (Basicamente metade dos passos para Técnica ou Taijutsu, além de que caso escolha esse poder, você não pode usar os efeitos de técnica celeste, e vice versa)",
+    "versoes": {}
+  },
+  {
+    "nome": "TÉCNICA DE TRANSFORMAÇÃO",
+    "classe": "Shinobi",
+    "grau_base": 2,
+    "descricao_base": "Utilizando o Jutsu de Transformação é uma técnica intermediária de jutsu utilizada pelos ninjas para alterar sua aparência e assumir a forma de outras pessoas, objetos ou criaturas. Apesar de simples, é uma habilidade essencial para espionagem, infiltração e confundir oponentes, você deve pagar 2 PE para mudar sua aparência por até o fim da cena.",
+    "versoes": {}
+  },
+  {
+    "nome": "Jutsu: Substituição",
+    "classe": "Shinobi",
+    "grau_base": 2,
+    "descricao_base": "Ao ser alvo de um ataque deve realizar um teste de Reflexos contra o teste de ataque ou DT da habilidade, em caso de sucesso evita o ataque completamente, caso falhe, toma metade do dano. Você aparece a 4 metros de onde estava sem causar um ataque de oportunidade.",
+    "versoes": {
+      "GRAU 1": "O seu teste de Reflexos para se esquivar do ataque tem seu valor + seu LP, e você também pode escolher entre aparecer em até alcance curto do alvo",
+      "ESPECIAL": "O seu teste de Reflexos para se esquivar do ataque tem seu valor vezes 2, e você também pode escolher entre aparecer em até alcance extremo do alvo, ou simplesmente corpo a corpo e usar um ataque adicional nele"
+    }
+  },
+  {
+    "nome": "Kinjutsu: Face do Demônio",
+    "classe": "Shinobi",
+    "grau_base": 1,
+    "descricao_base": "Como um espírito em suas costas ele te acolhe com seu rosto macabro de um velho yokai aterrorizante, seres a sua volta devem realizar um teste de Vontade DT se passarem ficaram com a condição abalado, caso não passem ficaram apavorados com a origem deste espírito maligno.",
+    "versoes": {
+      "ESPECIAL": "O alvo recebe 5d10 de dano de sanidade caso não passe, e fica assombrado para sempre. Caso tenha sucesso ele recebe metade do dano e fica assombrado ( a não ser que seja um grau especial ou já tenha visto isto antes )."
+    }
+  },
+  {
+    "nome": "Senjutsu",
+    "classe": "Shinobi",
+    "grau_base": 1,
+    "descricao_base": "Através de seu treinamento e dedicação você destrava um gatilho que funciona como um modo único para você, escolha um atributo, você recebe temporariamente +1 nele (Recebe os pontos de upgrade), +10 em testes de ataque e caso o atributo seja físico você recebe +1d de dano e +1 passo corpo a corpo, e caso seja mental +1d de dano e +1 passo de dano para a técnica, porém por rodada neste modo você recebe 1 ponto de exaustão.",
+    "versoes": {
+      "ESPECIAL": "Aumenta o bônus em +2d e +2 passos, totalizando +3d e +3 passos, e seu LP aumenta em +2."
+    }
+  },
+  {
+    "nome": "Liberação Máxima de Jutsus",
+    "classe": "Shinobi",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Tendo alcançado o seu ápice do treinamento ninja, você se tornou uma lenda entre os demais, um ninja perigoso demais para tentar matá-lo. Você deve escolher um caminho a trilhar entre as três artes de jutsus principais: Ninjutsu, Taijutsu, Genjutsu. Aquele a sua escolha poderá ter todos os seus jutsus com modos de DISCENTE: Gastando 3 + GRAU PE para seu jutsu, e este terá seus efeitos dobrados. E VERDADEIRO: Gastando 10 + GRAU PE para seu jutsu, e este terá seus efeitos quadruplicados.",
+    "versoes": {}
+  },
+  {
+    "nome": "Golpes Celestes",
+    "classe": "Restringido",
+    "grau_base": 4,
+    "descricao_base": "Aumenta um passo de dano em todo dano armado ou desarmado e para cada grau aumenta mais um passo.",
+    "versoes": {
+      "GRAU 3": "Recebe +1d20+AB nos testes de ataque.",
+      "GRAU 2": "Recebe LP+AB em todos os testes de ataque, além de +2 em margem.",
+      "GRAU 1": "Recebe 1d20+NEX nos testes de ataque e aumenta +1 passo de dano de habilidades corpo a corpo e estilo de luta.",
+      "ESPECIAL": "Recebe Crítico automático em todos os golpes e passa a somar seu LP em seu multiplicador de crítico."
+    }
+  },
+  {
+    "nome": "REVIDAR FOGO",
+    "classe": "Restringido",
+    "grau_base": 4,
+    "descricao_base": "Quando um inimigo atacar um aliado, 2 vezes na cena você pode gastar uma reação e 5 PE para fazer um contra-ataque neste inimigo, desde que esteja no alcance de seu ataque.",
+    "versoes": {
+      "GRAU 3": "Ao realizar este ato de irmandade de vingar seu aliado, você o inspira, concedendo-o um bônus temporário igual seu LP em testes até o fim da cena. Aumenta para 3 vezes.",
+      "GRAU 2": "Ao realizar este contra-ataque, sua sede de vingança é tanta que de forma sobrenatural, você tem seu teste dobrado neste único golpe. Aumenta para 4 vezes.",
+      "GRAU 1": "Além do teste dobrado também seu dano é dobrado neste único contra-golpe. Aumenta para 5 vezes."
+    }
+  },
+  {
+    "nome": "O Artifício do Desfavorável",
+    "classe": "Restringido",
+    "grau_base": 3,
+    "descricao_base": "Pode carregar uma quantidade de Itens amaldiçoados igual a metade da sua FOR sem precisar contar em espaço e categoria correspondentes.",
+    "versoes": {
+      "GRAU 3": "Pode carregar uma quantidade de Itens amaldiçoados igual a sua FOR sem precisar contar em espaço e categoria correspondentes.",
+      "GRAU 2": "Pode carregar uma quantidade de Itens amaldiçoados igual a sua FOR + VIG sem precisar contar em espaço e categoria correspondentes."
+    }
+  },
+  {
+    "nome": "Armadura Celeste",
+    "classe": "Restringido",
+    "grau_base": 3,
+    "descricao_base": "Recebe +5 de RD geral caso esteja usando Armadura Leve e +10 de RD geral caso esteja usando armadura pesada.",
+    "versoes": {
+      "GRAU 2": "Caso tenha mais de 2 de VIG seu corpo passa a contar como uma armadura leve. Recebe +15 de RD geral caso esteja usando Armadura Leve e +30 de RD geral caso esteja usando armadura pesada.",
+      "GRAU 1": "Recebe LP+AB de RD geral caso esteja usando Armadura Leve e +NEX/2 de RD geral caso esteja usando armadura pesada.",
+      "ESPECIAL": "Caso tenha mais de 5 de VIG seu corpo passa a contar como uma armadura pesada. Recebe +2xNEX de RD geral caso esteja usando armadura pesada.",
+      "ULTRA ESPECIAL": "A cada 2 de VIG que possui, você dobra os efeitos passados da armadura celeste."
+    }
+  },
+  {
+    "nome": "Corpo de Aço",
+    "classe": "Restringido",
+    "grau_base": 3,
+    "descricao_base": "Seu corpo é trincado, resistente e persistente devido seu árduo treinamento, recebendo NEX de RD geral, Imunidade a efeitos de Calor ou Frio, dobra os limites de prender a respiração. Também a cada grau e 10% de NEX aumenta LP do RD geral.",
+    "versoes": {
+      "GRAU 2": "Aumenta em +10 o RD GERAL para cada grau e 10% de NEX.",
+      "GRAU 1": "Aumenta em +20 o RD GERAL para cada grau e 10% de NEX.",
+      "ESPECIAL": "Aumenta em +50 o RD GERAL para cada grau e 10% de NEX.",
+      "ULTRA ESPECIAL": "Aumenta em +150 o RD GERAL para cada grau e 10% de NEX."
+    }
+  },
+  {
+    "nome": "Que se dane o Destino",
+    "classe": "Restringido",
+    "grau_base": 3,
+    "descricao_base": "Sua força de vontade é muito mais determinante do que o destino. Assim, a cada 5% escolha entre receber +2 em uma perícia ou +2 de deslocamento. A cada 10% escolha um dos três status (PV, SAN e PE) para receber o bônus de aumento novamente. A cada 20% escolha entre receber +2% de RDP geral ou +1x de multiplicador.",
+    "versoes": {
+      "ESPECIAL": "Dobra os efeitos de cada NEX respectivo.",
+      "ULTRA ESPECIAL": "Dobra os efeitos de cada NEX respectivo, novamente."
+    }
+  },
+  {
+    "nome": "Penumbra Fatal",
+    "classe": "Restringido",
+    "grau_base": 2,
+    "descricao_base": "Recebe um bônus de AGI*INT em Furtividade e não possui nenhum tipo de penalidade de Furtividade.\n*Req: Veterano em Furtividade.",
+    "versoes": {
+      "GRAU 2": "Recebe um bônus de +LP em Furtividade e +NEX de dano em furtividade a cada 5% de NEX."
+    }
+  },
+  {
+    "nome": "Portas da Morte",
+    "classe": "Restringido",
+    "grau_base": 2,
+    "descricao_base": "Ao estar com metade da vida você ganha +1d20 em todos os testes, e a cada 5% de vida que perder depois de ativar essa habilidade recebe +10 nos testes de ataque. Se eliminar um inimigo com essa habilidade ativa você ganha a quantidade que falta para chegar na metade da vida em PV temporário até o fim da cena.",
+    "versoes": {}
+  },
+  {
+    "nome": "Anular Energia Amaldiçoada",
+    "classe": "Restringido",
+    "grau_base": 2,
+    "descricao_base": "Gastando uma reação e 10 PE e AB vezes por cena, você pode realizar um TR de Luta contra o ataque do inimigo, caso tenha sucesso você realiza um parry na energia amaldiçoada do alvo, anulando completamente o dano. Caso falhe, você anula 15%.",
+    "versoes": {
+      "GRAU 1": "Metade do dano ignorado retorna ao inimigo.",
+      "ESPECIAL": "O dano ignorado retorna ao inimigo ou você pode usar esse dano para absorvê-lo em seu estoque de energia como PEs temporários."
+    }
+  },
+  {
+    "nome": "Ancião Marcial",
+    "classe": "Restringido",
+    "grau_base": 2,
+    "descricao_base": "Sua maestria lendária te ensinou a melhorar seu estilo de luta, recebendo mais um upgrade de estilo de luta, apenas caso o seu estilo tenha alguma linhagem, sem contar no seu limite de estilo de luta.",
+    "versoes": {
+      "GRAU 1": "Além disso, recebe mais 1 estilo de luta qualquer.",
+      "ESPECIAL": "Recebe mais 1 estilo de luta qualquer, e mais um upgrade sem contar no limite."
+    }
+  },
+  {
+    "nome": "Expertise Bélica",
+    "classe": "Restringido",
+    "grau_base": 1,
+    "descricao_base": "A categoria do tipo de empunhadura da arma (uma mão/leve/duas mãos) conta como uma a menos, porém se usar uma arma de duas mãos (usando como duas mãos) você ganha +5 de dano por dado.",
+    "versoes": {
+      "ESPECIAL": "Reduz em 2 o passo de empunhadura e independente da empunhadura recebe +10 de dano por dado."
+    }
+  },
+  {
+    "nome": "Conhecimento dos seus Limites",
+    "classe": "Restringido",
+    "grau_base": 1,
+    "descricao_base": "Some metade de seu INT no número de espaços de combo que você ganha em 65% de NEX.",
+    "versoes": {
+      "GRAU 2": "Muda para INT o número de espaços de combo.",
+      "GRAU 1": "Recebe +1 passo de dano com todos os seus combos."
+    }
+  },
+  {
+    "nome": "Abdicar do Poder",
+    "classe": "Restringido",
+    "grau_base": 1,
+    "descricao_base": "Pode pegar até INT/2 feitiços de outras classes do livro (desde que não envolva EA ou Ocultismo), podem ser poderes intrínsecos a classe e trilha.",
+    "versoes": {}
+  },
+  {
+    "nome": "Abençoado Celestialmente",
+    "classe": "Restringido",
+    "grau_base": 1,
+    "descricao_base": "Você se torna imune a ataques com vantagem de dados adicionais.",
+    "versoes": {
+      "ESPECIAL": "Você se torna imune a ataques críticos e anula 20% do resultado dos testes de ataque desferidos a você."
+    }
+  },
+  {
+    "nome": "Estilos Mortais",
+    "classe": "Restringido",
+    "grau_base": 1,
+    "descricao_base": "Seus danos bônus de estilos de luta recebem +AB/2 passos.",
+    "versoes": {
+      "ESPECIAL": "Muda o bônus para AB passos."
+    }
+  },
+  {
+    "nome": "Liberação Máxima de Restrição",
+    "classe": "Restringido",
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Subvertendo a sua restrição celeste, você se libertou completamente do destino, alcançando um nível de poder invejável e único para um ser humano como você. Você recebe 50% de RDP geral, também sempre recebe ½ do dano desferido a você, além de receber +NEX em rolagens de ataque e +LP de dano por dado.",
+    "versoes": {}
+  }
+
+]
+  

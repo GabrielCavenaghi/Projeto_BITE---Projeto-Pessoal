@@ -1,0 +1,183 @@
+[
+    {
+    "nome": "Inato",
+    "descricao": "Estes são os feiticeiros capazes de controlar a energia amaldiçoada muito bem, normalmente imbuindo ela em seus punhos. Inatos são focados em um combate de corpo a corpo, devido a suas técnicas que já são inatas em si. Eles possuem uma maestria de combate aprimorada, sendo os mais táticos de combate corpo a corpo. Estes combatentes são dos tipos mais comuns no mundo jujutsu, devido a sua enorme frequência de feiticeiros com técnicas inatas despertadas e devido a sua grande versatilidade, normalmente sendo feiticeiros muito resistentes e fortes. Atualmente este é o tipo de feiticeiro mais comum, porém ainda sim são muito fortes, inatos podem variar de longa distância a curta distância.\n\nInatos possuem um Ren superior.\n\n“Quanto mais forte o Inato, mais forte ficará sua técnica.”",
+    "pv_inicial": 21,
+    "san_inicial": 17,
+    "pe_inicial": 6,
+    "pv_por_nex": 7,
+    "san_por_nex": 4,
+    "pe_por_nex": 4,
+    "qnt_pericias_iniciais_treinadas": 2,
+    "qnt_up_grau": 4,
+    "trilha": ["Inato Classico", "Lenda Viva", "Tanque de Guerra"],
+    "descricaoTrilha": [
+        "Inato clássico focado em combate corpo a corpo versátil e resistente.",
+        "Especialista em estilos de luta, capaz de rivalizar com restringidos.",
+        "Focado em resistência extrema e proteção, o mais casca grossa."
+    ],
+    "habilidadeTrilha": [
+        [
+        "Treino Básico",
+        "Força do Guerreiro",
+        "Maestria em Combate",
+        "Combate Ultimate"
+        ],
+        [
+        "Aprendiz Marcial",
+        "Mestre Marcial",
+        "Sensei Marcial",
+        "Ápice Humano"
+        ],
+        [
+        "Chapa de aço",
+        "Vigor Monstruoso",
+        "Homem Indestrutível",
+        "Ídolo Imortalizado"
+        ]
+    ],
+    "descricaoHabilidadeTrilha": [
+        [
+        "Recebe imbuir energia amaldiçoada, se já tiver reduz o gasto de PE em 1. Recebe uma técnica amaldiçoada, a habilidade “Mestre da Luta”, Artista Marcial 2.0 e um estilo de luta. Ganha uma passiva única com o Efeito de conjuração de Energia Amaldiçoada “Ren”.\n\n*Ren Clássico Superior (EA): Recebe + NEX de bônus para o ataque com o “Ren”.\n\nMestre da Luta: Um inato é um mestre da luta, dedicando-se de corpo e alma para isso. Você recebe as seguintes capacidades:\nVocê sabe desferir golpes rápidos com o seu corpo. Ao realizar um ataque desarmado ou com uma arma, você pode gastar 2 PE para realizar um ataque desarmado como ação de movimento e todas as armas se tornam ágeis para você.",
+        "Um verdadeiro guerreiro, acostumado com o caos do campo de batalha, cada vez mais proficiente em batalhar, recebe diminuição de 1 PE em 2 Habilidades a sua escolha, além de receber 2 das seguintes habilidades, em 55% e 65%, você escolhe mais uma. Veja abaixo.\n\nSelvageria: Seu gosto por batalhas desenvolveu uma certa selvageria nos seus golpes e no seu potencial. Você perde 6 PE Max, mas passa a adicionar +AB em rolagens de Fortitude, rolagens de dano e ataque. Cada 10% de NEX você recebe +(LP/4).\n\nFúria: Você pode gastar 1 PE para invocar uma fúria selvagem, tornando-se temível em combate. Você recebe +NEX/2 em testes de ataque e rolagens de dano corpo a corpo, mas não pode fazer nenhuma ação que exija calma e concentração (como usar a perícia Furtividade, perícias de Intelecto ou conjurar rituais). A cada 25% de NEX pode gastar +5 PE para aumentar os bônus em +LP. A Fúria termina se, ao fim da rodada, você não tiver atacado nem sido alvo de um efeito (ataque, habilidade, rituais...) hostil ou quando o combate acabar. Req: Selvageria.\n\nFísico Preparado: Ao usar Fúria, você recebe uma quantidade de PV temporários igual a (VIG+LP)*NEX ; Req: Fúria.\n\nCrítico Brutal: Sua margem de ameaça em todos os ataques corpo a corpo aumenta em +2 e o crítico em +1.\n\nFúria Titânica: o bônus que você recebe nos testes de ataque e rolagens de dano quando usa Fúria é dobrado; Req: 65% e Fúria.",
+        "Guerrear para você é como se fosse a coisa mais natural em sua alma, realizando golpes com mais maestria e melhor controle próprio. Logo, escolha 4 habilidades para reduzir 2 PE.\nAlém disso, recebe a habilidade abaixo “Postura de Combate”.\n\nPostura de Combate: Para mudar sua postura de combate deve gastar uma ação de movimento e 2PE (+1 a cada vez utilizada novamente na cena). Ela dura até a desativação. Escolha uma das seguintes posturas abaixo.\n-Postura Padrão: sem modificadores.\n-Postura de Ataque: Recebe +NEX/2 nos testes de ataque e não pode receber condições de medo ou mentais (a quesito do Mestre…)\n-Postura de Defesa: Soma sua Força e Vigor na Defesa e pode gastar uma reação especial para bloquear somando sua luta junto com o padrão.\n-Postura das Duas Armas: Ganha Combater com Duas Armas (perde o debuff) e ganha Ataque Extra.\n-Postura Quebra Guarda: Recebe +NEX*AB de penetração de RD.\n-Postura Vingativa: Ao ser acertado ou acertarem um aliado, você pode gastar 2PE (+1 Por vez realizado na cena) para atacar esse inimigo como reação.\n-Postura Esguia: soma novamente sua (AGI*INT)*3 na Defesa e pode gastar 6 PE para não receber o dano de um teste de resistencia de Reflexos.",
+        "Atingindo o pico de maestria do combate, você aprendeu a ultrapassar os limites de forma eficaz e consciente, assim podendo gastar +40 PE para Triplicar o efeito da energia amaldiçoada. Além disso, pode gastar +10 PE para aprimorar suas técnicas ou habilidades, dobrando os efeitos delas. Mudar postura é uma ação livre e +AB habilidades para diminuir em -2 o gasto de PE."
+        ],
+        [
+        "Você está trilhando o caminho para se tornar o melhor lutador entre todos os humanos, seu treinamento já é superior a o dos outros, recebendo dois estilos de luta, e artista marcial 3.0 ou Atirador de Elite 3.0, também liberando a habilidade “Verdadeira Artes marciais”. Ganha uma passiva única com o Efeito de conjuração de Energia Amaldiçoada “Ren”.\n\n*Ren Lendário Superior (EA): Recebe + NEX de bônus para o dano com o “Ren”.\n\nVerdadeira Artes Marciais: A energia amaldiçoada permite que seu corpo exceda padrões humanos, você recebe uma quantidade de passos de dano corpo a corpo ou de disparo a distância igual ao seu bónus de passos corpo a corpo, eles se aplicam a estilo de luta, porém focar tanto em ataques corpo a corpo te deixa precário em técnicas, você causa apenas metade de dano com suas técnicas.",
+        "Seu treinamento se torna mais intenso e muito mais rígido, devido a todo o seu esforço de trilhar este caminho, você lapidou melhor ainda suas habilidades, recebendo +1 estilo de luta aprende “Empolgação” e caso já possua começa com +1 carga em todo combate, escolha duas das habilidades abaixo.\n\nMestre das Guerras: Ao masterizar seus estilos de luta, você consegue escolher uma quantidade de estilos de luta igual INT para criar um ataque único para todos estes estilos de luta.\n\nUltrapassando os limites Humanos: Seu entendimento de lutas e combates supera limites humanos, uma vez por dia você pode ativar essa habilidade, dobrando suas ações durante VIG/2 rodadas (mínimo 1 rodada). Após este efeito acabar, você fica com Exaustão de nível equivalente a metade da quantidade de rodadas que usou este efeito.\n\nExcitação da Batalha: Você não consegue parar sua empolgação quando o assunto é lutar, devido aos golpes, sangue derramado ou o som dos disparos, esse é o calor da batalha que sempre aquece seu coração. Você não pode perder empolgação de maneira alguma, além disso, você recebe os bônus de dano de empolgação vezes seu AB/2 e na primeira manobra do “empolgação” que realizar na cena não consumirá empolgação.",
+        "Seu treinamento árduo e incessante finalmente te levou a um ponto almejado por todos, você se torna um símbolo no caminho das artes marciais, sua aura pode ser reconhecida apenas pelo olhar, recebendo +2 estilo de luta, escolha duas habilidades abaixo.\n\nDragon Combo: você recebe três espaços de Combo, você pode combinar até duas habilidades de estilo de luta em uma só, gastando todos os PE necessários e sendo sempre uma ação completa.\n\nGênio do Combate: Uma vez por cena, caso você veja alguém usando algum estilo de luta ÚNICO, você pode realizar um teste de INTELECTO (DT 18 - 1 a cada habilidade do estilo que você o ver usando), caso tenha um sucesso você aprende aquele estilo de luta Permanentemente. (Não contando em seu limite de estilos de luta).\n\nLeitura Fria: No início de seu turno você pode gastar 2 PE para estipular a quantidade de ataques que conseguira acertar no inimigo, caso acerte essa exata mesma quantia de ataques que você supôs, você recebe um bônus de dados de dano igual a quantia acertada em todos seus ataques até o final da cena.",
+        "Você não precisa mais treinar, você atingiu o epicentro do auge das artes marciais, praticamente se tornando uma divindade, adorado por todos que trilham o caminho do punho ou do Disparo Perfeito. Agora você recebe +INT estilos de luta, e pode escolher aumentar uma categoria de tamanho. Escolha uma das habilidades abaixo.\n\nConvencido: Sendo uma lenda, uma divindade que você é, você jamais abaixa a cabeça pra alguém. Dentro de combate, você pode gastar 2 PE e uma ação padrão para tentar convencer um inimigo que ele é mais fraco que você, faça um teste de intimidação somando sua força ou vigor e com +5 para cada categoria de tamanho acima de médio, caso passe, seu alvo fica imóvel de medo, até para criaturas paranormais.\n\nShi Remover: Uma vez por alvo, você pode gastar 5 PE, realizar um teste de luta contra o alvo, caso tenha um sucesso, até o fim do combate cada ataque que você acertar no alvo com seus punhos, você irá rebaixar -5 do treinamento de EA do alvo, caso o alvo zere, ele entra em morrendo. A vítima apenas tem sua EA de volta no próximo interlúdio."
+        ],
+        [
+        "“O feiticeiro mais resistente entre todos os outros” esse é o caminho que você está trilhando. Seu treinamento árduo o recompensa com +10 RD físico e +5 RD geral +1 PV por NEX, recebe um estilo de luta e Artista Marcial 1.0, além de ganhar a habilidade “Resistência sobrenatural”. Ganha uma passiva única com o Efeito de conjuração de Energia Amaldiçoada “Ren”.\n\n*Ren de Guerra Superior (EA): Recebe + NEX de bônus para a defesa com o “Ren”.\n\nResistência Sobrenatural: Você recebe uma quantidade de pontos de imunidade para cada NEX ímpar, e pode gastar 1 ponto para passar em um teste de fortitude automaticamente, ameaças muito maiores podem exigir mais pontos de acordo com o Mestre, você recupera esses pontos em uma cena de interlúdio.",
+        "Resistência sobrenatural é o seu atributo, seu fator de cura se torna inato, recebendo “Sangue de Xamã” caso já tenha os bônus são dobrados, além disso, você se torna mais resistente, ganhando +50 RD físico e +15 RD geral e +Grau PV por NEX. Também, ao usar bloqueio some seu treinamento em EA, também podendo adicionar + 0.5 para os efeitos da “Resistência Sobrenatural”.",
+        "Simplesmente indestrutível, você se torna imparável, sua resistência anormal te dá +500 RD físico e +50 RD geral e dobra os efeitos de grau por NEX. Você pode chamar um alvo em alcance médio para um combate direto, ele deve fazer um TR de vontade toda rodada contra sua DT*2 + LP, a cada rodada a DT aumenta em +1+Grau, toda vez que receber dano desse alvo você pode gastar 4 PE para reduzir o dano à metade. E recebe a habilidade “Ser Superior”.\n\nSer Superior: Alcançar esse patamar não é para todos, sua vitalidade é absoluta, recebendo + LP*AB em sua fortitude.",
+        "Neste ponto, você se tornou um ídolo, praticamente imortal se tornando imune a qualquer dano mundano. Enquanto seus aliados estiverem de pé, você também estará, sempre que entrar em morrendo você pode se tirar de morrendo em um teste de Vigor contra a DT (20 - VIG), você recebe +1 para cada aliado na cena, além de receber metade do dano em qualquer habilidade permanentemente e dobrar sua cura acelerada."
+        ]
+    ]
+    },
+  {
+    "nome": "Mestre Jujutsu",
+    "descricao": "xxx.",
+    "trilha": ["Mestre Classico", "Atirador de Elite", "Selado"],
+    "descricaoTrilha": ["1", "2", "3"],
+    "habilidadeTrilha": [
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"]
+    ],
+    "descricaoHabilidadeTrilha": [
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"]
+    ]
+  },
+  {
+    "nome": "Invocador",
+    "descricao": "Estes são os únicos feiticeiros capazes de gerar e controlar shikigamis. Shikigamis são criaturas e monstros variados, podendo ser desde uma maldição, até um fantasma, porém estes shikigamis não podem ser vistos por mundanos. Os invocadores têm o trabalho de ensinar seus shikigamis a obedecerem suas ordens, precisando domar as suas próprias invocações. Os Shikigamis podem ser invocados através de talismãs, selos e rituais. Feiticeiros com muita habilidade e talento conseguem imbuir seus shikigamis como técnicas jujutsu, assim podendo invocá-los eles mesmos. Shikigamis são seres feitos a partir da energia amaldiçoada, seja do invocador, de um talismã, item amaldiçoado. Os invocadores devem estar em sintonia perfeita com seus shikigamis e vice e versa. Invocadores possuem um Yoroi superior. “Quanto mais forte o invocador, mais forte é a sua invocação.”",
+    "pv_inicial": 15,
+    "san_inicial": 23,
+    "pe_inicial": 8,
+    "pv_por_nex": 3,
+    "san_por_nex": 6,
+    "pe_por_nex": 6,
+    "qnt_pericias_iniciais_treinadas": 6,
+    "qnt_up_grau": 6,
+    "trilha": ["Invocador Classico", "Arsenal de Guerra", "Royal Guard"],
+    "descricaoTrilha": [
+      "Clássico invocador que equilibra quantidade e qualidade.",
+      "Focado em controlar um exército de invocações.",
+      "Focado em um único guardião poderoso."
+    ],
+    "habilidadeTrilha": [
+      [
+        "Treino Básico",
+        "Treino Avançado",
+        "Treino Perfeito",
+        "Manifestação Divina"
+      ],
+      [
+        "Líder de Esquadrão",
+        "Senhor das Guerras",
+        "Monarca dos Exércitos",
+        "Ameaça Global"
+      ],
+      [
+        "Guardião",
+        "Guarda Costas",
+        "Máquina Mortífera",
+        "Monstros da Calamidade"
+      ]
+    ],
+    "descricaoHabilidadeTrilha": [
+      [
+        "Você realiza um treino de manipulação de criaturas paranormais para que elas se moldem conforme a sua vontade. Libera invocações e Artista Marcial 1.0 (Descrito na aba 'Scaling') e um estilo de luta +2 característica/ação para a invocação. Ganha uma passiva única com o Efeito de conjuração de Energia Amaldiçoada 'Yoroi'. *Yoroi Clássico Superior (EA): Diminui o gasto do 'Yoroi' em 1 PE.",
+        "O treino se torna intenso e brutal, fazendo você aprimorar suas invocações e as compreender melhor. Você possui +5 em testes de identificação de criaturas e para saber fraquezas. +2 na DT das invocações e libera o Manifestação Incompleta; +2 característica/ação para a invocação. Manifestação incompleta: Você pode escolher invocar seu shikigami de forma parcial, ao invés de criar uma forma física para seu shikigami você pode manifestar ele em seu corpo, recebendo habilidades que possam ser usadas na manifestação incompleta (ao criar a ficha você e o Mestre devem determinar quais habilidades podem ser usadas na manifestação incompleta).",
+        "Se torna um mestre em invocações. Libera Invocar Recuperação e recebe +5 na DT de invocação. ( Invocar Recuperação: Em uma cena de interlúdio você pode gastar suas duas ações para dobrar todos os efeitos da cena para os aliados ); +2 característica/ação para a invocação.",
+        "Escolhe uma invocação para poder manter ela como Permanente pagando +15 PE na hora de invocar. Além disso, aumenta em 4 passos todo dano/cura dada pelas invocações."
+      ],
+      [
+        "Você é capaz de invocar criaturas que obedecem suas vontades, Libera invocações e pode controlar uma quantidade de invocações igual seu NEX+AB, +1 característica/ação para as invocações e recebe a habilidade “Sacrifício da marionete”. Ganha uma passiva única com o Efeito de conjuração de Energia Amaldiçoada “Yoroi”.\n*Yoroi de Guerra Superior (EA): Recebe +1 de Bônus na Defesa do “Yoroi” a cada invocação adjacente a você.\nSacrifício da marionete : Às vezes, se é necessário sacrificar um peão para se ter a vitória, uma invocação que esteja adjacente a você pode se jogar na frente de um ataque para receber o dano por você.",
+        "Sua capacidade de invocar criaturas se intensifica. Você pode invocar uma quantidade de invocações igual ao seu (NEX+AB+LP)*2, gastando uma ação padrão, libera formações, +1 característica/ação para a invocação, e recebe a habilidade “Formações”.\nFormações: Você pode criar uma quantidade de formações igual seu INT, cada formação tem um Líder e pode ter uma quantidade de soldados a sua escolha, o Líder da formação obrigatoriamente deve ser de pelo menos Grau 2. Você e o Mestre devem criar a mecânica, seu intuito é simplificar na hora do combate, pois uma grande quantidade de invocações pode atrapalhar o andamento do jogo.",
+        "Se torna um mestre em invocações dos exércitos e pode controlar uma quantidade de invocações igual ao seu (NEX+AB+LP)*5, +2 característica/ação para a invocação, cada formação recebe um buff único que deve ser feito com o Mestre.",
+        "Simplesmente um batalhão de nações, seu exército rivaliza com países, se tornando uma potencial ameaça mundial, aumentando em 2 passos todo dano/cura dada pelas invocações e não possui um limite de invocações, gastando 10 PE pode aumentar o dano de uma formação em 25%."
+      ],
+      [
+        "Você libera invocações e Artista Marcial 2.0, escolha um estilo de luta, escolha um guardião entre seus shikigamis, ele recebe +1 ponto de atributo +3 características/ações, ele recebe uma habilidade única que deve ser criada junto com o Mestre. Ganha uma passiva única com o Efeito de conjuração de Energia Amaldiçoada “Yoroi”.\n*Yoroi Real Superior (EA): Dobra a Defesa ganha pelo “Yoroi” a cada Royal Guard.",
+        "O Guardião se torna seu braço direito. +5 na DT do Guardião e libera o Proteção do Guardião, +1 característica/ação para a invocação em geral e +3 característica/ação para o Guardião além de +1 Ponto de atributo para ele.\nProteção do Guardião: Seu guardião sempre irá te proteger, como reação a um ataque você pode chamar seu guardião para receber metade do dano que você iria.",
+        "Seu Guardião se torna um Guardião Nobre capaz de realizar feitos incríveis e inacreditáveis, você recebe +10 na DT de invocação e +20 na DT do Guardião. +3 característica/ação para o Guardião, além de +1 ação padrão para ele.",
+        "Você recebe +1 Guardião, e estes mesmos se tornam invocações permanentes, eles recebem +5 passos de dano e +5 na DT além de + 2 atributos. Se tornando duas calamidades do mundo humano."
+      ]
+    ]
+  },
+  {
+    "nome": "Amaldiçoado",
+    "descricao": "xxx.",
+    "trilha": ["Amaldiçoado Classico", "Perseguido", "Receptaculo"],
+    "descricaoTrilha": ["1", "2", "3"],
+    "habilidadeTrilha": [
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"]
+    ],
+    "descricaoHabilidadeTrilha": [
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"]
+    ]
+  },
+  {
+    "nome": "Shinobi",
+    "descricao": "xxx.",
+    "trilha": ["Shinobi Classico", "Elemental", "Ilusionista"],
+    "descricaoTrilha": ["1", "2", "3"],
+    "habilidadeTrilha": [
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"]
+    ],
+    "descricaoHabilidadeTrilha": [
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"]
+    ]
+  },
+  {
+    "nome": "Restringido",
+    "descricao": "xxx.",
+    "trilha": ["Restringido Classico"],
+    "descricaoTrilha": ["1"],
+    "habilidadeTrilha": [
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"]
+    ],
+    "descricaoHabilidadeTrilha": [
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"],
+      ["xxx", "xxx", "xxx", "xxx"]
+    ]
+  }
+]
+

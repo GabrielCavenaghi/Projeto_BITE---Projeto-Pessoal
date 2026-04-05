@@ -1,0 +1,89 @@
+{
+    "graus": {
+        "Grau 4": {
+            "pv_por_nex": -2,
+            "san_por_nex": -3,
+            "pe_por_nex": -1,
+            "graus_treinamento": 1,
+            "encantamentos": 1,
+            "maldicoes": 2,
+            "libera_habilidades": "Grau 4"
+        },
+        "Grau 3": {
+            "pv_por_nex": 0,
+            "san_por_nex": 0,
+            "pe_por_nex": 0,
+            "graus_treinamento": 1,
+            "encantamentos": 1,
+            "maldicoes": 2,
+            "libera_habilidades": "Grau 3"
+        },
+        "Grau 2": {
+            "pv_por_nex": 2,
+            "san_por_nex": 1,
+            "pe_por_nex": 1,
+            "graus_treinamento": 1,
+            "encantamentos": 1,
+            "maldicoes": 2,
+            "libera_habilidades": "Grau 2"
+        },
+        "Grau 1": {
+            "pv_por_nex": 2,
+            "san_por_nex": 3,
+            "pe_por_nex": 2,
+            "graus_treinamento": 1,
+            "encantamentos": 1,
+            "maldicoes": 2,
+            "libera_habilidades": "Grau 1"
+        },
+        "Grau Semi Especial": {
+            "pv_por_nex": 5,
+            "san_por_nex": 7,
+            "pe_por_nex": 5,
+            "graus_treinamento": 1,
+            "encantamentos": 1,
+            "maldicoes": 2,
+            "libera_habilidades": "Grau 1+",
+            "bonus_vigor": {"nome": "Vigor Impressionante", "pv_por_vigor": 100},
+            "bonus_presenca": {"nome": "Estamina Excelente", "pe_por_presenca": 10}
+        },
+        "Grau Especial": {
+            "pontos_atributo": 1,
+            "encantamentos_ab": "metade_ab",
+            "maldicoes": 2,
+            "graus_treinamento": 1,
+            "poder_especial_individualidade": true,
+            "bonus_vigor": {"nome": "Vigor Superior", "pv_por_vigor": 500},
+            "bonus_presenca": {"nome": "Estamina Sobrenatural", "pe_por_presenca": 50},
+            "classes": {
+                "Invocador":      {"pv_por_nex": 10,  "san_por_nex": 30, "pe_por_nex": 50},
+                "Inato":          {"pv_por_nex": 50,  "san_por_nex": 30, "pe_por_nex": 30},
+                "Amaldiçoado":    {"pv_por_nex": 30,  "san_por_nex": 50, "pe_por_nex": 30},
+                "Mestre Jujutsu": {"pv_por_nex": 20,  "san_por_nex": 30, "pe_por_nex": 50},
+                "Shinobi":        {"pv_por_nex": 40,  "san_por_nex": 40, "pe_por_nex": 20},
+                "Restringido":    {"pv_por_nex": 50,  "san_por_nex": 10, "pe_por_nex": 30}
+            }
+        },
+        "Grau Ultra Especial": {
+            "pontos_atributo": 1,
+            "encantamentos_ab": "metade_ab",
+            "maldicoes": 2,
+            "graus_treinamento": 1,
+            "bonus_vigor": {"nome": "Vigor Ultra Superior", "pv_por_vigor": 1000},
+            "bonus_presenca": {"nome": "Estamina Ultra Sobrenatural", "pe_por_presenca": 100},
+            "classes": {
+                "Invocador":      {"pv_por_nex": 20,  "san_por_nex": 60,  "pe_por_nex": 100},
+                "Inato":          {"pv_por_nex": 100, "san_por_nex": 60,  "pe_por_nex": 60},
+                "Amaldiçoado":    {"pv_por_nex": 60,  "san_por_nex": 100, "pe_por_nex": 60},
+                "Mestre Jujutsu": {"pv_por_nex": 40,  "san_por_nex": 60,  "pe_por_nex": 100},
+                "Shinobi":        {"pv_por_nex": 80,  "san_por_nex": 80,  "pe_por_nex": 40},
+                "Restringido":    {"pv_por_nex": 100, "san_por_nex": 20,  "pe_por_nex": 60}
+            }
+        }
+    },
+
+    "classes_disponiveis": [
+        "Invocador", "Inato", "Amaldiçoado",
+        "Mestre Jujutsu", "Shinobi", "Restringido"
+    ]
+}
