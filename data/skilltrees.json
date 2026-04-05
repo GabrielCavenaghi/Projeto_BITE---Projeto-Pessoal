@@ -39,7 +39,7 @@
             {"id": "for_14", "nome": "Força Bruta", "descricao": "Pode substituir o atributo base de qualquer teste de perícia por Força, pagando 2 PE. Requer FOR 4.", "custo": 2, "requisitos": []},
             {"id": "for_15", "nome": "Força Avassaladora", "descricao": "Ataques corpo a corpo recebem +2 de dano para cada dado rolado. Requer FOR 5.", "custo": 3, "requisitos": ["for_14"]},
             {"id": "for_16", "nome": "Força Absoluta", "descricao": "Ataques corpo a corpo recebem +FOR de dano para cada dado rolado. Requer FOR 7.", "custo": 5, "requisitos": ["for_15"]},
-            {"id": "for_17", "nome": "Mestre Marcial", "descricao": "Aumenta em mais um dado e um passo para os seus efeitos do Artista Marcial em que se encontra.", "custo": 4, "requisitos": []},
+            {"id": "for_17", "nome": "Mestre Marcial", "descricao": "Aumenta em mais um dado e um passo para os seus efeitos do Artista Marcial em que se encontra.", "custo": 4, "requisitos": ["for_07", "for_09"]},
             {"id": "for_18", "nome": "Soco Perfurante", "descricao": "Ao realizar um ataque desarmado você pode gastar 4 PE para ignorar a resistência a dano do alvo. Se o seu dano ultrapassar a resistência você soma a resistência do inimigo em seu dano.", "custo": 2, "requisitos": []},
             {"id": "for_19", "nome": "Soco Sônico", "descricao": "Gastando 6 PE e uma ação de agredir você causa um soco que não pega no exterior, mas sim no interior, destruindo por dentro. Caso faça isso em uma pessoa, ela faz um teste de Fortitude DT 50. Caso não passar, ela desmaia. O sucesso é automático em 6 de Vigor.", "custo": 3, "requisitos": ["for_18"]}
         ]

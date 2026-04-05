@@ -58,12 +58,21 @@ class CriadorFichas:
         self.atributos           = None
         self.pontos_disponiveis  = 0
 
-        # ── Estado da skill tree ─────────────────────────────────────────────
+        # ── Estado da skill tree ────────────────────────────────────────────
         self.nos_comprados       = {}
         self.pontos_skilltree    = {}
         self.abas_confirmadas    = set()
         self.no_selecionado      = None
         self.aba_skilltree_ativa = "INT"
+
+        # ── Estado de confirmação ───────────────────────────────────────────
+        self.nome_personagem = ""
+        self._secoes_expandidas = {}
+
+        # ── Estado dos feitiços ─────────────────────────────────────────────
+        self.feiticos_escolhidos  = []   # lista de ids escolhidos
+        self.pontos_feiticos      = 0    # calculado pelo NEX
+        self.aba_feitico_ativa    = None
 
         # ── Fontes centralizadas ─────────────────────────────────────────────
         self.fonte_titulo      = ctk.CTkFont(size=32, weight="bold")
@@ -97,13 +106,13 @@ class CriadorFichas:
         self.frame_grau        = ctk.CTkFrame(self.main, fg_color="transparent")
         self.frame_atributos   = ctk.CTkFrame(self.main, fg_color="transparent")
         self.frame_skilltree   = ctk.CTkFrame(self.main, fg_color="transparent")
-        self.frame_habilidades = ctk.CTkFrame(self.main, fg_color="transparent")
-        self.frame_inventario  = ctk.CTkFrame(self.main, fg_color="transparent")
+        self.frame_feiticos    = ctk.CTkFrame(self.main, fg_color="transparent")
+        self.frame_confirmacao = ctk.CTkFrame(self.main, fg_color="transparent")
 
         self.todos_frames = [
             self.frame_classe, self.frame_trilha, self.frame_nex, self.frame_grau,
             self.frame_atributos, self.frame_skilltree,
-            self.frame_habilidades, self.frame_inventario
+            self.frame_feiticos, self.frame_confirmacao
         ]
 
     def mostrar_aba(self, frame):
@@ -883,12 +892,541 @@ class CriadorFichas:
         self._trocar_aba_skilltree("INT")
 
     def _confirmar_skilltrees(self):
-        self.mostrar_aba(self.frame_inventario)
+        self._mostrar_feiticos()
 
 
-    # ══════════════════════════════════════════════════════════════════════════
+    # ══════════════════════════════════════════════════════════════════════════════
     # Tela 7 — Feitiços
-    # ══════════════════════════════════════════════════════════════════════════
+    # ══════════════════════════════════════════════════════════════════════════════
+
+    def _mostrar_feiticos(self):
+        from utils.feiticos import carregar_feiticos, feiticos_por_classe, abas_disponiveis
+
+        for w in self.frame_feiticos.winfo_children():
+            w.destroy()
+
+        self._btn_voltar(self.frame_feiticos, self._mostrar_skilltree)
+        self.feiticos_data    = carregar_feiticos()
+        self.feiticos_por_aba = feiticos_por_classe(self.feiticos_data)
+
+        # Pontos de feitiço vêm do totais_nex
+        self.pontos_feiticos = self.totais_nex.get("feiticos", 0)
+
+        # Cabeçalho com contador
+        header = ctk.CTkFrame(self.frame_feiticos, fg_color="transparent")
+        header.pack(fill="x", padx=20, pady=(0, 5))
+
+        ctk.CTkLabel(header, text="Feitiços",
+                    font=self.fonte_titulo).pack(side="left")
+
+        self.feiticos_contador = ctk.CTkLabel(
+            header, text=self._texto_contador_feiticos(),
+            font=self.fonte_card_desc, text_color="gray")
+        self.feiticos_contador.pack(side="right", padx=10)
+
+        # Tabs
+        tabs_frame = ctk.CTkFrame(self.frame_feiticos, fg_color="transparent")
+        tabs_frame.pack(fill="x", padx=20, pady=(0, 5))
+
+        classe_personagem = self.classe_selecionada["nome"]
+        self.abas_feiticos = abas_disponiveis(self.feiticos_data, classe_personagem)
+        self.tab_feitico_botoes = {}
+
+        for aba in self.abas_feiticos:
+            btn = ctk.CTkButton(tabs_frame, text=aba, width=120,
+                                font=self.fonte_hab_desc,
+                                command=lambda a=aba: self._trocar_aba_feitico(a))
+            btn.pack(side="left", padx=4)
+            self.tab_feitico_botoes[aba] = btn
+
+        # Container da lista
+        self.feitico_container = ctk.CTkFrame(self.frame_feiticos, fg_color="transparent")
+        self.feitico_container.pack(fill="both", expand=True, padx=20, pady=(0, 5))
+
+        ctk.CTkButton(self.frame_feiticos, text="Confirmar Feitiços →",
+                    font=self.fonte_botao,
+                    command=self._confirmar_feiticos).pack(pady=10)
+
+        self.mostrar_aba(self.frame_feiticos)
+        self._trocar_aba_feitico(self.abas_feiticos[0])
+
+    def _texto_contador_feiticos(self) -> str:
+        return f"Feitiços: {len(self.feiticos_escolhidos)} / {self.pontos_feiticos}"
+
+    def _trocar_aba_feitico(self, aba):
+        self.aba_feitico_ativa = aba
+        for nome, btn in self.tab_feitico_botoes.items():
+            btn.configure(fg_color=("green4", "#1a6b1a") if nome == aba
+                        else ("gray75", "gray25"))
+        self._desenhar_lista_feiticos()
+
+    def _desenhar_lista_feiticos(self):
+        for w in self.feitico_container.winfo_children():
+            w.destroy()
+
+        aba      = self.aba_feitico_ativa
+        feiticos = self.feiticos_por_aba.get(aba, [])
+
+        scroll = ctk.CTkScrollableFrame(self.feitico_container, fg_color="transparent")
+        scroll.pack(fill="both", expand=True)
+
+        if not feiticos:
+            ctk.CTkLabel(scroll, text="Nenhum feitiço disponível nesta aba.",
+                        text_color="gray", font=self.fonte_hab_desc).pack(pady=40)
+            return
+
+        for feitico in feiticos:
+            self._card_feitico(feitico, scroll)
+
+    def _card_feitico(self, feitico, parent):
+        escolhido  = feitico["id"] in self.feiticos_escolhidos
+        pode_pegar = (len(self.feiticos_escolhidos) < self.pontos_feiticos
+                    and not escolhido)
+
+        if escolhido:
+            cor_borda, cor_bg = "#FFD700", "#3a3000"
+        elif pode_pegar:
+            cor_borda, cor_bg = "#2ecc71", "#1a2b1a"
+        else:
+            cor_borda, cor_bg = "#555555", "#2b2b2b"
+
+        card = ctk.CTkFrame(parent, corner_radius=10, border_width=2,
+                            border_color=cor_borda, fg_color=cor_bg)
+        card.pack(fill="x", padx=5, pady=4)
+
+        # Linha superior: nome + grau + status
+        topo = ctk.CTkFrame(card, fg_color="transparent")
+        topo.pack(fill="x", padx=12, pady=(10, 4))
+
+        ctk.CTkLabel(topo, text=feitico["nome"],
+                    font=self.fonte_hab_titulo).pack(side="left")
+
+        grau_txt = f"Grau {feitico['grau_base']}" if isinstance(feitico['grau_base'], int) else feitico['grau_base']
+        ctk.CTkLabel(topo, text=grau_txt,
+                    font=ctk.CTkFont(size=11), text_color="#aaaaaa").pack(side="left", padx=8)
+
+        if escolhido:
+            ctk.CTkLabel(topo, text="✓ Escolhido",
+                        text_color="#FFD700", font=ctk.CTkFont(size=12)).pack(side="right")
+
+        # Descrição resumida
+        desc_curta = feitico["descricao_base"][:120] + "…" \
+                    if len(feitico["descricao_base"]) > 120 else feitico["descricao_base"]
+        ctk.CTkLabel(card, text=desc_curta, wraplength=700, justify="left",
+                    text_color="#cccccc", font=self.fonte_hab_desc).pack(
+                        anchor="w", padx=12, pady=(0, 8))
+
+        # Botão de ação
+        btn_frame = ctk.CTkFrame(card, fg_color="transparent")
+        btn_frame.pack(fill="x", padx=12, pady=(0, 10))
+
+        ctk.CTkButton(btn_frame, text="Ver detalhes", width=110,
+                    font=self.fonte_hab_desc, fg_color="transparent",
+                    border_width=1,
+                    command=lambda f=feitico: self._abrir_popup_feitico(f)).pack(side="left")
+
+        if escolhido:
+            ctk.CTkButton(btn_frame, text="Desistir", width=100,
+                        font=self.fonte_hab_desc, fg_color="#6b1a1a",
+                        hover_color="#4a1010",
+                        command=lambda f=feitico: self._desistir_feitico(f)).pack(side="left", padx=(8, 0))
+        elif pode_pegar:
+            ctk.CTkButton(btn_frame, text="Escolher", width=100,
+                        font=self.fonte_hab_desc, fg_color="#1a6b1a",
+                        hover_color="#145214",
+                        command=lambda f=feitico: self._escolher_feitico(f)).pack(side="left", padx=(8, 0))
+
+    def _abrir_popup_feitico(self, feitico):
+        from utils.feiticos import versoes_disponiveis
+
+        popup = ctk.CTkToplevel(self.app)
+        popup.title(feitico["nome"])
+        popup.geometry("520x500")
+        popup.resizable(False, False)
+        popup.after(100, popup.grab_set)
+
+        # Cabeçalho
+        ctk.CTkLabel(popup, text=feitico["nome"],
+                    font=self.fonte_card_titulo).pack(pady=(20, 2), padx=20)
+
+        grau_txt = f"Grau base: {feitico['grau_base']} • Classe: {feitico['classe']}"
+        ctk.CTkLabel(popup, text=grau_txt,
+                    font=ctk.CTkFont(size=12), text_color="gray").pack(pady=(0, 10))
+
+        self._separador(popup)
+
+        # Conteúdo scrollável
+        scroll = ctk.CTkScrollableFrame(popup, fg_color="transparent")
+        scroll.pack(fill="both", expand=True, padx=20, pady=10)
+
+        # Descrição base
+        ctk.CTkLabel(scroll, text="Versão base (Grau 4):",
+                    font=self.fonte_hab_titulo, text_color="#aaaaaa").pack(anchor="w", pady=(0, 4))
+        ctk.CTkLabel(scroll, text=feitico["descricao_base"],
+                    font=self.fonte_hab_desc, wraplength=460,
+                    justify="left").pack(anchor="w", pady=(0, 12))
+
+        # Versões desbloqueadas pelo grau do personagem
+        versoes = versoes_disponiveis(feitico, self.grau_selecionado)
+        if versoes:
+            self._separador(scroll)
+            ctk.CTkLabel(scroll, text="Versões desbloqueadas pelo seu grau:",
+                        font=self.fonte_hab_titulo, text_color="#2ecc71").pack(anchor="w", pady=(8, 4))
+
+            for v in versoes:
+                desc_versao = feitico["versoes"][v]
+                ctk.CTkLabel(scroll, text=v,
+                            font=ctk.CTkFont(size=12, weight="bold"),
+                            text_color="#FFD700").pack(anchor="w", pady=(6, 2))
+                ctk.CTkLabel(scroll, text=desc_versao,
+                            font=self.fonte_hab_desc, wraplength=460,
+                            justify="left", text_color="#dddddd").pack(anchor="w", pady=(0, 6))
+
+        self._separador(popup)
+
+        # Botões
+        escolhido  = feitico["id"] in self.feiticos_escolhidos
+        pode_pegar = len(self.feiticos_escolhidos) < self.pontos_feiticos and not escolhido
+
+        botoes = ctk.CTkFrame(popup, fg_color="transparent")
+        botoes.pack(pady=(5, 15))
+
+        if escolhido:
+            ctk.CTkButton(botoes, text="Desistir deste feitiço",
+                        fg_color="#6b1a1a", hover_color="#4a1010",
+                        font=self.fonte_hab_desc,
+                        command=lambda: [self._desistir_feitico(feitico), popup.destroy()]
+                        ).pack(side="left", padx=5)
+        elif pode_pegar:
+            ctk.CTkButton(botoes, text="Escolher este feitiço",
+                        fg_color="#1a6b1a", hover_color="#145214",
+                        font=self.fonte_hab_desc,
+                        command=lambda: [self._escolher_feitico(feitico), popup.destroy()]
+                        ).pack(side="left", padx=5)
+        else:
+            ctk.CTkLabel(botoes,
+                        text="Sem pontos disponíveis" if not escolhido else "",
+                        text_color="#888888", font=ctk.CTkFont(size=12)).pack(side="left", padx=5)
+
+        ctk.CTkButton(botoes, text="Fechar", width=100,
+                    fg_color="transparent", border_width=1,
+                    command=popup.destroy).pack(side="left", padx=5)
+
+    def _escolher_feitico(self, feitico):
+        if (feitico["id"] not in self.feiticos_escolhidos and
+                len(self.feiticos_escolhidos) < self.pontos_feiticos):
+            self.feiticos_escolhidos.append(feitico["id"])
+            self._atualizar_contador_feiticos()
+            self._desenhar_lista_feiticos()
+
+    def _desistir_feitico(self, feitico):
+        if feitico["id"] in self.feiticos_escolhidos:
+            self.feiticos_escolhidos.remove(feitico["id"])
+            self._atualizar_contador_feiticos()
+            self._desenhar_lista_feiticos()
+
+    def _atualizar_contador_feiticos(self):
+        self.feiticos_contador.configure(text=self._texto_contador_feiticos())
+
+    def _confirmar_feiticos(self):
+        self._mostrar_confirmacao()
+
+    # ══════════════════════════════════════════════════════════════════════════════
+    # Tela 8 — Confirmação e salvamento
+    # ══════════════════════════════════════════════════════════════════════════════
+
+    def _mostrar_confirmacao(self):
+        for w in self.frame_confirmacao.winfo_children():
+            w.destroy()
+
+        self._btn_voltar(self.frame_confirmacao, self._mostrar_feiticos)
+        self._titulo(self.frame_confirmacao, "Confirmar Ficha")
+
+        # Campo de nome
+        nome_frame = ctk.CTkFrame(self.frame_confirmacao, fg_color="transparent")
+        nome_frame.pack(fill="x", padx=30, pady=(0, 15))
+
+        ctk.CTkLabel(nome_frame, text="Nome do Personagem:",
+                    font=self.fonte_hab_titulo).pack(side="left", padx=(0, 10))
+        self.entrada_nome = ctk.CTkEntry(nome_frame, width=300,
+                                        placeholder_text="Digite o nome...",
+                                        font=self.fonte_card_desc)
+        self.entrada_nome.pack(side="left")
+        if self.nome_personagem:
+            self.entrada_nome.insert(0, self.nome_personagem)
+
+        # Scroll principal
+        scroll = ctk.CTkScrollableFrame(self.frame_confirmacao, fg_color="transparent")
+        scroll.pack(fill="both", expand=True, padx=20, pady=(0, 10))
+
+        # Seções colapsáveis
+        secoes = [
+            ("Classe e Trilha",  self._conteudo_secao_classe),
+            ("NEX e Grau",       self._conteudo_secao_nex),
+            ("Atributos",        self._conteudo_secao_atributos),
+            ("Skill Trees",      self._conteudo_secao_skilltrees),
+            ("Feitiços",         self._conteudo_secao_feiticos),
+        ]
+
+        for titulo, construtor in secoes:
+            self._secao_colapsavel(scroll, titulo, construtor)
+
+        # Botão confirmar
+        ctk.CTkButton(self.frame_confirmacao,
+                    text="Salvar Ficha ✓",
+                    font=self.fonte_botao,
+                    fg_color="#1a6b1a", hover_color="#145214",
+                    height=45,
+                    command=self._salvar_ficha).pack(pady=12)
+
+        self.mostrar_aba(self.frame_confirmacao)
+
+    def _secao_colapsavel(self, parent, titulo, construtor_conteudo):
+        """Cria uma seção com cabeçalho clicável que expande/colapsa o conteúdo."""
+        expandida = self._secoes_expandidas.get(titulo, False)
+
+        container = ctk.CTkFrame(parent, corner_radius=10, border_width=1,
+                                border_color="#444444", fg_color="#1e1e1e")
+        container.pack(fill="x", padx=5, pady=5)
+
+        # Cabeçalho clicável
+        header = ctk.CTkFrame(container, fg_color="transparent")
+        header.pack(fill="x")
+
+        seta_var = ctk.StringVar(value="▼" if expandida else "▶")
+
+        seta = ctk.CTkLabel(header, textvariable=seta_var,
+                            font=ctk.CTkFont(size=14), width=24)
+        seta.pack(side="left", padx=(12, 4), pady=12)
+
+        ctk.CTkLabel(header, text=titulo,
+                    font=self.fonte_hab_titulo).pack(side="left", pady=12)
+
+        # Botão editar
+        destino = {
+            "Classe e Trilha": self._mostrar_classes,
+            "NEX e Grau":      self._mostrar_nex,
+            "Atributos":       self._mostrar_atributos,
+            "Skill Trees":     self._mostrar_skilltree,
+            "Feitiços":        self._mostrar_feiticos,
+        }
+        if titulo in destino:
+            ctk.CTkButton(header, text="✎ Editar", width=80,
+                        font=ctk.CTkFont(size=12),
+                        fg_color="transparent", border_width=1,
+                        command=destino[titulo]).pack(side="right", padx=12, pady=8)
+
+        # Frame de conteúdo
+        conteudo_frame = ctk.CTkFrame(container, fg_color="transparent")
+
+        def toggle():
+            atual = self._secoes_expandidas.get(titulo, False)
+            self._secoes_expandidas[titulo] = not atual
+            if not atual:
+                seta_var.set("▼")
+                construtor_conteudo(conteudo_frame)
+                conteudo_frame.pack(fill="x", padx=15, pady=(0, 12))
+            else:
+                seta_var.set("▶")
+                conteudo_frame.pack_forget()
+                for w in conteudo_frame.winfo_children():
+                    w.destroy()
+
+        # Bind no header inteiro
+        for widget in [header, seta]:
+            widget.bind("<Button-1>", lambda e: toggle())
+
+        ctk.CTkButton(header, text="", width=0, fg_color="transparent",
+                    command=toggle, hover=False).pack(side="left", fill="x", expand=True)
+
+        if expandida:
+            construtor_conteudo(conteudo_frame)
+            conteudo_frame.pack(fill="x", padx=15, pady=(0, 12))
+
+    # ── Construtores de conteúdo de cada seção ────────────────────────────────────
+
+    def _conteudo_secao_classe(self, parent):
+        dados = [
+            ("Classe",  self.classe_selecionada["nome"] if self.classe_selecionada else "—"),
+            ("Trilha",  self.trilha_selecionada or "—"),
+        ]
+        self._tabela_info(parent, dados)
+
+    def _conteudo_secao_nex(self, parent):
+        dados = [
+            ("NEX",             self.nex_selecionado or "—"),
+            ("LP",              str(self.lp_selecionado or "—")),
+            ("Grau",            self.grau_selecionado or "—"),
+        ]
+        if self.totais_nex:
+            dados += [
+                ("Pontos de Atributo (NEX)", str(self.totais_nex.get("pontos_atributo", 0))),
+                ("Feitiços (NEX)",           str(self.totais_nex.get("feiticos", 0))),
+                ("Graus de Treinamento",     str(self.totais_nex.get("graus_treinamento", 0))),
+                ("Habilidades de Trilha",    str(self.totais_nex.get("habilidade_trilha", 0))),
+            ]
+        self._tabela_info(parent, dados)
+
+    def _conteudo_secao_atributos(self, parent):
+        if not self.atributos:
+            ctk.CTkLabel(parent, text="Nenhum atributo distribuído.",
+                        text_color="gray").pack()
+            return
+        dados = [(f"{d['nome']} ({s})", str(d["valor"]))
+                for s, d in self.atributos.items()]
+        self._tabela_info(parent, dados)
+
+    def _conteudo_secao_skilltrees(self, parent):
+        if not self.nos_comprados:
+            ctk.CTkLabel(parent, text="Nenhum nó comprado.",
+                        text_color="gray").pack()
+            return
+
+        for aba, nos in self.nos_comprados.items():
+            if not nos:
+                continue
+
+            ctk.CTkLabel(parent, text=aba,
+                        font=self.fonte_hab_titulo,
+                        text_color="#2ecc71").pack(anchor="w", pady=(8, 2))
+
+            # Busca nomes dos nós
+            nos_por_id = {n["id"]: n
+                        for n in self.skilltrees_data.get(aba, {}).get("nos", [])}
+            for no_id in nos:
+                no = nos_por_id.get(no_id)
+                if no:
+                    ctk.CTkLabel(parent,
+                                text=f"  • {no['nome']} ({no['custo']}pt)",
+                                font=self.fonte_hab_desc,
+                                text_color="#cccccc").pack(anchor="w")
+
+    def _conteudo_secao_feiticos(self, parent):
+        from utils.feiticos import versoes_disponiveis
+
+        if not self.feiticos_escolhidos:
+            ctk.CTkLabel(parent, text="Nenhum feitiço escolhido.",
+                        text_color="gray").pack()
+            return
+
+        feiticos_por_id = {f["id"]: f for f in self.feiticos_data}
+        for fid in self.feiticos_escolhidos:
+            feitico = feiticos_por_id.get(fid)
+            if not feitico:
+                continue
+
+            linha = ctk.CTkFrame(parent, fg_color="transparent")
+            linha.pack(fill="x", pady=2)
+
+            ctk.CTkLabel(linha, text=f"• {feitico['nome']}",
+                        font=self.fonte_hab_titulo).pack(side="left")
+            ctk.CTkLabel(linha, text=f"  [{feitico['classe']}]",
+                        font=ctk.CTkFont(size=11),
+                        text_color="#aaaaaa").pack(side="left")
+
+            versoes = versoes_disponiveis(feitico, self.grau_selecionado)
+            if versoes:
+                ctk.CTkLabel(parent,
+                            text=f"  Versões desbloqueadas: {', '.join(versoes)}",
+                            font=ctk.CTkFont(size=11),
+                            text_color="#FFD700").pack(anchor="w", padx=12)
+
+    def _tabela_info(self, parent, dados: list):
+        """Renderiza uma lista de (chave, valor) em formato de tabela simples."""
+        for chave, valor in dados:
+            linha = ctk.CTkFrame(parent, fg_color="transparent")
+            linha.pack(fill="x", pady=1)
+            ctk.CTkLabel(linha, text=chave,
+                        font=ctk.CTkFont(size=13), text_color="#aaaaaa",
+                        width=200, anchor="w").pack(side="left")
+            ctk.CTkLabel(linha, text=valor,
+                        font=ctk.CTkFont(size=13, weight="bold"),
+                        anchor="w").pack(side="left")
+
+    # ── Salvamento ────────────────────────────────────────────────────────────────
+
+    def _salvar_ficha(self):
+        import datetime
+
+        self.nome_personagem = self.entrada_nome.get().strip()
+        if not self.nome_personagem:
+            self.entrada_nome.configure(border_color="#e74c3c")
+            return
+        self.entrada_nome.configure(border_color=("gray65", "gray35"))
+
+        ficha = {
+            "nome":             self.nome_personagem,
+            "criado_em":        datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "classe":           self.classe_selecionada["nome"] if self.classe_selecionada else None,
+            "trilha":           self.trilha_selecionada,
+            "nex":              self.nex_selecionado,
+            "lp":               self.lp_selecionado,
+            "grau":             self.grau_selecionado,
+            "totais_nex":       self.totais_nex,
+            "atributos":        {s: d["valor"] for s, d in self.atributos.items()},
+            "nos_comprados":    {aba: list(nos)
+                                for aba, nos in self.nos_comprados.items()},
+            "pontos_skilltree": self.pontos_skilltree,
+            "feiticos":         self.feiticos_escolhidos,
+        }
+
+        os.makedirs("data/fichas", exist_ok=True)
+        nome_arquivo = self.nome_personagem.replace(" ", "_").lower()
+        caminho = f"data/fichas/{nome_arquivo}.json"
+
+        # Evita sobrescrever fichas existentes
+        contador = 1
+        while os.path.exists(caminho):
+            caminho = f"data/fichas/{nome_arquivo}_{contador}.json"
+            contador += 1
+
+        with open(caminho, "w", encoding="utf-8") as f:
+            json.dump(ficha, f, indent=4, ensure_ascii=False)
+
+        self._popup_sucesso(caminho)
+
+    def _popup_sucesso(self, caminho):
+        popup = ctk.CTkToplevel(self.app)
+        popup.title("Ficha salva!")
+        popup.geometry("380x200")
+        popup.resizable(False, False)
+        popup.after(100, popup.grab_set)
+
+        ctk.CTkLabel(popup, text="✓ Ficha salva com sucesso!",
+                    font=self.fonte_card_titulo,
+                    text_color="#2ecc71").pack(pady=(30, 8))
+        ctk.CTkLabel(popup, text=caminho,
+                    font=ctk.CTkFont(size=11),
+                    text_color="gray").pack(pady=(0, 20))
+
+        ctk.CTkButton(popup, text="Criar outra ficha",
+                    font=self.fonte_hab_desc,
+                    command=lambda: [popup.destroy(), self._reiniciar()]).pack(pady=(0, 8))
+        ctk.CTkButton(popup, text="Fechar",
+                    font=self.fonte_hab_desc,
+                    fg_color="transparent", border_width=1,
+                    command=popup.destroy).pack()
+
+    def _reiniciar(self):
+        """Reseta o estado e volta para a tela inicial."""
+        self.classe_selecionada  = None
+        self.trilha_selecionada  = None
+        self.nex_selecionado     = None
+        self.lp_selecionado      = None
+        self.totais_nex          = None
+        self.grau_selecionado    = None
+        self.pontos_extras_grau  = 0
+        self.habilidades_trilha  = []
+        self.atributos           = None
+        self.pontos_disponiveis  = 0
+        self.nos_comprados       = {}
+        self.pontos_skilltree    = {}
+        self.abas_confirmadas    = set()
+        self.feiticos_escolhidos = []
+        self.pontos_feiticos     = 0
+        self.nome_personagem     = ""
+        self._secoes_expandidas  = {}
+        self._mostrar_classes()
 
     # ══════════════════════════════════════════════════════════════════════════
     # Navegação global

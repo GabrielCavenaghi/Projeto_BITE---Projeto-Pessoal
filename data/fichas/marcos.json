@@ -1,0 +1,88 @@
+{
+    "nome": "Marcos",
+    "criado_em": "2026-04-05 08:58",
+    "classe": "Invocador",
+    "trilha": "Arsenal de Guerra",
+    "nex": "99.2%",
+    "lp": 22,
+    "grau": "Grau Ultra Especial",
+    "totais_nex": {
+        "pontos_atributo": 5,
+        "feiticos": 12,
+        "graus_treinamento": 4,
+        "habilidade_trilha": 4,
+        "afinidade": 1,
+        "expansao_modo": 1,
+        "melhorias_superiores": 1,
+        "habilidades_lendarias": 1,
+        "habilidade_tecnica_n6": 0
+    },
+    "atributos": {
+        "AGI": 3,
+        "FOR": 3,
+        "INT": 9,
+        "VIG": 3,
+        "PRE": 7
+    },
+    "nos_comprados": {
+        "AGI": [
+            "agi_05",
+            "agi_04"
+        ],
+        "FOR": [
+            "for_13"
+        ],
+        "INT": [
+            "int_03",
+            "int_10",
+            "int_02",
+            "int_09",
+            "int_01"
+        ],
+        "VIG": [
+            "vig_14",
+            "vig_16",
+            "vig_15"
+        ],
+        "PRE": [
+            "pre_20",
+            "pre_04",
+            "pre_02",
+            "pre_03",
+            "pre_01",
+            "pre_19"
+        ],
+        "GERAL": [
+            "ger_01",
+            "ger_47",
+            "ger_35",
+            "ger_02",
+            "ger_20",
+            "ger_40",
+            "ger_34",
+            "ger_21"
+        ]
+    },
+    "pontos_skilltree": {
+        "AGI": 0,
+        "FOR": 0,
+        "INT": 0,
+        "VIG": 0,
+        "PRE": 0,
+        "GERAL": 0
+    },
+    "feiticos": [
+        "fei_074",
+        "fei_066",
+        "fei_108",
+        "fei_111",
+        "fei_002",
+        "fei_063",
+        "fei_061",
+        "fei_059",
+        "fei_019",
+        "fei_046",
+        "fei_004",
+        "fei_014"
+    ]
+}
