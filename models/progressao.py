@@ -1,0 +1,1 @@
+# regras de NEX/grau

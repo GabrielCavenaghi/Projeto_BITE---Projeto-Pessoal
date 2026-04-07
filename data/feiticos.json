@@ -1,6 +1,7 @@
 [
   {
     "id": "fei_001",
+    "tipo": "Ativa",
     "nome": "Detecção de Energia Amaldiçoada",
     "classe": "Geral",
     "grau_base": 4,
@@ -14,6 +15,7 @@
   },
   {
     "id": "fei_002",
+    "tipo": "Ativa",
     "nome": "Versatilidade de Feiticeiro",
     "classe": "Geral",
     "grau_base": 4,
@@ -28,6 +30,7 @@
   },
   {
     "id": "fei_003",
+    "tipo": "Passiva",
     "nome": "Fanático",
     "classe": "Geral",
     "grau_base": 4,
@@ -90,6 +93,7 @@
   },
   {
     "id": "fei_004",
+    "tipo": "Passiva",
     "nome": "Reflexos Defensivos",
     "classe": "Geral",
     "grau_base": 4,
@@ -143,6 +147,7 @@
   },
   {
     "id": "fei_005",
+    "tipo": "Ativa",
     "nome": "Sentido Tático",
     "classe": "Geral",
     "grau_base": 4,
@@ -155,6 +160,7 @@
   },
   {
     "id": "fei_006",
+    "tipo": "Ativa",
     "nome": "Pensamento Ágil",
     "classe": "Geral",
     "grau_base": 4,
@@ -163,6 +169,7 @@
   },
   {
     "id": "fei_007",
+    "tipo": "Passiva",
     "nome": "Movimento Estratégico",
     "classe": "Geral",
     "grau_base": 4,
@@ -171,6 +178,7 @@
   },
   {
     "id": "fei_008",
+    "tipo": "Ativa",
     "nome": "Na mira",
     "classe": "Geral",
     "grau_base": 4,
@@ -184,6 +192,7 @@
   },
   {
     "id": "fei_009",
+    "tipo": "Passiva",
     "nome": "Passo Vertical",
     "classe": "Geral",
     "grau_base": 4,
@@ -192,6 +201,7 @@
   },
   {
     "id": "fei_010",
+    "tipo": "Ativa",
     "nome": "Explosivo Improvisado",
     "classe": "Geral",
     "grau_base": 4,
@@ -200,6 +210,7 @@
   },
   {
     "id": "fei_011",
+    "tipo": "Passiva",
     "nome": "Mochila de Maldições",
     "classe": "Geral",
     "grau_base": 3,
@@ -212,6 +223,7 @@
   },
   {
     "id": "fei_012",
+    "tipo": "Ativa",
     "nome": "Exorcismo",
     "classe": "Geral",
     "grau_base": 3,
@@ -224,6 +236,7 @@
   },
   {
     "id": "fei_013",
+    "tipo": "Ativa",
     "nome": "Ataque Especial",
     "classe": "Geral",
     "grau_base": 3,
@@ -236,6 +249,7 @@
   },
   {
     "id": "fei_014",
+    "tipo": "Passiva",
     "nome": "Flashback",
     "classe": "Geral",
     "grau_base": 3,
@@ -244,6 +258,7 @@
   },
   {
     "id": "fei_015",
+    "tipo": "Ativa",
     "nome": "Combate Defensivo",
     "classe": "Geral",
     "grau_base": 3,
@@ -256,6 +271,7 @@
   },
   {
     "id": "fei_016",
+    "tipo": "Passiva",
     "nome": "Poder Latente",
     "classe": "Geral",
     "grau_base": 3,
@@ -285,6 +301,7 @@
   },
   {
     "id": "fei_017",
+    "tipo": "Passiva, Ativa, Ativa",
     "nome": "Aura Reforçada",
     "classe": "Geral",
     "grau_base": 3,
@@ -292,10 +309,30 @@
     "versoes": {
       "GRAU 2": "Melhorando ainda mais o fluxo, você se torna capaz de transformar a sua aura em uma fortaleza impenetrável contra simples golpes físicos. Ao obter essa habilidade, você pode, como uma ação de movimento, transformar a sua aura em impenetrável por 1 rodada, gastando 3 PE. Enquanto sua aura estiver impenetrável, você recebe RDP de 50% a dano cortante, perfurante e de impacto",
       "GRAU 1": "Evoluindo ao limite o fluxo da aura, você consegue a deixar tão densa e maciça que se torna um casulo protetivo. Ao obter essa habilidade você pode, como uma ação Padrão, formar um casulo de energia por 1 rodada, gastando 6 PE. Enquanto o casulo estiver ativo, você recebe imunidade a dano cortante, perfurante e de impacto."
-    }
+    },
+    "efeitos_por_versao": {
+    "BASE": [
+        {"alvo": "RDP_FISICO", "operacao": "+", "formula": [
+            {"tipo": "variavel", "valor": "NEX"},
+            {"tipo": "operador", "valor": "*"},
+            {"tipo": "constante", "valor": 2}
+        ]}
+    ],
+    "GRAU 2": [
+        {"alvo": "RDP_CORTANTE", "operacao": "+", "formula": [{"tipo": "constante", "valor": 50}]},
+        {"alvo": "RDP_PERFURANTE", "operacao": "+", "formula": [{"tipo": "constante", "valor": 50}]},
+        {"alvo": "RDP_IMPACTO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 50}]}
+    ],
+    "GRAU 1": [
+        {"alvo": "RDP_CORTANTE", "operacao": "+", "formula": [{"tipo": "constante", "valor": 100}]},
+        {"alvo": "RDP_PERFURANTE", "operacao": "+", "formula": [{"tipo": "constante", "valor": 100}]},
+        {"alvo": "RDP_IMPACTO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 100}]}
+     ]
+  }
   },
   {
     "id": "fei_018",
+    "tipo": "Passiva",
     "nome": "Aura Macabra",
     "classe": "Geral",
     "grau_base": 3,
@@ -304,6 +341,7 @@
   },
   {
     "id": "fei_019",
+    "tipo": "Passiva",
     "nome": "Sangue de Xamã",
     "classe": "Geral",
     "grau_base": 3,
@@ -342,6 +380,7 @@
   },
   {
     "id": "fei_020",
+    "tipo": "Passiva",
     "nome": "Estudo Assombroso",
     "classe": "Geral",
     "grau_base": 3,
@@ -350,6 +389,7 @@
   },
   {
     "id": "fei_021",
+    "tipo": "Passiva",
     "nome": "Armadura de Pele",
     "classe": "Geral",
     "grau_base": 3,
@@ -363,6 +403,7 @@
   },
   {
     "id": "fei_022",
+    "tipo": "Ativa",
     "nome": "Revidar",
     "classe": "Geral",
     "grau_base": 3,
@@ -373,6 +414,7 @@
   },
   {
     "id": "fei_023",
+    "tipo": "Ativa",
     "nome": "Tudo que Vai, Volta",
     "classe": "Geral",
     "grau_base": 3,
@@ -381,6 +423,7 @@
   },
   {
     "id": "fei_024",
+    "tipo": "Passiva",
     "nome": "Extensão do Corpo",
     "classe": "Geral",
     "grau_base": 3,
@@ -389,6 +432,7 @@
   },
   {
     "id": "fei_025",
+    "tipo": "Passiva",
     "nome": "Ataque Infalível",
     "classe": "Geral",
     "grau_base": 3,
@@ -401,6 +445,7 @@
   },
   {
     "id": "fei_026",
+    "tipo": "Passiva",
     "nome": "Condicionamento Brutal",
     "classe": "Geral",
     "grau_base": 3,
@@ -440,6 +485,7 @@
   },
   {
     "id": "fei_027",
+    "tipo": "Passiva",
     "nome": "Queimar a largada",
     "classe": "Geral",
     "grau_base": 3,
@@ -468,6 +514,7 @@
   },
   {
     "id": "fei_028",
+    "tipo": "Passiva, Ativa, Passiva",
     "nome": "Laços da Irmandade",
     "classe": "Geral",
     "grau_base": 3,
@@ -480,6 +527,7 @@
   },
   {
     "id": "fei_029",
+    "tipo": "Passiva",
     "nome": "Físico Incomum",
     "classe": "Geral",
     "grau_base": 3,
@@ -492,6 +540,7 @@
   },
   {
     "id": "fei_030",
+    "tipo": "Passiva",
     "nome": "Gastroterapia",
     "classe": "Geral",
     "grau_base": 3,
@@ -500,6 +549,7 @@
   },
   {
     "id": "fei_031",
+    "tipo": "Ativa",
     "nome": "Brutalidade Aplicada",
     "classe": "Geral",
     "grau_base": 3,
@@ -511,6 +561,7 @@
   },
   {
     "id": "fei_032",
+    "tipo": "Passiva",
     "nome": "Investigador Enxerido",
     "classe": "Geral",
     "grau_base": 3,
@@ -519,6 +570,7 @@
   },
   {
     "id": "fei_033",
+    "tipo": "Ativa",
     "nome": "Kokusen (Raio Negro)",
     "classe": "Geral",
     "grau_base": 2,
@@ -527,6 +579,7 @@
   },
   {
     "id": "fei_034",
+    "tipo": "Ativa",
     "nome": "Pegando o Embalo",
     "classe": "Geral",
     "grau_base": 2,
@@ -538,6 +591,7 @@
   },
   {
     "id": "fei_035",
+    "tipo": "Ativa",
     "nome": "Combatente Analista",
     "classe": "Geral",
     "grau_base": 2,
@@ -546,6 +600,7 @@
   },
   {
     "id": "fei_036",
+    "tipo": "Passiva",
     "nome": "Evasão",
     "classe": "Geral",
     "grau_base": 2,
@@ -554,6 +609,7 @@
   },
   {
     "id": "fei_037",
+    "tipo": "Passiva",
     "nome": "Especialista Diletante",
     "classe": "Geral",
     "grau_base": 2,
@@ -562,6 +618,7 @@
   },
   {
     "id": "fei_038",
+    "tipo": "Ativa",
     "nome": "Ataque de Oportunidade",
     "classe": "Geral",
     "grau_base": 2,
@@ -573,6 +630,7 @@
   },
   {
     "id": "fei_039",
+    "tipo": "Ativa",
     "nome": "Liderar",
     "classe": "Geral",
     "grau_base": 2,
@@ -583,6 +641,7 @@
   },
   {
     "id": "fei_040",
+    "tipo": "Passiva",
     "nome": "GRANDÃO",
     "classe": "Geral",
     "grau_base": 2,
@@ -607,6 +666,7 @@
   },
   {
     "id": "fei_041",
+    "tipo": "Ativa",
     "nome": "Último suspiro",
     "classe": "Geral",
     "grau_base": 2,
@@ -618,6 +678,7 @@
   },
   {
     "id": "fei_042",  
+    "tipo": "Passiva",
     "nome": "Antecipar",
     "classe": "Geral",
     "grau_base": 2,
@@ -628,6 +689,7 @@
   },
   {
     "id": "fei_043",
+    "tipo": "Ativa",
     "nome": "Empenho Recompensador",
     "classe": "Geral",
     "grau_base": 2,
@@ -636,6 +698,7 @@
   },
   {
     "id": "fei_044",
+    "tipo": "Ativa",
     "nome": "Devaneio",
     "classe": "Geral",
     "grau_base": 2,
@@ -647,6 +710,7 @@
   },
   {
     "id": "fei_045",
+    "tipo": "Ativa",
     "nome": "Aura Elemental",
     "classe": "Geral",
     "grau_base": 2,
@@ -658,6 +722,7 @@
   },
   {
     "id": "fei_046",
+    "tipo": "Ativa",
     "nome": "Técnica de Reversão",
     "classe": "Geral",
     "grau_base": 1,
@@ -669,6 +734,7 @@
   },
   {
     "id": "fei_047",
+    "tipo": "Ativa",
     "nome": "Surto de Adrenalina",
     "classe": "Geral",
     "grau_base": 1,
@@ -679,6 +745,7 @@
   },
   {
     "id": "fei_048",
+    "tipo": "Ativa",
     "nome": "Sombra da Morte",
     "classe": "Geral",
     "grau_base": 1,
@@ -689,6 +756,7 @@
   },
   {
     "id": "fei_049",
+    "tipo": "Passiva",
     "nome": "Aprendizado Ritualístico",
     "classe": "Geral",
     "grau_base": 1,
@@ -697,6 +765,7 @@
   },
   {
     "id": "fei_050",
+    "tipo": "Ativa",
     "nome": "Técnicas de Barreira",
     "classe": "Geral",
     "grau_base": 1,
@@ -705,6 +774,7 @@
   },
   {
     "id": "fei_051",
+    "tipo": "Ativa",
     "nome": "Golpe Imparável",
     "classe": "Geral",
     "grau_base": "ESPECIAL",
@@ -713,6 +783,7 @@
   },
   {
     "id": "fei_052",
+    "tipo": "Ativa",
     "nome": "MoonWalk",
     "classe": "Geral",
     "grau_base": "ESPECIAL",
@@ -721,6 +792,7 @@
   },
   {
     "id": "fei_053",
+    "tipo": "Passiva",
     "nome": "Sede de Sangue",
     "classe": "Geral",
     "grau_base": "ESPECIAL",
@@ -729,6 +801,7 @@
   },
   {
     "id": "fei_054",
+    "tipo": "Ativa",
     "nome": "Só Pra Garantir",
     "classe": "Geral",
     "grau_base": "ESPECIAL",
@@ -737,6 +810,7 @@
   },
   {
     "id": "fei_055",
+    "tipo": "Ativa",
     "nome": "Palavras Afiadas",
     "classe": "Geral",
     "grau_base": "ESPECIAL",
@@ -745,6 +819,7 @@
   },
   {
     "id": "fei_056",
+    "tipo": "Ativa",
     "nome": "Kkkkkkk, Errou, Trouxa",
     "classe": "Geral",
     "grau_base": "ESPECIAL",
@@ -753,6 +828,7 @@
   },
   {
     "id": "fei_057",
+    "tipo": "Ativa",
     "nome": "Protagonismo Flash back",
     "classe": "Geral",
     "grau_base": "ESPECIAL",
@@ -761,6 +837,7 @@
   },
   {
     "id": "fei_058",
+    "tipo": "Ativa",
     "nome": "Estancar ferimentos",
     "classe": "Geral",
     "grau_base": "ESPECIAL",
@@ -769,6 +846,7 @@
   },
   {
     "id": "fei_059",
+    "tipo": "Ativa",
     "nome": "Gostosão",
     "classe": "Geral",
     "grau_base": "ESPECIAL",
@@ -777,6 +855,7 @@
   },
   {
     "id": "fei_060",
+    "tipo": "Ativa",
     "nome": "Tempo do Gênio",
     "classe": "Geral",
     "grau_base": "ULTRA ESPECIAL",
@@ -785,6 +864,7 @@
   },
   {
     "id": "fei_061",
+    "tipo": "Ativa",
     "nome": "Verdadeiro Tempo do Gênio",
     "classe": "Geral",
     "grau_base": "ULTRA ESPECIAL",
@@ -793,6 +873,7 @@
   },
   {
     "id": "fei_062",
+    "tipo": "Passiva",
     "nome": "Força do Prodígio",
     "classe": "Geral",
     "grau_base": "ULTRA ESPECIAL",
@@ -815,6 +896,7 @@
   },
   {
     "id": "fei_063",
+    "tipo": "Passiva",
     "nome": "Força do Verdadeiro Prodígio",
     "classe": "Geral",
     "grau_base": "ULTRA ESPECIAL",
@@ -837,6 +919,7 @@
   },
   {
     "id": "fei_064",
+    "tipo": "Ativa, Passiva, Passiva, Passiva, Passiva",
     "nome": "Combate Improvisado",
     "classe": "Invocador",
     "grau_base": 4,
@@ -850,6 +933,8 @@
   },
   {
     "id": "fei_065",
+    "tipo": "Passiva",
+
     "nome": "Invocação favorita",
     "classe": "Invocador",
     "grau_base": 3,
@@ -861,6 +946,7 @@
   },
   {
     "id": "fei_066",
+    "tipo": "Passiva",
     "nome": "Invocação Celeste",
     "classe": "Invocador",
     "grau_base": 3,
@@ -876,6 +962,7 @@
   },
   {
     "id": "fei_067",
+    "tipo": "Ativa",
     "nome": "Invocação Potente",
     "classe": "Invocador",
     "grau_base": 3,
@@ -886,6 +973,7 @@
   },
   {
     "id": "fei_068",
+    "tipo": "Passiva",
     "nome": "Especialista em invocações",
     "classe": "Invocador",
     "grau_base": 3,
@@ -894,6 +982,7 @@
   },
   {
     "id": "fei_069",
+    "tipo": "Passiva",
     "nome": "Companhia Libertadora",
     "classe": "Invocador",
     "grau_base": 3,
@@ -905,6 +994,7 @@
   },
   {
     "id": "fei_070",
+    "tipo": "Passiva",
     "nome": "Mestre em invocações",
     "classe": "Invocador",
     "grau_base": 2,
@@ -913,6 +1003,7 @@
   },
   {
     "id": "fei_071",
+    "tipo": "Ativa",
     "nome": "Pensamento Tático",
     "classe": "Invocador",
     "grau_base": 2,
@@ -923,6 +1014,7 @@
   },
   {
     "id": "fei_072",
+    "tipo": "Passiva",
     "nome": "Reutilização",
     "classe": "Invocador",
     "grau_base": 2,
@@ -931,6 +1023,7 @@
   },
   {
     "id": "fei_073",
+    "tipo": "Ativa",
     "nome": "Camuflagem Mesclada",
     "classe": "Invocador",
     "grau_base": 2,
@@ -939,6 +1032,7 @@
   },
   {
     "id": "fei_074",
+    "tipo": "Ativa",
     "nome": "Absorção",
     "classe": "Invocador",
     "grau_base": 1,
@@ -947,6 +1041,7 @@
   },
   {
     "id": "fei_075",
+    "tipo": "Passiva",
     "nome": "Liberação Máxima de Invocação",
     "classe": "Invocador",
     "grau_base": "ESPECIAL",
@@ -960,6 +1055,7 @@
   },
   {
     "id": "fei_076",
+    "tipo": "Ativa",
     "nome": "Conjurar Arma",
     "classe": "Inato",
     "grau_base": 4,
@@ -973,6 +1069,7 @@
   },
   {
     "id": "fei_077",
+    "tipo": "Ativa",
     "nome": "Ataque Pesado",
     "classe": "Inato",
     "grau_base": 4,
@@ -981,6 +1078,7 @@
   },
   {
     "id": "fei_078",
+    "tipo": "Passiva",
     "nome": "Energia Celeste",
     "classe": "Inato",
     "grau_base": 3,
@@ -994,6 +1092,7 @@
   },
   {
     "id": "fei_079",
+    "tipo": "Passiva",
     "nome": "Apego Angustiado",
     "classe": "Inato",
     "grau_base": 3,
@@ -1005,6 +1104,7 @@
   },
   {
     "id": "fei_080",
+    "tipo": "Passiva",
     "nome": "Empolgação",
     "classe": "Inato",
     "grau_base": 3,
@@ -1016,6 +1116,7 @@
   },
   {
     "id": "fei_081",
+    "tipo": "Ativa",
     "nome": "Maldição Reconstrutora",
     "classe": "Inato",
     "grau_base": 3,
@@ -1027,6 +1128,7 @@
   },
   {
     "id": "fei_082",
+    "tipo": "Passiva",
     "nome": "Tenacidade",
     "classe": "Inato",
     "grau_base": 3,
@@ -1039,6 +1141,7 @@
   },
   {
     "id": "fei_083",
+    "tipo": "Ativa",
     "nome": "Punho Divergente",
     "classe": "Inato",
     "grau_base": 2,
@@ -1051,6 +1154,7 @@
   },
   {
     "id": "fei_084",
+    "tipo": "Passiva",
     "nome": "Especialista em Concussão",
     "classe": "Inato",
     "grau_base": 2,
@@ -1059,6 +1163,7 @@
   },
   {
     "id": "fei_085",
+    "tipo": "Passiva",
     "nome": "Especialista em Cortes",
     "classe": "Inato",
     "grau_base": 2,
@@ -1067,6 +1172,7 @@
   },
   {
     "id": "fei_086",
+    "tipo": "Passiva",
     "nome": "Especialista em Perfuração",
     "classe": "Inato",
     "grau_base": 2,
@@ -1075,6 +1181,7 @@
   },
   {
     "id": "fei_087",
+    "tipo": "Passiva",
     "nome": "Combater com Três Armas",
     "classe": "Inato",
     "grau_base": 2,
@@ -1086,6 +1193,7 @@
   },
   {
     "id": "fei_088",
+    "tipo": "Ativa",
     "nome": "Energia de Combate",
     "classe": "Inato",
     "grau_base": 1,
@@ -1094,6 +1202,7 @@
   },
   {
     "id": "fei_089",
+    "tipo": "Passiva",
     "nome": "Liberação Máxima de Combate",
     "classe": "Inato",
     "grau_base": "ESPECIAL",
@@ -1102,6 +1211,7 @@
   },
   {
     "id": "fei_090",
+    "tipo": "Ativa",
     "nome": "Espantar",
     "classe": "Amaldiçoado",
     "grau_base": 4,
@@ -1115,6 +1225,7 @@
   },
   {
     "id": "fei_091",
+    "tipo": "Passiva",
     "nome": "Identificação Paranormal",
     "classe": "Amaldiçoado",
     "grau_base": 4,
@@ -1127,6 +1238,7 @@
   },
   {
     "id": "fei_092",
+    "tipo":"Ativa",
     "nome": "Sentidos Amaldiçoados",
     "classe": "Amaldiçoado",
     "grau_base": 4,
@@ -1140,6 +1252,7 @@
   },
   {
     "id": "fei_093",
+    "tipo": "Ativa",
     "nome": "Arma Amaldiçoada Sinistra",
     "classe": "Amaldiçoado",
     "grau_base": 3,
@@ -1153,6 +1266,7 @@
   },
   {
     "id": "fei_094",
+    "tipo": "Passiva",
     "nome": "Estigma",
     "classe": "Amaldiçoado",
     "grau_base": 3,
@@ -1161,6 +1275,7 @@
   },
   {
     "id": "fei_095",
+    "tipo": "Passiva",
     "nome": "Maldição Celeste",
     "classe": "Amaldiçoado",
     "grau_base": 3,
@@ -1174,6 +1289,7 @@
   },
   {
     "id": "fei_096",
+    "tipo": "Ativa",
     "nome": "Aparar Ataques Amaldiçoados",
     "classe": "Amaldiçoado",
     "grau_base": 3,
@@ -1186,6 +1302,7 @@
   },
   {
     "id": "fei_097",
+    "tipo": "Passiva",
     "nome": "Ocultar nas Sombras",
     "classe": "Amaldiçoado",
     "grau_base": 3,
@@ -1196,6 +1313,7 @@
   },
   {
     "id": "fei_098",
+    "tipo": "Passiva",
     "nome": "MENTE INSTÁVEL",
     "classe": "Amaldiçoado",
     "grau_base": 3,
@@ -1204,6 +1322,7 @@
   },
   {
     "id": "fei_099",
+    "tipo": "Passiva",
     "nome": "Ele me ensina",
     "classe": "Amaldiçoado",
     "grau_base": 2,
@@ -1212,6 +1331,7 @@
   },
   {
     "id": "fei_100",
+    "tipo": "Ativa",
     "nome": "BARRAGE!",
     "classe": "Amaldiçoado",
     "grau_base": 2,
@@ -1223,6 +1343,7 @@
   },
   {
     "id": "fei_101",
+    "tipo": "Passiva",
     "nome": "Sombras do Profano",
     "classe": "Amaldiçoado",
     "grau_base": 2,
@@ -1240,6 +1361,7 @@
   },
   {
     "id": "fei_102",
+    "tipo": "Passiva",
     "nome": "Forma Inconsciente",
     "classe": "Amaldiçoado",
     "grau_base": 1,
@@ -1248,6 +1370,7 @@
   },
   {
     "id": "fei_103",
+    "tipo": "Passiva",
     "nome": "Liberação Máxima de Maldição",
     "classe": "Amaldiçoado",
     "grau_base": "ESPECIAL",
@@ -1256,6 +1379,7 @@
   },
   {
     "id": "fei_104",
+    "tipo": "Passiva",
     "nome": "Mente Rápida",
     "classe": "Mestre Jujutsu",
     "grau_base": 4,
@@ -1264,6 +1388,7 @@
   },
   {
     "id": "fei_105",
+    "tipo": "Ativa",
     "nome": "Até a Última Gota",
     "classe": "Mestre Jujutsu",
     "grau_base": 4,
@@ -1277,6 +1402,7 @@
   },
   {
     "id": "fei_106",
+    "tipo": "Ativa",
     "nome": "Conhecimento Aplicado",
     "classe": "Mestre Jujutsu",
     "grau_base": 3,
@@ -1289,6 +1415,7 @@
   },
   {
     "id": "fei_107",
+    "tipo": "Passiva",
     "nome": "Habilidades Refinadas",
     "classe": "Mestre Jujutsu",
     "grau_base": 3,
@@ -1339,6 +1466,7 @@
   {
     "id": "fei_108",
     "nome": "Técnica Celeste",
+    "tipo": "Passiva",
     "classe": "Mestre Jujutsu",
     "grau_base": 3,
     "descricao_base": "Você aumenta o potencial de energia amaldiçoada em um técnica, você aumenta um passo de dano/cura das suas técnicas para cada grau que tiver.",
@@ -1351,6 +1479,7 @@
   },
   {
     "id": "fei_109",
+    "tipo": "Ativa",
     "nome": "Conjuração Defensiva",
     "classe": "Mestre Jujutsu",
     "grau_base": 2,
@@ -1361,6 +1490,7 @@
   },
   {
     "id": "fei_110",
+    "tipo": "Ativa",
     "nome": "Domínio Esotérico",
     "classe": "Mestre Jujutsu",
     "grau_base": 1,
@@ -1371,6 +1501,7 @@
   },
   {
     "id": "fei_111",
+    "tipo": "Ativa",
     "nome": "Técnica 200%",
     "classe": "Mestre Jujutsu",
     "grau_base": "ESPECIAL",
@@ -1379,6 +1510,7 @@
   },
   {
     "id": "fei_112",
+    "tipo": "Passiva",
     "nome": "Jutsu: Inversão Amaldiçoada",
     "classe": "Shinobi",
     "grau_base": 4,
@@ -1392,6 +1524,7 @@
   },
   {
     "id": "fei_113",
+    "tipo": "Passiva",
     "nome": "Passos Silenciosos",
     "classe": "Shinobi",
     "grau_base": 4,
@@ -1400,6 +1533,7 @@
   },
   {
     "id": "fei_114",
+    "tipo": "Passiva",
     "nome": "Arte da Ocultação",
     "classe": "Shinobi",
     "grau_base": 4,
@@ -1408,6 +1542,7 @@
   },
   {
     "id": "fei_115",
+    "tipo": "Ativa",
     "nome": "Taijutsu: Investida Ninja",
     "classe": "Shinobi",
     "grau_base": 3,
@@ -1416,6 +1551,7 @@
   },
   {
     "id": "fei_116",
+    "tipo": "Ativa",
     "nome": "Taijutsu: Golpe Fatal",
     "classe": "Shinobi",
     "grau_base": 3,
@@ -1424,6 +1560,7 @@
   },
   {
     "id": "fei_117",
+    "tipo": "Passiva",
     "nome": "Taijutsu: Shurikens Letais",
     "classe": "Shinobi",
     "grau_base": 3,
@@ -1432,6 +1569,7 @@
   },
   {
     "id": "fei_118",
+    "tipo": "Passiva",
     "nome": "Jutsu Celeste",
     "classe": "Shinobi",
     "grau_base": 3,
@@ -1455,6 +1593,7 @@
   },
   {
     "id": "fei_119",
+    "tipo": "Ativa",
     "nome": "TÉCNICA DE TRANSFORMAÇÃO",
     "classe": "Shinobi",
     "grau_base": 2,
@@ -1463,6 +1602,7 @@
   },
   {
     "id": "fei_120",
+    "tipo": "Ativa",
     "nome": "Jutsu: Substituição",
     "classe": "Shinobi",
     "grau_base": 2,
@@ -1474,6 +1614,7 @@
   },
   {
     "id": "fei_121",
+    "tipo": "Ativa",
     "nome": "Kinjutsu: Face do Demônio",
     "classe": "Shinobi",
     "grau_base": 1,
@@ -1484,6 +1625,7 @@
   },
   {
     "id": "fei_122",
+    "tipo": "Ativa",
     "nome": "Senjutsu",
     "classe": "Shinobi",
     "grau_base": 1,
@@ -1494,6 +1636,7 @@
   },
   {
     "id": "fei_123",
+    "tipo": "Passiva",
     "nome": "Liberação Máxima de Jutsus",
     "classe": "Shinobi",
     "grau_base": "ESPECIAL",
@@ -1502,6 +1645,7 @@
   },
   {
     "id": "fei_124",
+    "tipo": "Passiva",
     "nome": "Golpes Celestes",
     "classe": "Restringido",
     "grau_base": 4,
@@ -1530,6 +1674,7 @@
   },
   {
     "id": "fei_125",
+    "tipo": "Ativa",
     "nome": "REVIDAR FOGO",
     "classe": "Restringido",
     "grau_base": 4,
@@ -1542,6 +1687,7 @@
   },
   {
     "id": "fei_126",
+    "tipo": "Passiva",
     "nome": "O Artifício do Desfavorável",
     "classe": "Restringido",
     "grau_base": 3,
@@ -1553,6 +1699,7 @@
   },
   {
     "id": "fei_127",
+    "tipo": "Ativa",
     "nome": "Armadura Celeste",
     "classe": "Restringido",
     "grau_base": 3,
@@ -1566,6 +1713,7 @@
   },
   {
     "id": "fei_128",
+    "tipo": "Passiva",
     "nome": "Corpo de Aço",
     "classe": "Restringido",
     "grau_base": 3,
@@ -1579,6 +1727,7 @@
   },
   {
     "id": "fei_129",
+    "tipo": "Passiva",
     "nome": "Que se dane o Destino",
     "classe": "Restringido",
     "grau_base": 3,
@@ -1590,6 +1739,7 @@
   },
   {
     "id": "fei_130",
+    "tipo": "Passiva",
     "nome": "Penumbra Fatal",
     "classe": "Restringido",
     "grau_base": 2,
@@ -1613,6 +1763,7 @@
   },
   {
     "id": "fei_131",
+    "tipo": "Ativa",
     "nome": "Portas da Morte",
     "classe": "Restringido",
     "grau_base": 2,
@@ -1621,6 +1772,7 @@
   },
   {
     "id": "fei_132",
+    "tipo": "Ativa",
     "nome": "Anular Energia Amaldiçoada",
     "classe": "Restringido",
     "grau_base": 2,
@@ -1632,6 +1784,7 @@
   },
   {
     "id": "fei_133",
+    "tipo": "Passiva",
     "nome": "Ancião Marcial",
     "classe": "Restringido",
     "grau_base": 2,
@@ -1643,6 +1796,7 @@
   },
   {
     "id": "fei_134",  
+    "tipo": "Passiva",
     "nome": "Expertise Bélica",
     "classe": "Restringido",
     "grau_base": 1,
@@ -1653,6 +1807,7 @@
   },
   {
     "id": "fei_135",
+    "tipo": "Passiva",
     "nome": "Conhecimento dos seus Limites",
     "classe": "Restringido",
     "grau_base": 1,
@@ -1664,6 +1819,7 @@
   },
   {
     "id": "fei_136",
+    "tipo": "Passiva",
     "nome": "Abdicar do Poder",
     "classe": "Restringido",
     "grau_base": 1,
@@ -1672,6 +1828,7 @@
   },
   {
     "id": "fei_137",
+    "tipo": "Passiva",
     "nome": "Abençoado Celestialmente",
     "classe": "Restringido",
     "grau_base": 1,
@@ -1682,6 +1839,7 @@
   },
   {
     "id": "fei_138",
+    "tipo": "Passiva",
     "nome": "Estilos Mortais",
     "classe": "Restringido",
     "grau_base": 1,
@@ -1704,6 +1862,7 @@
   },
   {
     "id": "fei_139",
+    "tipo": "Passiva",
     "nome": "Liberação Máxima de Restrição",
     "classe": "Restringido",
     "grau_base": "ESPECIAL",

@@ -18,11 +18,11 @@
         "habilidade_tecnica_n6": 0
     },
     "atributos": {
-        "AGI": 3,
-        "FOR": 3,
-        "INT": 9,
+        "AGI": 0,
+        "FOR": 6,
+        "INT": 13,
         "VIG": 3,
-        "PRE": 7
+        "PRE": 10
     },
     "nos_comprados": {
         "AGI": [
@@ -84,5 +84,37 @@
         "fei_046",
         "fei_004",
         "fei_014"
-    ]
+    ],
+    "atualizado_em": "2026-04-07 16:58",
+    "pontos_atributo_gastos": 9,
+    "estado": {
+        "pv_atual": 22,
+        "pv_maximo": 22,
+        "san_atual": 22,
+        "san_maximo": 22,
+        "pe_atual": 300,
+        "pe_maximo": 300
+    },
+    "estilo_luta": {
+        "id": null,
+        "nome": null,
+        "descricao": null,
+        "origem": "padrao",
+        "efeito": null
+    },
+    "tecnica": {
+        "id": null,
+        "nome": null,
+        "descricao": null,
+        "origem": "padrao",
+        "efeito": null
+    },
+    "feiticos_custom": [],
+    "inventario": {
+        "dinheiro": 0,
+        "itens": []
+    },
+    "anotacoes": "",
+    "historico_sessoes": [],
+    "pontos_extras_temp": 18
 }
