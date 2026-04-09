@@ -5,6 +5,16 @@ from criarFichas import CriadorFichas
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
 
+import tkinter as tk
+
+def report_callback_exception(exc, val, tb, *args):   # Aceita 4 argumentos
+    import traceback
+    print("--- Tkinter Exception ---")
+    traceback.print_exception(exc, val, tb)
+    print("-------------------------")
+
+tk.Tk.report_callback_exception = report_callback_exception
+
 class MainApp:
     def __init__(self):
         self.app = ctk.CTk()

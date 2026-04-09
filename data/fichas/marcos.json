@@ -18,7 +18,7 @@
         "habilidade_tecnica_n6": 1
     },
     "atributos": {
-        "AGI": 5,
+        "AGI": 7,
         "FOR": 6,
         "INT": 13,
         "VIG": 4,
@@ -26,49 +26,68 @@
     },
     "nos_comprados": {
         "AGI": [
-            "agi_05",
-            "agi_04"
+            "agi_01",
+            "agi_02",
+            "agi_03",
+            "agi_04",
+            "agi_05"
         ],
         "FOR": [
             "for_13"
         ],
         "INT": [
-            "int_03",
-            "int_10",
-            "int_02",
             "int_09",
-            "int_01"
+            "int_10",
+            "int_01",
+            "int_02",
+            "int_03",
+            "int_11"
         ],
         "VIG": [
             "vig_14",
-            "vig_16",
-            "vig_15"
+            "vig_15",
+            "vig_16"
         ],
         "PRE": [
-            "pre_20",
-            "pre_04",
+            "pre_01",
             "pre_02",
             "pre_03",
-            "pre_01",
-            "pre_19"
+            "pre_04",
+            "pre_05",
+            "pre_06",
+            "pre_19",
+            "pre_20",
+            "pre_08",
+            "pre_07"
         ],
         "GERAL": [
             "ger_01",
-            "ger_47",
-            "ger_35",
             "ger_02",
+            "ger_05",
+            "ger_06",
+            "ger_07",
+            "ger_08",
+            "ger_09",
+            "ger_10",
+            "ger_03",
+            "ger_04",
+            "ger_11",
+            "ger_12",
             "ger_20",
-            "ger_40",
+            "ger_21",
             "ger_34",
-            "ger_21"
+            "ger_39",
+            "ger_40",
+            "ger_47",
+            "ger_41"
         ]
     },
     "pontos_skilltree": {
-        "AGI": 0,
-        "FOR": 0,
-        "INT": 0,
-        "VIG": 0,
-        "PRE": 0,
+        "AGI": 2,
+        "FOR": 10,
+        "INT": 15,
+        "VIG": 2,
+        "PRE": 2,
         "GERAL": 0
     },
     "feiticos": [
@@ -83,17 +102,19 @@
         "fei_019",
         "fei_046",
         "fei_004",
-        "fei_014"
+        "fei_014",
+        "fei_075",
+        "fei_003"
     ],
-    "atualizado_em": "2026-04-08 14:27",
+    "atualizado_em": "2026-04-09 15:56",
     "pontos_atributo_gastos": 0,
     "estado": {
-        "pv_atual": 4615,
-        "pv_maximo": 4615,
-        "san_atual": 1823,
-        "san_maximo": 1823,
-        "pe_atual": 4022,
-        "pe_maximo": 4022
+        "pv_atual": 4765,
+        "pv_maximo": 4765,
+        "san_atual": 1973,
+        "san_maximo": 1973,
+        "pe_atual": 4172,
+        "pe_maximo": 4172
     },
     "estilo_luta": {
         "id": null,
@@ -298,22 +319,36 @@
         "fei_108": "BASE",
         "fei_063": "BASE",
         "fei_019": "ESPECIAL",
-        "fei_004": "ESPECIAL"
+        "fei_004": "ESPECIAL",
+        "fei_075": "BASE"
     },
     "bonus_passivos": {
-        "CARACTERISTICA_INVOCACAO": 1,
+        "CARACTERISTICA_INVOCACAO": 4,
         "PASSO_DANO_INVOCACAO": 7,
         "PASSO_TECNICA": 7,
         "PASSO_DANO_TECNICA": 6.5,
         "PASSO_DANO_CORPO": 6.5,
         "CURA_ACELERADA": 199.98,
-        "DEF": 201.0,
+        "DEF": 276.0,
         "TR": 60,
+        "REACAO": 3,
         "RD_GERAL": 180,
         "GRAU_TREINAMENTO": 2,
         "DT": 20,
+        "RD_MENTAL": 150,
         "LP": 2,
+        "SAN_MAX": 150,
+        "PV_MAX": 150,
+        "PE_MAX": 150,
+        "RD_PARANORMAL": 60,
         "MULTIPLICADOR_CRITICO": 1,
         "MARGEM_AMEAÇA": 2
-    }
+    },
+    "abas_confirmadas": [
+        "AGI",
+        "INT",
+        "VIG",
+        "FOR",
+        "PRE"
+    ]
 }
