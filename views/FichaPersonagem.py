@@ -2,6 +2,8 @@ import customtkinter as ctk
 import json
 import os
 import datetime
+import random
+import re
 
 # Importa funções auxiliares do módulo principal (ou de utils)
 from ficha import (
@@ -381,9 +383,11 @@ class FichaPersonagem:
             "Skill Tree":      lambda: PainelSkilltree(pai, self.ficha, on_change=self._recalcular_tudo),
             "Feitiços":        lambda: PainelFeiticos(pai, self.ficha, on_passiva_change=self._recalcular_tudo, on_save=self._salvar),
             "Estilo de Luta":  lambda: PainelEstiloLuta(pai, self.ficha, on_save=self._salvar),
-            "Técnica":         lambda: PainelTecnica(pai, self.ficha, on_save=self._salvar),
+            "Técnica": lambda: PainelTecnica(pai, self.ficha, on_save=self._salvar),
             "Inventário":      lambda: PainelInventario(pai, self.ficha, on_save=self._salvar),
-            "Resumo":          lambda: PainelResumo(pai, self.ficha),
+            "Resumo":          lambda: PainelResumo(pai, self.ficha, 
+                                                    info_grau=self._carregar_graus().get(self.ficha.get("grau", "Grau 4"), {}),
+                                                    atributos=self.ficha.get("atributos", {})),
             "Anotações":       lambda: PainelAnotacoes(pai, self.ficha, on_save=self._salvar),
         }
 
@@ -778,6 +782,77 @@ class FichaPersonagem:
                 barra.set_valores(estado["san_atual"], san_max)
             elif chave == "pe":
                 barra.set_valores(estado["pe_atual"], pe_max)
+
+    def _calcular_totais_grau(self) -> dict:
+        """Retorna um dicionário com os totais acumulados de Grau."""
+        graus = self._carregar_graus()
+        grau_atual = self.ficha.get("grau", "Grau 4")
+        atributos = self.ficha.get("atributos", {})
+        ab = atributos.get("INT", 1)
+
+        # Ordem de progressão (do mais fraco ao mais forte)
+        ordem = ["Grau 4", "Grau 3", "Grau 2", "Grau 1",
+                 "Grau Semi Especial", "Grau Especial", "Grau Ultra Especial"]
+
+        totais = {
+            "pontos_atributo": 0,
+            "graus_treinamento": 0,
+            "encantamentos": 0,
+            "maldicoes": 0,
+            "encantamentos_ab_acumulado": 0,  # armazena quantas vezes "metade_ab" foi aplicado
+        }
+
+        for grau_nome in ordem:
+            info = graus.get(grau_nome, {})
+            if not info:
+                continue
+
+            # Acumula valores simples
+            totais["pontos_atributo"] += info.get("pontos_atributo", 0)
+            totais["graus_treinamento"] += info.get("graus_treinamento", 0)
+            totais["maldicoes"] += info.get("maldicoes", 0)
+
+            # Tratamento de encantamentos
+            if "encantamentos_ab" in info:
+                # Cada ocorrência de "encantamentos_ab" conta como uma aplicação de AB/2
+                totais["encantamentos_ab_acumulado"] += 1
+            else:
+                # Acumula encantamentos fixos
+                totais["encantamentos"] += info.get("encantamentos", 0)
+
+            if grau_nome == grau_atual:
+                break
+
+        # Calcula o valor total de encantamentos
+        encantamentos_total = totais["encantamentos"]
+        if totais["encantamentos_ab_acumulado"] > 0:
+            encantamentos_total += totais["encantamentos_ab_acumulado"] * (ab / 2)
+
+        # Prepara o dicionário final para exibição
+        resultado = {
+            "pontos_atributo": totais["pontos_atributo"],
+            "graus_treinamento": totais["graus_treinamento"],
+            "encantamentos": encantamentos_total,
+            "maldicoes": totais["maldicoes"],
+        }
+
+        # Adiciona bônus especiais do grau atual (não acumulativos)
+        info_atual = graus.get(grau_atual, {})
+        bonus_vigor = info_atual.get("bonus_vigor", {})
+        bonus_presenca = info_atual.get("bonus_presenca", {})
+
+        if bonus_vigor:
+            resultado["bonus_vigor"] = {
+                "nome": bonus_vigor.get("nome", "Bônus de Vigor"),
+                "valor": bonus_vigor.get("pv_por_vigor", 0) * atributos.get("VIG", 1)
+            }
+        if bonus_presenca:
+            resultado["bonus_presenca"] = {
+                "nome": bonus_presenca.get("nome", "Bônus de Presença"),
+                "valor": bonus_presenca.get("pe_por_presenca", 0) * atributos.get("PRE", 1)
+            }
+
+        return resultado    
     
     def _recalcular_tudo(self):
         if getattr(self, '_recalculando', False):
@@ -785,6 +860,7 @@ class FichaPersonagem:
         self._recalculando = True
         try:
             self._recalcular_totais_nex()
+            self.ficha["totais_grau"] = self._calcular_totais_grau()
             bonus_passivas = self._calcular_bonus_passivas()
             bonus_skilltree = self.recalcular_bonus_skilltree()
             bonus_total = {}
@@ -799,6 +875,28 @@ class FichaPersonagem:
             estado["pv_atual"] = estado.get("pv_maximo", 0)
             estado["san_atual"] = estado.get("san_maximo", 0)
             estado["pe_atual"] = estado.get("pe_maximo", 0)
+
+            # Bônus inato: Verdadeiro Jujutsu (exceto Restringido)
+            classe = self.ficha.get("classe", "")
+            if classe != "Restringido":
+                # Obtém o valor numérico do Grau
+                grau_str = self.ficha.get("grau", "Grau 4")
+                grau_num = 0
+                if "Grau" in grau_str and "Semi" not in grau_str and "Especial" not in grau_str:
+                    try:
+                        grau_num = int(grau_str.split()[1])
+                    except:
+                        pass
+                elif "Semi" in grau_str:
+                    grau_num = 5
+                elif "Ultra" in grau_str:
+                    grau_num = 7
+                elif "Especial" in grau_str:
+                    grau_num = 6
+
+                lp = self.ficha.get("lp", 1)
+                bonus_verdadeiro_jujutsu = grau_num + int(lp / 2)
+                bonus_total["PASSO_DANO_TECNICA"] = bonus_total.get("PASSO_DANO_TECNICA", 0) + bonus_verdadeiro_jujutsu
 
             # Verifica se as barras ainda existem antes de atualizar
             for chave, barra in list(self._barras.items()):
@@ -815,6 +913,77 @@ class FichaPersonagem:
                     painel._construir()
         finally:
             self._recalculando = False
+
+    def avaliar_dado(formula: str, contexto: dict) -> int:
+        """
+        Interpreta uma string como '4d6+12' ou '2d10+AB' e retorna o valor total.
+        Suporta partes de dados (ex.: '4d6') e bônus que podem ser fórmulas avaliadas.
+        """
+        # Divide a fórmula em partes separadas por '+' ou '-'
+        partes = re.split(r'(\+|-)', formula.replace(' ', ''))
+        total = 0
+        operador = '+'
+        
+        for parte in partes:
+            if parte in ('+', '-'):
+                operador = parte
+                continue
+            
+            if not parte:
+                continue
+                
+            # Verifica se é uma expressão de dado (ex.: '4d6')
+            match = re.match(r'^(\d+)d(\d+)$', parte)
+            if match:
+                qtd = int(match.group(1))
+                faces = int(match.group(2))
+                valor = sum(random.randint(1, faces) for _ in range(qtd))
+            else:
+                # Avalia como fórmula matemática (pode conter variáveis como AB, LP)
+                from ficha import avaliar_formula
+                # Converte a string da parte em tokens (assumindo que é uma expressão simples)
+                # Para simplificar, chamamos avaliar_formula com um token de expressão.
+                # Vamos criar um token wrapper.
+                tokens = _parse_expressao(parte)
+                valor = avaliar_formula(tokens, contexto)
+            
+            if operador == '+':
+                total += valor
+            else:
+                total -= valor
+                
+        return total
+
+    def _parse_expressao(expr: str) -> list:
+        """Converte uma string de expressão simples em tokens para avaliar_formula."""
+        # Exemplo: "AB+5" -> [{"tipo": "variavel", "valor": "AB"}, {"tipo": "operador", "valor": "+"}, {"tipo": "constante", "valor": 5}]
+        tokens = []
+        i = 0
+        while i < len(expr):
+            char = expr[i]
+            if char.isalpha():
+                # Variável
+                j = i
+                while j < len(expr) and expr[j].isalpha():
+                    j += 1
+                var = expr[i:j]
+                tokens.append({"tipo": "variavel", "valor": var})
+                i = j
+            elif char.isdigit():
+                # Constante
+                j = i
+                while j < len(expr) and expr[j].isdigit():
+                    j += 1
+                num = int(expr[i:j])
+                tokens.append({"tipo": "constante", "valor": num})
+                i = j
+            elif char in '+-*/()':
+                tokens.append({"tipo": "operador", "valor": char})
+                i += 1
+            else:
+                i += 1  # ignora caracteres estranhos
+        return tokens
+
 
     def _debug_popup(self, event=None):
         """Exibe um popup com o conteúdo completo da ficha (JSON formatado) + testes de fórmula."""

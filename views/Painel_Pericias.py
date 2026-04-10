@@ -32,6 +32,19 @@ class PainelPericias(ctk.CTkFrame):
         ctk.CTkLabel(header, text="Total", width=50,
                      font=ctk.CTkFont(size=12, weight="bold")).pack(side="left", padx=2)
         ctk.CTkLabel(header, text="", width=60).pack(side="left")  # espaço para botão
+        # Botão de Ajuda
+        btn_ajuda = ctk.CTkButton(
+            header,
+            text="?",
+            width=28,
+            height=28,
+            font=ctk.CTkFont(size=14, weight="bold"),
+            fg_color="#2a2a2a",
+            hover_color="#3a3a3a",
+            command=self._mostrar_ajuda_pericias
+        )
+        btn_ajuda.pack(side="right", padx=(0, 10))
+
 
         # Área rolável
         scroll = ctk.CTkScrollableFrame(self, fg_color="transparent")
@@ -193,12 +206,17 @@ class PainelPericias(ctk.CTkFrame):
         treino = dados.get("treinamento", 0)
         bonus = dados.get("bonus", 0)
 
-        resultado = rolar_atributo(attr_valor, treino, bonus)
+        # Bônus adicional de TR para perícias de resistência
+        bonus_tr = 0
+        if nome in ("Fortitude", "Reflexos", "Vontade"):
+            bonus_tr = self._ficha.get("bonus_passivos", {}).get("TR", 0)
+
+        resultado = rolar_atributo(attr_valor, treino, bonus + bonus_tr)
 
         # Popup de resultado
-        popup = ctk.CTkToplevel(self.winfo_toplevel())
+        popup = ctk.CTkToplevel(self.winfo_toplevel())  
         popup.title(f"Rolagem: {nome}")
-        popup.geometry("300x220")
+        popup.geometry("400x320")
         popup.resizable(False, False)
         popup.after(100, popup.grab_set)
 
@@ -224,11 +242,110 @@ class PainelPericias(ctk.CTkFrame):
         ctk.CTkLabel(frame, text=f"+ Treino: {treino}   + Bônus: {bonus}",
                      font=ctk.CTkFont(size=12), text_color="#aaaaaa").pack()
 
+        if bonus_tr > 0:
+            ctk.CTkLabel(frame, text=f"+ TR: {bonus_tr}",
+                         font=ctk.CTkFont(size=12), text_color="#3498db").pack()
+
         ctk.CTkLabel(frame, text=f"TOTAL: {resultado['total']}",
                      font=ctk.CTkFont(size=20, weight="bold"),
                      text_color="#f1c40f").pack(pady=(5,10))
 
         ctk.CTkButton(popup, text="Fechar", command=popup.destroy).pack()
+
+    def _mostrar_ajuda_pericias(self):
+        """Exibe um popup com informações sobre perícias treinadas e graus disponíveis."""
+        import os
+        import json
+
+        # Obtém dados da ficha
+        classe_nome = self._ficha.get("classe", "")
+        atributos = self._ficha.get("atributos", {})
+        int_valor = atributos.get("INT", 1)
+        grau_str = self._ficha.get("grau", "Grau 4")
+
+        # Determina se é Grau Especial ou superior (bônus +15)
+        grau_num = 0
+        if "Grau" in grau_str and "Semi" not in grau_str and "Especial" not in grau_str:
+            try:
+                grau_num = int(grau_str.split()[1])
+            except:
+                pass
+        elif "Semi" in grau_str:
+            grau_num = 5
+        elif "Ultra" in grau_str:
+            grau_num = 7
+        elif "Especial" in grau_str:
+            grau_num = 6
+
+        treinamento_inicial = 15 if grau_num >= 6 else 5
+
+        # Carrega dados da classe
+        qnt_iniciais = 0
+        qnt_up_grau = 0
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        caminho_classes = os.path.join(base_dir, "data", "classes.json")
+        if os.path.exists(caminho_classes):
+            with open(caminho_classes, "r", encoding="utf-8") as f:
+                classes = json.load(f)
+                for c in classes:
+                    if c.get("nome") == classe_nome:
+                        qnt_iniciais = c.get("qnt_pericias_iniciais_treinadas", 0)
+                        qnt_up_grau = c.get("qnt_up_grau", 0)
+                        break
+
+        # Totais de graus de treinamento
+        totais_nex = self._ficha.get("totais_nex", {})
+        totais_grau = self._ficha.get("totais_grau", {})
+        bonus_passivos = self._ficha.get("bonus_passivos", {})
+
+        graus_nex = totais_nex.get("graus_treinamento", 0)
+        graus_grau = totais_grau.get("graus_treinamento", 0)
+        graus_skill = bonus_passivos.get("GRAU_TREINAMENTO", 0)
+        total_graus = graus_nex + graus_grau + graus_skill
+
+        # Cálculos finais
+        pericias_iniciais = qnt_iniciais + int_valor
+        pericias_treinaveis = qnt_up_grau + int_valor
+
+        # Cria o popup
+        popup = ctk.CTkToplevel(self.winfo_toplevel())
+        popup.title("Ajuda – Perícias")
+        popup.geometry("400x300")
+        popup.resizable(False, False)
+        popup.after(100, popup.grab_set)
+
+        main = ctk.CTkFrame(popup, fg_color="transparent")
+        main.pack(fill="both", expand=True, padx=20, pady=20)
+
+        ctk.CTkLabel(main, text="Informações de Perícias",
+                     font=ctk.CTkFont(size=16, weight="bold")).pack(anchor="w", pady=(0,15))
+
+        # Linhas informativas
+        info_frame = ctk.CTkFrame(main, fg_color="transparent")
+        info_frame.pack(fill="x", pady=5)
+
+        def _linha(texto, valor):
+            frame = ctk.CTkFrame(info_frame, fg_color="transparent")
+            frame.pack(fill="x", pady=2)
+            ctk.CTkLabel(frame, text=texto, font=ctk.CTkFont(size=12),
+                         text_color="#aaaaaa").pack(side="left")
+            ctk.CTkLabel(frame, text=str(valor), font=ctk.CTkFont(size=13, weight="bold"),
+                         text_color="#ffffff").pack(side="right")
+
+        _linha("Perícias iniciais treinadas:", pericias_iniciais)
+        _linha("Treinamento inicial:", f"+{treinamento_inicial}")
+        _linha("Graus de treinamento disponíveis:", total_graus)
+        _linha("Quantidade de perícias treináveis:", pericias_treinaveis)
+        valor_max = total_graus * 5 + treinamento_inicial
+        _linha("Valor máximo em uma perícia:", f"+{valor_max}")
+
+        # Explicação resumida
+        ctk.CTkLabel(main, text="• Cada grau de treinamento pode ser usado para\n  aumentar uma perícia em +5 (cumulativo).",
+                     font=ctk.CTkFont(size=11), text_color="#888888",
+                     justify="left").pack(anchor="w", pady=(15,10))
+
+        ctk.CTkButton(main, text="Fechar", width=100,
+                      command=popup.destroy).pack(pady=(5,0))
 
     def atualizar(self):
         self._construir()

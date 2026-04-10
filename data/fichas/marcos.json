@@ -21,7 +21,7 @@
         "AGI": 7,
         "FOR": 6,
         "INT": 13,
-        "VIG": 4,
+        "VIG": 8,
         "PRE": 10
     },
     "nos_comprados": {
@@ -106,11 +106,11 @@
         "fei_075",
         "fei_003"
     ],
-    "atualizado_em": "2026-04-09 15:56",
-    "pontos_atributo_gastos": 0,
+    "atualizado_em": "2026-04-10 17:00",
+    "pontos_atributo_gastos": 6,
     "estado": {
-        "pv_atual": 4765,
-        "pv_maximo": 4765,
+        "pv_atual": 8765,
+        "pv_maximo": 8765,
         "san_atual": 1973,
         "san_maximo": 1973,
         "pe_atual": 4172,
@@ -125,10 +125,10 @@
     },
     "tecnica": {
         "id": null,
-        "nome": null,
+        "nome": "Teste",
         "descricao": null,
-        "origem": "padrao",
-        "efeito": null
+        "origem": "custom",
+        "efeito": "Talvez"
     },
     "feiticos_custom": [],
     "inventario": {
@@ -137,7 +137,7 @@
     },
     "anotacoes": "",
     "historico_sessoes": [],
-    "pontos_extras_temp": 0,
+    "pontos_extras_temp": 55,
     "pericias": {
         "Acrobacia": {
             "atributo_base": "AGI",
@@ -148,13 +148,13 @@
         "Adestramento": {
             "atributo_base": "PRE",
             "atributo_override": null,
-            "treinamento": 5,
+            "treinamento": 90,
             "bonus": 0
         },
         "Artes": {
             "atributo_base": "PRE",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Atletismo": {
@@ -172,7 +172,7 @@
         "Ciencias": {
             "atributo_base": "INT",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Crime": {
@@ -184,7 +184,7 @@
         "Diplomacia": {
             "atributo_base": "PRE",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Enganação": {
@@ -196,61 +196,61 @@
         "Fortitude": {
             "atributo_base": "VIG",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Furtividade": {
             "atributo_base": "AGI",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Iniciativa": {
             "atributo_base": "AGI",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Intimidação": {
             "atributo_base": "PRE",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Intuição": {
             "atributo_base": "PRE",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Investigação": {
             "atributo_base": "INT",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Luta": {
             "atributo_base": "FOR",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Medicina": {
             "atributo_base": "INT",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Ocultismo": {
             "atributo_base": "INT",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Percepção": {
             "atributo_base": "PRE",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Pilotagem": {
@@ -262,7 +262,7 @@
         "Pontaria": {
             "atributo_base": "AGI",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Profissão": {
@@ -274,19 +274,19 @@
         "Energia Amaldiçoada": {
             "atributo_base": "PRE",
             "atributo_override": null,
-            "treinamento": 0,
-            "bonus": 0
+            "treinamento": 100,
+            "bonus": 110
         },
         "Reflexos": {
             "atributo_base": "AGI",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Religião": {
             "atributo_base": "PRE",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Sobrevivência": {
@@ -298,7 +298,7 @@
         "Tática": {
             "atributo_base": "INT",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         },
         "Tecnologia": {
@@ -310,7 +310,7 @@
         "Vontade": {
             "atributo_base": "PRE",
             "atributo_override": null,
-            "treinamento": 0,
+            "treinamento": 90,
             "bonus": 0
         }
     },
@@ -320,19 +320,21 @@
         "fei_063": "BASE",
         "fei_019": "ESPECIAL",
         "fei_004": "ESPECIAL",
-        "fei_075": "BASE"
+        "fei_075": "BASE",
+        "fei_003": "ULTRA ESPECIAL"
     },
     "bonus_passivos": {
         "CARACTERISTICA_INVOCACAO": 4,
         "PASSO_DANO_INVOCACAO": 7,
         "PASSO_TECNICA": 7,
-        "PASSO_DANO_TECNICA": 6.5,
+        "PASSO_DANO_TECNICA": 28.5,
         "PASSO_DANO_CORPO": 6.5,
         "CURA_ACELERADA": 199.98,
         "DEF": 276.0,
         "TR": 60,
+        "RD_GERAL": 390,
+        "RD_PARANORMAL": 384.9675,
         "REACAO": 3,
-        "RD_GERAL": 180,
         "GRAU_TREINAMENTO": 2,
         "DT": 20,
         "RD_MENTAL": 150,
@@ -340,7 +342,6 @@
         "SAN_MAX": 150,
         "PV_MAX": 150,
         "PE_MAX": 150,
-        "RD_PARANORMAL": 60,
         "MULTIPLICADOR_CRITICO": 1,
         "MARGEM_AMEAÇA": 2
     },
@@ -350,5 +351,49 @@
         "VIG",
         "FOR",
         "PRE"
+    ],
+    "totais_grau": {
+        "pontos_atributo": 2,
+        "graus_treinamento": 7,
+        "encantamentos": 18.0,
+        "maldicoes": 14,
+        "bonus_vigor": {
+            "nome": "Vigor Ultra Superior",
+            "valor": 8000
+        },
+        "bonus_presenca": {
+            "nome": "Estamina Ultra Sobrenatural",
+            "valor": 1000
+        }
+    },
+    "habilidades_tecnicas": [
+        {
+            "id": "197ee282-4da9-4bae-bc1c-6cd59a9712f7",
+            "nome": "Chains Of Vengeance",
+            "nivel": 0,
+            "conjuracao": "Livre",
+            "alcance": "Curto",
+            "alvo": "Voce",
+            "duracao": "Permanente",
+            "custo_pe": 0,
+            "descricao": "O usuário pode invocar suas correntes livremente durante ou fora combate, elas são invocadas na sua mão direita causando 3d4+AB, tendo um crítico de 19/x2 causando dano de perfuração + 2d6 de Conhecimento",
+            "tipo_mecanica": "Ataque",
+            "parametros": {
+                "dano": "3d4+AB+2d6"
+            }
+        },
+        {
+            "id": "0a9355b2-d314-4cfe-a77c-ac5740cc6b25",
+            "nome": "Holy Chain",
+            "nivel": 2,
+            "conjuracao": "Padrão",
+            "alcance": "Curto",
+            "alvo": "1 ser",
+            "duracao": "Instantânea",
+            "custo_pe": 4,
+            "descricao": "O usuário levanta o dedo polegar, fazendo com que sua corrente se mexa para quem deseja curar, a ponta da corrente vira uma cruz, que é emanada de uma aura amarelo claro, que cura 3d6+AB e da 15 de RD de Conhecimento para o alvo até o fim da cena",
+            "tipo_mecanica": "Cura",
+            "parametros": {}
+        }
     ]
 }

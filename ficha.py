@@ -244,6 +244,7 @@ def avaliar_formula(formula: list, contexto: dict) -> float:
 
 def construir_contexto_base(ficha: dict) -> dict:
     atributos = ficha.get("atributos", {})
+    pericias = ficha.get("pericias", {})
     estado = ficha.get("estado", {})
     totais_nex = ficha.get("totais_nex", {})
     grau_str = ficha.get("grau", "Grau 4")
@@ -266,6 +267,10 @@ def construir_contexto_base(ficha: dict) -> dict:
     except:
         nex_valor = 5.0
 
+    ea_pericia = pericias.get("Energia Amaldiçoada", {})
+    ea_valor = ea_pericia.get("treinamento", 0) + ea_pericia.get("bonus", 0)
+
+
     contexto = {
         "LP": ficha.get("lp", 1),
         "AB": atributos.get("INT", 1),
@@ -276,6 +281,7 @@ def construir_contexto_base(ficha: dict) -> dict:
         "INT": atributos.get("INT", 1),
         "VIG": atributos.get("VIG", 1),
         "PRE": atributos.get("PRE", 1),
+        "EA": ea_valor,
     }
     return contexto
 
