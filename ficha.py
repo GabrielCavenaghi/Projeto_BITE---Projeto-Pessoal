@@ -99,6 +99,8 @@ def normalizar_ficha(ficha: dict) -> dict:
     ficha.setdefault("atualizado_em", ficha.get("criado_em", ""))
     ficha.setdefault("pontos_atributo_gastos", 0)
     ficha.setdefault("pontos_extras_temp", 0)
+    ficha.setdefault("habilidades_gerais", [])
+    ficha.setdefault("tecnicas_ativas", [])
 
     # Garante que 'atributos' exista com os valores base
     if "atributos" not in ficha:
@@ -270,9 +272,16 @@ def construir_contexto_base(ficha: dict) -> dict:
     ea_pericia = pericias.get("Energia Amaldiçoada", {})
     ea_valor = ea_pericia.get("treinamento", 0) + ea_pericia.get("bonus", 0)
 
+    # Calcula LP_NATURAL (sem bônus)
+    lp_natural = ficha.get("lp", 1)  # lp já é o base
+
+    # LP total (base + bônus passivos)
+    bonus_lp = ficha.get("bonus_passivos", {}).get("LP", 0)
+    lp_total = lp_natural + bonus_lp
 
     contexto = {
-        "LP": ficha.get("lp", 1),
+        "LP": lp_total,
+        "LP_NATURAL": lp_natural,
         "AB": atributos.get("INT", 1),
         "GRAU": grau_num,
         "NEX": nex_valor,
@@ -282,6 +291,7 @@ def construir_contexto_base(ficha: dict) -> dict:
         "VIG": atributos.get("VIG", 1),
         "PRE": atributos.get("PRE", 1),
         "EA": ea_valor,
+        "PODERES_PARANORMAIS": ficha.get("poderes_paranormais", 0),  # se existir
     }
     return contexto
 

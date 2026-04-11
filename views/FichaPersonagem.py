@@ -11,6 +11,8 @@ from ficha import (
     avaliar_formula, construir_contexto_base, LIMITE_NORMAL, LIMITE_ABSOLUTO
 )
 
+from utils.Efeitos_Scalling import avaliar_efeitos
+
 # Importa todos os painéis e componentes necessários
 
 from .Barra_Recurso import BarraRecurso
@@ -23,6 +25,7 @@ from .Painel_Pericias import PainelPericias
 from .Painel_Resumo import PainelResumo
 from .Painel_Skilltree import PainelSkilltree
 from .Painel_Tecnica import PainelTecnica
+from .Painel_Habilidades import PainelHabilidades
 
 class FichaPersonagem:
     """
@@ -39,6 +42,7 @@ class FichaPersonagem:
         "Perícias",
         "Skill Tree",
         "Feitiços",
+        "Habilidades",
         "Estilo de Luta",
         "Técnica",
         "Inventário",
@@ -384,6 +388,7 @@ class FichaPersonagem:
             "Feitiços":        lambda: PainelFeiticos(pai, self.ficha, on_passiva_change=self._recalcular_tudo, on_save=self._salvar),
             "Estilo de Luta":  lambda: PainelEstiloLuta(pai, self.ficha, on_save=self._salvar),
             "Técnica": lambda: PainelTecnica(pai, self.ficha, on_save=self._salvar),
+            "Habilidades": lambda: PainelHabilidades(pai, self.ficha, on_change=self._recalcular_tudo, on_save=self._salvar),
             "Inventário":      lambda: PainelInventario(pai, self.ficha, on_save=self._salvar),
             "Resumo":          lambda: PainelResumo(pai, self.ficha, 
                                                     info_grau=self._carregar_graus().get(self.ficha.get("grau", "Grau 4"), {}),
@@ -476,6 +481,29 @@ class FichaPersonagem:
         contexto = construir_contexto_base(self.ficha)
         bonificacoes = {}
 
+        # Processa habilidades gerais passivas
+        for hab in self.ficha.get("habilidades_gerais", []):
+            if hab.get("tipo") != "Passiva":
+                continue
+            hab_id = hab["id"]
+            if hab_id not in self.ficha.get("passivas_ativas", {}):
+                continue
+            for efeito in hab.get("efeitos", []):
+                alvo = efeito["alvo"]
+                operacao = efeito["operacao"]
+                formula = efeito["formula"]
+                valor = avaliar_formula(formula, contexto)
+
+                if alvo not in bonificacoes:
+                    bonificacoes[alvo] = 0
+
+                if operacao == "+":
+                    bonificacoes[alvo] += valor
+                elif operacao == "-":
+                    bonificacoes[alvo] -= valor
+                elif operacao == "=":
+                    bonificacoes[alvo] = valor
+        
         for feat_id, versao in self.ficha.get("passivas_ativas", {}).items():
             feitico = db_feiticos.get(feat_id)
             if not feitico or feitico.get("tipo") != "Passiva":
@@ -863,6 +891,7 @@ class FichaPersonagem:
             self.ficha["totais_grau"] = self._calcular_totais_grau()
             bonus_passivas = self._calcular_bonus_passivas()
             bonus_skilltree = self.recalcular_bonus_skilltree()
+
             bonus_total = {}
             for fonte in (bonus_passivas, bonus_skilltree):
                 for alvo, valor in fonte.items():
@@ -897,6 +926,24 @@ class FichaPersonagem:
                 lp = self.ficha.get("lp", 1)
                 bonus_verdadeiro_jujutsu = grau_num + int(lp / 2)
                 bonus_total["PASSO_DANO_TECNICA"] = bonus_total.get("PASSO_DANO_TECNICA", 0) + bonus_verdadeiro_jujutsu
+    
+            tecnicas = self.ficha.get("habilidades_tecnicas", [])
+            tecnicas_ativas = self.ficha.get("tecnicas_ativas", [])
+            for tecnica in tecnicas:
+                if tecnica.get("tipo_mecanica") != "Passiva":
+                    continue
+                if tecnica["id"] not in tecnicas_ativas:
+                    continue
+                efeitos = tecnica.get("efeitos", [])
+                if efeitos:
+                    contexto = construir_contexto_base(self.ficha)
+                    resultado = avaliar_efeitos(efeitos, contexto)
+                    for alvo, valor in resultado.items():
+                        bonus_total[alvo] = bonus_total.get(alvo, 0) + valor
+
+            self.ficha["bonus_passivos"] = bonus_total
+            self._salvar()
+            self._atualizar_recursos_por_grau_e_nex()
 
             # Verifica se as barras ainda existem antes de atualizar
             for chave, barra in list(self._barras.items()):

@@ -852,71 +852,73 @@
     "grau_base": "ESPECIAL",
     "descricao_base": "Você é bonito demais para falhar.\nQuando tiver um atributo base em alguma perícia ou técnica que você pode rolar dados, você pode substituir por Presença.",
     "versoes": {}
-  },
+    },
   {
-    "id": "fei_060",
-    "tipo": "Ativa",
-    "nome": "Tempo do Gênio",
-    "classe": "Geral",
-    "grau_base": "ULTRA ESPECIAL",
-    "descricao_base": "Gastando 1K PE, durante 3 rodadas o passo de todas suas ações diminui em 1, ações livres tem limite de AGI+INT vezes por rodada. Esse feitiço pode ser usado 1 vez por cena.",
-    "versoes": {}
+      "id": "fei_060",
+      "tipo": "Ativa",
+      "nome": "Tempo do Gênio",
+      "classe": "Geral",
+      "grau_base": "ESPECIAL",
+      "descricao_base": "Gastando 1K PE, durante 3 rodadas o passo de todas suas ações diminui em 1, ações livres tem limite de AGI+INT vezes por rodada. Esse feitiço pode ser usado 1 vez por cena.",
+      "versoes": {
+          "ULTRA ESPECIAL": "Gastando 2.5K PE (independente do LP), durante 5 rodadas o passo de todas suas ações diminui em 1, ações livres tem limite de AGI*INT vezes por rodada. Esse feitiço pode ser usado 1 vez por cena."
+      },
+      "efeitos_por_versao": {}
   },
-  {
-    "id": "fei_061",
-    "tipo": "Ativa",
-    "nome": "Verdadeiro Tempo do Gênio",
-    "classe": "Geral",
-    "grau_base": "ULTRA ESPECIAL",
-    "descricao_base": "Gastando 2.5K PE (independente do LP), durante 5 rodadas o passo de todas suas ações diminui em 1, ações livres tem limite de AGI*INT vezes por rodada. Esse feitiço pode ser usado 1 vez por cena.",
-    "versoes": {}
-  },
-  {
+ {
     "id": "fei_062",
     "tipo": "Passiva",
-    "nome": "Força do Prodígio",
+    "nome": "Força do Prodígio (Técnica)",
     "classe": "Geral",
-    "grau_base": "ULTRA ESPECIAL",
-    "descricao_base": "Recebe +AB/4 em seus passos de dano para técnica ou corpo a corpo.",
-    "versoes": {},
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Recebe +AB/4 em seus passos de dano para técnica.",
+    "versoes": {
+        "ULTRA ESPECIAL": "Muda o buff para +AB/2 em seus passos de dano para técnica."
+        },
     "efeitos_por_versao": {
-      "BASE": [
-          {"alvo": "PASSO_DANO_TECNICA", "operacao": "+", "formula": [
-              {"tipo": "variavel", "valor": "AB"},
-              {"tipo": "operador", "valor": "/"},
-              {"tipo": "constante", "valor": 4}
-          ]},
-          {"alvo": "PASSO_DANO_CORPO", "operacao": "+", "formula": [
-              {"tipo": "variavel", "valor": "AB"},
-              {"tipo": "operador", "valor": "/"},
-              {"tipo": "constante", "valor": 4}
-          ]}
-      ]
-    }
-  },
-  {
+            "BASE": [
+                {"alvo": "PASSO_DANO_TECNICA", "operacao": "+", "formula": [
+                    {"tipo": "variavel", "valor": "AB"},
+                    {"tipo": "operador", "valor": "/"},
+                    {"tipo": "constante", "valor": 4}
+                ]}
+            ],
+            "ULTRA ESPECIAL": [
+                {"alvo": "PASSO_DANO_TECNICA", "operacao": "+", "formula": [
+                    {"tipo": "variavel", "valor": "AB"},
+                    {"tipo": "operador", "valor": "/"},
+                    {"tipo": "constante", "valor": 2}
+                ]}
+            ]
+        }
+    },
+    {
     "id": "fei_063",
     "tipo": "Passiva",
-    "nome": "Força do Verdadeiro Prodígio",
+    "nome": "Força do Prodígio (Corpo a Corpo)",
     "classe": "Geral",
-    "grau_base": "ULTRA ESPECIAL",
-    "descricao_base": "Muda o buff para +AB/2 em seus passos de dano para técnica ou corpo a corpo.",
-    "versoes": {},
-    "efeitos_por_versao": {
-      "BASE": [
-          {"alvo": "PASSO_DANO_TECNICA", "operacao": "+", "formula": [
-              {"tipo": "variavel", "valor": "AB"},
-              {"tipo": "operador", "valor": "/"},
-              {"tipo": "constante", "valor": 2}
-          ]},
-          {"alvo": "PASSO_DANO_CORPO", "operacao": "+", "formula": [
-              {"tipo": "variavel", "valor": "AB"},
-              {"tipo": "operador", "valor": "/"},
-              {"tipo": "constante", "valor": 2}
-          ]}
-      ]
-    }
-  },
+    "grau_base": "ESPECIAL",
+    "descricao_base": "Recebe +AB/4 em seus passos de dano corpo a corpo.",
+    "versoes": {
+        "ULTRA ESPECIAL": "Muda o buff para +AB/2 em seus passos de dano corpo a corpo."
+        },
+        "efeitos_por_versao": {
+            "BASE": [
+                {"alvo": "PASSO_DANO_CORPO", "operacao": "+", "formula": [
+                    {"tipo": "variavel", "valor": "AB"},
+                    {"tipo": "operador", "valor": "/"},
+                    {"tipo": "constante", "valor": 4}
+                ]}
+            ],
+            "ULTRA ESPECIAL": [
+                {"alvo": "PASSO_DANO_CORPO", "operacao": "+", "formula": [
+                    {"tipo": "variavel", "valor": "AB"},
+                    {"tipo": "operador", "valor": "/"},
+                    {"tipo": "constante", "valor": 2}
+                ]}
+            ]
+        }
+    },
   {
     "id": "fei_064",
     "tipo": "Ativa, Passiva, Passiva, Passiva, Passiva",
@@ -1427,37 +1429,36 @@
       "GRAU ULTRA ESPECIAL": "Substitua “NEX/2” por NEX*(AB/2)"
     },
     "efeitos_por_versao": {
-      "BASE": [
-          {"alvo": "DT_HABILIDADES_TECNICA", "operacao": "+", "formula": [
-            {"tipo": "variavel", "valor": "LP"},
-            {"tipo": "operacao", "valor": "/"},
-            {"tipo": "constante", "valor": 2}
-
+        "BASE": [
+            {"alvo": "DT_HABILIDADES_TECNICA", "operacao": "+", "formula": [
+                {"tipo": "variavel", "valor": "LP"},
+                {"tipo": "operador", "valor": "/"},
+                {"tipo": "constante", "valor": 2}
             ]}
-      ],
+        ],
         "GRAU 2": [
             {"alvo": "DT_HABILIDADES_TECNICA", "operacao": "+", "formula": [{"tipo": "variavel", "valor": "LP"}]}
         ],
         "GRAU 1": [
             {"alvo": "DT_HABILIDADES_TECNICA", "operacao": "+", "formula": [
                 {"tipo": "variavel", "valor": "LP"},
-                {"tipo": "operacao", "valor": "+"},
+                {"tipo": "operador", "valor": "+"},
                 {"tipo": "variavel", "valor": "AB"}
             ]}
         ],
         "GRAU ESPECIAL": [
             {"alvo": "DT_HABILIDADES_TECNICA", "operacao": "+", "formula": [
                 {"tipo": "variavel", "valor": "NEX"},
-                {"tipo": "operacao", "valor": "/"},
+                {"tipo": "operador", "valor": "/"},
                 {"tipo": "constante", "valor": 2}
             ]}
         ],
         "GRAU ULTRA ESPECIAL": [
             {"alvo": "DT_HABILIDADES_TECNICA", "operacao": "+", "formula": [
                 {"tipo": "variavel", "valor": "NEX"},
-                {"tipo": "operacao", "valor": "*"},
+                {"tipo": "operador", "valor": "*"},
                 {"tipo": "variavel", "valor": "AB"},
-                {"tipo": "operacao", "valor": "/"},
+                {"tipo": "operador", "valor": "/"},
                 {"tipo": "constante", "valor": 2}
             ]}
         ]
@@ -1580,12 +1581,12 @@
           {"alvo": "PASSO_SHINOBI", "operacao": "+", "formula": [{"tipo": "variavel", "valor": "GRAU"}]},
           {"alvo": "PASSO_ESTILO_LUTA", "operacao": "+", "formula": [
               {"tipo": "variavel", "valor": "GRAU"},
-              {"tipo": "operacao", "valor": "*"},
+              {"tipo": "operador", "valor": "*"},
               {"tipo": "constante", "valor": 0.5}
           ]},
           {"alvo": "PASSO_DANO_TECNICA", "operacao": "+", "formula": [
               {"tipo": "variavel", "valor": "GRAU"},
-              {"tipo": "operacao", "valor": "*"},
+              {"tipo": "operador", "valor": "*"},
               {"tipo": "constante", "valor": 0.5}
           ]}
       ]
@@ -1751,7 +1752,7 @@
       "BASE": [
           {"alvo": "PERICIA_FURTIVIDADE", "operacao": "+", "formula": [
               {"tipo": "variavel", "valor": "AGI"},
-              {"tipo": "operacao", "valor": "*"},
+              {"tipo": "operador", "valor": "*"},
               {"tipo": "variavel", "valor": "INT"}
           ]}
       ],
@@ -1851,7 +1852,7 @@
       "BASE": [
           {"alvo": "PASSO_DANO_ESTILO_LUTA", "operacao": "+", "formula": [
               {"tipo": "variavel", "valor": "AB"},
-              {"tipo": "operacao", "valor": "/"},
+              {"tipo": "operador", "valor": "/"},
               {"tipo": "constante", "valor": 2}
           ]} 
       ],

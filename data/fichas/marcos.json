@@ -22,7 +22,7 @@
         "FOR": 6,
         "INT": 13,
         "VIG": 8,
-        "PRE": 10
+        "PRE": 13
     },
     "nos_comprados": {
         "AGI": [
@@ -96,25 +96,25 @@
         "fei_108",
         "fei_111",
         "fei_002",
-        "fei_063",
-        "fei_061",
         "fei_059",
         "fei_019",
         "fei_046",
         "fei_004",
         "fei_014",
         "fei_075",
-        "fei_003"
+        "fei_003",
+        "fei_060",
+        "fei_062"
     ],
-    "atualizado_em": "2026-04-10 17:00",
-    "pontos_atributo_gastos": 6,
+    "atualizado_em": "2026-04-11 14:33",
+    "pontos_atributo_gastos": 9,
     "estado": {
-        "pv_atual": 8765,
-        "pv_maximo": 8765,
-        "san_atual": 1973,
-        "san_maximo": 1973,
-        "pe_atual": 4172,
-        "pe_maximo": 4172
+        "pv_atual": 8775,
+        "pv_maximo": 8775,
+        "san_atual": 1983,
+        "san_maximo": 1983,
+        "pe_atual": 4482,
+        "pe_maximo": 4482
     },
     "estilo_luta": {
         "id": null,
@@ -317,31 +317,33 @@
     "passivas_ativas": {
         "fei_066": "BASE",
         "fei_108": "BASE",
-        "fei_063": "BASE",
         "fei_019": "ESPECIAL",
         "fei_004": "ESPECIAL",
         "fei_075": "BASE",
-        "fei_003": "ULTRA ESPECIAL"
+        "fei_003": "ULTRA ESPECIAL",
+        "fei_062": "ULTRA ESPECIAL",
+        "3b16edd6-da1f-466c-9794-02fcd25aff49": "BASE",
+        "9e5a26aa-8a45-4b09-8bf7-0be0d2a6a437": "BASE"
     },
     "bonus_passivos": {
+        "TR": 558,
+        "DT_HABILIDADES_TECNICA": 420,
         "CARACTERISTICA_INVOCACAO": 4,
         "PASSO_DANO_INVOCACAO": 7,
         "PASSO_TECNICA": 7,
-        "PASSO_DANO_TECNICA": 28.5,
-        "PASSO_DANO_CORPO": 6.5,
         "CURA_ACELERADA": 199.98,
-        "DEF": 276.0,
-        "TR": 60,
-        "RD_GERAL": 390,
-        "RD_PARANORMAL": 384.9675,
+        "DEF": 294.0,
+        "RD_GERAL": 402,
+        "RD_PARANORMAL": 388.9675,
+        "PASSO_DANO_TECNICA": 28.5,
         "REACAO": 3,
         "GRAU_TREINAMENTO": 2,
         "DT": 20,
-        "RD_MENTAL": 150,
+        "RD_MENTAL": 160,
         "LP": 2,
-        "SAN_MAX": 150,
-        "PV_MAX": 150,
-        "PE_MAX": 150,
+        "SAN_MAX": 160,
+        "PV_MAX": 160,
+        "PE_MAX": 160,
         "MULTIPLICADOR_CRITICO": 1,
         "MARGEM_AMEAÇA": 2
     },
@@ -363,7 +365,7 @@
         },
         "bonus_presenca": {
             "nome": "Estamina Ultra Sobrenatural",
-            "valor": 1000
+            "valor": 1300
         }
     },
     "habilidades_tecnicas": [
@@ -395,5 +397,88 @@
             "tipo_mecanica": "Cura",
             "parametros": {}
         }
-    ]
+    ],
+    "habilidades_gerais": [
+        {
+            "id": "3b16edd6-da1f-466c-9794-02fcd25aff49",
+            "nome": "Teste TR",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "TR",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 2
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "+"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 10
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "9e5a26aa-8a45-4b09-8bf7-0be0d2a6a437",
+            "nome": "Teste",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DT_HABILIDADES_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "EA"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 2
+                        }
+                    ]
+                },
+                {
+                    "alvo": "TR",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "EA"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "tecnicas_ativas": []
 }

@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import uuid
 from tkinter import messagebox
+from views.Efeitos_Popup import EfeitosPopup
 
 class PainelTecnica(ctk.CTkFrame):
     """Aba: gerenciamento de habilidades de técnica customizadas."""
@@ -112,14 +113,23 @@ class PainelTecnica(ctk.CTkFrame):
             ctk.CTkLabel(card, text=previa, wraplength=500, justify="left",
                          font=ctk.CTkFont(size=11),
                          text_color="#aaaaaa").pack(anchor="w", padx=12, pady=(0, 8))
-            
+        
+        # Exibe dano se houver 
         params = tecnica.get("parametros", {})
         dano = params.get("dano", "")
         if dano:
             ctk.CTkLabel(card, text=f"Dano: {dano}", font=ctk.CTkFont(size=11),
                          text_color="#e67e22").pack(anchor="w", padx=12, pady=(0,4))
+            
+        # Exibe quantidade de efeitos
+        efeitos = tecnica.get("efeitos", [])
+        if efeitos:
+            ctk.CTkLabel(card, text=f"⚡ {len(efeitos)} efeito(s) configurado(s)",
+                         font=ctk.CTkFont(size=10), text_color="#888888").pack(anchor="w", padx=12, pady=(0,4))
 
+        # ══════════════════════════════════════════════════════════════════════
         # Botões de ação
+        # ══════════════════════════════════════════════════════════════════════
         btn_frame = ctk.CTkFrame(card, fg_color="transparent")
         btn_frame.pack(fill="x", padx=12, pady=(0, 10))
 
@@ -128,9 +138,30 @@ class PainelTecnica(ctk.CTkFrame):
                       border_width=1, border_color="#444444",
                       command=lambda: self._abrir_popup_edicao(tecnica)).pack(side="left", padx=(0, 5))
 
-        ctk.CTkButton(btn_frame, text="Usar", width=70, height=28,
-                      font=ctk.CTkFont(size=11), fg_color="#2a6b2a", hover_color="#1a4a1a",
-                      command=lambda: self._executar_tecnica(tecnica)).pack(side="left", padx=5)
+        tipo_mec = tecnica.get("tipo_mecanica", "Extra")
+        if tipo_mec == "Passiva":
+            tecnicas_ativas = self._ficha.setdefault("tecnicas_ativas", [])
+            ativa = tecnica["id"] in tecnicas_ativas
+            var_ativa = ctk.BooleanVar(value=ativa)
+
+            def toggle_passiva():
+                if var_ativa.get():
+                    if tecnica["id"] not in tecnicas_ativas:
+                        tecnicas_ativas.append(tecnica["id"])
+                else:
+                    if tecnica["id"] in tecnicas_ativas:
+                        tecnicas_ativas.remove(tecnica["id"])
+                if self._on_save:
+                    self._on_save()
+                self._construir()
+
+            cb = ctk.CTkCheckBox(btn_frame, text="Ativar", variable=var_ativa,
+                                 font=ctk.CTkFont(size=11), command=toggle_passiva)
+            cb.pack(side="left", padx=5)
+        else:
+            ctk.CTkButton(btn_frame, text="Usar", width=70, height=28,
+                          font=ctk.CTkFont(size=11), fg_color="#2a6b2a", hover_color="#1a4a1a",
+                          command=lambda: self._executar_tecnica(tecnica)).pack(side="left", padx=5)
 
         ctk.CTkButton(btn_frame, text="Remover", width=70, height=28,
                       font=ctk.CTkFont(size=11), fg_color="#8B0000",
@@ -262,9 +293,28 @@ class PainelTecnica(ctk.CTkFrame):
             e_desc.insert("1.0", tecnica.get("descricao", ""))
         e_desc.pack(fill="x", pady=(2, 12))
 
-        # Placeholder para parâmetros específicos
-        ctk.CTkLabel(main, text="Parâmetros específicos (em breve)",
-                     font=ctk.CTkFont(size=12, slant="italic"), text_color="#888888").pack(anchor="w")
+        # ══════════════════════════════════════════════════════════════════════
+        # Gerenciamento de Efeitos (Scaling)
+        # ══════════════════════════════════════════════════════════════════════
+        efeitos_temp = list(tecnica.get("efeitos", [])) if editando else []
+
+        def abrir_efeitos():
+            nonlocal efeitos_temp
+            popup_efeitos = EfeitosPopup(
+                popup,
+                efeitos_existentes=efeitos_temp,
+                on_save=lambda novos: efeitos_temp.clear() or efeitos_temp.extend(novos)
+            )
+            popup_efeitos.abrir()
+
+        btn_efeitos = ctk.CTkButton(
+            main,
+            text="⚙️ Gerenciar Efeitos (Scaling)",
+            fg_color="#3a3a3a",
+            hover_color="#4a4a4a",
+            command=abrir_efeitos
+        )
+        btn_efeitos.pack(fill="x", pady=(10, 5))
 
         # ══════════════════════════════════════════════════════════════════════
         # Barra de botões fixa na parte inferior
@@ -299,7 +349,8 @@ class PainelTecnica(ctk.CTkFrame):
                 "custo_pe": custo,
                 "descricao": e_desc.get("1.0", "end-1c").strip(),
                 "tipo_mecanica": tipo_mec_var.get(),
-                "parametros": params
+                "parametros": params,
+                "efeitos": efeitos_temp 
             }
 
             tecnicas = self._ficha.setdefault("habilidades_tecnicas", [])
