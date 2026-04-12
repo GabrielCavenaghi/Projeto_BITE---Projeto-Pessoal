@@ -2,6 +2,9 @@ import customtkinter as ctk
 import uuid
 from tkinter import messagebox
 from views.Efeitos_Popup import EfeitosPopup
+from utils.tecnicas import executar_tecnica
+from utils.Efeitos_Scalling import string_para_tokens
+from utils.helpers import formatar_numero_grande
 
 class PainelTecnica(ctk.CTkFrame):
     """Aba: gerenciamento de habilidades de técnica customizadas."""
@@ -60,16 +63,31 @@ class PainelTecnica(ctk.CTkFrame):
     def _aplicar_scroll(self, scroll):
         def _scroll(delta):
             scroll._parent_canvas.yview_scroll(delta, "units")
+
+        def _on_mousewheel(event):
+            # Windows/Mac: event.delta positivo = rolar para cima
+            delta = -1 if event.delta > 0 else 1
+            _scroll(delta)
+
+        def _on_button4(event):
+            # Linux: scroll para cima
+            _scroll(-1)
+
+        def _on_button5(event):
+            # Linux: scroll para baixo
+            _scroll(1)
+
         def _bind_scroll_recursivo(widget):
-            widget.bind("<MouseWheel>", lambda e: _scroll(-1 if e.delta > 0 else 1))
-            widget.bind("<Button-4>", lambda e: _scroll(-1))
-            widget.bind("<Button-5>", lambda e: _scroll(1))
+            widget.bind("<MouseWheel>", _on_mousewheel)
+            widget.bind("<Button-4>", _on_button4)
+            widget.bind("<Button-5>", _on_button5)
             for child in widget.winfo_children():
                 _bind_scroll_recursivo(child)
+
         _bind_scroll_recursivo(scroll)
-        scroll._parent_canvas.bind("<MouseWheel>", lambda e: _scroll(-1 if e.delta > 0 else 1))
-        scroll._parent_canvas.bind("<Button-4>", lambda e: _scroll(-1))
-        scroll._parent_canvas.bind("<Button-5>", lambda e: _scroll(1))
+        scroll._parent_canvas.bind("<MouseWheel>", _on_mousewheel)
+        scroll._parent_canvas.bind("<Button-4>", _on_button4)
+        scroll._parent_canvas.bind("<Button-5>", _on_button5)
         scroll.focus_set()
 
     def _criar_card(self, parent, tecnica: dict):
@@ -171,7 +189,7 @@ class PainelTecnica(ctk.CTkFrame):
     # ──────────────────────────────────────────────────────────────────────────
     # Popup de Criação / Edição
     # ──────────────────────────────────────────────────────────────────────────
-
+    
     def _abrir_popup_criacao(self):
         self._abrir_popup_edicao(None)
 
@@ -255,12 +273,67 @@ class PainelTecnica(ctk.CTkFrame):
         tipo_mec_menu = ctk.CTkOptionMenu(row3, values=self.TIPO_MECANICA_OPCOES, variable=tipo_mec_var)
         tipo_mec_menu.grid(row=1, column=1, sticky="ew", padx=(5,0))
 
+        # --- Campos específicos para Ataque (inicialmente ocultos) ---
+        frame_ataque = ctk.CTkFrame(main, fg_color="transparent")
+        frame_ataque.pack(fill="x", pady=(0, 12))
+        frame_ataque.pack_forget()  # Oculta inicialmente
+
+        # Perícia de Ataque
+        ctk.CTkLabel(frame_ataque, text="Perícia de Ataque:", anchor="w").pack(fill="x")
+        pericia_var = ctk.StringVar(value="Luta")
+        pericia_menu = ctk.CTkOptionMenu(frame_ataque, values=["Luta", "Pontaria"], variable=pericia_var)
+        pericia_menu.pack(fill="x", pady=(2, 8))
+
+        # Margem de Ameaça
+        row_ataque1 = ctk.CTkFrame(frame_ataque, fg_color="transparent")
+        row_ataque1.pack(fill="x", pady=(0, 8))
+        row_ataque1.columnconfigure(0, weight=1)
+        row_ataque1.columnconfigure(1, weight=1)
+
+        ctk.CTkLabel(row_ataque1, text="Margem de Ameaça:", anchor="w").grid(row=0, column=0, sticky="w", padx=(0,5))
+        margem_var = ctk.StringVar(value="20")
+        margem_entry = ctk.CTkEntry(row_ataque1, placeholder_text="20")
+        margem_entry.grid(row=1, column=0, sticky="ew", padx=(0,5))
+
+        ctk.CTkLabel(row_ataque1, text="Mult. Crítico:", anchor="w").grid(row=0, column=1, sticky="w", padx=(5,0))
+        mult_var = ctk.StringVar(value="2")
+        mult_entry = ctk.CTkEntry(row_ataque1, placeholder_text="2")
+        mult_entry.grid(row=1, column=1, sticky="ew", padx=(5,0))
+
+        # Função para mostrar/ocultar frame de ataque conforme tipo
+        def toggle_frame_ataque(*args):
+            if tipo_mec_var.get() == "Ataque":
+                frame_ataque.pack(fill="x", pady=(0, 12), after=row3)  # ajuste o posicionamento
+            else:
+                frame_ataque.pack_forget()
+
+        tipo_mec_var.trace_add("write", toggle_frame_ataque)
+        toggle_frame_ataque()  # inicial
+
+        # Se estiver editando uma técnica de ataque, preencher valores salvos
+        if editando and tecnica.get("tipo_mecanica") == "Ataque":
+            pericia_var.set(tecnica.get("parametros", {}).get("pericia_ataque", "Luta"))
+            margem_entry.insert(0, str(tecnica.get("parametros", {}).get("margem_ameaca", 20)))
+            mult_entry.insert(0, str(tecnica.get("parametros", {}).get("multiplicador_critico", 2)))
+
         # Campo de Dano (fórmula)
         ctk.CTkLabel(main, text="Dano / Efeito (fórmula):", anchor="w").pack(fill="x")
         e_dano = ctk.CTkEntry(main, placeholder_text="ex: 4d6+12, 2d10+AB")
         if editando and "dano" in tecnica.get("parametros", {}):
             e_dano.insert(0, tecnica["parametros"]["dano"])
         e_dano.pack(fill="x", pady=(2, 12))
+
+        # Multiplicador de dano (fórmula, ex.: "AB+LP")
+        ctk.CTkLabel(main, text="Multiplicador de Dano (fórmula):", anchor="w").pack(fill="x", pady=(12,2))
+        e_multiplicador = ctk.CTkEntry(main, placeholder_text="ex: AB, LP/2, (FOR+AGI)/2")
+        if editando and "multiplicador_dano" in tecnica.get("parametros", {}):
+            e_multiplicador.insert(0, tecnica["parametros"]["multiplicador_dano"])
+        e_multiplicador.pack(fill="x", pady=(2, 12))
+
+        # Checkbox para aplicar passo de dano
+        aplicar_passo_var = ctk.BooleanVar(value=tecnica.get("parametros", {}).get("aplicar_passo", False) if editando else False)
+        cb_passo = ctk.CTkCheckBox(main, text="Aplicar Passo de Dano (bônus acumulado)", variable=aplicar_passo_var)
+        cb_passo.pack(anchor="w", pady=(2,12))
 
         # Custo PE
         ctk.CTkLabel(main, text="Custo PE (calculado automaticamente):", anchor="w").pack(fill="x", pady=(0,2))
@@ -335,9 +408,22 @@ class PainelTecnica(ctk.CTkFrame):
                 nivel = 0
                 custo = 0
 
+
             params = tecnica.get("parametros", {}) if editando else {}
             params["dano"] = e_dano.get().strip() or "0"
+            if tipo_mec_var.get() == "Ataque":
+                params["pericia_ataque"] = pericia_var.get()
+                try:
+                    params["margem_ameaca"] = int(margem_entry.get())
+                except:
+                    params["margem_ameaca"] = 20
+                try:
+                    params["multiplicador_critico"] = int(mult_entry.get())
+                except:
+                    params["multiplicador_critico"] = 2
 
+            params["aplicar_passo"] = aplicar_passo_var.get()
+            params["multiplicador_dano"] = e_multiplicador.get().strip() or "1"
             nova_tec = {
                 "id": tecnica.get("id") if editando else str(uuid.uuid4()),
                 "nome": nome,
@@ -376,8 +462,84 @@ class PainelTecnica(ctk.CTkFrame):
     # ──────────────────────────────────────────────────────────────────────────
 
     def _executar_tecnica(self, tecnica: dict):
-        """Executa a técnica (placeholder)."""
-        messagebox.showinfo("Executar Técnica", f"Execução de '{tecnica.get('nome')}' será implementada no módulo utils/tecnicas.py")
+        """Executa a técnica diretamente, sem popup adicional."""
+        resultado = executar_tecnica(tecnica, self._ficha)
+        self._mostrar_resultado(resultado)
+
+    def _popup_executar_ataque(self, tecnica: dict):
+        popup = ctk.CTkToplevel(self.winfo_toplevel())
+        popup.title(f"Executar Ataque - {tecnica.get('nome')}")
+        popup.geometry("400x250")
+        popup.resizable(False, False)
+        popup.after(100, popup.grab_set)
+
+        main = ctk.CTkFrame(popup, fg_color="transparent")
+        main.pack(fill="both", expand=True, padx=20, pady=20)
+
+        ctk.CTkLabel(main, text="Defesa do alvo:", anchor="w").pack(fill="x")
+        defesa_entry = ctk.CTkEntry(main, placeholder_text="10")
+        defesa_entry.pack(fill="x", pady=(2, 12))
+
+        # Opção de perícia (já vem pré-definida nos parâmetros, mas pode deixar o usuário trocar)
+        params = tecnica.get("parametros", {})
+        pericia_atual = params.get("pericia_ataque", "Luta")
+        pericia_var = ctk.StringVar(value=pericia_atual)
+        ctk.CTkLabel(main, text="Perícia de Ataque:", anchor="w").pack(fill="x")
+        pericia_menu = ctk.CTkOptionMenu(main, values=["Luta", "Pontaria"], variable=pericia_var)
+        pericia_menu.pack(fill="x", pady=(2, 12))
+
+        btn_frame = ctk.CTkFrame(main, fg_color="transparent")
+        btn_frame.pack(fill="x", pady=(10, 0))
+
+        def rolar():
+            try:
+                defesa = int(defesa_entry.get())
+            except ValueError:
+                defesa = 10
+            # Atualiza temporariamente os parâmetros com a defesa e perícia escolhida
+            tecnica["parametros"]["defesa_alvo"] = defesa
+            tecnica["parametros"]["pericia_ataque"] = pericia_var.get()
+
+            from utils.tecnicas import executar_tecnica
+            resultado = executar_tecnica(tecnica, self._ficha)
+            self._mostrar_resultado(resultado)
+            popup.destroy()
+
+        ctk.CTkButton(btn_frame, text="Rolar Ataque", fg_color="#1a6b1a", hover_color="#145214",
+                    command=rolar).pack(side="right", padx=(5,0))
+        ctk.CTkButton(btn_frame, text="Cancelar", fg_color="transparent", border_width=1,
+                    command=popup.destroy).pack(side="right")
+
+    def _mostrar_resultado(self, resultado: dict):
+        popup = ctk.CTkToplevel(self.winfo_toplevel())
+        popup.title("Resultado")
+        popup.geometry("450x350")
+        popup.after(100, popup.grab_set)
+
+        main = ctk.CTkFrame(popup, fg_color="transparent")
+        main.pack(fill="both", expand=True, padx=20, pady=20)
+
+        dano = resultado.get("detalhes", {}).get("dano", 0)
+        texto = resultado.get("mensagem", "")
+
+        # Só formata se o dano for maior que 9999
+        if dano and dano > 9999:
+            dano_formatado = formatar_numero_grande(dano)
+            texto = texto.replace(str(dano), dano_formatado)
+            mostrar_botao_exato = True
+        else:
+            mostrar_botao_exato = False
+
+        ctk.CTkLabel(main, text=texto, wraplength=400, justify="left",
+                     font=ctk.CTkFont(size=13)).pack(anchor="w", pady=(0, 20))
+
+        if mostrar_botao_exato:
+            def mostrar_exato():
+                messagebox.showinfo("Valor exato", f"{dano:,}".replace(',', '.'))
+            ctk.CTkButton(main, text="Ver valor exato", command=mostrar_exato,
+                          fg_color="transparent", border_width=1).pack(pady=(0,10))
+
+        ctk.CTkButton(main, text="Fechar", command=popup.destroy).pack()
 
     def _remover_tecnica(self, tecnica: dict):
         if not messagebox.askyesno("Confirmar", f"Remover '{tecnica.get('nome', 'esta técnica')}'?"):

@@ -5,6 +5,7 @@ class BarraRecurso(ctk.CTkFrame):
     Barra de recurso reutilizável.
     Layout: label + fração  |  barra de progresso  |  [−] [entrada] [+]  [máx]
     on_change(novo_atual) é chamado após cada alteração.
+    Suporta valores temporários (atual pode exceder máximo).
     """
 
     def __init__(self, parent, label: str, atual: int, maximo: int,
@@ -69,7 +70,11 @@ class BarraRecurso(ctk.CTkFrame):
         return f"{self._atual} / {self._maximo}"
 
     def _atualizar_barra(self):
-        prog = max(0.0, min(1.0, self._atual / self._maximo)) if self._maximo > 0 else 0.0
+        if self._maximo > 0:
+            # A barra fica cheia (1.0) se atual >= máximo, senão proporcional
+            prog = min(1.0, self._atual / self._maximo)
+        else:
+            prog = 0.0
         self._barra.set(prog)
 
     def _atualizar_ui(self):
@@ -89,13 +94,15 @@ class BarraRecurso(ctk.CTkFrame):
         self._atualizar_ui()
 
     def _incrementar(self):
-        self._atual = min(self._maximo, self._atual + 1)
+        # Permite ultrapassar o máximo (recursos temporários)
+        self._atual += 1
         self._atualizar_ui()
 
     def _ao_confirmar_entrada(self, _event=None):
         try:
             valor = int(self._entrada.get())
-            self._atual = max(0, min(self._maximo, valor))
+            # Apenas não permite negativo
+            self._atual = max(0, valor)
         except ValueError:
             pass
         self._atualizar_ui()
@@ -121,7 +128,7 @@ class BarraRecurso(ctk.CTkFrame):
                 novo = int(entrada.get())
                 if novo >= 0:
                     self._maximo = novo
-                    self._atual  = min(self._atual, self._maximo)
+                    # Não reduz o atual (mantém temporários)
                     self._atualizar_ui()
             except ValueError:
                 pass

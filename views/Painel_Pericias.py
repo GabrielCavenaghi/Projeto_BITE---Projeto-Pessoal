@@ -157,8 +157,13 @@ class PainelPericias(ctk.CTkFrame):
         # Atualiza total inicial
         self._atualizar_total(nome)
 
+    def _get_bonus_passivo_pericia(self, nome_pericia: str) -> int:
+        """Retorna o bônus passivo para uma perícia específica."""
+        # Converte "Nome da Perícia" para "PERICIA_NOME_DA_PERICIA"
+        chave = "PERICIA_" + nome_pericia.upper().replace(" ", "_").replace("Ç", "C").replace("Ã", "A").replace("Õ", "O")
+        return self._ficha.get("bonus_passivos", {}).get(chave, 0)
+
     def _atualizar_total(self, nome: str):
-        """Recalcula e atualiza o label de total da perícia."""
         dados = self._ficha["pericias"][nome]
         atributos = self._ficha.get("atributos", {})
 
@@ -168,7 +173,8 @@ class PainelPericias(ctk.CTkFrame):
 
         treino = dados.get("treinamento", 0)
         bonus = dados.get("bonus", 0)
-        total = treino + bonus
+        bonus_passivo = self._get_bonus_passivo_pericia(nome)   # <-- NOVO
+        total = treino + bonus + bonus_passivo
 
         self._pericia_widgets[nome]["total_label"].configure(text=str(total))
 
@@ -202,9 +208,10 @@ class PainelPericias(ctk.CTkFrame):
         attr_base = dados.get("atributo_base", "FOR")
         attr_nome = attr_override if attr_override else attr_base
         attr_valor = atributos.get(attr_nome, 0)
-
+        bonus_passivo = self._get_bonus_passivo_pericia(nome)
         treino = dados.get("treinamento", 0)
-        bonus = dados.get("bonus", 0)
+        bonus = dados.get("bonus", 0) + bonus_passivo
+
 
         # Bônus adicional de TR para perícias de resistência
         bonus_tr = 0
@@ -245,6 +252,9 @@ class PainelPericias(ctk.CTkFrame):
         if bonus_tr > 0:
             ctk.CTkLabel(frame, text=f"+ TR: {bonus_tr}",
                          font=ctk.CTkFont(size=12), text_color="#3498db").pack()
+        if bonus_passivo > 0:
+            ctk.CTkLabel(frame, text=f"Bônus Passivo: {bonus_passivo}",
+                         font=ctk.CTkFont(size=12), text_color="#2ecc71").pack()    
 
         ctk.CTkLabel(frame, text=f"TOTAL: {resultado['total']}",
                      font=ctk.CTkFont(size=20, weight="bold"),

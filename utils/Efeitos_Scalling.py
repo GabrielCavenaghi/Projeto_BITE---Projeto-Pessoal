@@ -20,6 +20,7 @@ ALVOS_DISPONIVEIS = {
     "RD_PARANORMAL": {"nome": "RD Paranormal", "categoria": "Resistências"},
     "RD_MENTAL": {"nome": "RD Mental", "categoria": "Resistências"},
     "RD_FISICO": {"nome": "RD Físico", "categoria": "Resistências"},
+    "CURA_ACELERADA": {"nome": "Cura Acelerada", "categoria": "Resistências"},
 
     # Status Máximos
     "PV_MAX": {"nome": "PV Máximo", "categoria": "Status"},
@@ -35,6 +36,17 @@ ALVOS_DISPONIVEIS = {
     "PASSO_MALDICAO": {"nome": "Passo (Maldição)", "categoria": "Dano"},
     "PASSO_SHINOBI": {"nome": "Passo (Shinobi)", "categoria": "Dano"},
     "PASSO_ESTILO_LUTA": {"nome": "Passo de Dano (Estilo de Luta)", "categoria": "Dano"},
+    "DADO_CORPO": {"nome": "Dados de Dano Corpo a Corpo", "categoria": "Dano"},
+    "DADO_TECNICA": {"nome": "Dados de Dano Técnica", "categoria": "Dano"},
+    "DADO_DESARMADO": {"nome": "Dados de Dano Desarmado", "categoria": "Dano"},
+    "DADO_POR_DADO_TECNICA": {"nome": "Dados de Dano Por Dado (Técnica)", "categoria": "Dano"},
+    "DADO_POR_DADO_CORPO": {"nome": "Dados de Dano Por Dado (Corpo a Corpo)", "categoria": "Dano"},
+    "DADO_POR_DADO_DESARMADO": {"nome": "Dados de Dano Por Dado (Desarmado)", "categoria": "Dano"},
+    "DANO_PERCENTUAL_GERAL": {"nome": "Bônus de Dano Percentual Geral", "categoria": "Dano"},
+    "DANO_PERCENTUAL_TECNICA": {"nome": "Bônus de Dano Percentual (Técnica)", "categoria": "Dano"},
+    "DANO_PERCENTUAL_CORPO": {"nome": "Bônus de Dano Percentual (Corpo a Corpo)", "categoria": "Dano"},
+    "DANO_PERCENTUAL_DESARMADO": {"nome": "Bônus de Dano Percentual (Desarmado)", "categoria": "Dano"},
+
 
     # Atributos de Combate
     "MARGEM_AMEAÇA": {"nome": "Margem de Ameaça", "categoria": "Combate"},
@@ -43,11 +55,35 @@ ALVOS_DISPONIVEIS = {
     "DESLOCAMENTO": {"nome": "Deslocamento", "categoria": "Combate"},
 
     # Perícias Específicas
-    "PERICIA_LUTA": {"nome": "Perícia Luta", "categoria": "Perícias"},
-    "PERICIA_PONTARIA": {"nome": "Perícia Pontaria", "categoria": "Perícias"},
-    "PERICIA_FORTITUDE": {"nome": "Perícia Fortitude", "categoria": "Perícias"},
-    "PERICIA_REFLEXOS": {"nome": "Perícia Reflexos", "categoria": "Perícias"},
-    "PERICIA_VONTADE": {"nome": "Perícia Vontade", "categoria": "Perícias"},
+    "PERICIA_ACROBACIA": {"nome": "Acrobacia", "categoria": "Perícias"},
+    "PERICIA_ADESTRAMENTO": {"nome": "Adestramento", "categoria": "Perícias"},
+    "PERICIA_ARTES": {"nome": "Artes", "categoria": "Perícias"},
+    "PERICIA_ATLETISMO": {"nome": "Atletismo", "categoria": "Perícias"},
+    "PERICIA_ATUALIDADES": {"nome": "Atualidades", "categoria": "Perícias"},
+    "PERICIA_CIENCIAS": {"nome": "Ciências", "categoria": "Perícias"},
+    "PERICIA_CRIME": {"nome": "Crime", "categoria": "Perícias"},
+    "PERICIA_DIPLOMACIA": {"nome": "Diplomacia", "categoria": "Perícias"},
+    "PERICIA_ENGANACAO": {"nome": "Enganação", "categoria": "Perícias"},
+    "PERICIA_FORTITUDE": {"nome": "Fortitude", "categoria": "Perícias"},
+    "PERICIA_FURTIVIDADE": {"nome": "Furtividade", "categoria": "Perícias"},
+    "PERICIA_INICIATIVA": {"nome": "Iniciativa", "categoria": "Perícias"},
+    "PERICIA_INTIMIDACAO": {"nome": "Intimidação", "categoria": "Perícias"},
+    "PERICIA_INTUICAO": {"nome": "Intuição", "categoria": "Perícias"},
+    "PERICIA_INVESTIGACAO": {"nome": "Investigação", "categoria": "Perícias"},
+    "PERICIA_LUTA": {"nome": "Luta", "categoria": "Perícias"},
+    "PERICIA_MEDICINA": {"nome": "Medicina", "categoria": "Perícias"},
+    "PERICIA_OCULTISMO": {"nome": "Ocultismo", "categoria": "Perícias"},
+    "PERICIA_PERCEPCAO": {"nome": "Percepção", "categoria": "Perícias"},
+    "PERICIA_PILOTAGEM": {"nome": "Pilotagem", "categoria": "Perícias"},
+    "PERICIA_PONTARIA": {"nome": "Pontaria", "categoria": "Perícias"},
+    "PERICIA_PROFISSAO": {"nome": "Profissão", "categoria": "Perícias"},
+    "PERICIA_ENERGIA_AMALDICOADA": {"nome": "Energia Amaldiçoada", "categoria": "Perícias"},
+    "PERICIA_REFLEXOS": {"nome": "Reflexos", "categoria": "Perícias"},
+    "PERICIA_RELIGIAO": {"nome": "Religião", "categoria": "Perícias"},
+    "PERICIA_SOBREVIVENCIA": {"nome": "Sobrevivência", "categoria": "Perícias"},
+    "PERICIA_TATICA": {"nome": "Tática", "categoria": "Perícias"},
+    "PERICIA_TECNOLOGIA": {"nome": "Tecnologia", "categoria": "Perícias"},
+    "PERICIA_VONTADE": {"nome": "Vontade", "categoria": "Perícias"},
 
     # DT (Dificuldade de Testes)
     "DT": {"nome": "DT (Dificuldade de Testes)", "categoria": "Geral"},
@@ -55,14 +91,14 @@ ALVOS_DISPONIVEIS = {
 
     # Outros
     "CARACTERISTICA_INVOCACAO": {"nome": "Característica de Invocação", "categoria": "Invocação"},
-    "DADO_CORPO": {"nome": "Dados de Dano Corpo a Corpo", "categoria": "Dano"},
-    "DADO_DESARMADO": {"nome": "Dados de Dano Desarmado", "categoria": "Dano"},
+    "LP": {"nome": "LP", "categoria": "Outros"},
+
 }
 
 # Operações permitidas para efeitos passivos.
 # Nota: "*" e "/" podem ser usados em fórmulas, mas como operação principal
 # geralmente apenas "+", "-" e "=" fazem sentido para acumular bônus.
-OPERACOES_PERMITIDAS = ["+", "-", "="]
+OPERACOES_PERMITIDAS = ["+", "-", "*", "/", "="]
 
 # Variáveis que podem ser utilizadas nas fórmulas.
 # Estas devem corresponder às chaves retornadas por construir_contexto_base().

@@ -111,16 +111,16 @@
         "fei_062",
         "fei_060"
     ],
-    "atualizado_em": "2026-04-11 14:35",
+    "atualizado_em": "2026-04-12 14:59",
     "pontos_atributo_gastos": 0,
     "pontos_extras_temp": 0,
     "estado": {
-        "pv_atual": 27000,
-        "pv_maximo": 27000,
-        "san_atual": 1368,
-        "san_maximo": 1368,
-        "pe_atual": 2912,
-        "pe_maximo": 2912
+        "pv_atual": 16115,
+        "pv_maximo": 29115,
+        "san_atual": 1598,
+        "san_maximo": 1598,
+        "pe_atual": 3704,
+        "pe_maximo": 3704
     },
     "estilo_luta": {
         "id": null,
@@ -148,25 +148,37 @@
         "fei_107": "GRAU ULTRA ESPECIAL",
         "fei_108": "BASE",
         "fei_019": "ESPECIAL",
-        "fei_062": "ULTRA ESPECIAL"
+        "fei_062": "ULTRA ESPECIAL",
+        "f2b573f5-2c5a-49fe-b508-efb34904e701": "BASE",
+        "dd295f7a-691a-408b-9f1e-39a0f1c63f59": "BASE",
+        "d0e32030-e1b2-4b35-9c9e-6eafb57131bd": "BASE",
+        "ec08d8d4-8723-4ba5-86fd-2857238f4fd8": "BASE",
+        "8d5ea255-5dbd-47a8-b680-f56a5ac25b4a": "BASE",
+        "55f17df4-bb32-49f6-ae3d-0504f20a46ab": "BASE",
+        "1773a1b2-8647-4da6-9ee9-9c96b45d1283": "BASE"
     },
     "bonus_passivos": {
-        "DEF": 186.0,
-        "TR": 48,
+        "PASSO_DANO_TECNICA": 46.5,
+        "DADO_TECNICA": 218,
+        "PERICIA_ENERGIA_AMALDICOADA": 234,
+        "PV_MAX": 15235,
+        "DANO_PERCENTUAL_GERAL": 0.15,
+        "SAN_MAX": 278,
+        "PE_MAX": 792,
+        "DADO_POR_DADO_TECNICA": 9,
+        "LP": 7,
+        "DEF": 218.5,
+        "TR": 58,
         "DT_HABILIDADES_TECNICA": 644.8000000000001,
         "PASSO_TECNICA": 7,
-        "CURA_ACELERADA": 198.4,
-        "PASSO_DANO_TECNICA": 27.5,
+        "CURA_ACELERADA": 2579.2000000000003,
         "DESLOCAMENTO": 0,
         "REACAO": 3,
-        "RD_GERAL": 96,
+        "RD_GERAL": 116,
         "GRAU_TREINAMENTO": 2,
         "DT": 20,
         "MARGEM_AMEAÇA_ARMA_FAVORITA": 2,
         "PASSO_DANO_ARMA_FAVORITA": 2,
-        "SAN_MAX": 48,
-        "PV_MAX": 13120,
-        "LP": 2,
         "MARGEM_AMEAÇA": 2,
         "MULTIPLICADOR_CRITICO": 1
     },
@@ -373,8 +385,11 @@
             "descricao": "Você concentra energia sanguínea em um feixe de sangue que corta tudo e todos. Dispara em uma linha para frente que causa 40d10+ 2x(LP+PB) de dano de Sangue e que possui nível de perfuração infinita ou seja ela atravessa todos os alvos da área. Para cada 1 de Vigor que você tenha a largura do disparo aumenta em 0,5m com seu inicial sendo 0,5m. A cada metro mais próximo do centro a DT aumenta em +5.\nCondição e Restrição:\n-Enquanto estiver usando Escama do Dragão Escarlate;\n-Enquanto estiver usando Cura Acelerada em seu acumulo máximo;\n-Enquanto estiver usando Armadura de Sangue;\n-Adiciona recarga de duas rodadas;\n-Adiciona conjuração complexa em forma de completa de duas rodadas;\nEfeito: Muda o dano para 2*EAd20 e multiplica o dano por AB+LP",
             "tipo_mecanica": "Teste de Resistência",
             "parametros": {
-                "dano": "(AB+LP)*(2*(EAd20))"
-            }
+                "dano": "2*EAd20",
+                "aplicar_passo": true,
+                "multiplicador_dano": "(AB+LP)*4.9*14.95*2"
+            },
+            "efeitos": []
         },
         {
             "id": "da67c0c2-63ea-40c5-824f-000c18805f10",
@@ -420,10 +435,342 @@
                     ]
                 }
             ]
+        },
+        {
+            "id": "511f549e-5d71-4b6e-9183-9930fc63376b",
+            "nome": "Escama do Dragão Escarlate",
+            "nivel": 5,
+            "conjuracao": "Padrão",
+            "alcance": "Pessoal",
+            "alvo": "Voce",
+            "duracao": "Dia",
+            "custo_pe": 10,
+            "descricao": "Recebe +2 em atributos físicos até o final da duração da habilidade.\nEncantamentos:\nSangue Atroz (4):\nEnquanto a habilidade estiver ativa, sangue de Xamã é multiplicado por AB.\nSangue Condensado (4):\nEnquanto a habilidade estiver ativa, o excedente de cura acelerada se torna PV temporário, com limite igual a 2 vezes seu PV máximo.\n6: +3 Passos",
+            "tipo_mecanica": "Passiva",
+            "parametros": {
+                "dano": "0"
+            },
+            "efeitos": [
+                {
+                    "alvo": "PASSO_DANO_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 3
+                        }
+                    ]
+                },
+                {
+                    "alvo": "CURA_ACELERADA",
+                    "operacao": "*",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "VIG"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "67587b71-5d63-47be-b839-684fd97b3a12",
+            "nome": "Armadura de Sangue",
+            "nivel": 5,
+            "conjuracao": "Padrão",
+            "alcance": "Pessoal",
+            "alvo": "1 ser",
+            "duracao": "Cena",
+            "custo_pe": 10,
+            "descricao": "Você Cria uma Armadura feita de sangue, que concede +NEX em Testes de Resistência, reduz a metade todo dano recebido e +100% de cura acelerada.\nEncantamentos:\n6: +3 Passos\n1 - Vigor perpétuo:\nTodo PV temporário que receber sob efeito da armadura tem sua duração sincronizada com a duração da armadura.\n1,5 - Troca de Pele:\nSempre que a duração da armadura se esgotar, você pode conjurar ela novamente sem perder seus efeitos acumulados, essa escolha não precisa ser instantânea e pode ser feita dentro de 1 hora desde a dissipação da armadura.\n6 - Sobrevigor:\nA armadura fortalece seu físico, Você recebe +LP/7 em Vigor.",
+            "tipo_mecanica": "Passiva",
+            "parametros": {
+                "dano": "0"
+            },
+            "efeitos": [
+                {
+                    "alvo": "PASSO_DANO_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 3
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "436292bb-06be-4e14-86af-ee673b6f03dc",
+            "nome": "Teste",
+            "nivel": 5,
+            "conjuracao": "Completa",
+            "alcance": "Extremo",
+            "alvo": "1 ser",
+            "duracao": "Instantânea",
+            "custo_pe": 10,
+            "descricao": "Primeira forma:\nConjura uma única agulha em formato do broca, que gira em extremo estresse, faça um ataque contra o alvo usando a broca, crítico 18/4x, a broca causa 50d12 de dano de sangue, que ignora RD e RDP além de reduzir a RDP do alvo em 25% até o fim da rodada.\nCondição e Restrição:\n-Adiciona Recarga de 3 rodadas;\n-Adiciona conjuração complexa de 3 rodadas;\n-O alvo deve estar sangrando;\n-Deve ser o alvo da habilidade marca da presa;\nEfeito: Muda a quantidade de brocas para 3, multiplica o dano Por AB e aumenta o multiplicador de crítico em +LP.",
+            "tipo_mecanica": "Ataque",
+            "parametros": {
+                "dano": "50d12",
+                "pericia_ataque": "Pontaria",
+                "margem_ameaca": 7,
+                "multiplicador_critico": 36,
+                "aplicar_passo": true,
+                "multiplicador_dano": "(AB+LP)*4.9*14.95*2"
+            },
+            "efeitos": []
         }
     ],
-    "habilidades_gerais": [],
+    "habilidades_gerais": [
+        {
+            "id": "1773a1b2-8647-4da6-9ee9-9c96b45d1283",
+            "nome": "Fluxo Irrestrito (Expansao)",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "PASSO_DANO_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "VIG"
+                        }
+                    ]
+                },
+                {
+                    "alvo": "DADO_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "EA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ec08d8d4-8723-4ba5-86fd-2857238f4fd8",
+            "nome": "Buffs Corrida",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "PERICIA_ENERGIA_AMALDICOADA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP"
+                        }
+                    ]
+                },
+                {
+                    "alvo": "PV_MAX",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 100
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP_NATURAL"
+                        }
+                    ]
+                },
+                {
+                    "alvo": "DANO_PERCENTUAL_GERAL",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 0.15
+                        }
+                    ]
+                },
+                {
+                    "alvo": "SAN_MAX",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 10
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP_NATURAL"
+                        }
+                    ]
+                },
+                {
+                    "alvo": "PE_MAX",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 30
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP_NATURAL"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "8d5ea255-5dbd-47a8-b680-f56a5ac25b4a",
+            "nome": "Energia de Combate",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "PERICIA_ENERGIA_AMALDICOADA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "EA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "d0e32030-e1b2-4b35-9c9e-6eafb57131bd",
+            "nome": "Palavras Afiadas",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DADO_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "INT"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "f2b573f5-2c5a-49fe-b508-efb34904e701",
+            "nome": "Dominio Exoterico",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DADO_POR_DADO_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 3
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "dd295f7a-691a-408b-9f1e-39a0f1c63f59",
+            "nome": "Tecnica Focada",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DADO_POR_DADO_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 6
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "55f17df4-bb32-49f6-ae3d-0504f20a46ab",
+            "nome": "Restriçao Cogenita",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "LP",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 5
+                        }
+                    ]
+                },
+                {
+                    "alvo": "PV_MAX",
+                    "operacao": "-",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 5
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP_NATURAL"
+                        }
+                    ]
+                },
+                {
+                    "alvo": "PE_MAX",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 6
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP_NATURAL"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
     "tecnicas_ativas": [
-        "da67c0c2-63ea-40c5-824f-000c18805f10"
+        "da67c0c2-63ea-40c5-824f-000c18805f10",
+        "67587b71-5d63-47be-b839-684fd97b3a12",
+        "511f549e-5d71-4b6e-9183-9930fc63376b",
+        "e0bfdcf4-e2b5-47cd-a1f3-36005a67e1ee"
     ]
 }

@@ -112,43 +112,76 @@ class EfeitosPopup:
         return "".join(partes)
 
     def _abrir_editor_efeito(self, index=None):
-        """
-        Abre um sub-popup para criar ou editar um efeito.
-        Se index for None, está criando um novo; caso contrário, editando o existente.
-        """
         editando = index is not None
         efeito_atual = self.efeitos[index] if editando else {}
 
         popup = ctk.CTkToplevel(self.window)
         popup.title("Editar Efeito" if editando else "Novo Efeito")
-        popup.geometry("450x350")
+        popup.geometry("500x400")
         popup.resizable(False, False)
         popup.after(100, popup.grab_set)
 
         main = ctk.CTkFrame(popup, fg_color="transparent")
         main.pack(fill="both", expand=True, padx=20, pady=20)
 
+        # ══════════════════════════════════════════════════════════════════════
+        # Categorias e alvos
+        # ══════════════════════════════════════════════════════════════════════
+        categorias = sorted(set(v['categoria'] for v in ALVOS_DISPONIVEIS.values()))
+        alvos_por_categoria = {}
+        for k, v in ALVOS_DISPONIVEIS.items():
+            cat = v['categoria']
+            alvos_por_categoria.setdefault(cat, []).append((k, v['nome']))
+
+        # Categoria
+        ctk.CTkLabel(main, text="Categoria:", anchor="w").pack(fill="x")
+        cat_var = ctk.StringVar()
+        cat_menu = ctk.CTkOptionMenu(main, values=categorias, variable=cat_var,
+                                     command=lambda _: atualizar_alvos())
+        cat_menu.pack(fill="x", pady=(2, 12))
+
+        # Alvo
         ctk.CTkLabel(main, text="Alvo:", anchor="w").pack(fill="x")
-        alvo_opcoes = [f"{v['nome']} ({k})" for k, v in ALVOS_DISPONIVEIS.items()]
-        alvo_keys = list(ALVOS_DISPONIVEIS.keys())
         alvo_var = ctk.StringVar()
-        if editando:
-            alvo_atual = efeito_atual.get("alvo", "")
-            try:
-                idx_alvo = alvo_keys.index(alvo_atual)
-                alvo_var.set(alvo_opcoes[idx_alvo])
-            except ValueError:
-                alvo_var.set(alvo_opcoes[0] if alvo_opcoes else "")
-        else:
-            alvo_var.set(alvo_opcoes[0] if alvo_opcoes else "")
-        alvo_menu = ctk.CTkOptionMenu(main, values=alvo_opcoes, variable=alvo_var)
+        alvo_menu = ctk.CTkOptionMenu(main, values=[], variable=alvo_var)
         alvo_menu.pack(fill="x", pady=(2, 12))
 
+        def atualizar_alvos():
+            cat = cat_var.get()
+            alvos = alvos_por_categoria.get(cat, [])
+            opcoes = [f"{nome} ({k})" for k, nome in alvos]
+            alvo_menu.configure(values=opcoes)
+            if opcoes:
+                alvo_var.set(opcoes[0])
+
+        # Se estiver editando, pré-seleciona categoria e alvo
+        if editando:
+            alvo_key = efeito_atual.get("alvo", "")
+            if alvo_key in ALVOS_DISPONIVEIS:
+                cat_alvo = ALVOS_DISPONIVEIS[alvo_key]['categoria']
+                cat_var.set(cat_alvo)
+                atualizar_alvos()
+                # Seleciona o item correto no dropdown de alvos
+                nome_alvo = ALVOS_DISPONIVEIS[alvo_key]['nome']
+                alvo_var.set(f"{nome_alvo} ({alvo_key})")
+            else:
+                cat_var.set(categorias[0])
+                atualizar_alvos()
+        else:
+            cat_var.set(categorias[0])
+            atualizar_alvos()
+
+        # ══════════════════════════════════════════════════════════════════════
+        # Operação
+        # ══════════════════════════════════════════════════════════════════════
         ctk.CTkLabel(main, text="Operação:", anchor="w").pack(fill="x")
         op_var = ctk.StringVar(value=efeito_atual.get("operacao", "+") if editando else "+")
         op_menu = ctk.CTkOptionMenu(main, values=OPERACOES_PERMITIDAS, variable=op_var)
         op_menu.pack(fill="x", pady=(2, 12))
 
+        # ══════════════════════════════════════════════════════════════════════
+        # Fórmula
+        # ══════════════════════════════════════════════════════════════════════
         ctk.CTkLabel(main, text="Fórmula (expressão):", anchor="w").pack(fill="x")
         formula_entry = ctk.CTkEntry(main, placeholder_text="ex: LP*2+10, AB/2")
         if editando:
@@ -158,19 +191,22 @@ class EfeitosPopup:
         ctk.CTkLabel(main, text="Use variáveis: " + ", ".join(VARIAVEIS_BASE),
                      font=ctk.CTkFont(size=11), text_color="#888888").pack(anchor="w")
 
+        # ══════════════════════════════════════════════════════════════════════
+        # Botões
+        # ══════════════════════════════════════════════════════════════════════
         btn_frame = ctk.CTkFrame(main, fg_color="transparent")
         btn_frame.pack(fill="x", pady=(20, 0))
 
         def salvar_efeito():
-            # Extrai chave do alvo
+            # Extrai a chave do alvo a partir da string selecionada
             sel = alvo_var.get()
-            alvo_key = None
-            for k, v in ALVOS_DISPONIVEIS.items():
-                if sel.startswith(v['nome']):
-                    alvo_key = k
-                    break
-            if not alvo_key:
-                messagebox.showerror("Erro", "Selecione um alvo válido.")
+            if not sel:
+                messagebox.showerror("Erro", "Selecione um alvo.")
+                return
+            # O formato é "Nome (CHAVE)"
+            alvo_key = sel.split('(')[-1].rstrip(')')
+            if alvo_key not in ALVOS_DISPONIVEIS:
+                messagebox.showerror("Erro", "Alvo inválido.")
                 return
 
             operacao = op_var.get()

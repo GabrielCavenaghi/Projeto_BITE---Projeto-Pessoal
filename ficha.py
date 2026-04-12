@@ -278,11 +278,22 @@ def construir_contexto_base(ficha: dict) -> dict:
     # LP total (base + bônus passivos)
     bonus_lp = ficha.get("bonus_passivos", {}).get("LP", 0)
     lp_total = lp_natural + bonus_lp
+    bonus = ficha.get("bonus_passivos", {})
+
+    ab = max(atributos.get("AGI", 1),
+             atributos.get("FOR", 1),
+             atributos.get("INT", 1),
+             atributos.get("VIG", 1),
+             atributos.get("PRE", 1))
+    
+    dt_base = 10 + lp_total + (nex_valor / 2.0) + ab
+    dt_tecnica = dt_base + bonus.get("DT_HABILIDADES_TECNICA", 0)
+
 
     contexto = {
         "LP": lp_total,
         "LP_NATURAL": lp_natural,
-        "AB": atributos.get("INT", 1),
+        "AB": ab,
         "GRAU": grau_num,
         "NEX": nex_valor,
         "AGI": atributos.get("AGI", 1),
@@ -291,7 +302,15 @@ def construir_contexto_base(ficha: dict) -> dict:
         "VIG": atributos.get("VIG", 1),
         "PRE": atributos.get("PRE", 1),
         "EA": ea_valor,
-        "PODERES_PARANORMAIS": ficha.get("poderes_paranormais", 0),  # se existir
+        "PASSO_DANO_TECNICA": bonus.get("PASSO_DANO_TECNICA", 0),
+        "PASSO_TECNICA": bonus.get("PASSO_TECNICA", 0),
+        "DADO_TECNICA": bonus.get("DADO_TECNICA", 0),
+        "DADO_POR_DADO_TECNICA": bonus.get("DADO_POR_DADO_TECNICA", 0),
+        "DANO_PERCENTUAL_GERAL": bonus.get("DANO_PERCENTUAL_GERAL", 0),
+        "DANO_PERCENTUAL_TECNICA": bonus.get("DANO_PERCENTUAL_TECNICA", 0),
+        "DT_BASE": dt_base,
+        "DT_TECNICA": dt_tecnica,
+        "DT_HABILIDADES_TECNICA": bonus.get("DT_HABILIDADES_TECNICA", 0),
     }
     return contexto
 

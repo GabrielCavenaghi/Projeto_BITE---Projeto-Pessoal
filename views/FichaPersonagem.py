@@ -11,7 +11,7 @@ from ficha import (
     avaliar_formula, construir_contexto_base, LIMITE_NORMAL, LIMITE_ABSOLUTO
 )
 
-from utils.Efeitos_Scalling import avaliar_efeitos
+from utils.Efeitos_Scalling import ALVOS_DISPONIVEIS, avaliar_efeitos
 
 # Importa todos os painéis e componentes necessários
 
@@ -934,12 +934,38 @@ class FichaPersonagem:
                     continue
                 if tecnica["id"] not in tecnicas_ativas:
                     continue
-                efeitos = tecnica.get("efeitos", [])
-                if efeitos:
-                    contexto = construir_contexto_base(self.ficha)
-                    resultado = avaliar_efeitos(efeitos, contexto)
-                    for alvo, valor in resultado.items():
-                        bonus_total[alvo] = bonus_total.get(alvo, 0) + valor
+                for efeito in tecnica.get("efeitos", []):
+                    alvo = efeito["alvo"]
+                    operacao = efeito["operacao"]
+                    formula = efeito["formula"]
+
+                    # Validação rápida (opcional)
+                    if alvo not in ALVOS_DISPONIVEIS:
+                        continue
+
+                    try:
+                        valor = avaliar_formula(formula, construir_contexto_base(self.ficha))
+                    except Exception as e:
+                        print(f"Erro ao avaliar efeito de técnica ({alvo}): {e}")
+                        continue
+
+                    # Obtém o valor atual do bônus (se não existir, assume 0)
+                    atual = bonus_total.get(alvo, 0)
+
+                    if operacao == '+':
+                        bonus_total[alvo] = atual + valor
+                    elif operacao == '-':
+                        bonus_total[alvo] = atual - valor
+                    elif operacao == '*':
+                        # Para multiplicação, se o alvo ainda não existe, usa 1 como base
+                        base = bonus_total.get(alvo, 1) if alvo in bonus_total else 1
+                        bonus_total[alvo] = base * valor
+                    elif operacao == '/':
+                        base = bonus_total.get(alvo, 1) if alvo in bonus_total else 1
+                        if valor != 0:
+                            bonus_total[alvo] = base / valor
+                    elif operacao == '=':
+                        bonus_total[alvo] = valor
 
             self.ficha["bonus_passivos"] = bonus_total
             self._salvar()
