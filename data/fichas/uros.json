@@ -111,16 +111,16 @@
         "fei_062",
         "fei_060"
     ],
-    "atualizado_em": "2026-04-12 14:59",
+    "atualizado_em": "2026-04-14 13:37",
     "pontos_atributo_gastos": 0,
     "pontos_extras_temp": 0,
     "estado": {
-        "pv_atual": 16115,
-        "pv_maximo": 29115,
-        "san_atual": 1598,
-        "san_maximo": 1598,
-        "pe_atual": 3704,
-        "pe_maximo": 3704
+        "pv_atual": 108100,
+        "pv_maximo": 29024,
+        "san_atual": 1574,
+        "san_maximo": 1574,
+        "pe_atual": 3714,
+        "pe_maximo": 3714
     },
     "estilo_luta": {
         "id": null,
@@ -155,32 +155,36 @@
         "ec08d8d4-8723-4ba5-86fd-2857238f4fd8": "BASE",
         "8d5ea255-5dbd-47a8-b680-f56a5ac25b4a": "BASE",
         "55f17df4-bb32-49f6-ae3d-0504f20a46ab": "BASE",
-        "1773a1b2-8647-4da6-9ee9-9c96b45d1283": "BASE"
+        "eb961ab0-c079-4316-93f2-ad410109d996": "BASE",
+        "1d61c392-8026-43e8-92fc-d29386c44751": "BASE",
+        "b12f6039-d7db-4f37-bda7-87870b9a1c37": "BASE",
+        "73f5510e-88b6-41c4-bbd7-9bdb15d56a50": "BASE"
     },
     "bonus_passivos": {
-        "PASSO_DANO_TECNICA": 46.5,
-        "DADO_TECNICA": 218,
-        "PERICIA_ENERGIA_AMALDICOADA": 234,
-        "PV_MAX": 15235,
-        "DANO_PERCENTUAL_GERAL": 0.15,
-        "SAN_MAX": 278,
+        "PERICIA_ENERGIA_AMALDICOADA": 212,
+        "PV_MAX": 15125,
+        "SAN_MAX": 234,
         "PE_MAX": 792,
+        "DANO_PERCENTUAL_TECNICA": 2.9,
+        "DADO_TECNICA": 52,
         "DADO_POR_DADO_TECNICA": 9,
         "LP": 7,
-        "DEF": 218.5,
-        "TR": 58,
+        "DEF": 75.5,
+        "TR": 212,
         "DT_HABILIDADES_TECNICA": 644.8000000000001,
         "PASSO_TECNICA": 7,
         "CURA_ACELERADA": 2579.2000000000003,
+        "PASSO_DANO_TECNICA": 15.5,
         "DESLOCAMENTO": 0,
         "REACAO": 3,
-        "RD_GERAL": 116,
+        "RD_GERAL": 28,
         "GRAU_TREINAMENTO": 2,
         "DT": 20,
         "MARGEM_AMEAÇA_ARMA_FAVORITA": 2,
         "PASSO_DANO_ARMA_FAVORITA": 2,
         "MARGEM_AMEAÇA": 2,
-        "MULTIPLICADOR_CRITICO": 1
+        "MULTIPLICADOR_CRITICO": 1,
+        "VERDADEIRO_JUJUTSU": 18
     },
     "pericias": {
         "Acrobacia": {
@@ -375,7 +379,7 @@
     "habilidades_tecnicas": [
         {
             "id": "230e2d22-a2b8-44f4-8638-cf63c42956df",
-            "nome": "SUPERNOVA",
+            "nome": "SUPERNOVA (Ativar +AB e +LP)",
             "nivel": 5,
             "conjuracao": "Padrão",
             "alcance": "Toque",
@@ -387,7 +391,7 @@
             "parametros": {
                 "dano": "2*EAd20",
                 "aplicar_passo": true,
-                "multiplicador_dano": "(AB+LP)*4.9*14.95*2"
+                "multiplicador_dano": "1"
             },
             "efeitos": []
         },
@@ -403,7 +407,9 @@
             "descricao": "Seu corpo porta o fluxo infinito do sangue, que te torna exponencialmente mais forte recebe um bônus de PV igual a 1000*VIG.\n\n6: +3 Passos\n\n10: Recebe +1 em todos os atributos",
             "tipo_mecanica": "Passiva",
             "parametros": {
-                "dano": "0"
+                "dano": "0",
+                "aplicar_passo": false,
+                "multiplicador_dano": "1"
             },
             "efeitos": [
                 {
@@ -485,7 +491,9 @@
             "descricao": "Você Cria uma Armadura feita de sangue, que concede +NEX em Testes de Resistência, reduz a metade todo dano recebido e +100% de cura acelerada.\nEncantamentos:\n6: +3 Passos\n1 - Vigor perpétuo:\nTodo PV temporário que receber sob efeito da armadura tem sua duração sincronizada com a duração da armadura.\n1,5 - Troca de Pele:\nSempre que a duração da armadura se esgotar, você pode conjurar ela novamente sem perder seus efeitos acumulados, essa escolha não precisa ser instantânea e pode ser feita dentro de 1 hora desde a dissipação da armadura.\n6 - Sobrevigor:\nA armadura fortalece seu físico, Você recebe +LP/7 em Vigor.",
             "tipo_mecanica": "Passiva",
             "parametros": {
-                "dano": "0"
+                "dano": "0",
+                "aplicar_passo": false,
+                "multiplicador_dano": "1"
             },
             "efeitos": [
                 {
@@ -497,12 +505,22 @@
                             "valor": 3
                         }
                     ]
+                },
+                {
+                    "alvo": "TR",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 198
+                        }
+                    ]
                 }
             ]
         },
         {
             "id": "436292bb-06be-4e14-86af-ee673b6f03dc",
-            "nome": "Teste",
+            "nome": "Broca \"акупунктура\" (Ativar +AB)",
             "nivel": 5,
             "conjuracao": "Completa",
             "alcance": "Extremo",
@@ -517,7 +535,46 @@
                 "margem_ameaca": 7,
                 "multiplicador_critico": 36,
                 "aplicar_passo": true,
-                "multiplicador_dano": "(AB+LP)*4.9*14.95*2"
+                "multiplicador_dano": "3"
+            },
+            "efeitos": []
+        },
+        {
+            "id": "21f8ce14-d689-428e-a4ab-5c0d48c272df",
+            "nome": "Agulha \"акупунктура\"",
+            "nivel": 5,
+            "conjuracao": "Padrão",
+            "alcance": "Extremo",
+            "alvo": "1 ser",
+            "duracao": "Instantânea",
+            "custo_pe": 10,
+            "descricao": "Conjura quatro agulhas ao redor do alvo, que o prendem em uma gaiola, em sincronia se fecham mirando em pontos de pressão do alvo, cada agulha causa 5d12 de dano de sangue, o alvo tem direito a um teste de fortitude, se passar recebe 2/3 do dano, se falhar recebe o dano completo e fica paralisado por 1d6 rodadas. Pela sua capacidade de perfuração infinita todos os seres em até 20 metros devem realizar um teste de reflexos, caso falhe recebe 1/10 do dano.\nCondição e Restrição:\n-Adiciona Recarga de 3 rodadas, muda a quantidade de agulhas para 1d2\nDentro do Dominio: 512d10*128\nFora: 512d8*16",
+            "tipo_mecanica": "Teste de Resistência",
+            "parametros": {
+                "dano": "5d12",
+                "aplicar_passo": true,
+                "multiplicador_dano": "512d10*128"
+            },
+            "efeitos": []
+        },
+        {
+            "id": "fd3177ff-e110-4fbd-974f-42975a00818b",
+            "nome": "Maestro de Sangue (Mult = quantidade de virotes)",
+            "nivel": 5,
+            "conjuracao": "Padrão",
+            "alcance": "Longo",
+            "alvo": "Varia",
+            "duracao": "Instantânea",
+            "custo_pe": 10,
+            "descricao": "Você cria uma quantidade variável de Virotes de Sangue, com capacidade explosiva. Ao conjurar como uma ação completa, você cria 6 Virotes; como ação padrão cria 4 e como ação de movimento cria 2. Você pode dividir como desejar os Virotes entre alvos dentro de 9 metros. Cada Virote irá tentar perfurar o alvo selecionado, realizando uma rolagem de ataque com Pontaria e causando 4d12 de dano de sangue em um acerto; após a perfurar o alvo, os virotes ficam presos no alvo, que devem fazer um teste de fortitude, caso falhe fica com sangramento estágio 8, se passar fica com sangramento estágio 5.\nEncantamento: \nPartitura Sanguinária 6:\nO dano causado pelo sangramento passa a escalar com passo, e se torna cumulativo até NEX*AB vezes.",
+            "tipo_mecanica": "Ataque",
+            "parametros": {
+                "dano": "4d12",
+                "aplicar_passo": true,
+                "multiplicador_dano": "1",
+                "pericia_ataque": "Pontaria",
+                "margem_ameaca": 8,
+                "multiplicador_critico": 3
             },
             "efeitos": []
         }
@@ -588,16 +645,6 @@
                     ]
                 },
                 {
-                    "alvo": "DANO_PERCENTUAL_GERAL",
-                    "operacao": "+",
-                    "formula": [
-                        {
-                            "tipo": "constante",
-                            "valor": 0.15
-                        }
-                    ]
-                },
-                {
                     "alvo": "SAN_MAX",
                     "operacao": "+",
                     "formula": [
@@ -630,6 +677,16 @@
                         {
                             "tipo": "variavel",
                             "valor": "LP_NATURAL"
+                        }
+                    ]
+                },
+                {
+                    "alvo": "DANO_PERCENTUAL_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 0.35
                         }
                     ]
                 }
@@ -765,12 +822,224 @@
                     ]
                 }
             ]
+        },
+        {
+            "id": "eb961ab0-c079-4316-93f2-ad410109d996",
+            "nome": "Tecnica Potente",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DADO_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 3
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "variavel",
+                            "valor": "AB"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "1d61c392-8026-43e8-92fc-d29386c44751",
+            "nome": "Tecnica Destrutiva",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DANO_PERCENTUAL_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "AB"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "/"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 10
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "b12f6039-d7db-4f37-bda7-87870b9a1c37",
+            "nome": "Tecnica 200%",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DANO_PERCENTUAL_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "73f5510e-88b6-41c4-bbd7-9bdb15d56a50",
+            "nome": "Efeito Cajado",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DANO_PERCENTUAL_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 0.25
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "66a5fbb7-955e-4656-950c-15a50dfa3687",
+            "nome": "Scarificio Vital 299%",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DANO_PERCENTUAL_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 14.95
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "e66cefde-1a16-4ede-aa55-18f8b49437e3",
+            "nome": "Estigma Orgulho",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DANO_PERCENTUAL_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bee9d8f1-92d5-4e14-9d56-9877d63c8f85",
+            "nome": "+AB mult",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DANO_PERCENTUAL_GERAL",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "AB"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "a52c6f1c-2bed-4f08-a5e3-5cf1eef35d3e",
+            "nome": "+LP mult",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "DANO_PERCENTUAL_GERAL",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "f4c86098-aad5-427e-bded-aa161c1fa4b0",
+            "nome": "Arma Favorita (Para Broca)",
+            "tipo": "Passiva",
+            "custo_pe": 0,
+            "descricao": "",
+            "efeitos": [
+                {
+                    "alvo": "PASSO_DANO_TECNICA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 2
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "tecnicas_ativas": [
         "da67c0c2-63ea-40c5-824f-000c18805f10",
-        "67587b71-5d63-47be-b839-684fd97b3a12",
         "511f549e-5d71-4b6e-9183-9930fc63376b",
-        "e0bfdcf4-e2b5-47cd-a1f3-36005a67e1ee"
+        "e0bfdcf4-e2b5-47cd-a1f3-36005a67e1ee",
+        "67587b71-5d63-47be-b839-684fd97b3a12"
+    ],
+    "ataques_personalizados": [
+        {
+            "id": "28d73e9c-b325-405f-a31a-7bb2c1f6634a",
+            "nome": "Broca",
+            "dano": "50d12",
+            "tipo_efeito": "tecnica",
+            "aplicar_passo": true,
+            "margem_ameaca": 7,
+            "multiplicador_critico": 108,
+            "pericia": "Pontaria"
+        }
+    ],
+    "habilidades_estilo_luta": [
+        {
+            "id": "fa158dc5-52cd-49e7-83d5-94824486749c",
+            "nome": "Redemoinho de Cortes",
+            "tipo_mecanica": "Ataque",
+            "descricao": "Gastando 4 PE, realiza um único ataque e consegue cortar todo o seu ao redor, todos os seres adjacentes a você sofrem o ataque, você realiza um único teste para todos os alvos, além disso seu dano aumenta em +6d10 de dano.",
+            "parametros": {
+                "dano": "6d10",
+                "aplicar_passo": true
+            },
+            "efeitos": []
+        }
     ]
 }

@@ -26,6 +26,7 @@ from .Painel_Resumo import PainelResumo
 from .Painel_Skilltree import PainelSkilltree
 from .Painel_Tecnica import PainelTecnica
 from .Painel_Habilidades import PainelHabilidades
+from .Painel_Combate import PainelCombate
 
 class FichaPersonagem:
     """
@@ -39,6 +40,7 @@ class FichaPersonagem:
     """
 
     ABA_NOMES = [
+        "Combate",
         "Perícias",
         "Skill Tree",
         "Feitiços",
@@ -383,16 +385,15 @@ class FichaPersonagem:
         pai  = self._frame_conteudo
 
         fabricas = {
+            "Combate":         lambda: PainelCombate(pai, self.ficha, on_save=self._salvar),
             "Perícias":        lambda: PainelPericias(pai, self.ficha),
             "Skill Tree":      lambda: PainelSkilltree(pai, self.ficha, on_change=self._recalcular_tudo),
             "Feitiços":        lambda: PainelFeiticos(pai, self.ficha, on_passiva_change=self._recalcular_tudo, on_save=self._salvar),
             "Estilo de Luta":  lambda: PainelEstiloLuta(pai, self.ficha, on_save=self._salvar),
-            "Técnica": lambda: PainelTecnica(pai, self.ficha, on_save=self._salvar),
-            "Habilidades": lambda: PainelHabilidades(pai, self.ficha, on_change=self._recalcular_tudo, on_save=self._salvar),
+            "Técnica":         lambda: PainelTecnica(pai, self.ficha, on_save=self._salvar),
+            "Habilidades":     lambda: PainelHabilidades(pai, self.ficha, on_change=self._recalcular_tudo, on_save=self._salvar),
             "Inventário":      lambda: PainelInventario(pai, self.ficha, on_save=self._salvar),
-            "Resumo":          lambda: PainelResumo(pai, self.ficha, 
-                                                    info_grau=self._carregar_graus().get(self.ficha.get("grau", "Grau 4"), {}),
-                                                    atributos=self.ficha.get("atributos", {})),
+            "Resumo":          lambda: PainelResumo(pai, self.ficha, info_grau=self._carregar_graus().get(self.ficha.get("grau", "Grau 4"), {}), atributos=self.ficha.get("atributos", {})),
             "Anotações":       lambda: PainelAnotacoes(pai, self.ficha, on_save=self._salvar),
         }
 
@@ -925,7 +926,7 @@ class FichaPersonagem:
 
                 lp = self.ficha.get("lp", 1)
                 bonus_verdadeiro_jujutsu = grau_num + int(lp / 2)
-                bonus_total["PASSO_DANO_TECNICA"] = bonus_total.get("PASSO_DANO_TECNICA", 0) + bonus_verdadeiro_jujutsu
+                bonus_total["VERDADEIRO_JUJUTSU"] = bonus_total.get("VERDADEIRO_JUJUTSU", 0) + bonus_verdadeiro_jujutsu
     
             tecnicas = self.ficha.get("habilidades_tecnicas", [])
             tecnicas_ativas = self.ficha.get("tecnicas_ativas", [])

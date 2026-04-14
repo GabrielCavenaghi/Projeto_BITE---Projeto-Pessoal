@@ -147,6 +147,49 @@ class PainelHabilidades(ctk.CTkFrame):
     # Popup de Criação / Edição
     # ──────────────────────────────────────────────────────────────────────────
 
+    def _carregar_habilidades_trilha(self) -> list:
+        classe_nome = self._ficha.get("classe", "")
+        trilha_nome = self._ficha.get("trilha", "")
+        print(f"[DEBUG] Classe: '{classe_nome}', Trilha: '{trilha_nome}'")
+        if not classe_nome or not trilha_nome:
+            print("[DEBUG] Classe ou trilha não definidas.")
+            return []
+
+        import os, json
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        caminho = os.path.join(base_dir, "data", "classes.json")
+        print(f"[DEBUG] Caminho classes.json: {caminho}")
+        if not os.path.exists(caminho):
+            print("[DEBUG] Arquivo classes.json não encontrado.")
+            return []
+
+        with open(caminho, "r", encoding="utf-8") as f:
+            classes_data = json.load(f)
+
+        # Encontrar a classe
+        classe_info = None
+        for c in classes_data:
+            if c.get("nome") == classe_nome:
+                classe_info = c
+                break
+        if not classe_info:
+            print(f"[DEBUG] Classe '{classe_nome}' não encontrada no JSON.")
+            return []
+
+        trilhas = classe_info.get("trilha", [])
+        if trilha_nome not in trilhas:
+            print(f"[DEBUG] Trilha '{trilha_nome}' não encontrada nas trilhas da classe: {trilhas}")
+            return []
+        idx = trilhas.index(trilha_nome)
+
+        habilidades_trilha = classe_info.get("habilidadeTrilha", [])
+        if idx < len(habilidades_trilha):
+            resultado = habilidades_trilha[idx]
+            print(f"[DEBUG] Habilidades carregadas: {resultado}")
+            return resultado
+        print("[DEBUG] Índice fora do range de habilidadeTrilha.")
+        return []
+
     def _abrir_popup_criacao(self):
         self._abrir_popup_edicao(None)
 
@@ -207,6 +250,19 @@ class PainelHabilidades(ctk.CTkFrame):
         btn_frame = ctk.CTkFrame(popup, fg_color="transparent")
         btn_frame.pack(fill="x", padx=20, pady=(0, 20))
 
+        # ══════════════════════════════════════════════════════════════════════
+        # Habilidade de Trilha (preenchimento automático)
+        # ══════════════════════════════════════════════════════════════════════
+        habilidades_trilha = self._carregar_habilidades_trilha()
+        if habilidades_trilha:
+            ctk.CTkLabel(main, text="Habilidade de Trilha (opcional):", anchor="w").pack(fill="x", pady=(12,2))
+            opcoes_trilha = ["(Nenhuma)"] + habilidades_trilha
+            trilha_var = ctk.StringVar(value="(Nenhuma)")
+            trilha_menu = ctk.CTkOptionMenu(main, values=opcoes_trilha, variable=trilha_var,
+                                            command=lambda escolha: self._preencher_de_trilha(escolha, e_nome, e_desc, tipo_var))
+            trilha_menu.pack(fill="x", pady=(2, 12))
+
+    
         def salvar():
             nome = e_nome.get().strip()
             if not nome:
@@ -297,6 +353,59 @@ class PainelHabilidades(ctk.CTkFrame):
         if self._on_change:
             self._on_change()
         self._construir()
+
+    def _preencher_de_trilha(self, escolha: str, e_nome, e_desc, tipo_var):
+        """Preenche os campos com os dados da habilidade de trilha selecionada."""
+        if escolha == "(Nenhuma)":
+            return
+
+        classe_nome = self._ficha.get("classe", "")
+        trilha_nome = self._ficha.get("trilha", "")
+        if not classe_nome or not trilha_nome:
+            return
+
+        import os, json
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        caminho = os.path.join(base_dir, "data", "classes.json")
+        if not os.path.exists(caminho):
+            return
+
+        with open(caminho, "r", encoding="utf-8") as f:
+            classes_data = json.load(f)
+
+        classe_info = None
+        for c in classes_data:
+            if c.get("nome") == classe_nome:
+                classe_info = c
+                break
+        if not classe_info:
+            return
+
+        trilhas = classe_info.get("trilha", [])
+        idx_trilha = trilhas.index(trilha_nome) if trilha_nome in trilhas else -1
+        if idx_trilha == -1:
+            return
+
+        # Encontrar o índice da habilidade selecionada
+        habilidades_nomes = classe_info.get("habilidadeTrilha", [])[idx_trilha]
+        idx_habilidade = habilidades_nomes.index(escolha) if escolha in habilidades_nomes else -1
+        if idx_habilidade == -1:
+            return
+
+        # Obter a descrição correspondente
+        descricoes = classe_info.get("descricaoHabilidadeTrilha", [])
+        if idx_trilha < len(descricoes) and idx_habilidade < len(descricoes[idx_trilha]):
+            descricao = descricoes[idx_trilha][idx_habilidade]
+        else:
+            descricao = ""
+
+        # Preencher campos
+        e_nome.delete(0, "end")
+        e_nome.insert(0, escolha)
+        e_desc.delete("1.0", "end")
+        e_desc.insert("1.0", descricao)
+        tipo_var.set("Passiva")  # a maioria das habilidades de trilha é passiva
+
 
     def atualizar(self):
         self._construir()

@@ -290,6 +290,7 @@ def construir_contexto_base(ficha: dict) -> dict:
     dt_tecnica = dt_base + bonus.get("DT_HABILIDADES_TECNICA", 0)
 
 
+    # Contexto base (valores fundamentais do personagem)
     contexto = {
         "LP": lp_total,
         "LP_NATURAL": lp_natural,
@@ -302,16 +303,20 @@ def construir_contexto_base(ficha: dict) -> dict:
         "VIG": atributos.get("VIG", 1),
         "PRE": atributos.get("PRE", 1),
         "EA": ea_valor,
-        "PASSO_DANO_TECNICA": bonus.get("PASSO_DANO_TECNICA", 0),
-        "PASSO_TECNICA": bonus.get("PASSO_TECNICA", 0),
-        "DADO_TECNICA": bonus.get("DADO_TECNICA", 0),
-        "DADO_POR_DADO_TECNICA": bonus.get("DADO_POR_DADO_TECNICA", 0),
-        "DANO_PERCENTUAL_GERAL": bonus.get("DANO_PERCENTUAL_GERAL", 0),
-        "DANO_PERCENTUAL_TECNICA": bonus.get("DANO_PERCENTUAL_TECNICA", 0),
+        "PODERES_PARANORMAIS": ficha.get("poderes_paranormais", 0),
         "DT_BASE": dt_base,
         "DT_TECNICA": dt_tecnica,
-        "DT_HABILIDADES_TECNICA": bonus.get("DT_HABILIDADES_TECNICA", 0),
     }
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # ADIÇÃO AUTOMÁTICA DE TODOS OS BÔNUS PASSIVOS
+    # ══════════════════════════════════════════════════════════════════════════
+    # Isso inclui:
+    #   - PASSO_DANO_TECNICA, PASSO_DANO_CORPO, PASSO_DANO_DESARMADO, etc.
+    #   - DADO_TECNICA, DADO_CORPO, DADO_DESARMADO, etc.
+    #   - DANO_PERCENTUAL_TECNICA, DANO_PERCENTUAL_GERAL, etc.
+    #   - VERDADEIRO_JUJUTSU, PERICIA_*, DEF, TR, RD_*, CURA_ACELERADA, etc.
+    contexto.update(bonus)
     return contexto
 
 # ══════════════════════════════════════════════════════════════════════════════
