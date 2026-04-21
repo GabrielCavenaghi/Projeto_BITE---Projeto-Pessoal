@@ -9,7 +9,7 @@ from utils.helpers import formatar_numero_grande
 class PainelCombate(ctk.CTkFrame):
     """Aba: gerenciamento de ataques (armas, corpo a corpo, etc.)."""
 
-    TIPO_EFEITO_OPCOES = ["tecnica", "corpo", "desarmado", "invocacao", "maldicao", "shinobi", "estilo_luta"]
+    TIPO_EFEITO_OPCOES = ["tecnica", "corpo", "desarmado", "invocacao", "maldicao", "shinobi", "estilo_luta", "energia_amaldicoada"]
     TIPO_EFEITO_NOMES = {
         "tecnica": "Técnica",
         "corpo": "Corpo a Corpo",
@@ -17,7 +17,8 @@ class PainelCombate(ctk.CTkFrame):
         "invocacao": "Invocação",
         "maldicao": "Maldição",
         "shinobi": "Shinobi",
-        "estilo_luta": "Estilo de Luta"
+        "estilo_luta": "Estilo de Luta",
+        "energia_amaldicoada": "Energia Amaldiçoada"
     }
 
     def __init__(self, parent, ficha: dict, on_save=None, **kwargs):

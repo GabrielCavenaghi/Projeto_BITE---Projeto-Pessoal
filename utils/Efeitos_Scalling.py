@@ -13,9 +13,9 @@ Fornece constantes, validação e avaliação de efeitos baseados em fórmulas.
 # Alvos disponíveis para efeitos passivos.
 # Mapeia identificador interno -> nome amigável e categoria (opcional).
 ALVOS_DISPONIVEIS = {
-    # Defesas e Resistências
-    "DEF": {"nome": "Defesa", "categoria": "Defesas"},
-    "TR": {"nome": "Testes de Resistência", "categoria": "Defesas"},
+    # Resistências
+    "DEF": {"nome": "Defesa", "categoria": "Resistências"},
+    "TR": {"nome": "Testes de Resistência", "categoria": "Resistências"},
     "RD_GERAL": {"nome": "RD Geral", "categoria": "Resistências"},
     "RD_PARANORMAL": {"nome": "RD Paranormal", "categoria": "Resistências"},
     "RD_MENTAL": {"nome": "RD Mental", "categoria": "Resistências"},
@@ -27,28 +27,59 @@ ALVOS_DISPONIVEIS = {
     "SAN_MAX": {"nome": "Sanidade Máxima", "categoria": "Status"},
     "PE_MAX": {"nome": "PE Máximo", "categoria": "Status"},
 
-    #Dano
-    "PASSO_DANO_TECNICA": {"nome": "Passo de Dano (Técnica)", "categoria": "Dano"},
-    "PASSO_DANO_CORPO": {"nome": "Passo de Dano (Corpo a Corpo)", "categoria": "Dano"},
-    "PASSO_DANO_DESARMADO": {"nome": "Passo de Dano (Desarmado)", "categoria": "Dano"},
-    "PASSO_ESTILO_LUTA": {"nome": "Passo de Dano (Estilo de Luta)", "categoria": "Dano"},
-    "PASSO_DANO_INVOCACAO": {"nome": "Passo de Dano (Invocação)", "categoria": "Dano"},
-    "PASSO_ENERGIA_AMALDICOADA": {"nome": "Passo (Energia Amaldiçoada)", "categoria": "Dano"},
-    "PASSO_MALDICAO": {"nome": "Passo (Maldição)", "categoria": "Dano"},
-    "PASSO_SHINOBI": {"nome": "Passo (Shinobi)", "categoria": "Dano"},
-    "DADO_CORPO": {"nome": "Dados de Dano Corpo a Corpo", "categoria": "Dano"},
-    "DADO_ESTILO_LUTA": {"nome": "Dados de Dano Estilo de Luta", "categoria": "Dano"},
-    "DADO_TECNICA": {"nome": "Dados de Dano Técnica", "categoria": "Dano"},
-    "DADO_DESARMADO": {"nome": "Dados de Dano Desarmado", "categoria": "Dano"},
-    "DADO_POR_DADO_TECNICA": {"nome": "Dados de Dano Por Dado (Técnica)", "categoria": "Dano"},
-    "DADO_POR_DADO_CORPO": {"nome": "Dados de Dano Por Dado (Corpo a Corpo)", "categoria": "Dano"},
-    "DADO_POR_DADO_DESARMADO": {"nome": "Dados de Dano Por Dado (Desarmado)", "categoria": "Dano"},
-    "DANO_PERCENTUAL_GERAL": {"nome": "Bônus de Dano Percentual Geral", "categoria": "Dano"},
-    "DANO_PERCENTUAL_ESTILO_LUTA": {"nome": "Bônus de Dano Percentual (Estilo de Luta)", "categoria": "Dano"},
-    "DANO_PERCENTUAL_INVOCACAO": {"nome": "Bônus de Dano Percentual (Invocação)", "categoria": "Dano"},
-    "DANO_PERCENTUAL_TECNICA": {"nome": "Bônus de Dano Percentual (Técnica)", "categoria": "Dano"},
-    "DANO_PERCENTUAL_CORPO": {"nome": "Bônus de Dano Percentual (Corpo a Corpo)", "categoria": "Dano"},
-    "DANO_PERCENTUAL_DESARMADO": {"nome": "Bônus de Dano Percentual (Desarmado)", "categoria": "Dano"},
+    #Tecnica:    
+    "PASSO_DANO_TECNICA": {"nome": "Passo de Dano (Técnica)", "categoria": "Técnica"},
+    "DADO_TECNICA": {"nome": "Dados de Dano Técnica", "categoria": "Técnica"},
+    "DADO_POR_DADO_TECNICA": {"nome": "Dados de Dano Por Dado (Técnica)", "categoria": "Técnica"},
+    "DANO_PERCENTUAL_TECNICA": {"nome": "Bônus de Dano Percentual (Técnica)", "categoria": "Técnica"},
+
+    #Corpo a Corpo:
+    "PASSO_DANO_CORPO": {"nome": "Passo de Dano (Corpo a Corpo)", "categoria": "Corpo a Corpo"},
+    "DADO_CORPO": {"nome": "Dados de Dano Corpo a Corpo", "categoria": "Corpo a Corpo"},
+    "DADO_POR_DADO_CORPO": {"nome": "Dados de Dano Por Dado (Corpo a Corpo)", "categoria": "Corpo a Corpo"},
+    "DANO_PERCENTUAL_CORPO": {"nome": "Bônus de Dano Percentual (Corpo a Corpo)", "categoria": "Corpo a Corpo"},
+
+    #Desarmado:    
+    "PASSO_DANO_DESARMADO": {"nome": "Passo de Dano (Desarmado)", "categoria": "Desarmado"},
+    "DADO_DESARMADO": {"nome": "Dados de Dano Desarmado", "categoria": "Desarmado"},
+    "DADO_POR_DADO_DESARMADO": {"nome": "Dados de Dano Por Dado (Desarmado)", "categoria": "Desarmado"},
+    "DANO_PERCENTUAL_DESARMADO": {"nome": "Bônus de Dano Percentual (Desarmado)", "categoria": "Desarmado"},
+
+    #Estilo de Luta:
+    "PASSO_DANO_ESTILO_LUTA": {"nome": "Passo de Dano (Estilo de Luta)", "categoria": "Estilo de Luta"},
+    "DADO_ESTILO_LUTA": {"nome": "Dados de Dano Estilo de Luta", "categoria": "Estilo de Luta"},
+    "DADO_POR_DADO_ESTILO_LUTA": {"nome": "Dados de Dano Por Dado (Estilo de Luta)", "categoria": "Estilo de Luta"},
+    "DANO_PERCENTUAL_ESTILO_LUTA": {"nome": "Bônus de Dano Percentual (Estilo de Luta)", "categoria": "Estilo de Luta"},
+
+    #Invocação:
+    "PASSO_DANO_INVOCACAO": {"nome": "Passo de Dano (Invocação)", "categoria": "Invocação"},
+    "DADO_INVOCACAO": {"nome": "Dados de Dano Invocação", "categoria": "Invocação"},
+    "DADO_POR_DADO_INVOCACAO": {"nome": "Dados de Dano Por Dado (Invocação)", "categoria": "Invocação"},
+    "PERCENTUAL_INVOCACAO": {"nome": "Bônus de Dano Percentual (Invocação)", "categoria": "Invocação"},
+    
+    #Maldição:
+    "PASSO_MALDICAO": {"nome": "Passo de Dano (Maldição)", "categoria": "Maldição"},
+    "DADO_MALDICAO": {"nome": "Dados de Dano Maldição", "categoria": "Maldição"},
+    "DADO_POR_DADO_MALDICAO": {"nome": "Dados de Dano Por Dado (Maldição)", "categoria": "Maldição"},
+    "PERCENTUAL_MALDICAO": {"nome": "Bônus de Dano Percentual (Maldição)", "categoria": "Maldição"},
+
+    #Shinobi:
+    "PASSO_SHINOBI": {"nome": "Passo de Dano (Shinobi)", "categoria": "Shinobi"},
+    "DADO_SHINOBI": {"nome": "Dados de Dano Shinobi", "categoria": "Shinobi"},
+    "DADO_POR_DADO_SHINOBI": {"nome": "Dados de Dano Por Dado (Shinobi)", "categoria": "Shinobi"},
+    "PERCENTUAL_SHINOBI": {"nome": "Bônus de Dano Percentual (Shinobi)", "categoria": "Shinobi"},
+
+    #Energia Amaldiçoada:
+    "PASSO_ENERGIA_AMALDICOADA": {"nome": "Passo (Energia Amaldiçoada)", "categoria": "Energia Amaldiçoada"},
+    "DADO_ENERGIA_AMALDICOADA": {"nome": "Dados de Dano Energia Amaldiçoada", "categoria": "Energia Amaldiçoada"},
+    "DADO_POR_DADO_ENERGIA_AMALDICOADA": {"nome": "Dados de Dano Por Dado (Energia Amaldiçoada)", "categoria": "Energia Amaldiçoada"},
+    "PERCENTUAL_ENERGIA_AMALDICOADA": {"nome": "Bônus de Dano Percentual (Energia Amaldiçoada)", "categoria": "Energia Amaldiçoada"},
+    
+    #Geral:
+    "PASSO_DANO_GERAL": {"nome": "Passo de Dano Geral", "categoria": "Geral"},
+    "DADO_GERAL": {"nome": "Dados de Dano Geral", "categoria": "Geral"},
+    "DADO_POR_DADO_GERAL": {"nome": "Dados de Dano Por Dado (Geral)", "categoria": "Geral"},
+    "DANO_PERCENTUAL_GERAL": {"nome": "Bônus de Dano Percentual Geral", "categoria": "Geral"},
 
 
     # Atributos de Combate
@@ -95,7 +126,6 @@ ALVOS_DISPONIVEIS = {
     # Outros
     "CARACTERISTICA_INVOCACAO": {"nome": "Característica de Invocação", "categoria": "Invocação"},
     "LP": {"nome": "LP", "categoria": "Outros"},
-
 }
 
 # Operações permitidas para efeitos passivos.

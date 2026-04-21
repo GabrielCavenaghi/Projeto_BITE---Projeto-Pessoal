@@ -85,30 +85,44 @@ def avaliar_dado_str(
         "invocacao": {
             "passo_dano": "PASSO_DANO_INVOCACAO",
             "passo_extra": None,
-            "dado_extra": None,
-            "por_dado": None,
-            "percentual": None,
+            "dado_extra": "DADO_INVOCACAO",
+            "por_dado": "DADO_POR_DADO_INVOCACAO",
+            "percentual": "PERCENTUAL_INVOCACAO",
         },
         "maldicao": {
             "passo_dano": "PASSO_MALDICAO",
             "passo_extra": None,
-            "dado_extra": None,
-            "por_dado": None,
-            "percentual": None,
+            "dado_extra": "DADO_MALDICAO",
+            "por_dado": "DADO_POR_DADO_MALDICAO",
+            "percentual": "PERCENTUAL_MALDICAO",
         },
         "shinobi": {
             "passo_dano": "PASSO_SHINOBI",
             "passo_extra": None,
-            "dado_extra": None,
-            "por_dado": None,
-            "percentual": None,
+            "dado_extra": "DADO_SHINOBI",
+            "por_dado": "DADO_POR_DADO_SHINOBI",
+            "percentual": "PERCENTUAL_SHINOBI",
         },
         "estilo_luta": {
             "passo_dano": "PASSO_ESTILO_LUTA",
             "passo_extra": None,
             "dado_extra": "DADO_ESTILO_LUTA",
-            "por_dado": None,
+            "por_dado": "DADO_POR_DADO_ESTILO_LUTA",
             "percentual": "DANO_PERCENTUAL_ESTILO_LUTA",
+        },
+        "energia_amaldicoada": {
+            "passo_dano": "PASSO_ENERGIA_AMALDICOADA",
+            "passo_extra": None,
+            "dado_extra": "DADO_ENERGIA_AMALDICOADA",
+            "por_dado": "DADO_POR_DADO_ENERGIA_AMALDICOADA",
+            "percentual": "PERCENTUAL_ENERGIA_AMALDICOADA",
+        },
+        "geral": {
+            "passo_dano": "PASSO_DANO_GERAL",
+            "passo_extra": None,
+            "dado_extra": "DADO_GERAL",
+            "por_dado": "DADO_POR_DADO_GERAL",
+            "percentual": "DANO_PERCENTUAL_GERAL",
         },
     }
 
@@ -160,6 +174,17 @@ def avaliar_dado_str(
                 bonus_por_dado += int(_get(chaves_corpo["por_dado"]))
             if chaves_corpo["percentual"]:
                 fator_percentual_especifico += float(_get(chaves_corpo["percentual"]))
+
+        # ══════════════════════════════════════════════════════════════════════
+        # ADIÇÃO DOS BÔNUS GERAIS (aplicam-se a todos os tipos)
+        # ══════════════════════════════════════════════════════════════════════
+        chaves_geral = MAP_BONUS["geral"]
+        if chaves_geral["passo_dano"]:
+            bonus_passo += int(_get(chaves_geral["passo_dano"]))
+        if chaves_geral["dado_extra"]:
+            bonus_dados_extra += int(_get(chaves_geral["dado_extra"]))
+        if chaves_geral["por_dado"]:
+            bonus_por_dado += int(_get(chaves_geral["por_dado"]))
 
     def rolar_dado(quant_str: str, faces_str: str) -> int:
         # Avalia a quantidade

@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import uuid
 from tkinter import messagebox
+from views.EfeitosEditorFrame import EfeitosEditorFrame
 
 class PainelHabilidades(ctk.CTkFrame):
     """Aba: gerenciamento de habilidades gerais (não feitiços)."""
@@ -150,17 +151,13 @@ class PainelHabilidades(ctk.CTkFrame):
     def _carregar_habilidades_trilha(self) -> list:
         classe_nome = self._ficha.get("classe", "")
         trilha_nome = self._ficha.get("trilha", "")
-        print(f"[DEBUG] Classe: '{classe_nome}', Trilha: '{trilha_nome}'")
         if not classe_nome or not trilha_nome:
-            print("[DEBUG] Classe ou trilha não definidas.")
             return []
 
         import os, json
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         caminho = os.path.join(base_dir, "data", "classes.json")
-        print(f"[DEBUG] Caminho classes.json: {caminho}")
         if not os.path.exists(caminho):
-            print("[DEBUG] Arquivo classes.json não encontrado.")
             return []
 
         with open(caminho, "r", encoding="utf-8") as f:
@@ -173,21 +170,17 @@ class PainelHabilidades(ctk.CTkFrame):
                 classe_info = c
                 break
         if not classe_info:
-            print(f"[DEBUG] Classe '{classe_nome}' não encontrada no JSON.")
             return []
 
         trilhas = classe_info.get("trilha", [])
         if trilha_nome not in trilhas:
-            print(f"[DEBUG] Trilha '{trilha_nome}' não encontrada nas trilhas da classe: {trilhas}")
             return []
         idx = trilhas.index(trilha_nome)
 
         habilidades_trilha = classe_info.get("habilidadeTrilha", [])
         if idx < len(habilidades_trilha):
             resultado = habilidades_trilha[idx]
-            print(f"[DEBUG] Habilidades carregadas: {resultado}")
             return resultado
-        print("[DEBUG] Índice fora do range de habilidadeTrilha.")
         return []
 
     def _abrir_popup_criacao(self):
@@ -242,9 +235,6 @@ class PainelHabilidades(ctk.CTkFrame):
             e_desc.insert("1.0", hab.get("descricao", ""))
         e_desc.pack(fill="x", pady=(2, 12))
 
-        # Efeitos (para passivas) - placeholder
-        ctk.CTkLabel(main, text="Efeitos (em breve - use o editor JSON por enquanto)",
-                     font=ctk.CTkFont(size=12, slant="italic"), text_color="#888888").pack(anchor="w", pady=(10,0))
 
         # Barra de botões fixa
         btn_frame = ctk.CTkFrame(popup, fg_color="transparent")
@@ -261,6 +251,8 @@ class PainelHabilidades(ctk.CTkFrame):
             trilha_menu = ctk.CTkOptionMenu(main, values=opcoes_trilha, variable=trilha_var,
                                             command=lambda escolha: self._preencher_de_trilha(escolha, e_nome, e_desc, tipo_var))
             trilha_menu.pack(fill="x", pady=(2, 12))
+
+        efeitos_temp = list(hab.get("efeitos", [])) if editando else []
 
     
         def salvar():
@@ -280,7 +272,7 @@ class PainelHabilidades(ctk.CTkFrame):
                 "tipo": tipo_var.get(),
                 "custo_pe": custo,
                 "descricao": e_desc.get("1.0", "end-1c").strip(),
-                "efeitos": hab.get("efeitos", []) if editando else []
+                "efeitos": efeitos_temp 
             }
 
             habilidades = self._ficha.setdefault("habilidades_gerais", [])
@@ -299,38 +291,21 @@ class PainelHabilidades(ctk.CTkFrame):
             popup.destroy()
             self._construir()
 
-        # Botão para gerenciar efeitos (inicialmente só abre popup vazio)
-        btn_efeitos = ctk.CTkButton(
+        efeitos_temp = list(hab.get("efeitos", [])) if editando else []
+
+        efeitos_frame = EfeitosEditorFrame(
             main,
-            text="⚙️ Gerenciar Efeitos",
-            fg_color="#3a3a3a",
-            hover_color="#4a4a4a",
-            command=lambda: self._abrir_popup_efeitos(hab if editando else None)
+            efeitos_iniciais=efeitos_temp,
+            on_change=lambda novos: efeitos_temp.clear() or efeitos_temp.extend(novos)
         )
-        btn_efeitos.pack(pady=(10, 5))
+        efeitos_frame.pack(fill="both", expand=True, pady=(10, 5))
+
         
         ctk.CTkButton(btn_frame, text="Salvar", fg_color="#1a6b1a", hover_color="#145214",
                       command=salvar).pack(side="right", padx=(5,0))
         ctk.CTkButton(btn_frame, text="Cancelar", fg_color="transparent", border_width=1,
                       command=popup.destroy).pack(side="right")
-
-
-    # ──────────────────────────────────────────────────────────────────────────
-    # Efeitos (em construção)
-    # ──────────────────────────────────────────────────────────────────────────
-    
-    def _abrir_popup_efeitos(self, hab: dict = None):
-        from views.Efeitos_Popup import EfeitosPopup
-        efeitos = hab.get("efeitos", []) if hab else []
-        popup = EfeitosPopup(self.winfo_toplevel(), efeitos,
-                            on_save=lambda novos: self._salvar_efeitos(hab, novos))
-        popup.abrir()
-
-    def _salvar_efeitos(self, hab: dict, novos_efeitos: list):
-        if hab:
-            hab["efeitos"] = novos_efeitos
-        # Se for criação, os efeitos serão salvos quando o popup principal for salvo
-
+        
     # ──────────────────────────────────────────────────────────────────────────
     # Remoção
     # ──────────────────────────────────────────────────────────────────────────

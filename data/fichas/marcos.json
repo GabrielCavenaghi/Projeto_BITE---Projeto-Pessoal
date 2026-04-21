@@ -106,15 +106,15 @@
         "fei_060",
         "fei_062"
     ],
-    "atualizado_em": "2026-04-11 18:59",
+    "atualizado_em": "2026-04-20 21:55",
     "pontos_atributo_gastos": 9,
     "estado": {
-        "pv_atual": 8775,
-        "pv_maximo": 8775,
-        "san_atual": 1983,
-        "san_maximo": 1983,
-        "pe_atual": 4482,
-        "pe_maximo": 4482
+        "pv_atual": 8625,
+        "pv_maximo": 8625,
+        "san_atual": 1833,
+        "san_maximo": 1833,
+        "pe_atual": 4332,
+        "pe_maximo": 4332
     },
     "estilo_luta": {
         "id": null,
@@ -326,26 +326,27 @@
         "9e5a26aa-8a45-4b09-8bf7-0be0d2a6a437": "BASE"
     },
     "bonus_passivos": {
-        "TR": 558,
+        "TR": 438,
         "DT_HABILIDADES_TECNICA": 420,
         "CARACTERISTICA_INVOCACAO": 4,
         "PASSO_DANO_INVOCACAO": 7,
         "PASSO_TECNICA": 7,
         "CURA_ACELERADA": 199.98,
-        "DEF": 294.0,
-        "RD_GERAL": 402,
-        "RD_PARANORMAL": 388.9675,
-        "PASSO_DANO_TECNICA": 28.5,
+        "DEF": 24.0,
+        "RD_GERAL": 222,
+        "RD_PARANORMAL": 328.9675,
+        "PASSO_DANO_TECNICA": 6.5,
         "REACAO": 3,
         "GRAU_TREINAMENTO": 2,
         "DT": 20,
-        "RD_MENTAL": 160,
+        "RD_MENTAL": 10,
         "LP": 2,
-        "SAN_MAX": 160,
-        "PV_MAX": 160,
-        "PE_MAX": 160,
+        "SAN_MAX": 10,
+        "PV_MAX": 10,
+        "PE_MAX": 10,
         "MULTIPLICADOR_CRITICO": 1,
-        "MARGEM_AMEAÇA": 2
+        "MARGEM_AMEAÇA": 2,
+        "VERDADEIRO_JUJUTSU": 22
     },
     "abas_confirmadas": [
         "AGI",
@@ -480,5 +481,6 @@
             ]
         }
     ],
-    "tecnicas_ativas": []
+    "tecnicas_ativas": [],
+    "ataques_personalizados": []
 }

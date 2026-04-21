@@ -1,7 +1,8 @@
 import customtkinter as ctk
 import uuid
 from tkinter import messagebox
-from views.Efeitos_Popup import EfeitosPopup
+from views.EfeitosEditorFrame import EfeitosEditorFrame
+from ficha import construir_contexto_base
 from utils.tecnicas import executar_tecnica
 from utils.Efeitos_Scalling import string_para_tokens
 from utils.helpers import formatar_numero_grande
@@ -348,7 +349,7 @@ class PainelTecnica(ctk.CTkFrame):
             if nivel <= 5:
                 custo = nivel * 2
             else:
-                from ficha import construir_contexto_base
+
                 ctx = construir_contexto_base(self._ficha)
                 ab = ctx.get("AB", 1)
                 lp = ctx.get("LP", 1)
@@ -366,28 +367,14 @@ class PainelTecnica(ctk.CTkFrame):
             e_desc.insert("1.0", tecnica.get("descricao", ""))
         e_desc.pack(fill="x", pady=(2, 12))
 
-        # ══════════════════════════════════════════════════════════════════════
-        # Gerenciamento de Efeitos (Scaling)
-        # ══════════════════════════════════════════════════════════════════════
+        # Efeitos (Scaling) - Componente embutido
         efeitos_temp = list(tecnica.get("efeitos", [])) if editando else []
-
-        def abrir_efeitos():
-            nonlocal efeitos_temp
-            popup_efeitos = EfeitosPopup(
-                popup,
-                efeitos_existentes=efeitos_temp,
-                on_save=lambda novos: efeitos_temp.clear() or efeitos_temp.extend(novos)
-            )
-            popup_efeitos.abrir()
-
-        btn_efeitos = ctk.CTkButton(
+        efeitos_frame = EfeitosEditorFrame(
             main,
-            text="⚙️ Gerenciar Efeitos (Scaling)",
-            fg_color="#3a3a3a",
-            hover_color="#4a4a4a",
-            command=abrir_efeitos
+            efeitos_iniciais=efeitos_temp,
+            on_change=lambda novos: efeitos_temp.clear() or efeitos_temp.extend(novos)
         )
-        btn_efeitos.pack(fill="x", pady=(10, 5))
+        efeitos_frame.pack(fill="both", expand=True, pady=(10, 5))
 
         # ══════════════════════════════════════════════════════════════════════
         # Barra de botões fixa na parte inferior
@@ -507,8 +494,6 @@ class PainelTecnica(ctk.CTkFrame):
 
         ctk.CTkButton(btn_frame, text="Rolar Ataque", fg_color="#1a6b1a", hover_color="#145214",
                     command=rolar).pack(side="right", padx=(5,0))
-        ctk.CTkButton(btn_frame, text="Cancelar", fg_color="transparent", border_width=1,
-                    command=popup.destroy).pack(side="right")
 
     def _mostrar_resultado(self, resultado: dict):
         popup = ctk.CTkToplevel(self.winfo_toplevel())

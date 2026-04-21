@@ -693,7 +693,6 @@ class FichaPersonagem:
         self._atualizar_lp_base()
 
         self.ficha["totais_nex"] = totais
-        self._atualizar_recursos_por_grau_e_nex()
 
     def _atualizar_lp_base(self):
         """Define o LP baseado no NEX atual."""
@@ -719,7 +718,7 @@ class FichaPersonagem:
         # -----------------------------------------------------------------
         # 1. Atualiza o LP baseado no NEX
         # -----------------------------------------------------------------
-        self._atualizar_lp_base()   
+        
         lp_base = self.ficha.get("lp", 1)
 
         # -----------------------------------------------------------------
@@ -897,14 +896,6 @@ class FichaPersonagem:
             for fonte in (bonus_passivas, bonus_skilltree):
                 for alvo, valor in fonte.items():
                     bonus_total[alvo] = bonus_total.get(alvo, 0) + valor
-            self.ficha["bonus_passivos"] = bonus_total
-            self._salvar()
-            self._atualizar_recursos_por_grau_e_nex()
-
-            estado = self.ficha.get("estado", {})
-            estado["pv_atual"] = estado.get("pv_maximo", 0)
-            estado["san_atual"] = estado.get("san_maximo", 0)
-            estado["pe_atual"] = estado.get("pe_maximo", 0)
 
             # Bônus inato: Verdadeiro Jujutsu (exceto Restringido)
             classe = self.ficha.get("classe", "")
@@ -968,9 +959,54 @@ class FichaPersonagem:
                     elif operacao == '=':
                         bonus_total[alvo] = valor
 
+            # ══════════════════════════════════════════════════════════════════
+            # Processa passivas de estilo de luta (PainelEstiloLuta)
+            # ══════════════════════════════════════════════════════════════════
+            habilidades_estilo = self.ficha.get("habilidades_estilo_luta", [])
+            passivas_ativas = self.ficha.get("passivas_ativas", {})  # dicionário com id → "BASE"
+            for hab in habilidades_estilo:
+                # Apenas passivas ativadas
+                if hab.get("tipo_mecanica") != "Passiva":
+                    continue
+                if hab["id"] not in passivas_ativas:
+                    continue
+                for efeito in hab.get("efeitos", []):
+                    alvo = efeito["alvo"]
+                    operacao = efeito["operacao"]
+                    formula = efeito["formula"]
+
+                    if alvo not in ALVOS_DISPONIVEIS:
+                        continue
+
+                    try:
+                        valor = avaliar_formula(formula, construir_contexto_base(self.ficha))
+                    except Exception as e:
+                        print(f"Erro ao avaliar efeito de estilo de luta ({alvo}): {e}")
+                        continue
+
+                    atual = bonus_total.get(alvo, 0)
+
+                    if operacao == '+':
+                        bonus_total[alvo] = atual + valor
+                    elif operacao == '-':
+                        bonus_total[alvo] = atual - valor
+                    elif operacao == '*':
+                        base = bonus_total.get(alvo, 1) if alvo in bonus_total else 1
+                        bonus_total[alvo] = base * valor
+                    elif operacao == '/':
+                        base = bonus_total.get(alvo, 1) if alvo in bonus_total else 1
+                        if valor != 0:
+                            bonus_total[alvo] = base / valor
+                    elif operacao == '=':
+                        bonus_total[alvo] = valor
+
             self.ficha["bonus_passivos"] = bonus_total
             self._salvar()
             self._atualizar_recursos_por_grau_e_nex()
+            estado = self.ficha.get("estado", {})
+            estado["pv_atual"] = estado.get("pv_maximo", 0)
+            estado["san_atual"] = estado.get("san_maximo", 0)
+            estado["pe_atual"] = estado.get("pe_maximo", 0)
 
             # Verifica se as barras ainda existem antes de atualizar
             for chave, barra in list(self._barras.items()):
@@ -1108,6 +1144,9 @@ class FichaPersonagem:
 
             msg = "\n".join(resultados)
             ctk.CTkLabel(main, text=msg, font=ctk.CTkFont(size=12), justify="left").pack(pady=5)
+            print(f"[DEBUG POPUP] contexto['LP'] = {contexto['LP']}")
+            print(f"[DEBUG POPUP] self.ficha['lp'] = {self.ficha.get('lp')}")
+            print(f"[DEBUG POPUP] self.ficha['bonus_passivos']['LP'] = {self.ficha.get('bonus_passivos', {}).get('LP')}")
 
         ctk.CTkButton(main, text="🧪 Testar Fórmulas (avaliar_formula)",
                       command=testar_formulas).pack(pady=5)

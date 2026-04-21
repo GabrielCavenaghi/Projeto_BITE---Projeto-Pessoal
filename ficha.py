@@ -245,6 +245,7 @@ def avaliar_formula(formula: list, contexto: dict) -> float:
     return pilha[0] if pilha else 0
 
 def construir_contexto_base(ficha: dict) -> dict:
+    bonus = ficha.get("bonus_passivos", {})
     atributos = ficha.get("atributos", {})
     pericias = ficha.get("pericias", {})
     estado = ficha.get("estado", {})
@@ -273,10 +274,11 @@ def construir_contexto_base(ficha: dict) -> dict:
     ea_valor = ea_pericia.get("treinamento", 0) + ea_pericia.get("bonus", 0)
 
     # Calcula LP_NATURAL (sem bônus)
-    lp_natural = ficha.get("lp", 1)  # lp já é o base
+    lp_natural = ficha.get("lp", 1)
+    
 
     # LP total (base + bônus passivos)
-    bonus_lp = ficha.get("bonus_passivos", {}).get("LP", 0)
+    bonus_lp = int(bonus.get("LP", 0))
     lp_total = lp_natural + bonus_lp
     bonus = ficha.get("bonus_passivos", {})
 
@@ -308,6 +310,15 @@ def construir_contexto_base(ficha: dict) -> dict:
         "DT_TECNICA": dt_tecnica,
     }
 
+    # Adiciona todas as perícias com valores totais
+    for nome_pericia, info in ficha.get("pericias", {}).items():
+        attr_override = info.get("atributo_override")
+        attr_base = info.get("atributo_base", "FOR")
+        atributo_valor = atributos.get(attr_override if attr_override else attr_base, 0)
+        treinamento = info.get("treinamento", 0)
+        bonus_pericia = info.get("bonus", 0)
+        contexto[nome_pericia] = atributo_valor + treinamento + bonus_pericia
+
     # ══════════════════════════════════════════════════════════════════════════
     # ADIÇÃO AUTOMÁTICA DE TODOS OS BÔNUS PASSIVOS
     # ══════════════════════════════════════════════════════════════════════════
@@ -317,6 +328,8 @@ def construir_contexto_base(ficha: dict) -> dict:
     #   - DANO_PERCENTUAL_TECNICA, DANO_PERCENTUAL_GERAL, etc.
     #   - VERDADEIRO_JUJUTSU, PERICIA_*, DEF, TR, RD_*, CURA_ACELERADA, etc.
     contexto.update(bonus)
+    contexto["LP"] = lp_total
+    contexto["LP_NATURAL"] = lp_natural 
     return contexto
 
 # ══════════════════════════════════════════════════════════════════════════════

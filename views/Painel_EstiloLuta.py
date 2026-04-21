@@ -2,6 +2,7 @@
 import customtkinter as ctk
 import uuid
 from tkinter import messagebox
+from views.EfeitosEditorFrame import EfeitosEditorFrame
 from views.Efeitos_Popup import EfeitosPopup
 from utils.helpers import formatar_numero_grande
 from utils.estiloLuta import executar_estilo_luta
@@ -224,14 +225,12 @@ class PainelEstiloLuta(ctk.CTkFrame):
             )
             popup_efeitos.abrir()
 
-        btn_efeitos = ctk.CTkButton(
+        efeitos_frame = EfeitosEditorFrame(
             main,
-            text="⚙️ Gerenciar Efeitos (Scaling)",
-            fg_color="#3a3a3a",
-            hover_color="#4a4a4a",
-            command=abrir_efeitos
+            efeitos_iniciais=efeitos_temp,
+            on_change=lambda novos: efeitos_temp.clear() or efeitos_temp.extend(novos)
         )
-        btn_efeitos.pack(fill="x", pady=(10, 5))
+        efeitos_frame.pack(fill="both", expand=True, pady=(10, 5))
 
         # Botões Salvar / Cancelar
         btn_frame = ctk.CTkFrame(popup, fg_color="transparent")

@@ -111,16 +111,16 @@
         "fei_062",
         "fei_060"
     ],
-    "atualizado_em": "2026-04-14 13:37",
+    "atualizado_em": "2026-04-20 23:24",
     "pontos_atributo_gastos": 0,
     "pontos_extras_temp": 0,
     "estado": {
-        "pv_atual": 108100,
-        "pv_maximo": 29024,
-        "san_atual": 1574,
-        "san_maximo": 1574,
-        "pe_atual": 3714,
-        "pe_maximo": 3714
+        "pv_atual": 29134,
+        "pv_maximo": 29134,
+        "san_atual": 1618,
+        "san_maximo": 1618,
+        "pe_atual": 4374,
+        "pe_maximo": 4374
     },
     "estilo_luta": {
         "id": null,
@@ -152,39 +152,41 @@
         "f2b573f5-2c5a-49fe-b508-efb34904e701": "BASE",
         "dd295f7a-691a-408b-9f1e-39a0f1c63f59": "BASE",
         "d0e32030-e1b2-4b35-9c9e-6eafb57131bd": "BASE",
-        "ec08d8d4-8723-4ba5-86fd-2857238f4fd8": "BASE",
-        "8d5ea255-5dbd-47a8-b680-f56a5ac25b4a": "BASE",
         "55f17df4-bb32-49f6-ae3d-0504f20a46ab": "BASE",
         "eb961ab0-c079-4316-93f2-ad410109d996": "BASE",
         "1d61c392-8026-43e8-92fc-d29386c44751": "BASE",
         "b12f6039-d7db-4f37-bda7-87870b9a1c37": "BASE",
-        "73f5510e-88b6-41c4-bbd7-9bdb15d56a50": "BASE"
+        "73f5510e-88b6-41c4-bbd7-9bdb15d56a50": "BASE",
+        "ec08d8d4-8723-4ba5-86fd-2857238f4fd8": "BASE",
+        "8d5ea255-5dbd-47a8-b680-f56a5ac25b4a": "BASE",
+        "68fa7d74-7d5f-42f6-abe7-4d9c52322bd6": "BASE"
     },
     "bonus_passivos": {
-        "PERICIA_ENERGIA_AMALDICOADA": 212,
-        "PV_MAX": 15125,
-        "SAN_MAX": 234,
-        "PE_MAX": 792,
+        "PERICIA_ENERGIA_AMALDICOADA": 256,
+        "PV_MAX": 15235,
+        "SAN_MAX": 278,
+        "PE_MAX": 1452,
         "DANO_PERCENTUAL_TECNICA": 2.9,
         "DADO_TECNICA": 52,
         "DADO_POR_DADO_TECNICA": 9,
         "LP": 7,
-        "DEF": 75.5,
-        "TR": 212,
+        "DEF": 218.5,
+        "TR": 256,
         "DT_HABILIDADES_TECNICA": 644.8000000000001,
         "PASSO_TECNICA": 7,
         "CURA_ACELERADA": 2579.2000000000003,
         "PASSO_DANO_TECNICA": 15.5,
-        "DESLOCAMENTO": 0,
+        "DESLOCAMENTO": 29,
         "REACAO": 3,
-        "RD_GERAL": 28,
+        "RD_GERAL": 116,
         "GRAU_TREINAMENTO": 2,
         "DT": 20,
         "MARGEM_AMEAÇA_ARMA_FAVORITA": 2,
         "PASSO_DANO_ARMA_FAVORITA": 2,
         "MARGEM_AMEAÇA": 2,
         "MULTIPLICADOR_CRITICO": 1,
-        "VERDADEIRO_JUJUTSU": 18
+        "VERDADEIRO_JUJUTSU": 18,
+        "DADO_ESTILO_LUTA": 22
     },
     "pericias": {
         "Acrobacia": {
@@ -389,7 +391,7 @@
             "descricao": "Você concentra energia sanguínea em um feixe de sangue que corta tudo e todos. Dispara em uma linha para frente que causa 40d10+ 2x(LP+PB) de dano de Sangue e que possui nível de perfuração infinita ou seja ela atravessa todos os alvos da área. Para cada 1 de Vigor que você tenha a largura do disparo aumenta em 0,5m com seu inicial sendo 0,5m. A cada metro mais próximo do centro a DT aumenta em +5.\nCondição e Restrição:\n-Enquanto estiver usando Escama do Dragão Escarlate;\n-Enquanto estiver usando Cura Acelerada em seu acumulo máximo;\n-Enquanto estiver usando Armadura de Sangue;\n-Adiciona recarga de duas rodadas;\n-Adiciona conjuração complexa em forma de completa de duas rodadas;\nEfeito: Muda o dano para 2*EAd20 e multiplica o dano por AB+LP",
             "tipo_mecanica": "Teste de Resistência",
             "parametros": {
-                "dano": "2*EAd20",
+                "dano": "4*EAd20",
                 "aplicar_passo": true,
                 "multiplicador_dano": "1"
             },
@@ -419,24 +421,6 @@
                         {
                             "tipo": "constante",
                             "valor": 3
-                        }
-                    ]
-                },
-                {
-                    "alvo": "PV_MAX",
-                    "operacao": "+",
-                    "formula": [
-                        {
-                            "tipo": "constante",
-                            "valor": 1000
-                        },
-                        {
-                            "tipo": "operador",
-                            "valor": "*"
-                        },
-                        {
-                            "tipo": "variavel",
-                            "valor": "VIG"
                         }
                     ]
                 }
@@ -519,27 +503,6 @@
             ]
         },
         {
-            "id": "436292bb-06be-4e14-86af-ee673b6f03dc",
-            "nome": "Broca \"акупунктура\" (Ativar +AB)",
-            "nivel": 5,
-            "conjuracao": "Completa",
-            "alcance": "Extremo",
-            "alvo": "1 ser",
-            "duracao": "Instantânea",
-            "custo_pe": 10,
-            "descricao": "Primeira forma:\nConjura uma única agulha em formato do broca, que gira em extremo estresse, faça um ataque contra o alvo usando a broca, crítico 18/4x, a broca causa 50d12 de dano de sangue, que ignora RD e RDP além de reduzir a RDP do alvo em 25% até o fim da rodada.\nCondição e Restrição:\n-Adiciona Recarga de 3 rodadas;\n-Adiciona conjuração complexa de 3 rodadas;\n-O alvo deve estar sangrando;\n-Deve ser o alvo da habilidade marca da presa;\nEfeito: Muda a quantidade de brocas para 3, multiplica o dano Por AB e aumenta o multiplicador de crítico em +LP.",
-            "tipo_mecanica": "Ataque",
-            "parametros": {
-                "dano": "50d12",
-                "pericia_ataque": "Pontaria",
-                "margem_ameaca": 7,
-                "multiplicador_critico": 36,
-                "aplicar_passo": true,
-                "multiplicador_dano": "3"
-            },
-            "efeitos": []
-        },
-        {
             "id": "21f8ce14-d689-428e-a4ab-5c0d48c272df",
             "nome": "Agulha \"акупунктура\"",
             "nivel": 5,
@@ -548,7 +511,61 @@
             "alvo": "1 ser",
             "duracao": "Instantânea",
             "custo_pe": 10,
-            "descricao": "Conjura quatro agulhas ao redor do alvo, que o prendem em uma gaiola, em sincronia se fecham mirando em pontos de pressão do alvo, cada agulha causa 5d12 de dano de sangue, o alvo tem direito a um teste de fortitude, se passar recebe 2/3 do dano, se falhar recebe o dano completo e fica paralisado por 1d6 rodadas. Pela sua capacidade de perfuração infinita todos os seres em até 20 metros devem realizar um teste de reflexos, caso falhe recebe 1/10 do dano.\nCondição e Restrição:\n-Adiciona Recarga de 3 rodadas, muda a quantidade de agulhas para 1d2\nDentro do Dominio: 512d10*128\nFora: 512d8*16",
+            "descricao": "Conjura quatro agulhas ao redor do alvo, que o prendem em uma gaiola, em sincronia se fecham mirando em pontos de pressão do alvo, cada agulha causa 5d12 de dano de sangue, o alvo tem direito a um teste de fortitude, se passar recebe 2/3 do dano, se falhar recebe o dano completo e fica paralisado por 1d6 rodadas. Pela sua capacidade de perfuração infinita todos os seres em até 20 metros devem realizar um teste de reflexos, caso falhe recebe 1/10 do dano.\nCondição e Restrição:\n-Adiciona Recarga de 3 rodadas, muda a quantidade de agulhas para 1d2\nDentro do Dominio: 512d10*128 =~1.4Qa\nFora: 512d8*16 =~1.7T",
+            "tipo_mecanica": "Teste de Resistência",
+            "parametros": {
+                "dano": "5d12",
+                "aplicar_passo": true,
+                "multiplicador_dano": "512d8*16"
+            },
+            "efeitos": []
+        },
+        {
+            "id": "53d595f0-9663-49a3-9a01-c01fbef96ce3",
+            "nome": "Agulha Ensanguentada",
+            "nivel": 5,
+            "conjuracao": "Padrão",
+            "alcance": "Curto",
+            "alvo": "1 ser",
+            "duracao": "Instantânea",
+            "custo_pe": 10,
+            "descricao": "",
+            "tipo_mecanica": "Cura",
+            "parametros": {
+                "dano": "640d10*32*2*0.1",
+                "aplicar_passo": false,
+                "multiplicador_dano": "1"
+            },
+            "efeitos": []
+        },
+        {
+            "id": "3190d088-ebd8-41a5-9658-46583bd29a65",
+            "nome": "Ensanguentar Corpo",
+            "nivel": 5,
+            "conjuracao": "Padrão",
+            "alcance": "Toque",
+            "alvo": "1 ser ou a Si mesmo",
+            "duracao": "Instantânea",
+            "custo_pe": 10,
+            "descricao": "Você cobre o alvo com seu poder enrubescido, curando ele de pouco em pouco, o alvo recebe 10d6 de cura acelerada e +1k de RD geral e +1.5k de RD de Sangue.\nPartilhar da dor (3):\nSempre que um alvo que esteja sob efeito dessa habilidade receber dano, você pode escolher a % de dano que será transferida para você.\nResistência sobrenatural (3,5):\nEnquanto estiver com a armadura você tem a opção de destruir ela para reduzir ⅕ do dano recebido, você só pode fazer isso uma vez por cena, mesmo que receba outra armadura.",
+            "tipo_mecanica": "Cura",
+            "parametros": {
+                "dano": "512d12*10*2",
+                "aplicar_passo": false,
+                "multiplicador_dano": "1"
+            },
+            "efeitos": []
+        },
+        {
+            "id": "49f467de-a208-4650-96ad-276346c1f113",
+            "nome": "Agulha “акупунктура” (Dominio)",
+            "nivel": 5,
+            "conjuracao": "Turno",
+            "alcance": "Curto",
+            "alvo": "1 ser",
+            "duracao": "Instantânea",
+            "custo_pe": 10,
+            "descricao": "Conjura quatro agulhas ao redor do alvo, que o prendem em uma gaiola, em sincronia se fecham mirando em pontos de pressão do alvo, cada agulha causa 5d12 de dano de sangue, o alvo tem direito a um teste de fortitude, se passar recebe 2/3 do dano, se falhar recebe o dano completo e fica paralisado por 1d6 rodadas. Pela sua capacidade de perfuração infinita todos os seres em até 20 metros devem realizar um teste de reflexos, caso falhe recebe 1/10 do dano.\nCondição e Restrição:\n-Adiciona Recarga de 3 rodadas, muda a quantidade de agulhas para 1d2\nDentro do Dominio: 512d10*128 =~1.4Qa\nFora: 512d8*16 =~1.7T",
             "tipo_mecanica": "Teste de Resistência",
             "parametros": {
                 "dano": "5d12",
@@ -558,25 +575,33 @@
             "efeitos": []
         },
         {
-            "id": "fd3177ff-e110-4fbd-974f-42975a00818b",
-            "nome": "Maestro de Sangue (Mult = quantidade de virotes)",
-            "nivel": 5,
-            "conjuracao": "Padrão",
-            "alcance": "Longo",
-            "alvo": "Varia",
-            "duracao": "Instantânea",
-            "custo_pe": 10,
-            "descricao": "Você cria uma quantidade variável de Virotes de Sangue, com capacidade explosiva. Ao conjurar como uma ação completa, você cria 6 Virotes; como ação padrão cria 4 e como ação de movimento cria 2. Você pode dividir como desejar os Virotes entre alvos dentro de 9 metros. Cada Virote irá tentar perfurar o alvo selecionado, realizando uma rolagem de ataque com Pontaria e causando 4d12 de dano de sangue em um acerto; após a perfurar o alvo, os virotes ficam presos no alvo, que devem fazer um teste de fortitude, caso falhe fica com sangramento estágio 8, se passar fica com sangramento estágio 5.\nEncantamento: \nPartitura Sanguinária 6:\nO dano causado pelo sangramento passa a escalar com passo, e se torna cumulativo até NEX*AB vezes.",
-            "tipo_mecanica": "Ataque",
+            "id": "9b19213f-cc35-4276-bb13-ed170786d972",
+            "nome": "Lua de Sangue",
+            "nivel": 6,
+            "conjuracao": "Completa",
+            "alcance": "Extremo",
+            "alvo": "Seres dentro da area",
+            "duracao": "Cena",
+            "custo_pe": 1984,
+            "descricao": "Uma grande lua de sangue se torna visível, e todo o cenário começa a ser devorado pelo elemento de sangue.\nDentro da área suas habilidades de técnica possuem a DT aumentada em 25% (+50%), e seres com afinidade com sangue causam +25%(+50%)de dano.\nComo efeito principal da habilidade, você pode transformar um alvo dentro da área em um hospedeiro do estigma da dor, o ser tem direito a um teste de resistência de fortitude DT * 3, se falhar nada acontece com o alvo, e sim com os seres ao redor, sempre que o hospedeiro do estigma da dor receber danos, todos inimigos dentro da área recebem 25%(+50%) do dano causado a ele, serem afetados têm direito de um teste de fortitude para reduzir essa dano a metade. Se o alvo do estigma passar no teste, a lua de sangue se revolta, por ter sido rejeitada, todos os seres na área causam o dobro de dano no alvo, um ser que finalize o alvo é recompensado, recebendo permanentemente +1(+2) passo em estilo de luta ou técnica, que fica a escolha do alvo.\nVocê pode mudar o hospedeiro do estigma uma vez a cada 3 rodadas como reação.",
+            "tipo_mecanica": "Passiva",
             "parametros": {
-                "dano": "4d12",
-                "aplicar_passo": true,
-                "multiplicador_dano": "1",
-                "pericia_ataque": "Pontaria",
-                "margem_ameaca": 8,
-                "multiplicador_critico": 3
+                "dano": "0",
+                "aplicar_passo": false,
+                "multiplicador_dano": "1"
             },
-            "efeitos": []
+            "efeitos": [
+                {
+                    "alvo": "DANO_PERCENTUAL_GERAL",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 0.5
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "habilidades_gerais": [
@@ -584,8 +609,8 @@
             "id": "1773a1b2-8647-4da6-9ee9-9c96b45d1283",
             "nome": "Fluxo Irrestrito (Expansao)",
             "tipo": "Passiva",
-            "custo_pe": 0,
-            "descricao": "",
+            "custo_pe": 188,
+            "descricao": "O fluxo infinito irrompe a realidade, sem limites se expande, até sua perfeição, não existe impossível para o sangue pois uma barreira não seria capaz de restringir o seu extremismo, Gastando um valor igual ao seu LP*(AB/2) por turno e uma ação completa você ativa a sua Expansão. A expansão durará 2d4 + (1 a cada +10 de energia amaldiçoada) rodadas.\nUma das características dessa expansão é seu formato sem barreiras, que por sua vez se torna letal contra expansões normais, dentro da expansão você ganha + EA/2 em testes de ataque e em dados de dano com a técnica, além de receber +1 passo de dano das técnicas por ponto de AB ( Recebe +1 a cada treinamento em energia amaldiçoada, em todos os modificadores de perícia, exceto Luta e Pontaria ), além de poder distribuir os seguintes ataques contra alvos dentro de seu domínio, 1 акупунктура, 800 Virotes, e 1 Supernova, o domínio sem barreiras se estende por 200 metros e ao final do domínio você recebe +1 ponto de exaustão, além de garantir o uso do estigma do orgulho, pois é o SEU domínio.\nCondição e Restrição:\nDado a peculiaridade do domínio, a sua ativação requer um timing perfeito com sua individualidade,  você só pode usar seu domínio, quando estiver em uma rodada de recarga do fluxo infinito (o'que ocorre a cada 3 rodadas)\nPermissão de fuga, como todo domínio sem barreiras, qualquer um pode simplesmente sair de dentro da área do domínio.\nEfeito: Nenhum, pois é inato ao funcionamento do domínio",
             "efeitos": [
                 {
                     "alvo": "PASSO_DANO_TECNICA",
@@ -623,6 +648,14 @@
                         {
                             "tipo": "variavel",
                             "valor": "LP"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "+"
+                        },
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP_NATURAL"
                         }
                     ]
                 },
@@ -677,6 +710,14 @@
                         {
                             "tipo": "variavel",
                             "valor": "LP_NATURAL"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 2
                         }
                     ]
                 },
@@ -687,6 +728,24 @@
                         {
                             "tipo": "constante",
                             "valor": 0.35
+                        }
+                    ]
+                },
+                {
+                    "alvo": "PV_MAX",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "VIG"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 1000
                         }
                     ]
                 }
@@ -986,6 +1045,14 @@
                         {
                             "tipo": "variavel",
                             "valor": "LP"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "+"
+                        },
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP_NATURAL"
                         }
                     ]
                 }
@@ -1020,26 +1087,67 @@
     "ataques_personalizados": [
         {
             "id": "28d73e9c-b325-405f-a31a-7bb2c1f6634a",
-            "nome": "Broca",
+            "nome": "Broca (Ativar +AB)",
             "dano": "50d12",
             "tipo_efeito": "tecnica",
             "aplicar_passo": true,
             "margem_ameaca": 7,
             "multiplicador_critico": 108,
             "pericia": "Pontaria"
+        },
+        {
+            "id": "337f103e-a16b-4412-a777-615f1be7d975",
+            "nome": "EA",
+            "dano": "EAd100",
+            "tipo_efeito": "energia_amaldicoada",
+            "aplicar_passo": true,
+            "margem_ameaca": 20,
+            "multiplicador_critico": 1,
+            "pericia": "Energia Amaldiçoada"
+        },
+        {
+            "id": "60cbe838-4327-46fb-a74d-62240a8a3557",
+            "nome": "Maestro de Sangue (1 Virote)",
+            "dano": "4d12",
+            "tipo_efeito": "tecnica",
+            "aplicar_passo": true,
+            "margem_ameaca": 8,
+            "multiplicador_critico": 3,
+            "pericia": "Pontaria"
         }
     ],
     "habilidades_estilo_luta": [
         {
-            "id": "fa158dc5-52cd-49e7-83d5-94824486749c",
-            "nome": "Redemoinho de Cortes",
-            "tipo_mecanica": "Ataque",
-            "descricao": "Gastando 4 PE, realiza um único ataque e consegue cortar todo o seu ao redor, todos os seres adjacentes a você sofrem o ataque, você realiza um único teste para todos os alvos, além disso seu dano aumenta em +6d10 de dano.",
+            "id": "68fa7d74-7d5f-42f6-abe7-4d9c52322bd6",
+            "nome": "Teste",
+            "tipo_mecanica": "Passiva",
+            "descricao": "",
             "parametros": {
-                "dano": "6d10",
+                "dano": "0",
                 "aplicar_passo": true
             },
-            "efeitos": []
+            "efeitos": [
+                {
+                    "alvo": "DADO_ESTILO_LUTA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP"
+                        }
+                    ]
+                },
+                {
+                    "alvo": "DESLOCAMENTO",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
