@@ -195,7 +195,6 @@ class FichaPersonagem:
 
         ctk.CTkFrame(lat, height=1, fg_color="#2a2a2a").pack(fill="x", padx=12)
 
-                # Barras de recursos – agora fixas, sem scroll
         rec_frame = ctk.CTkFrame(lat, fg_color="transparent")
         rec_frame.pack(fill="x", padx=16, pady=12)
 
@@ -340,9 +339,9 @@ class FichaPersonagem:
     def _construir_abas(self):
         area = self._area
 
-        nav = ctk.CTkFrame(area, fg_color="#0f0f0f", height=42, corner_radius=0)
+        nav = ctk.CTkScrollableFrame(area, fg_color="#0f0f0f", height=48,
+                              orientation="horizontal", corner_radius=0)
         nav.grid(row=0, column=0, sticky="ew")
-        nav.pack_propagate(False)
 
         self._botoes_aba: list[ctk.CTkButton] = []
         for i, nome in enumerate(self.ABA_NOMES):
@@ -354,8 +353,6 @@ class FichaPersonagem:
             )
             btn.pack(side="left", padx=2)
             self._botoes_aba.append(btn)
-
-        # Não empacotamos ainda; será mostrado na aba Skill Tree
 
         self._frame_conteudo = ctk.CTkFrame(area, fg_color="transparent")
         self._frame_conteudo.grid(row=1, column=0, sticky="nsew", padx=16, pady=16)
