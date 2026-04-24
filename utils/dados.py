@@ -13,8 +13,8 @@ PASSO_MAP = {
     8:  (1, 10),     # d8 → d10
     10: (1, 12),     # d10 → d12
     12: (2, 8),      # d12 → 2d8
-    20: (4, 8),      # d20 → 4d8
-    100:(15, 8),     # d100 → 15d8
+    20: (4, 12),      # d20 → 4d8
+    100:(15, 12),     # d100 → 15d8
 }
 
 def _aplicar_um_passo(count: int, faces: int) -> tuple[int, int]:
