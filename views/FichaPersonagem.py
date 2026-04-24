@@ -727,13 +727,13 @@ class FichaPersonagem:
 
         if "classes" in info_grau and classe_nome in info_grau["classes"]:
             bonus_classe = info_grau["classes"][classe_nome]
-            pv_por_lp = bonus_classe.get("pv_por_nex", 0)   # mantém nome original do JSON
-            san_por_lp = bonus_classe.get("san_por_nex", 0)
-            pe_por_lp = bonus_classe.get("pe_por_nex", 0)
+            pv_por_lp  = info_classe.get("pv_por_nex", 0) + bonus_classe.get("pv_por_nex", 0)
+            san_por_lp = info_classe.get("san_por_nex", 0) + bonus_classe.get("san_por_nex", 0)
+            pe_por_lp  = info_classe.get("pe_por_nex", 0) + bonus_classe.get("pe_por_nex", 0)
         elif "pv_por_nex" in info_grau:
-            pv_por_lp = info_grau.get("pv_por_nex", 0)
-            san_por_lp = info_grau.get("san_por_nex", 0)
-            pe_por_lp = info_grau.get("pe_por_nex", 0)
+            pv_por_lp  = info_classe.get("pv_por_nex", 0) + info_grau.get("pv_por_nex", 0)
+            san_por_lp = info_classe.get("san_por_nex", 0) + info_grau.get("san_por_nex", 0)
+            pe_por_lp  = info_classe.get("pe_por_nex", 0) + info_grau.get("pe_por_nex", 0)
         else:
             pv_por_lp = info_classe.get("pv_por_nex", 0)
             san_por_lp = info_classe.get("san_por_nex", 0)
@@ -749,9 +749,9 @@ class FichaPersonagem:
         # -----------------------------------------------------------------
         # 4. Bônus por LP (multiplicação)
         # -----------------------------------------------------------------
-        pv_por_lp_total = lp_base * pv_por_lp
-        san_por_lp_total = lp_base * san_por_lp
-        pe_por_lp_total = lp_base * pe_por_lp
+        pv_por_lp_total  = (lp_base - 1) * (pv_por_lp + vig)
+        san_por_lp_total = (lp_base - 1) * san_por_lp
+        pe_por_lp_total  = (lp_base - 1) * (pe_por_lp + pre)
 
         # -----------------------------------------------------------------
         # 5. Bônus especiais do Grau (Vigor e Presença)
@@ -763,16 +763,11 @@ class FichaPersonagem:
         pe_bonus_presenca = bonus_presenca.get("pe_por_presenca", 0) * pre
 
         # -----------------------------------------------------------------
-        # 6. PE adicional por feitiços concedidos pelo NEX
+        # 6. Cálculo final
         # -----------------------------------------------------------------
-        pe_feiticos = self.ficha.get("totais_nex", {}).get("feiticos", 0)
-
-        # -----------------------------------------------------------------
-        # 7. Cálculo final
-        # -----------------------------------------------------------------
-        pv_max = pv_inicial + pv_por_lp_total + pv_bonus_vigor
+        pv_max  = pv_inicial + vig + pv_por_lp_total + pv_bonus_vigor
         san_max = san_inicial + san_por_lp_total
-        pe_max = pe_inicial + pe_por_lp_total + pe_bonus_presenca + pe_feiticos
+        pe_max  = pe_inicial + pre + pe_por_lp_total + pe_bonus_presenca
 
         # -----------------------------------------------------------------
         # Aplica bônus passivos (Skill Tree + Feitiços)
