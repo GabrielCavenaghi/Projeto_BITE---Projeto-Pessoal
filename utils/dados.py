@@ -6,6 +6,9 @@ from utils.Efeitos_Scalling import string_para_tokens
 
 # Tabela de progressão de passos (pode ser importada se já definida em outro lugar)
 PASSO_MAP = {
+    2:  (1, 3),      # d2 → d3
+    3:  (1, 4),      # d3 → d4
+    4:  (1, 6),      # d4 → d6
     6:  (1, 8),      # d6 → d8
     8:  (1, 10),     # d8 → d10
     10: (1, 12),     # d10 → d12
@@ -146,7 +149,7 @@ def avaliar_dado_str(
         if chaves["passo_extra"]:
             bonus_passo += int(_get(chaves["passo_extra"]))
         # Verdadeiro Jujutsu (apenas para técnica)
-        if tipo_efeito == "tecnica":
+        if tipo_efeito == "tecnica" or tipo_efeito == "maldicao":
             bonus_passo += int(_get("VERDADEIRO_JUJUTSU"))
 
         # Dados extras

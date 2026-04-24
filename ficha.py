@@ -251,18 +251,16 @@ def construir_contexto_base(ficha: dict) -> dict:
     estado = ficha.get("estado", {})
     totais_nex = ficha.get("totais_nex", {})
     grau_str = ficha.get("grau", "Grau 4")
-    grau_num = 0
-    if "Grau" in grau_str and "Semi" not in grau_str and "Especial" not in grau_str:
-        try:
-            grau_num = int(grau_str.split()[1])
-        except:
-            pass
-    elif "Semi" in grau_str:
-        grau_num = 5
-    elif "Ultra" in grau_str:
-        grau_num = 7
-    elif "Especial" in grau_str:
-        grau_num = 6
+    mapa_grau = {
+        "Grau 4": 1,
+        "Grau 3": 2,
+        "Grau 2": 3,
+        "Grau 1": 4,
+        "Grau Semi Especial": 5,
+        "Grau Especial": 6,
+        "Grau Ultra Especial": 7,
+    }
+    grau_num = mapa_grau.get(grau_str, 0)
 
     nex_str = ficha.get("nex", "5%").replace("%", "")
     try:
