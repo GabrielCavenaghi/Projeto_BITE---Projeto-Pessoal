@@ -441,25 +441,23 @@ class FichaPersonagem:
         self._salvar()
 
     def _ajustar_atributo(self, sigla: str, delta: int):
-        """Aumenta ou diminui o valor do atributo, respeitando limites e pontos disponíveis."""
-        valor_atual = self.ficha["atributos"][sigla]
+        valor_atual = self.ficha["atributos_base"].get(sigla, self.ficha["atributos"][sigla])
         pontos_disp = calcular_pontos_disponiveis_ficha(self.ficha)
 
         if delta > 0:
-            # Aumentar: precisa de pontos e não pode ultrapassar LIMITE_NORMAL
             if pontos_disp <= 0:
-                return  # Poderia tocar um aviso sonoro, mas por ora silencioso
+                return
             if valor_atual >= LIMITE_NORMAL:
                 return
-            self.ficha["atributos"][sigla] += 1
+            self.ficha["atributos_base"][sigla] = valor_atual + 1
             self.ficha["pontos_atributo_gastos"] = self.ficha.get("pontos_atributo_gastos", 0) + 1
-        else:  # delta < 0
-            # Diminuir: não pode ficar abaixo de 0
+        else:
             if valor_atual <= 0:
                 return
-            self.ficha["atributos"][sigla] -= 1
+            self.ficha["atributos_base"][sigla] = valor_atual - 1
             self.ficha["pontos_atributo_gastos"] = max(0, self.ficha.get("pontos_atributo_gastos", 0) - 1)
 
+        self.ficha["atributos"][sigla] = self.ficha["atributos_base"][sigla]
         self._atualizar_ui_atributos()
 
 
@@ -879,37 +877,60 @@ class FichaPersonagem:
             return
         self._recalculando = True
         try:
+            # 1. Restaura atributos base
+            if "atributos_base" not in self.ficha:
+                self.ficha["atributos_base"] = dict(self.ficha["atributos"])
+            self.ficha["atributos"] = dict(self.ficha["atributos_base"])
+
             self._recalcular_totais_nex()
             self.ficha["totais_grau"] = self._calcular_totais_grau()
+
+            # PASSE 1: calcula para obter bônus de atributos
             bonus_passivas = self._calcular_bonus_passivas()
             bonus_skilltree = self.recalcular_bonus_skilltree()
-
             bonus_total = {}
             for fonte in (bonus_passivas, bonus_skilltree):
                 for alvo, valor in fonte.items():
                     bonus_total[alvo] = bonus_total.get(alvo, 0) + valor
 
-            # Bônus inato: Verdadeiro Jujutsu (exceto Restringido)
+            # Aplica atributos provisoriamente
+            for sigla in ("AGI", "FOR", "INT", "VIG", "PRE"):
+                bonus_attr = bonus_total.get(sigla, 0)
+                if bonus_attr:
+                    self.ficha["atributos"][sigla] = self.ficha["atributos_base"].get(sigla, 0) + bonus_attr
+
+            # PASSE 2: recalcula com atributos já corretos
+            bonus_passivas = self._calcular_bonus_passivas()
+            bonus_skilltree = self.recalcular_bonus_skilltree()
+            bonus_total = {}
+            for fonte in (bonus_passivas, bonus_skilltree):
+                for alvo, valor in fonte.items():
+                    bonus_total[alvo] = bonus_total.get(alvo, 0) + valor
+
+            # Aplica atributos definitivamente
+            for sigla in ("AGI", "FOR", "INT", "VIG", "PRE"):
+                bonus_attr = bonus_total.get(sigla, 0)
+                if bonus_attr:
+                    self.ficha["atributos"][sigla] = self.ficha["atributos_base"].get(sigla, 0) + bonus_attr
+
+            # Contexto final com atributos corretos
+            contexto = construir_contexto_base(self.ficha)
+
+            # 4. Agora o contexto já tem os atributos corretos
+            contexto = construir_contexto_base(self.ficha)
+
+            # 5. Verdadeiro Jujutsu
             classe = self.ficha.get("classe", "")
             if classe != "Restringido":
-                # Obtém o valor numérico do Grau
-                grau_str = self.ficha.get("grau", "Grau 4")
-                grau_num = 0
                 mapa_grau = {
-                    "Grau 4": 1,
-                    "Grau 3": 2,
-                    "Grau 2": 3,
-                    "Grau 1": 4,
-                    "Grau Semi Especial": 5,
-                    "Grau Especial": 6,
-                    "Grau Ultra Especial": 7,
+                    "Grau 4": 1, "Grau 3": 2, "Grau 2": 3, "Grau 1": 4,
+                    "Grau Semi Especial": 5, "Grau Especial": 6, "Grau Ultra Especial": 7,
                 }
-                grau_num = mapa_grau.get(grau_str, 0)
-
+                grau_num = mapa_grau.get(self.ficha.get("grau", "Grau 4"), 0)
                 lp = self.ficha.get("lp", 1)
-                bonus_verdadeiro_jujutsu = grau_num + int(lp / 2)
-                bonus_total["VERDADEIRO_JUJUTSU"] = bonus_total.get("VERDADEIRO_JUJUTSU", 0) + bonus_verdadeiro_jujutsu
-    
+                bonus_total["VERDADEIRO_JUJUTSU"] = grau_num + int(lp / 2)
+
+            # 6. Técnicas passivas (com contexto atualizado)
             tecnicas = self.ficha.get("habilidades_tecnicas", [])
             tecnicas_ativas = self.ficha.get("tecnicas_ativas", [])
             for tecnica in tecnicas:
@@ -921,42 +942,23 @@ class FichaPersonagem:
                     alvo = efeito["alvo"]
                     operacao = efeito["operacao"]
                     formula = efeito["formula"]
-
-                    # Validação rápida (opcional)
                     if alvo not in ALVOS_DISPONIVEIS:
                         continue
-
                     try:
-                        valor = avaliar_formula(formula, construir_contexto_base(self.ficha))
+                        valor = avaliar_formula(formula, contexto)
                     except Exception as e:
-                        print(f"Erro ao avaliar efeito de técnica ({alvo}): {e}")
+                        print(f"Erro técnica ({alvo}): {e}")
                         continue
-
-                    # Obtém o valor atual do bônus (se não existir, assume 0)
                     atual = bonus_total.get(alvo, 0)
+                    if operacao == '+': bonus_total[alvo] = atual + valor
+                    elif operacao == '-': bonus_total[alvo] = atual - valor
+                    elif operacao == '*': bonus_total[alvo] = bonus_total.get(alvo, 1) * valor
+                    elif operacao == '/' and valor != 0: bonus_total[alvo] = bonus_total.get(alvo, 1) / valor
+                    elif operacao == '=': bonus_total[alvo] = valor
 
-                    if operacao == '+':
-                        bonus_total[alvo] = atual + valor
-                    elif operacao == '-':
-                        bonus_total[alvo] = atual - valor
-                    elif operacao == '*':
-                        # Para multiplicação, se o alvo ainda não existe, usa 1 como base
-                        base = bonus_total.get(alvo, 1) if alvo in bonus_total else 1
-                        bonus_total[alvo] = base * valor
-                    elif operacao == '/':
-                        base = bonus_total.get(alvo, 1) if alvo in bonus_total else 1
-                        if valor != 0:
-                            bonus_total[alvo] = base / valor
-                    elif operacao == '=':
-                        bonus_total[alvo] = valor
-
-            # ══════════════════════════════════════════════════════════════════
-            # Processa passivas de estilo de luta (PainelEstiloLuta)
-            # ══════════════════════════════════════════════════════════════════
-            habilidades_estilo = self.ficha.get("habilidades_estilo_luta", [])
-            passivas_ativas = self.ficha.get("passivas_ativas", {})  # dicionário com id → "BASE"
-            for hab in habilidades_estilo:
-                # Apenas passivas ativadas
+            # 7. Estilos de luta passivos (com contexto atualizado)
+            passivas_ativas = self.ficha.get("passivas_ativas", {})
+            for hab in self.ficha.get("habilidades_estilo_luta", []):
                 if hab.get("tipo_mecanica") != "Passiva":
                     continue
                 if hab["id"] not in passivas_ativas:
@@ -965,32 +967,21 @@ class FichaPersonagem:
                     alvo = efeito["alvo"]
                     operacao = efeito["operacao"]
                     formula = efeito["formula"]
-
                     if alvo not in ALVOS_DISPONIVEIS:
                         continue
-
                     try:
-                        valor = avaliar_formula(formula, construir_contexto_base(self.ficha))
+                        valor = avaliar_formula(formula, contexto)
                     except Exception as e:
-                        print(f"Erro ao avaliar efeito de estilo de luta ({alvo}): {e}")
+                        print(f"Erro estilo luta ({alvo}): {e}")
                         continue
-
                     atual = bonus_total.get(alvo, 0)
+                    if operacao == '+': bonus_total[alvo] = atual + valor
+                    elif operacao == '-': bonus_total[alvo] = atual - valor
+                    elif operacao == '*': bonus_total[alvo] = bonus_total.get(alvo, 1) * valor
+                    elif operacao == '/' and valor != 0: bonus_total[alvo] = bonus_total.get(alvo, 1) / valor
+                    elif operacao == '=': bonus_total[alvo] = valor
 
-                    if operacao == '+':
-                        bonus_total[alvo] = atual + valor
-                    elif operacao == '-':
-                        bonus_total[alvo] = atual - valor
-                    elif operacao == '*':
-                        base = bonus_total.get(alvo, 1) if alvo in bonus_total else 1
-                        bonus_total[alvo] = base * valor
-                    elif operacao == '/':
-                        base = bonus_total.get(alvo, 1) if alvo in bonus_total else 1
-                        if valor != 0:
-                            bonus_total[alvo] = base / valor
-                    elif operacao == '=':
-                        bonus_total[alvo] = valor
-
+            # 8. Finaliza
             self.ficha["bonus_passivos"] = bonus_total
             self._salvar()
             self._atualizar_recursos_por_grau_e_nex()
@@ -999,15 +990,13 @@ class FichaPersonagem:
             estado["san_atual"] = estado.get("san_maximo", 0)
             estado["pe_atual"] = estado.get("pe_maximo", 0)
 
-            # Verifica se as barras ainda existem antes de atualizar
             for chave, barra in list(self._barras.items()):
                 if barra and barra.winfo_exists():
-                    if chave == "pv":
-                        barra.set_valores(estado["pv_atual"], estado["pv_maximo"])
-                    elif chave == "san":
-                        barra.set_valores(estado["san_atual"], estado["san_maximo"])
-                    elif chave == "pe":
-                        barra.set_valores(estado["pe_atual"], estado["pe_maximo"])
+                    if chave == "pv": barra.set_valores(estado["pv_atual"], estado["pv_maximo"])
+                    elif chave == "san": barra.set_valores(estado["san_atual"], estado["san_maximo"])
+                    elif chave == "pe": barra.set_valores(estado["pe_atual"], estado["pe_maximo"])
+
+            self._atualizar_ui_atributos()
 
             for painel in self._paineis_aba.values():
                 if isinstance(painel, PainelResumo):

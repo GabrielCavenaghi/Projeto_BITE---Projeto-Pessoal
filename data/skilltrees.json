@@ -34,9 +34,9 @@
         {"id": "for_10", "nome": "+5 Carga (1)", "descricao": "Ganha +5 de capacidade de carga.", "custo": 2, "requisitos": [], "tipo": "Passiva", "efeitos": [{"alvo": "CARGA", "operacao": "+", "formula": [{"tipo": "constante", "valor": 5}]}]},
         {"id": "for_11", "nome": "+5 Carga (2)", "descricao": "Ganha mais +5 de capacidade de carga.", "custo": 2, "requisitos": ["for_10"], "tipo": "Passiva", "efeitos": [{"alvo": "CARGA", "operacao": "+", "formula": [{"tipo": "constante", "valor": 5}]}]},
         {"id": "for_12", "nome": "Até Acertar", "descricao": "Ao errar um ataque desarmado você recebe +2 no teste de ataque (cumulativo) até acertar.", "custo": 2, "requisitos": [], "tipo": "Ativa"},
-        {"id": "for_13", "nome": "Calejar", "descricao": "Soma sua FOR na DF e FOR*LP em RD geral.", "custo": 2, "requisitos": [], "tipo": "Passiva", "efeitos": [
+        {"id": "for_13", "nome": "Calejar", "descricao": "Soma sua FOR na DF e FOR*NEX em RD geral.", "custo": 2, "requisitos": [], "tipo": "Passiva", "efeitos": [
             {"alvo": "DEF", "operacao": "+", "formula": [{"tipo": "variavel", "valor": "FOR"}]},
-            {"alvo": "RD_GERAL", "operacao": "+", "formula": [{"tipo": "variavel", "valor": "FOR"}, {"tipo": "operador", "valor": "*"}, {"tipo": "variavel", "valor": "LP"}]}
+            {"alvo": "RD_GERAL", "operacao": "+", "formula": [{"tipo": "variavel", "valor": "FOR"}, {"tipo": "operador", "valor": "*"}, {"tipo": "variavel", "valor": "NEX"}]}
         ]},
         {"id": "for_14", "nome": "Força Bruta", "descricao": "Pode substituir o atributo base de qualquer teste de perícia por Força, pagando 2 PE. Requer FOR 4.", "custo": 2, "requisitos": [], "tipo": "Ativa"},
         {"id": "for_15", "nome": "Força Avassaladora", "descricao": "Ataques corpo a corpo recebem +2 de dano para cada dado rolado.", "custo": 3, "requisitos": ["for_14"], "tipo": "Passiva"},

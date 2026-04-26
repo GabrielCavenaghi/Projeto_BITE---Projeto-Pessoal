@@ -192,10 +192,12 @@ class PainelHabilidades(ctk.CTkFrame):
 
         popup = ctk.CTkToplevel(self.winfo_toplevel())
         popup.title(titulo)
-        popup.geometry("600x650")
         popup.minsize(500, 500)
-        popup.resizable(False, False)
-        popup.after(100, popup.grab_set)
+        popup.resizable(True, True)
+        # Centraliza na tela
+        popup.after(10, lambda: popup.geometry(
+            f"{min(700, popup.winfo_screenwidth()-100)}x{min(800, popup.winfo_screenheight()-100)}"
+        ))
 
         # Área rolável
         scroll = ctk.CTkScrollableFrame(popup, fg_color="transparent")

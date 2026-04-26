@@ -123,15 +123,19 @@ ALVOS_DISPONIVEIS = {
     "DT": {"nome": "DT (Dificuldade de Testes)", "categoria": "Geral"},
     "DT_HABILIDADES_TECNICA": {"nome": "DT (Habilidades de Técnica)", "categoria": "Geral"},
 
+    # Atributos
+    "AGI": {"nome": "Agilidade", "categoria": "Atributos"},
+    "FOR": {"nome": "Força", "categoria": "Atributos"},
+    "INT": {"nome": "Inteligência", "categoria": "Atributos"},
+    "VIG": {"nome": "Vigor", "categoria": "Atributos"},
+    "PRE": {"nome": "Presença", "categoria": "Atributos"},
+
     # Outros
     "CARACTERISTICA_INVOCACAO": {"nome": "Característica de Invocação", "categoria": "Invocação"},
     "LP": {"nome": "LP", "categoria": "Outros"},
 }
 
-# Operações permitidas para efeitos passivos.
-# Nota: "*" e "/" podem ser usados em fórmulas, mas como operação principal
-# geralmente apenas "+", "-" e "=" fazem sentido para acumular bônus.
-OPERACOES_PERMITIDAS = ["+", "-", "*", "/", "="]
+OPERACOES_PERMITIDAS = ["+", "-"]
 
 # Variáveis que podem ser utilizadas nas fórmulas.
 # Estas devem corresponder às chaves retornadas por construir_contexto_base().

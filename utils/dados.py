@@ -131,7 +131,6 @@ def avaliar_dado_str(
 
     # Obtém as chaves para o tipo de efeito (fallback para tecnica)
     chaves = MAP_BONUS.get(tipo_efeito, MAP_BONUS["tecnica"])
-
     bonus_passo = 0
     bonus_dados_extra = 0
     bonus_por_dado = 0
@@ -149,7 +148,7 @@ def avaliar_dado_str(
         if chaves["passo_extra"]:
             bonus_passo += int(_get(chaves["passo_extra"]))
         # Verdadeiro Jujutsu (apenas para técnica)
-        if tipo_efeito == "tecnica" or tipo_efeito == "maldicao":
+        if tipo_efeito == "tecnica" or tipo_efeito == "maldicao" or tipo_efeito == "invocacao":
             bonus_passo += int(_get("VERDADEIRO_JUJUTSU"))
 
         # Dados extras
