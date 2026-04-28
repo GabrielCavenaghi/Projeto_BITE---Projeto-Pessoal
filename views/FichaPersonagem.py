@@ -12,6 +12,7 @@ from ficha import (
 )
 
 from utils.Efeitos_Scalling import ALVOS_DISPONIVEIS, avaliar_efeitos
+from views.Painel_Invocacao import PainelInvocacao
 
 # Importa todos os painéis e componentes necessários
 
@@ -48,6 +49,7 @@ class FichaPersonagem:
         "Estilo de Luta",
         "Técnica",
         "Inventário",
+        "Invocações",
         "Resumo",
         "Anotações",
     ]
@@ -390,6 +392,7 @@ class FichaPersonagem:
             "Técnica":         lambda: PainelTecnica(pai, self.ficha, on_save=self._salvar),
             "Habilidades":     lambda: PainelHabilidades(pai, self.ficha, on_change=self._recalcular_tudo, on_save=self._salvar),
             "Inventário":      lambda: PainelInventario(pai, self.ficha, on_save=self._salvar),
+            "Invocações":       lambda: PainelInvocacao(pai, self.ficha, on_save=self._salvar),
             "Resumo":          lambda: PainelResumo(pai, self.ficha, info_grau=self._carregar_graus().get(self.ficha.get("grau", "Grau 4"), {}), atributos=self.ficha.get("atributos", {})),
             "Anotações":       lambda: PainelAnotacoes(pai, self.ficha, on_save=self._salvar),
         }

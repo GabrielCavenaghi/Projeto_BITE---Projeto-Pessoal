@@ -1,0 +1,137 @@
+[
+    {
+        "nome": "Arma Amaldiçoada Sinistra",
+        "tipo": "Passiva",
+        "classe": "Amaldiçoado",
+        "grau_base": "3",
+        "descricao_base": "Envolve sua maldição em sua arma causando dano adicional\naumenta 7 dados de dano do mesmo tipo +5d6 do elemento",
+        "versoes": {
+            "ESPECIAL": "aumenta 1 passo de dane do mesmo tipo +NEXd12 do elemento",
+            "GRAU 1": "aumenta 1 passo de dane do mesmo tipo +NEXd12 do elemento",
+            "GRAU 2": "aumenta LP dados de dano do mesmo tipo +10d8 do elemento",
+            "ULTRA ESPECIAL": "aumenta AB/4 passos de dane do mesmo tipo +NEX*LP d12 do elemento"
+        },
+        "efeitos_por_versao": {
+            "GRAU 1": [
+                {
+                    "alvo": "DADO_MALDICAO",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "NEX"
+                        }
+                    ]
+                }
+            ]
+        },
+        "id": "custom_9e574e"
+    },
+    {
+        "nome": "Arma Amaldiçoada Sinistra",
+        "tipo": "Ativa",
+        "classe": "Amaldiçoado",
+        "grau_base": "3",
+        "descricao_base": "Envolve sua maldição em sua arma causando dano adicional\naumenta 7 dados de dano do mesmo tipo +5d6 do elemento",
+        "versoes": {
+            "ESPECIAL": "aumenta 1 passo de dane do mesmo tipo +NEXd12 do elemento",
+            "GRAU 1": "aumenta 1 passo de dane do mesmo tipo +NEXd12 do elemento",
+            "GRAU 2": "aumenta LP dados de dano do mesmo tipo +10d8 do elemento",
+            "ULTRA ESPECIAL": "aumenta AB/4 passos de dane do mesmo tipo +NEX*LP d12 do elemento"
+        },
+        "efeitos_por_versao": {},
+        "id": "custom_2bc1c7"
+    },
+    {
+        "nome": "Arma Amaldiçoada Sinistra",
+        "tipo": "Passiva",
+        "classe": "Amaldiçoado",
+        "grau_base": "3",
+        "descricao_base": "Envolve sua maldição em sua arma causando dano adicional\naumenta 7 dados de dano do mesmo tipo +5d6 do elemento",
+        "versoes": {
+            "ESPECIAL": "aumenta 1 passo de dane do mesmo tipo +NEXd12 do elemento",
+            "GRAU 1": "aumenta NEX dados de dano do mesmo tipo +20d10 do elemento",
+            "GRAU 2": "aumenta LP dados de dano do mesmo tipo +10d8 do elemento",
+            "ULTRA ESPECIAL": "aumenta AB/4 passos de dano do mesmo tipo +NEX*LP d12 do elemento"
+        },
+        "efeitos_por_versao": {
+            "ULTRA ESPECIAL": [
+                {
+                    "alvo": "PASSO_MALDICAO",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "AB"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "/"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 4
+                        }
+                    ]
+                },
+                {
+                    "alvo": "DADO_MALDICAO",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "NEX"
+                        }
+                    ]
+                }
+            ],
+            "GRAU 2": [
+                {
+                    "alvo": "DADO_MALDICAO",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP"
+                        }
+                    ]
+                }
+            ],
+            "GRAU 1": [
+                {
+                    "alvo": "DADO_MALDICAO",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "NEX"
+                        }
+                    ]
+                }
+            ],
+            "ESPECIAL": [
+                {
+                    "alvo": "DADO_MALDICAO",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "NEX"
+                        }
+                    ]
+                },
+                {
+                    "alvo": "PASSO_MALDICAO",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        "id": "custom_6b2913"
+    }
+]

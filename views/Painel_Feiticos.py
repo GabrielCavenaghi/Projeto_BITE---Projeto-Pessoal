@@ -1,8 +1,10 @@
 from datetime import datetime
+from tkinter import messagebox
 
 import customtkinter as ctk
 import json
 import os
+from views.EfeitosEditorFrame import EfeitosEditorFrame
 
 class PainelFeiticos(ctk.CTkFrame):
     """Aba: feitiços escolhidos (padrão + custom)."""
@@ -284,11 +286,22 @@ class PainelFeiticos(ctk.CTkFrame):
                          font=ctk.CTkFont(size=12),
                          text_color="#aaaaaa").pack(anchor="w", padx=12, pady=(0, 10))
 
-        # Frame de ações (remover + controles de passiva)
+        # Frame de ações (remover + editar + controles de passiva)
         acoes_frame = ctk.CTkFrame(card, fg_color="transparent")
         acoes_frame.pack(fill="x", padx=12, pady=(0, 8))
 
-        # Botão Remover (alinhado à direita)
+        btn_editar = ctk.CTkButton(
+            acoes_frame,
+            text="Editar",
+            width=70,
+            height=28,
+            font=ctk.CTkFont(size=11),
+            fg_color="#3a3a3a",
+            hover_color="#4a4a4a",
+            command=lambda: self._abrir_editor_feitico(f)
+        )
+        btn_editar.pack(side="right", padx=(0, 5))
+
         btn_remover = ctk.CTkButton(
             acoes_frame,
             text="✕ Remover",
@@ -670,6 +683,208 @@ class PainelFeiticos(ctk.CTkFrame):
 
         # Usa after_idle para executar quando não houver mais eventos pendentes
         self.after_idle(reconstruir_e_recalcular)
+
+    def _abrir_editor_feitico(self, feitico: dict):
+        # ── 1. Criação do popup ──
+        popup = ctk.CTkToplevel(self.winfo_toplevel())
+        popup.title(f"Editar Feitiço: {feitico.get('nome')}")
+        popup.geometry("650x800")
+        popup.minsize(550, 700)
+        popup.after(100, popup.grab_set)
+
+        scroll = ctk.CTkScrollableFrame(popup, fg_color="transparent")
+        scroll.pack(fill="both", expand=True, padx=20, pady=(20, 10))
+        main = ctk.CTkFrame(scroll, fg_color="transparent")
+        main.pack(fill="both", expand=True)
+
+        ctk.CTkLabel(main, text="Editar Feitiço", font=ctk.CTkFont(size=16, weight="bold")).pack(anchor="w", pady=(0,15))
+
+        # ── 2. Campos básicos ──
+        ctk.CTkLabel(main, text="Nome:", anchor="w").pack(fill="x")
+        e_nome = ctk.CTkEntry(main)
+        e_nome.insert(0, feitico.get("nome", ""))
+        e_nome.pack(fill="x", pady=(2,12))
+
+        ctk.CTkLabel(main, text="Tipo:", anchor="w").pack(fill="x")
+        tipo_var = ctk.StringVar(value=feitico.get("tipo", "Ativa"))
+        frame_tipo = ctk.CTkFrame(main, fg_color="transparent")
+        frame_tipo.pack(fill="x", pady=(2,12))
+        ctk.CTkRadioButton(frame_tipo, text="Passiva", variable=tipo_var, value="Passiva").pack(side="left", padx=10)
+        ctk.CTkRadioButton(frame_tipo, text="Ativa", variable=tipo_var, value="Ativa").pack(side="left", padx=10)
+
+        # Grau Base (aprendizado)
+        ctk.CTkLabel(main, text="Grau de Aprendizado:", anchor="w").pack(fill="x")
+        grau_var = ctk.StringVar(value=feitico.get("grau_base", "4"))
+        grau_menu = ctk.CTkOptionMenu(main, values=["4", "3", "2", "1", "Semi Especial", "Especial", "Ultra Especial"],
+                                    variable=grau_var)
+        grau_menu.pack(fill="x", pady=(2,12))
+
+        # ── 3. Descrição Base (sempre visível, editável) ──
+        ctk.CTkLabel(main, text="Descrição Base:", anchor="w").pack(fill="x", pady=(10,2))
+        desc_base_var = ctk.StringVar(value=feitico.get("descricao_base") or feitico.get("descricao", ""))
+        e_desc_base = ctk.CTkTextbox(main, height=80)
+        e_desc_base.insert("1.0", desc_base_var.get())
+        e_desc_base.pack(fill="x", pady=(2,12))
+
+        # ── 4. Versões melhoradas (dropdown + descrição + efeitos) ──
+        ctk.CTkLabel(main, text="Versões Melhoradas", font=ctk.CTkFont(weight="bold")).pack(anchor="w", pady=(10,5))
+
+        # Carrega dados existentes
+        efeitos_por_versao = feitico.get("efeitos_por_versao", {})
+        versoes_desc = feitico.get("versoes", {})
+        # Lista de versões que não são BASE
+        versoes_melhoradas = sorted(set(versoes_desc.keys()) | set(efeitos_por_versao.keys()))  # sem BASE
+
+        if not versoes_melhoradas:
+            ctk.CTkLabel(main, text="Nenhuma versão melhorada.").pack(anchor="w")
+            versao_selecionada = None
+        else:
+            # Dropdown para selecionar a versão
+            sel_frame = ctk.CTkFrame(main, fg_color="transparent")
+            sel_frame.pack(fill="x", pady=(5,10))
+            ctk.CTkLabel(sel_frame, text="Versão:").pack(side="left")
+            versao_selecionada = ctk.StringVar(value=versoes_melhoradas[0])
+            versao_menu = ctk.CTkOptionMenu(sel_frame, values=versoes_melhoradas, variable=versao_selecionada)
+            versao_menu.pack(side="left", padx=5)
+
+            # Descrição da versão selecionada
+            ctk.CTkLabel(main, text="Descrição da Versão:").pack(anchor="w")
+            e_desc_versao = ctk.CTkTextbox(main, height=80)
+            e_desc_versao.pack(fill="x", pady=(2,12))
+
+            # Container dos efeitos
+            efeitos_container = ctk.CTkFrame(main, fg_color="transparent")
+            efeitos_container.pack(fill="both", expand=True, pady=(10,5))
+            editor_atual = [None]
+
+            # Dicionário para armazenar as descrições editadas (para não perder ao trocar de versão)
+            descricoes_editaveis = {}
+
+            def salvar_versao_atual(versao: str):
+                """Salva a descrição (e os efeitos) associados à versão fornecida."""
+                if versao is None:
+                    return
+                # A versão passada é a que está sendo DEIXADA (a versão corrente)
+                texto = e_desc_versao.get("1.0", "end-1c").strip()
+                descricoes_editaveis[versao] = texto
+                # Efeitos já são salvos pelo on_change do EfeitosEditorFrame
+
+            def carregar_versao(versao: str):
+                """Carrega a descrição e os efeitos da versão indicada."""
+                texto = descricoes_editaveis.get(versao, versoes_desc.get(versao, ""))
+                e_desc_versao.delete("1.0", "end")
+                e_desc_versao.insert("1.0", texto)
+
+                # Efeitos
+                for w in efeitos_container.winfo_children():
+                    w.destroy()
+                efeitos = efeitos_por_versao.get(versao, [])
+                editor = EfeitosEditorFrame(
+                    efeitos_container,
+                    efeitos_iniciais=efeitos,
+                    on_change=lambda novos, v=versao: efeitos_por_versao.update({v: novos})
+                )
+                editor.pack(fill="both", expand=True)
+                editor_atual[0] = editor
+
+            def ao_mudar_versao(nova_versao):
+                # Salva a versão que será deixada
+                if hasattr(self, '_versao_corrente') and self._versao_corrente != nova_versao:
+                    salvar_versao_atual(self._versao_corrente)   # <-- versão anterior
+                # Carrega a nova versão
+                carregar_versao(nova_versao)
+                self._versao_corrente = nova_versao
+
+            versao_menu.configure(command=ao_mudar_versao)
+            # Inicializa com a primeira versão
+            self._versao_corrente = versoes_melhoradas[0]
+            carregar_versao(self._versao_corrente)
+
+        # ── 5. Botões Salvar/Cancelar ──
+        btn_frame = ctk.CTkFrame(popup, fg_color="transparent")
+        btn_frame.pack(fill="x", padx=20, pady=(0,20))
+
+        def salvar_edicao():
+            # Salva a versão atualmente exibida (se houver)
+            if versao_selecionada is not None:
+                salvar_versao_atual(versao_selecionada.get())
+
+            nome = e_nome.get().strip()
+            if not nome:
+                messagebox.showerror("Erro", "O nome é obrigatório.")
+                return
+            novo_tipo = tipo_var.get()
+            novo_grau = grau_var.get()
+            nova_desc_base = e_desc_base.get("1.0", "end-1c").strip()
+
+            # Reconstrói 'versoes' com as descrições editadas (apenas não vazias)
+            novas_versoes = {}
+            if versao_selecionada is not None:
+                for v in versoes_melhoradas:
+                    desc = descricoes_editaveis.get(v, versoes_desc.get(v, ""))
+                    if desc.strip():
+                        novas_versoes[v] = desc
+
+            feitico_editado = {
+                "nome": nome,
+                "tipo": novo_tipo,
+                "classe": feitico.get("classe", "Customizado"),
+                "grau_base": novo_grau,
+                "descricao_base": nova_desc_base,
+                "versoes": novas_versoes,
+                "efeitos_por_versao": {v: e for v, e in efeitos_por_versao.items() if e},  # remove listas vazias
+            }
+
+            fid_original = feitico["id"]
+            if fid_original.startswith("custom_"):
+                self._atualizar_feitico_customizado(fid_original, feitico_editado)
+                self._db[fid_original] = {**feitico, **feitico_editado, "id": fid_original}
+            else:
+                import uuid
+                novo_id = f"custom_{uuid.uuid4().hex[:6]}"
+                feitico_editado["id"] = novo_id
+                self._salvar_feitico_customizado(feitico_editado)
+                self._db[novo_id] = feitico_editado
+                if fid_original in self._ficha.get("feiticos", []):
+                    self._ficha["feiticos"].remove(fid_original)
+                    self._ficha.setdefault("feiticos_custom", []).append(novo_id)
+
+            if self._on_save:
+                self._on_save()
+            self._db = self._carregar_db()
+            self._construir()
+            popup.destroy()
+
+        ctk.CTkButton(btn_frame, text="Salvar", fg_color="#1a6b1a", command=salvar_edicao).pack(side="right", padx=5)
+        ctk.CTkButton(btn_frame, text="Cancelar", fg_color="transparent", border_width=1,
+                    command=popup.destroy).pack(side="right")
+        
+    def _atualizar_feitico_customizado(self, fid: str, dados: dict):
+        base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        caminho = os.path.join(base, self.CAMINHO_CUSTOM)
+        if not os.path.exists(caminho):
+            return
+        with open(caminho, "r", encoding="utf-8") as f:
+            lista = json.load(f)
+        for i, item in enumerate(lista):
+            if item["id"] == fid:
+                lista[i] = {**item, **dados, "id": fid}
+                break
+        with open(caminho, "w", encoding="utf-8") as f:
+            json.dump(lista, f, indent=4, ensure_ascii=False)
+
+    def _salvar_feitico_customizado(self, feitico: dict):
+        # Caminho relativo à raiz do projeto (dois níveis acima de __file__)
+        base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        caminho = os.path.join(base, self.CAMINHO_CUSTOM)
+        if os.path.exists(caminho):
+            with open(caminho, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        else:
+            data = []
+        data.append(feitico)
+        with open(caminho, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
         
 
     def _remover_feitico(self, fid: str):

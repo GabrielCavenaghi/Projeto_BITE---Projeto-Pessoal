@@ -1,0 +1,60 @@
+{
+  "graus": {
+    "Grau 4": {
+      "pontos_atributo": 4,
+      "maximo_atributo": 3,
+      "acoes_caracteristicas": 2,
+      "dano_base": "2d6+AB",
+      "vida_formula": "10 + VIG*2 + DT + LP",
+      "vida_bonus_por_vig": 0
+    },
+    "Grau 3": {
+      "pontos_atributo": 6,
+      "maximo_atributo": 4,
+      "acoes_caracteristicas": 2,
+      "dano_base": "2d8+AB",
+      "vida_formula": "15 + VIG*3 + DT + LP",
+      "vida_bonus_por_vig": 0
+    },
+    "Grau 2": {
+      "pontos_atributo": 8,
+      "maximo_atributo": 6,
+      "acoes_caracteristicas": 3,
+      "dano_base": "2d10+AB",
+      "vida_formula": "20 + VIG*4 + DT + LP",
+      "vida_bonus_por_vig": 0
+    },
+    "Grau 1": {
+      "pontos_atributo": 10,
+      "maximo_atributo": 8,
+      "acoes_caracteristicas": 3,
+      "dano_base": "4d10+AB",
+      "vida_formula": "25 + VIG*5 + DT + LP",
+      "vida_bonus_por_vig": 0
+    },
+    "Grau Semi Especial": {
+      "pontos_atributo": 12,
+      "maximo_atributo": 9,
+      "acoes_caracteristicas": 4,
+      "dano_base": "25d12+AB*10",
+      "vida_formula": "50 + VIG*6 + DT + LP",
+      "vida_bonus_por_vig": 100
+    },
+    "Grau Especial": {
+      "pontos_atributo": 15,
+      "maximo_atributo": 11,
+      "acoes_caracteristicas": 4,
+      "dano_base": "50d12+PB",
+      "vida_formula": "80 + VIG*7 + DT + LP",
+      "vida_bonus_por_vig": 500
+    },
+    "Grau Ultra Especial": {
+      "pontos_atributo": 20,
+      "maximo_atributo": 13,
+      "acoes_caracteristicas": 6,
+      "dano_base": "110d10+PB*2",
+      "vida_formula": "150 + VIG*8 + DT + LP",
+      "vida_bonus_por_vig": 1000
+    }
+  }
+}

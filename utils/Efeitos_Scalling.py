@@ -139,8 +139,6 @@ OPERACOES_PERMITIDAS = ["+", "-"]
 
 # Variáveis que podem ser utilizadas nas fórmulas.
 # Estas devem corresponder às chaves retornadas por construir_contexto_base().
-# Variáveis que podem ser utilizadas nas fórmulas.
-# Estas devem corresponder às chaves retornadas por construir_contexto_base().
 VARIAVEIS_BASE = [
     "LP",           # LP total (base + bônus)
     "LP_NATURAL",   # LP base (apenas do NEX)
@@ -149,6 +147,9 @@ VARIAVEIS_BASE = [
     "NEX",          # Valor percentual do NEX (ex.: 99.3)
     "AGI", "FOR", "INT", "VIG", "PRE",  # Atributos
     "EA",           # Energia Amaldiçoada (treino + bônus)
+    "DT",           # DT base (sem modificadores de habilidades ou efeitos)
+    "DT_TECNICA",   # DT específico para habilidades de técnica
+    "PB",           # Perícia Base
     "PODERES_PARANORMAIS"  # Quantidade de poderes paranormais
 ]
 

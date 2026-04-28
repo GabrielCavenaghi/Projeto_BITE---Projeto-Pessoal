@@ -156,10 +156,12 @@ class PainelCombate(ctk.CTkFrame):
 
         popup = ctk.CTkToplevel(self.winfo_toplevel())
         popup.title(titulo)
-        popup.geometry("550x650")
-        popup.minsize(500, 550)
-        popup.resizable(False, False)
-        popup.after(100, popup.grab_set)
+        popup.minsize(500, 500)
+        popup.resizable(True, True)
+        # Centraliza na tela
+        popup.after(10, lambda: popup.geometry(
+            f"{min(700, popup.winfo_screenwidth()-100)}x{min(800, popup.winfo_screenheight()-100)}"
+        ))
 
         scroll = ctk.CTkScrollableFrame(popup, fg_color="transparent")
         scroll.pack(fill="both", expand=True, padx=20, pady=(20, 10))
@@ -183,17 +185,19 @@ class PainelCombate(ctk.CTkFrame):
             e_dano.insert(0, ataque.get("dano", ""))
         e_dano.pack(fill="x", pady=(2, 12))
 
-        # Tipo de Efeito (dropdown)
-        ctk.CTkLabel(main, text="Tipo de Dano:", anchor="w").pack(fill="x")
-        opcoes_tipo = [self.TIPO_EFEITO_NOMES[t] for t in self.TIPO_EFEITO_OPCOES]
-        tipo_var = ctk.StringVar()
-        tipo_menu = ctk.CTkOptionMenu(main, values=opcoes_tipo, variable=tipo_var)
-        if editando:
-            tipo_atual = ataque.get("tipo_efeito", "corpo")
-            tipo_var.set(self.TIPO_EFEITO_NOMES.get(tipo_atual, "Corpo a Corpo"))
-        else:
-            tipo_var.set("Corpo a Corpo")
-        tipo_menu.pack(fill="x", pady=(2, 12))
+        # Substitua o OptionMenu de tipo único por checkboxes
+        ctk.CTkLabel(main, text="Tipos de Dano (pode combinar):", anchor="w").pack(fill="x")
+        tipos_vars = {}
+        tipos_frame = ctk.CTkFrame(main, fg_color="transparent")
+        tipos_frame.pack(fill="x", pady=(2, 12))
+
+        tipos_selecionados = ataque.get("tipos_efeito", [ataque.get("tipo_efeito", "corpo")]) if editando else ["corpo"]
+
+        for chave, nome in self.TIPO_EFEITO_NOMES.items():
+            var = ctk.BooleanVar(value=chave in tipos_selecionados)
+            cb = ctk.CTkCheckBox(tipos_frame, text=nome, variable=var)
+            cb.pack(anchor="w", pady=1)
+            tipos_vars[chave] = var
 
         # Checkbox aplicar passo
         aplicar_passo_var = ctk.BooleanVar(value=ataque.get("aplicar_passo", False) if editando else False)
@@ -247,13 +251,9 @@ class PainelCombate(ctk.CTkFrame):
                 messagebox.showwarning("Aviso", "O nome do ataque é obrigatório.")
                 return
 
-            # Converte nome amigável para chave interna
-            tipo_nome_sel = tipo_var.get()
-            tipo_efeito = "corpo"
-            for chave, nome_amigavel in self.TIPO_EFEITO_NOMES.items():
-                if nome_amigavel == tipo_nome_sel:
-                    tipo_efeito = chave
-                    break
+            tipos_efeito = [chave for chave, var in tipos_vars.items() if var.get()]
+            if not tipos_efeito:
+                tipos_efeito = ["corpo"]  # fallback
 
             try:
                 margem = int(e_margem.get())
@@ -269,7 +269,8 @@ class PainelCombate(ctk.CTkFrame):
                 "id": ataque.get("id") if editando else str(uuid.uuid4()),
                 "nome": nome,
                 "dano": e_dano.get().strip() or "1d6",
-                "tipo_efeito": tipo_efeito,
+                "tipos_efeito": tipos_efeito,
+                "tipo_efeito": tipos_efeito[0],
                 "aplicar_passo": aplicar_passo_var.get(),
                 "margem_ameaca": margem,
                 "multiplicador_critico": mult,

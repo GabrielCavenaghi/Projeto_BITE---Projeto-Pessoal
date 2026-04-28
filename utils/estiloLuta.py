@@ -115,10 +115,7 @@ def _executar_tr_estilo(hab: dict, ficha: dict) -> dict:
     }
 
 def _executar_passiva_estilo(hab: dict, ficha: dict) -> dict:
-    # Passivas de estilo são gerenciadas pelo sistema de efeitos (Efeitos_Scalling)
-    # e ativadas/desativadas via checkbox no painel.
     return {
         "sucesso": True,
-        "mensagem": f"Passiva '{hab['nome']}' está ativa. Seus efeitos são aplicados automaticamente.",
         "detalhes": {}
     }
