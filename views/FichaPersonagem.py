@@ -101,7 +101,7 @@ class FichaPersonagem:
         for w in self.app.winfo_children():
             w.destroy()
 
-        self.app.geometry("1100x700")
+        self.app.geometry("1400x900")
         self.app.minsize(900, 560)
         self.app.title(f"Projeto BITE — {self.ficha.get('nome', 'Ficha')}")
 
@@ -138,65 +138,68 @@ class FichaPersonagem:
     def _construir_lateral(self):
         lat = self._lateral
 
-        # Botão voltar
+        # ── Botão Voltar fixo (fora do scroll) ───────────────────────────────
         ctk.CTkButton(lat, text="← Voltar", font=self.f_botao, width=90,
-                      fg_color="transparent", border_width=1,
-                      border_color="#333333",
-                      command=self._voltar).pack(anchor="nw", padx=12, pady=(12, 0))
+                    fg_color="transparent", border_width=1,
+                    border_color="#333333",
+                    command=self._voltar).pack(anchor="nw", padx=12, pady=(12, 6))
+
+        # ── Área rolável (todo o resto) ───────────────────────────────────────
+        scroll = ctk.CTkScrollableFrame(lat, fg_color="transparent")
+        scroll.pack(fill="both", expand=True)
+        self._aplicar_scroll_lateral(scroll)
+
+        # A partir daqui, substitua `lat` por `scroll` em todos os widgets
+        lat = scroll
 
         # Identidade
         ctk.CTkLabel(lat, text=self.ficha.get("nome", "—"),
-                     font=self.f_titulo,
-                     wraplength=240).pack(pady=(10, 2), padx=16)
+                    font=self.f_titulo,
+                    wraplength=240).pack(pady=(10, 2), padx=16)
 
         ctk.CTkLabel(lat,
-                     text=f"{self.ficha.get('classe','—')}  ·  {self.ficha.get('trilha','—')}",
-                     font=self.f_subtitulo, text_color="#888888",
-                     wraplength=240).pack(pady=(0, 2), padx=16)
+                    text=f"{self.ficha.get('classe','—')}  ·  {self.ficha.get('trilha','—')}",
+                    font=self.f_subtitulo, text_color="#888888",
+                    wraplength=240).pack(pady=(0, 2), padx=16)
 
-                # Frame para NEX e Grau editáveis
-        frame_nex_grau = ctk.CTkFrame(lat, fg_color="transparent")
-        frame_nex_grau.pack(fill="x", padx=16, pady=(0, 10))
-
-        # NEX
-        ctk.CTkLabel(frame_nex_grau, text="NEX:", font=ctk.CTkFont(size=11),
-                     text_color="#888888").pack(side="left")
-
+        # Linha 1: NEX
         opcoes_nex = self._listar_opcoes_nex()
-        # Ordena para exibição mais lógica (opcional)
         opcoes_nex.sort(key=lambda x: float(x.replace('%', '')) if x != "99.99%" else 99.99)
+
+        frame_nex = ctk.CTkFrame(lat, fg_color="transparent")
+        frame_nex.pack(fill="x", padx=16, pady=(0, 4))
+
+        ctk.CTkLabel(frame_nex, text="NEX:", font=ctk.CTkFont(size=11),
+                    text_color="#888888").pack(side="left")
 
         self._nex_var = ctk.StringVar(value=self.ficha.get("nex", "5%"))
         nex_menu = ctk.CTkOptionMenu(
-            frame_nex_grau,
-            values=opcoes_nex,
-            variable=self._nex_var,
-            width=75,
-            height=28,
-            font=ctk.CTkFont(size=12),
+            frame_nex, values=opcoes_nex, variable=self._nex_var,
+            width=140, height=28, font=ctk.CTkFont(size=12),
             command=self._ao_mudar_nex
         )
-        nex_menu.pack(side="left", padx=(4, 12))
+        nex_menu.pack(side="left", padx=(4, 0))
 
-        # Grau
-        ctk.CTkLabel(frame_nex_grau, text="Grau:", font=ctk.CTkFont(size=11),
-                     text_color="#888888").pack(side="left")
-
+        # Linha 2: Grau
         opcoes_grau = self._listar_opcoes_grau()
+
+        frame_grau = ctk.CTkFrame(lat, fg_color="transparent")
+        frame_grau.pack(fill="x", padx=16, pady=(0, 10))
+
+        ctk.CTkLabel(frame_grau, text="Grau:", font=ctk.CTkFont(size=11),
+                    text_color="#888888").pack(side="left")
+
         self._grau_var = ctk.StringVar(value=self.ficha.get("grau", "Grau 4"))
         grau_menu = ctk.CTkOptionMenu(
-            frame_nex_grau,
-            values=opcoes_grau,
-            variable=self._grau_var,
-            width=120,
-            height=28,
-            font=ctk.CTkFont(size=12),
+            frame_grau, values=opcoes_grau, variable=self._grau_var,
+            width=180, height=28, font=ctk.CTkFont(size=12),
             command=self._ao_mudar_grau
         )
         grau_menu.pack(side="left", padx=(4, 0))
 
         ctk.CTkFrame(lat, height=1, fg_color="#2a2a2a").pack(fill="x", padx=12)
 
+        # Recursos (PV / SAN / PE)
         rec_frame = ctk.CTkFrame(lat, fg_color="transparent")
         rec_frame.pack(fill="x", padx=16, pady=12)
 
@@ -206,10 +209,9 @@ class FichaPersonagem:
             ("Sanidade", "san", "san_atual",  "san_maximo"),
             ("PE",       "pe",  "pe_atual",   "pe_maximo"),
         ]
-
         for nome_exib, chave, k_atual, k_max in specs:
             barra = BarraRecurso(
-                rec_frame,   # <--- aqui muda de rec_scroll para rec_frame
+                rec_frame,
                 label    = nome_exib,
                 atual    = estado.get(k_atual, 0),
                 maximo   = estado.get(k_max,   0),
@@ -221,17 +223,14 @@ class FichaPersonagem:
 
         ctk.CTkFrame(lat, height=1, fg_color="#2a2a2a").pack(fill="x", padx=12)
 
-        # ══════════════════════════════════════════════════════════════════════
-        # Atributos (EDITÁVEIS)
-        # ══════════════════════════════════════════════════════════════════════
+        # Atributos
         ctk.CTkFrame(lat, height=1, fg_color="#2a2a2a").pack(fill="x", padx=12, pady=(6, 6))
 
-        # Cabeçalho com pontos disponíveis
         header_attr = ctk.CTkFrame(lat, fg_color="transparent")
         header_attr.pack(fill="x", padx=16, pady=(4, 6))
 
         ctk.CTkLabel(header_attr, text="ATRIBUTOS",
-                     font=self.f_secao, text_color="#555555").pack(side="left")
+                    font=self.f_secao, text_color="#555555").pack(side="left")
 
         pontos_disp = calcular_pontos_disponiveis_ficha(self.ficha)
         self._lbl_pontos_disponiveis = ctk.CTkLabel(
@@ -242,34 +241,25 @@ class FichaPersonagem:
         )
         self._lbl_pontos_disponiveis.pack(side="right")
 
-        # Scroll frame para os atributos (caso haja muitos)
-        attr_scroll = ctk.CTkScrollableFrame(lat, fg_color="transparent", height=200)
-        attr_scroll.pack(fill="x", padx=8, pady=(0, 8))
+        attr_container = ctk.CTkFrame(lat, fg_color="transparent")
+        attr_container.pack(fill="x", padx=8, pady=(0, 8))
 
-        # Container interno (para alinhamento)
-        attr_container = ctk.CTkFrame(attr_scroll, fg_color="transparent")
-        attr_container.pack(fill="x")
-
-        # Para cada atributo, criar uma linha com: sigla | valor | [+] [-]
         for sigla, valor in self.ficha.get("atributos", {}).items():
             cor = self.CORES_ATRIBUTO.get(sigla, "#888888")
 
             linha = ctk.CTkFrame(attr_container, fg_color="transparent")
             linha.pack(fill="x", pady=2)
 
-            # Sigla do atributo
             ctk.CTkLabel(linha, text=sigla,
-                         font=ctk.CTkFont(size=12, weight="bold"),
-                         text_color=cor, width=40).pack(side="left", padx=(8, 4))
+                        font=ctk.CTkFont(size=12, weight="bold"),
+                        text_color=cor, width=40).pack(side="left", padx=(8, 4))
 
-            # Valor atual
             lbl_valor = ctk.CTkLabel(linha, text=str(valor),
-                                     font=ctk.CTkFont(size=16, weight="bold"),
-                                     text_color="#ffffff", width=30)
+                                    font=ctk.CTkFont(size=16, weight="bold"),
+                                    text_color="#ffffff", width=30)
             lbl_valor.pack(side="left", padx=4)
             self._attr_widgets[sigla] = lbl_valor
 
-            # Botão diminuir (-)
             btn_menos = ctk.CTkButton(
                 linha, text="−", width=28, height=28,
                 font=ctk.CTkFont(size=14),
@@ -278,7 +268,6 @@ class FichaPersonagem:
             )
             btn_menos.pack(side="right", padx=2)
 
-            # Botão aumentar (+)
             btn_mais = ctk.CTkButton(
                 linha, text="+", width=28, height=28,
                 font=ctk.CTkFont(size=14),
@@ -287,14 +276,12 @@ class FichaPersonagem:
             )
             btn_mais.pack(side="right", padx=2)
 
-        # ══════════════════════════════════════════════════════════════════════
-        # Pontos extras (buffs temporários)
-        # ══════════════════════════════════════════════════════════════════════
+        # Pontos extras
         extras_frame = ctk.CTkFrame(lat, fg_color="transparent")
         extras_frame.pack(fill="x", padx=16, pady=(4, 8))
 
         ctk.CTkLabel(extras_frame, text="Pontos extras:",
-                     font=ctk.CTkFont(size=11), text_color="#666666").pack(side="left")
+                    font=ctk.CTkFont(size=11), text_color="#666666").pack(side="left")
 
         self._entrada_extras = ctk.CTkEntry(extras_frame, width=50, height=26,
                                             font=ctk.CTkFont(size=12),
@@ -302,19 +289,17 @@ class FichaPersonagem:
         self._entrada_extras.pack(side="left", padx=(4, 4))
 
         ctk.CTkButton(extras_frame, text="Adicionar", width=70, height=26,
-                      font=ctk.CTkFont(size=11),
-                      fg_color="#2a2a2a", hover_color="#3a3a3a",
-                      command=self._adicionar_pontos_extras).pack(side="left")
+                    font=ctk.CTkFont(size=11),
+                    fg_color="#2a2a2a", hover_color="#3a3a3a",
+                    command=self._adicionar_pontos_extras).pack(side="left")
 
         # Indicador de salvamento
         self._lbl_salvo = ctk.CTkLabel(lat, text="",
-                                       font=ctk.CTkFont(size=10),
-                                       text_color="#444444")
+                                    font=ctk.CTkFont(size=10),
+                                    text_color="#444444")
         self._lbl_salvo.pack(pady=(8, 4), padx=16)
 
-        # ══════════════════════════════════════════════════════════════════════
-        # Botão Recalcular (PV / PE / SAN)
-        # ══════════════════════════════════════════════════════════════════════
+        # Botão Recalcular
         btn_recalcular = ctk.CTkButton(
             lat,
             text="⟲ Recalcular PV/PE/SAN",
@@ -325,7 +310,24 @@ class FichaPersonagem:
             border_color="#444444",
             command=self._recalcular_tudo
         )
-        btn_recalcular.pack(fill="x", padx=16, pady=(4, 4))
+        btn_recalcular.pack(fill="x", padx=16, pady=(4, 16))
+
+
+    def _aplicar_scroll_lateral(self, scroll):
+        """Fix de scroll com roda do mouse para Linux/Windows na lateral."""
+        def _scroll(delta):
+            scroll._parent_canvas.yview_scroll(delta, "units")
+        def _bind_recursivo(widget):
+            widget.bind("<MouseWheel>", lambda e: _scroll(-1 if e.delta > 0 else 1))
+            widget.bind("<Button-4>",   lambda e: _scroll(-1))
+            widget.bind("<Button-5>",   lambda e: _scroll(1))
+            for child in widget.winfo_children():
+                _bind_recursivo(child)
+        _bind_recursivo(scroll)
+        scroll._parent_canvas.bind("<MouseWheel>", lambda e: _scroll(-1 if e.delta > 0 else 1))
+        scroll._parent_canvas.bind("<Button-4>",   lambda e: _scroll(-1))
+        scroll._parent_canvas.bind("<Button-5>",   lambda e: _scroll(1))
+        scroll.focus_set()
 
     def _make_callback(self, chave: str, k_atual: str, k_max: str):
         """Fábrica de callbacks para as barras de recurso."""

@@ -14,7 +14,7 @@
         {"id": "int_10", "nome": "+1 Ação Mental", "descricao": "Ganha +1 ação padrão Mental por rodada.", "custo": 4, "requisitos": ["int_09"], "tipo": "Passiva"},
         {"id": "int_11", "nome": "Inteligência Apurada", "descricao": "Ao realizar um teste de Intelecto você pode rerolar e ficar com o melhor resultado, uma vez por cena.", "custo": 2, "requisitos": [], "tipo": "Ativa"},
         {"id": "int_12", "nome": "Previsão Semi Perfeita", "descricao": "Uma vez por cena, você prevê um ataque inimigo...", "custo": 2, "requisitos": ["int_11"], "tipo": "Ativa"},
-        {"id": "int_13", "nome": "Análise Precisa", "descricao": "Ao gastar 2 PE, você realiza um teste de investigação ou tática...", "custo": 1, "requisitos": [], "tipo": "Ativa"},
+        {"id": "int_13", "nome": "Análise Precisa", "descricao": "Ao gastar 2 PE, você realiza um teste de investigação ou tática contra um alvo e a cada 10 no resultado você ignora LP de RD inimigo, pode comunicar isso para seus aliados em alcance curto como ação livre, eles recebem o mesmo bônus que você.", "custo": 1, "requisitos": [], "tipo": "Ativa"},
         {"id": "int_14", "nome": "Ápice Cerebral", "descricao": "Uma vez por dia, gastando 7 PE...", "custo": 2, "requisitos": ["int_13"], "tipo": "Ativa"},
         {"id": "int_15", "nome": "Paródia", "descricao": "Se um aliado usar uma habilidade...", "custo": 4, "requisitos": ["int_14", "int_12"], "tipo": "Ativa"}
     ]
@@ -159,7 +159,7 @@
         {"id": "ger_32", "nome": "Presa Favorita", "descricao": "Escolha um elemento que prefere caçar...", "custo": 2, "requisitos": ["ger_31"], "tipo": "Ativa"},
         {"id": "ger_33", "nome": "Morte Silenciosa", "descricao": "Contra criaturas marcadas, seu multiplicador de crítico aumenta em +1.", "custo": 3, "requisitos": ["ger_32"], "tipo": "Ativa"},
         {"id": "ger_34", "nome": "Brecha na Guarda", "descricao": "Uma vez por rodada... gastar uma reação e 2 PE...", "custo": 2, "requisitos": [], "tipo": "Ativa"},
-        {"id": "ger_35", "nome": "Agilidade de Combate", "descricao": "Ao acertar um ataque você pode realizar um ataque adicional...", "custo": 2, "requisitos": [], "tipo": "Ativa"},
+        {"id": "ger_35", "nome": "Agilidade de Combate", "descricao": "Ao acertar um ataque você pode realizar um ataque adicional (Limitado uma vez por turno).", "custo": 2, "requisitos": [], "tipo": "Ativa"},
         {"id": "ger_36", "nome": "Combate Anti-Maldição", "descricao": "Ao atacar uma Maldição você causa 1d10 de dano adicional...", "custo": 2, "requisitos": ["ger_35"], "tipo": "Ativa"},
         {"id": "ger_37", "nome": "Combate Anti-Fantasma", "descricao": "Ao atacar um Fantasma você causa 1d10 de dano adicional...", "custo": 2, "requisitos": ["ger_35"], "tipo": "Ativa"},
         {"id": "ger_38", "nome": "Combate Anti-Pessoal", "descricao": "Ao atacar uma Pessoa você causa 1d10 de dano adicional...", "custo": 2, "requisitos": ["ger_35"], "tipo": "Ativa"},

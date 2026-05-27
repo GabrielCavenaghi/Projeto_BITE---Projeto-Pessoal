@@ -142,6 +142,7 @@ class PainelCombate(ctk.CTkFrame):
                       font=ctk.CTkFont(size=11), fg_color="#8B0000",
                       hover_color="#5a0000",
                       command=lambda: self._remover_ataque(ataque)).pack(side="right")
+        print("ataque:", ataque)
 
     # ──────────────────────────────────────────────────────────────────────────
     # Popup de Criação / Edição

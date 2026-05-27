@@ -24,19 +24,14 @@ def carregar_fichas() -> list:
 
 class GerenciadorFichas:
     def __init__(self, parent, on_voltar_para_main=None):
-        """
-        parent: janela principal (CTk) que será usada como pai da Toplevel
-        on_voltar_para_main: callback chamado ao clicar em Voltar
-        """
         self.parent = parent
         self.on_voltar_para_main = on_voltar_para_main
 
-        # Cria uma janela filha (Toplevel) – NÃO uma nova CTk!
         self.janela = ctk.CTkToplevel(parent)
         self.janela.title("Projeto BITE - Gerenciador de Fichas")
-        self.janela.geometry("900x600")
+        self.janela.geometry("1200x900")
         self.janela.minsize(700, 400)
-        self.janela.protocol("WM_DELETE_WINDOW", self._fechar_janela)  # trata o X
+        self.janela.protocol("WM_DELETE_WINDOW", self._fechar_janela)
 
         self.fonte_titulo = ctk.CTkFont(size=24, weight="bold")
         self.fonte_subtitulo = ctk.CTkFont(size=15, weight="bold")
@@ -44,6 +39,7 @@ class GerenciadorFichas:
         self.fonte_botao = ctk.CTkFont(size=14)
 
         self._criar_layout()
+        
 
     def _fechar_janela(self):
         """Quando o usuário fechar a janela, chama o callback de voltar (se existir)"""
@@ -52,19 +48,16 @@ class GerenciadorFichas:
         self.janela.destroy()
 
     def _criar_layout(self):
-        # Limpa o conteúdo da Toplevel (caso esteja sendo recriada)
         for widget in self.janela.winfo_children():
             widget.destroy()
 
         main_frame = ctk.CTkFrame(self.janela, fg_color="transparent")
         main_frame.pack(fill="both", expand=True, padx=20, pady=20)
 
-        # Botão Voltar
         if self.on_voltar_para_main:
             ctk.CTkButton(main_frame, text="← Voltar", font=self.fonte_botao,
                           command=self._voltar, width=100).pack(anchor="nw", pady=(0, 10))
 
-        # Cabeçalho
         header = ctk.CTkFrame(main_frame, fg_color="transparent")
         header.pack(fill="x", pady=(0, 5))
         ctk.CTkLabel(header, text="Gerenciador de Fichas",
@@ -72,14 +65,27 @@ class GerenciadorFichas:
         ctk.CTkButton(header, text="↺ Atualizar", width=110,
                       font=self.fonte_botao, fg_color="transparent",
                       border_width=1, command=self._recarregar).pack(side="right")
-
         ctk.CTkFrame(main_frame, height=1,
                      fg_color="#444444").pack(fill="x", pady=(5, 10))
-
         self.area = ctk.CTkScrollableFrame(main_frame, fg_color="transparent")
         self.area.pack(fill="both", expand=True)
 
         self._carregar_fichas()
+
+    def _aplicar_scroll(self, scroll):
+        def _scroll(delta):
+            scroll._parent_canvas.yview_scroll(delta, "units")
+        def _bind_scroll_recursivo(widget):
+            widget.bind("<MouseWheel>", lambda e: _scroll(-1 if e.delta > 0 else 1))
+            widget.bind("<Button-4>", lambda e: _scroll(-1))
+            widget.bind("<Button-5>", lambda e: _scroll(1))
+            for child in widget.winfo_children():
+                _bind_scroll_recursivo(child)
+        _bind_scroll_recursivo(scroll)
+        scroll._parent_canvas.bind("<MouseWheel>", lambda e: _scroll(-1 if e.delta > 0 else 1))
+        scroll._parent_canvas.bind("<Button-4>", lambda e: _scroll(-1))
+        scroll._parent_canvas.bind("<Button-5>", lambda e: _scroll(1))
+        scroll.focus_set()
 
     def _carregar_fichas(self):
         for w in self.area.winfo_children():
@@ -88,12 +94,15 @@ class GerenciadorFichas:
         fichas = carregar_fichas()
         if not fichas:
             ctk.CTkLabel(self.area,
-                         text="Nenhuma ficha encontrada em data/fichas/",
-                         font=self.fonte_info, text_color="gray").pack(pady=60)
+                        text="Nenhuma ficha encontrada em data/fichas/",
+                        font=self.fonte_info, text_color="gray").pack(pady=60)
+            self._aplicar_scroll(self.area)  # ← mesmo sem fichas, precisa bindar
             return
 
         for ficha in fichas:
             self._card_ficha(ficha)
+
+        self._aplicar_scroll(self.area)  # ← chamado DEPOIS dos cards existirem
 
     def _recarregar(self):
         self._carregar_fichas()

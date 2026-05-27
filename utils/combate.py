@@ -26,10 +26,9 @@ def executar_ataque_personalizado(ficha: dict, ataque: dict) -> dict:
     multiplicador = ataque.get("multiplicador_critico", 2)
 
     critico = (d20_result >= margem)
-    falha_critica = (d20_result == 1)
 
     aplicar_passo = ataque.get("aplicar_passo", False)
-    tipos = ataque.get("tipos_efeito", [ataque.get("tipo_efeito", "corpo")])  # ← aqui
+    tipos = ataque.get("tipos_efeito", [ataque.get("tipo_efeito", "corpo")])  
     dano_formula = ataque.get("dano", "1d6")
 
     # Cálculo do dano
@@ -79,6 +78,8 @@ def executar_ataque_personalizado(ficha: dict, ataque: dict) -> dict:
         ctx_combinado[chave] = 0
     ctx_combinado["VERDADEIRO_JUJUTSU"] = 0
 
+    print("Contexto combinado para dano:", ctx_combinado)
+
     dano_total = avaliar_dado_str(
         formula_str=dano_formula,
         contexto=ctx_combinado,
@@ -86,14 +87,12 @@ def executar_ataque_personalizado(ficha: dict, ataque: dict) -> dict:
         tipo_efeito="geral",
         params={}
     )
-    detalhes_tipos = [f"{t}" for t in tipos]
 
     dados_rolados = resultado_ataque["dados"]
     msg_ataque = f"Ataque com {pericia}: {d20_result} + {bonus_pericia} = {total_ataque}"
     if critico:
         msg_ataque += " (CRÍTICO!)"
-    elif falha_critica:
-        msg_ataque += " (FALHA CRÍTICA!)"
+        dano_total = dano_total * multiplicador
 
     mensagem = f"{msg_ataque}\nDados: {dados_rolados}\nDano total: {dano_total}"
 
@@ -105,7 +104,6 @@ def executar_ataque_personalizado(ficha: dict, ataque: dict) -> dict:
             "bonus": bonus_pericia,
             "total": total_ataque,
             "critico": critico,
-            "falha_critica": falha_critica,
             "dano": dano_total
         }
     }

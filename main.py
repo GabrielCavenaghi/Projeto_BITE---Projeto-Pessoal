@@ -43,6 +43,7 @@ class MainApp:
         ctk.CTkButton(self.app, text="Criar Nova Ficha", width=220, height=45,
                       fg_color="transparent", border_width=2,
                       command=self.abrir_criador).pack(pady=8)
+        
     
     def abrir_gerenciador(self):
         self.app.withdraw()

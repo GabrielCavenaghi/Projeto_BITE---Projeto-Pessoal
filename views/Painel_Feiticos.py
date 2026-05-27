@@ -21,6 +21,7 @@ class PainelFeiticos(ctk.CTkFrame):
         self._on_save = on_save
         self._db = self._carregar_db()
         self._construir()
+        self.bind("<Visibility>", lambda event: self.atualizar_cabecalho())
 
     def _carregar_db(self) -> dict:
         db = {}
@@ -106,6 +107,21 @@ class PainelFeiticos(ctk.CTkFrame):
 
         # Força foco (útil no Linux)
         scroll.focus_set()
+
+    def atualizar_cabecalho(self):
+        """Recalcula e atualiza o texto/cor dos pontos de feitiço dinamicamente."""
+        # Garante que a label já foi criada antes de tentar atualizá-la
+        if not hasattr(self, "_lbl_pontos_feiticos") or not self._lbl_pontos_feiticos.winfo_exists():
+            return
+            
+        pontos_disponiveis = self._ficha.get("totais_nex", {}).get("feiticos", 0)
+        qtd_atual = len(self._ficha.get("feiticos", [])) + len(self._ficha.get("feiticos_custom", []))
+
+        # Atualiza o texto e a cor da label existente sem precisar reconstruir a tela toda
+        self._lbl_pontos_feiticos.configure(
+            text=f"Feitiços: {qtd_atual} / {pontos_disponiveis}",
+            text_color="#f1c40f" if qtd_atual < pontos_disponiveis else "#e74c3c"
+        )
 
     def _abrir_criador_customizado(self, popup_pai=None):
         """Abre janela para criar um novo feitiço customizado."""

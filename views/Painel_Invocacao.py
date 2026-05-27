@@ -265,35 +265,33 @@ class PainelInvocacao(ctk.CTkFrame):
         # ══════════════════════════════════════════════════════════════════════
         # Informações do grau (pontos de atributo e máximo)
         # ══════════════════════════════════════════════════════════════════════
-        pontos_total = dados_grau_atual["pontos_atributo"]
+        # Soma 5 pontos base (um para cada atributo) aos pontos concedidos pelo grau
+        pontos_total = 5 + dados_grau_atual["pontos_atributo"]
         max_por_atrib = dados_grau_atual["maximo_atributo"]
 
-        # Calcula pontos já gastos (se editando, soma dos atributos atuais)
         if editando:
             attr_atuais = inv.get("atributos", {})
-            # Pontos gastos = soma dos valores que excedem 1 em cada atributo
-            pontos_gastos = sum(max(0, attr_atuais.get(s, 1) - 1) for s in self.ATRIBUTOS)
+            pontos_gastos = sum(attr_atuais.get(s, 0) for s in self.ATRIBUTOS)
         else:
-            pontos_gastos = 0  # todos começam com 1, nada gasto ainda
+            pontos_gastos = 5  # 1 ponto em cada atributo = 5 pontos gastos
 
         pontos_restantes = pontos_total - pontos_gastos
 
         # Label que mostra pontos disponíveis
-        lbl_pontos = ctk.CTkLabel(main, text=f"Pontos de Atributo: {pontos_restantes}/{pontos_total}  |  Máximo por atributo: {max_por_atrib}",
+        lbl_pontos = ctk.CTkLabel(main, text=f"Pontos de Atributo: {pontos_restantes}/{pontos_total-5}  |  Máximo por atributo: {max_por_atrib}",
                                   font=ctk.CTkFont(size=12, weight="bold"), text_color="#f1c40f")
         lbl_pontos.pack(anchor="w", pady=(5, 10))
 
         # ══════════════════════════════════════════════════════════════════════
-        # Atributos (agora com botões +/-)
+        # Atributos
         # ══════════════════════════════════════════════════════════════════════
         attr_vars = {}  # guarda IntVar para cada atributo
 
         def atualizar_label_pontos():
-            # Gasto é a soma de (valor - 1) para cada atributo, nunca negativo
-            gastos = sum(max(0, var.get() - 1) for var in attr_vars.values())
+            gastos = sum(var.get() for var in attr_vars.values())  # todos os pontos contam
             restantes = pontos_total - gastos
             lbl_pontos.configure(
-                text=f"Pontos para distribuir: {restantes}/{pontos_total}  |  Máximo por atributo: {max_por_atrib}"
+                text=f"Pontos para distribuir: {restantes}/{pontos_total-5}  |  Máximo por atributo: {max_por_atrib}"
             )
 
         for sigla in self.ATRIBUTOS:
@@ -321,13 +319,12 @@ class PainelInvocacao(ctk.CTkFrame):
 
             # Comandos dos botões (capturam sigla e var corretamente)
             def fazer_diminuir(s=sigla, v=var):
-                if v.get() > 0:   
+                if v.get() > 0:
                     v.set(v.get() - 1)
                     atualizar_label_pontos()
 
             def fazer_aumentar(s=sigla, v=var):
-                # Verifica se ainda há pontos disponíveis e se não atingiu o máximo por atributo
-                gastos = sum(max(0, x.get() - 1) for x in attr_vars.values())
+                gastos = sum(x.get() for x in attr_vars.values())
                 if v.get() < max_por_atrib and gastos < pontos_total:
                     v.set(v.get() + 1)
                     atualizar_label_pontos()
@@ -344,9 +341,8 @@ class PainelInvocacao(ctk.CTkFrame):
         def ao_mudar_grau(*args):
             nonlocal dados_grau_atual, pontos_total, max_por_atrib, pontos_restantes
             dados_grau_atual = obter_dados_grau(grau_var.get())
-            pontos_total = dados_grau_atual["pontos_atributo"]
+            pontos_total = 5 + dados_grau_atual["pontos_atributo"]
             max_por_atrib = dados_grau_atual["maximo_atributo"]
-            # Reseta todos os atributos para 1
             for var in attr_vars.values():
                 var.set(1)
             atualizar_label_pontos()

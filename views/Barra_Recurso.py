@@ -58,11 +58,6 @@ class BarraRecurso(ctk.CTkFrame):
                       fg_color="#2a2a2a", hover_color="#3a3a3a",
                       command=self._incrementar).pack(side="left")
 
-        ctk.CTkButton(controles, text="máx", width=46, height=30,
-                      font=ctk.CTkFont(size=11),
-                      fg_color="transparent", border_width=1,
-                      border_color="#444444", text_color="#888888",
-                      command=self._editar_maximo).pack(side="right")
 
     # ── Helpers internos ──────────────────────────────────────────────────────
 
@@ -106,36 +101,6 @@ class BarraRecurso(ctk.CTkFrame):
         except ValueError:
             pass
         self._atualizar_ui()
-
-    def _editar_maximo(self):
-        popup = ctk.CTkToplevel(self.winfo_toplevel())
-        popup.title("Editar máximo")
-        popup.geometry("280x150")
-        popup.resizable(False, False)
-        popup.after(100, popup.grab_set)
-
-        ctk.CTkLabel(popup, text="Novo valor máximo:",
-                     font=ctk.CTkFont(size=13)).pack(pady=(20, 6))
-
-        entrada = ctk.CTkEntry(popup, width=100, justify="center",
-                               font=ctk.CTkFont(size=14))
-        entrada.insert(0, str(self._maximo))
-        entrada.pack()
-        entrada.focus()
-
-        def confirmar():
-            try:
-                novo = int(entrada.get())
-                if novo >= 0:
-                    self._maximo = novo
-                    # Não reduz o atual (mantém temporários)
-                    self._atualizar_ui()
-            except ValueError:
-                pass
-            popup.destroy()
-
-        entrada.bind("<Return>", lambda _: confirmar())
-        ctk.CTkButton(popup, text="Confirmar", command=confirmar).pack(pady=12)
 
     # ── API pública ───────────────────────────────────────────────────────────
 

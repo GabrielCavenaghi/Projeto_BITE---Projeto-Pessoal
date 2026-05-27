@@ -4,7 +4,6 @@ import re
 from ficha import avaliar_formula, construir_contexto_base
 from utils.Efeitos_Scalling import string_para_tokens
 
-# Tabela de progressão de passos (pode ser importada se já definida em outro lugar)
 PASSO_MAP = {
     2:  (1, 3),      # d2 → d3
     3:  (1, 4),      # d3 → d4
@@ -13,8 +12,8 @@ PASSO_MAP = {
     8:  (1, 10),     # d8 → d10
     10: (1, 12),     # d10 → d12
     12: (2, 8),      # d12 → 2d8
-    20: (4, 12),      # d20 → 4d8
-    100:(15, 12),     # d100 → 15d8
+    20: (4, 12),     # d20 → 4d8
+    100:(15, 12),    # d100 → 15d8
 }
 
 def _aplicar_um_passo(count: int, faces: int) -> tuple[int, int]:
@@ -28,25 +27,17 @@ def _aplicar_passo(count: int, faces: int, passos: int) -> tuple[int, int]:
         count, faces = _aplicar_um_passo(count, faces)
     return count, faces
 
+
 def avaliar_dado_str(
     formula_str: str,
     ficha: dict = None,
     contexto: dict = None,
     aplicar_passo: bool = False,
-    tipo_efeito: str = "tecnica",
+    tipo_efeito: str | list = "tecnica", # <-- Agora suporta Listas de Efeitos
     params: dict = None
 ) -> int:
     """
     Avalia uma string contendo notação de dados (ex.: "50d12+AB*2", "(AB+LP)*(2*(EAd20))").
-
-    Parâmetros:
-        formula_str   : string com a fórmula (dados, operadores, variáveis)
-        ficha         : dicionário completo da ficha (usado se contexto for None)
-        contexto      : dicionário de contexto pré-construído (opcional, evita reconstruir)
-        aplicar_passo : se True, aplica bônus de passos, dados extras, bônus por dado e percentuais
-        tipo_efeito   : categoria do efeito para selecionar os bônus corretos:
-                        "tecnica", "corpo", "desarmado", "invocacao", "maldicao", "shinobi", "estilo_luta"
-        params        : dicionário de parâmetros adicionais (ex.: multiplicador_dano)
     """
     if params is None:
         params = {}
@@ -56,13 +47,11 @@ def avaliar_dado_str(
 
     formula_str = formula_str.replace(' ', '')
 
-    # Constrói contexto se não fornecido
     if contexto is None and ficha is not None:
         contexto = construir_contexto_base(ficha)
     elif contexto is None:
         contexto = {}
 
-    # Mapeamento de tipo_efeito para as chaves de bônus no contexto
     MAP_BONUS = {
         "tecnica": {
             "passo_dano": "PASSO_DANO_TECNICA",
@@ -129,67 +118,63 @@ def avaliar_dado_str(
         },
     }
 
-    # Obtém as chaves para o tipo de efeito (fallback para tecnica)
-    chaves = MAP_BONUS.get(tipo_efeito, MAP_BONUS["tecnica"])
+    # Transforma em lista caso alguém chame mandando só uma string antiga
+    lista_tipos = [tipo_efeito] if isinstance(tipo_efeito, str) else tipo_efeito
+
     bonus_passo = 0
     bonus_dados_extra = 0
     bonus_por_dado = 0
     fator_percentual_especifico = 0.0
 
     if aplicar_passo:
-        # Função auxiliar para obter valor do contexto (inteiro ou float)
         def _get(key, default=0):
             return contexto.get(key, default)
 
-        # Passo de dano principal
-        if chaves["passo_dano"]:
-            bonus_passo += int(_get(chaves["passo_dano"]))
-        # Passo extra (apenas para técnica)
-        if chaves["passo_extra"]:
-            bonus_passo += int(_get(chaves["passo_extra"]))
-        # Verdadeiro Jujutsu (apenas para técnica)
-        if tipo_efeito == "tecnica" or tipo_efeito == "maldicao" or tipo_efeito == "invocacao":
-            bonus_passo += int(_get("VERDADEIRO_JUJUTSU"))
+        # Usamos sets para garantir que chaves repetidas não sejam somadas múltiplas vezes
+        chaves_soma = {
+            "passo_dano": set(),
+            "passo_extra": set(),
+            "dado_extra": set(),
+            "por_dado": set(),
+            "percentual": set()
+        }
 
-        # Dados extras
-        if chaves["dado_extra"]:
-            bonus_dados_extra = int(_get(chaves["dado_extra"]))
+        for t in lista_tipos:
+            chaves = MAP_BONUS.get(t, MAP_BONUS["tecnica"])
+            if chaves["passo_dano"]: chaves_soma["passo_dano"].add(chaves["passo_dano"])
+            if chaves["passo_extra"]: chaves_soma["passo_extra"].add(chaves["passo_extra"])
+            if chaves["dado_extra"]: chaves_soma["dado_extra"].add(chaves["dado_extra"])
+            if chaves["por_dado"]: chaves_soma["por_dado"].add(chaves["por_dado"])
+            if chaves["percentual"]: chaves_soma["percentual"].add(chaves["percentual"])
 
-        # Bônus por dado
-        if chaves["por_dado"]:
-            bonus_por_dado = int(_get(chaves["por_dado"]))
-
-        # Percentual específico
-        if chaves["percentual"]:
-            fator_percentual_especifico = float(_get(chaves["percentual"]))
-
-        # ══════════════════════════════════════════════════════════════════════
         # Tratamento especial: desarmado também herda bônus de corpo a corpo
-        # ══════════════════════════════════════════════════════════════════════
-        if tipo_efeito == "desarmado":
+        if "desarmado" in lista_tipos:
             chaves_corpo = MAP_BONUS["corpo"]
-            if chaves_corpo["passo_dano"]:
-                bonus_passo += int(_get(chaves_corpo["passo_dano"]))
-            if chaves_corpo["dado_extra"]:
-                bonus_dados_extra += int(_get(chaves_corpo["dado_extra"]))
-            if chaves_corpo["por_dado"]:
-                bonus_por_dado += int(_get(chaves_corpo["por_dado"]))
-            if chaves_corpo["percentual"]:
-                fator_percentual_especifico += float(_get(chaves_corpo["percentual"]))
+            if chaves_corpo["passo_dano"]: chaves_soma["passo_dano"].add(chaves_corpo["passo_dano"])
+            if chaves_corpo["dado_extra"]: chaves_soma["dado_extra"].add(chaves_corpo["dado_extra"])
+            if chaves_corpo["por_dado"]: chaves_soma["por_dado"].add(chaves_corpo["por_dado"])
+            if chaves_corpo["percentual"]: chaves_soma["percentual"].add(chaves_corpo["percentual"])
 
-        # ══════════════════════════════════════════════════════════════════════
-        # ADIÇÃO DOS BÔNUS GERAIS (aplicam-se a todos os tipos)
-        # ══════════════════════════════════════════════════════════════════════
+        # Verdadeiro Jujutsu
+        if any(t in ["tecnica", "maldicao", "invocacao"] for t in lista_tipos):
+            chaves_soma["passo_extra"].add("VERDADEIRO_JUJUTSU")
+
+        # Bônus Gerais
         chaves_geral = MAP_BONUS["geral"]
-        if chaves_geral["passo_dano"]:
-            bonus_passo += int(_get(chaves_geral["passo_dano"]))
-        if chaves_geral["dado_extra"]:
-            bonus_dados_extra += int(_get(chaves_geral["dado_extra"]))
-        if chaves_geral["por_dado"]:
-            bonus_por_dado += int(_get(chaves_geral["por_dado"]))
+        if chaves_geral["passo_dano"]: chaves_soma["passo_dano"].add(chaves_geral["passo_dano"])
+        if chaves_geral["dado_extra"]: chaves_soma["dado_extra"].add(chaves_geral["dado_extra"])
+        if chaves_geral["por_dado"]: chaves_soma["por_dado"].add(chaves_geral["por_dado"])
+
+
+        # Aplica a soma real extraindo as chaves únicas
+        for k in chaves_soma["passo_dano"]: bonus_passo += int(_get(k))
+        for k in chaves_soma["passo_extra"]: bonus_passo += int(_get(k))
+        for k in chaves_soma["dado_extra"]: bonus_dados_extra += int(_get(k))
+        for k in chaves_soma["por_dado"]: bonus_por_dado += int(_get(k))
+        for k in chaves_soma["percentual"]: fator_percentual_especifico += float(_get(k))
+
 
     def rolar_dado(quant_str: str, faces_str: str) -> int:
-        # Avalia a quantidade
         if quant_str.isdigit():
             count = int(quant_str)
         else:
@@ -206,7 +191,6 @@ def avaliar_dado_str(
             if bonus_passo > 0:
                 count, faces = _aplicar_passo(count, faces, bonus_passo)
 
-        # Compressão para evitar rolagens massivas
         fator = 1
         while count > 1000:
             count //= 2
@@ -218,13 +202,11 @@ def avaliar_dado_str(
         valor_total = valor_dados + (count * bonus_por_dado * fator)
         return valor_total
 
-    # Reconstrução da string com substituição dos dados
     partes = []
     i = 0
     n = len(formula_str)
     while i < n:
         if formula_str[i] == 'd':
-            # Encontra o início da quantidade
             j = i - 1
             paren_count = 0
             while j >= 0:
@@ -238,15 +220,12 @@ def avaliar_dado_str(
             quant_start = j + 1 if j >= 0 else 0
             quant_str = formula_str[quant_start:i]
 
-            # Encontra o fim das faces
             k = i + 1
             while k < n and formula_str[k].isdigit():
                 k += 1
             faces_str = formula_str[i+1:k]
 
-            # Remove a quantidade já adicionada
             del partes[-(i - quant_start):]
-
             valor_dado = rolar_dado(quant_str, faces_str)
             partes.append(str(valor_dado))
             i = k
@@ -256,7 +235,6 @@ def avaliar_dado_str(
 
     formula_sem_dados = ''.join(partes)
 
-    # Avaliação da expressão matemática final
     try:
         tokens = string_para_tokens(formula_sem_dados)
         valor_final = avaliar_formula(tokens, contexto)
@@ -264,11 +242,9 @@ def avaliar_dado_str(
         print(f"Erro ao avaliar expressão final '{formula_sem_dados}': {e}")
         valor_final = 0
 
-    # Multiplicador exclusivo (dos params)
     if aplicar_passo:
         mult_formula = params.get("multiplicador_dano", "1")
         if mult_formula and mult_formula != "1":
-            # Chama recursivamente sem aplicar bônus de novo
             multiplicador = avaliar_dado_str(
                 mult_formula,
                 contexto=contexto,
@@ -278,7 +254,6 @@ def avaliar_dado_str(
             )
             valor_final = int(valor_final * multiplicador)
 
-    # Percentuais globais + específico
     if aplicar_passo:
         percentual_geral = float(contexto.get("DANO_PERCENTUAL_GERAL", 0))
         fator_total = 1.0 + percentual_geral + fator_percentual_especifico

@@ -320,11 +320,6 @@ def construir_contexto_base(ficha: dict) -> dict:
     # ══════════════════════════════════════════════════════════════════════════
     # ADIÇÃO AUTOMÁTICA DE TODOS OS BÔNUS PASSIVOS
     # ══════════════════════════════════════════════════════════════════════════
-    # Isso inclui:
-    #   - PASSO_DANO_TECNICA, PASSO_DANO_CORPO, PASSO_DANO_DESARMADO, etc.
-    #   - DADO_TECNICA, DADO_CORPO, DADO_DESARMADO, etc.
-    #   - DANO_PERCENTUAL_TECNICA, DANO_PERCENTUAL_GERAL, etc.
-    #   - VERDADEIRO_JUJUTSU, PERICIA_*, DEF, TR, RD_*, CURA_ACELERADA, etc.
     contexto.update(bonus)
     contexto["LP"] = lp_total
     contexto["LP_NATURAL"] = lp_natural 

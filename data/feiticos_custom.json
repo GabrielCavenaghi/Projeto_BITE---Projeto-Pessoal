@@ -133,5 +133,161 @@
             ]
         },
         "id": "custom_6b2913"
+    },
+    {
+        "nome": "Sangue de Xamã",
+        "tipo": "Passiva",
+        "classe": "Geral",
+        "grau_base": "3",
+        "descricao_base": "Recebe cura acelerada no valor do seu LP por rodada.",
+        "versoes": {
+            "ESPECIAL": "Recebe cura acelerada no valor do dobro do seu NEX.",
+            "GRAU 1": "Recebe cura acelerada no valor do TRIPLO seu LP por rodada e é imune a doenças mundanas.",
+            "GRAU 2": "Recebe cura acelerada no valor do DOBRO seu LP por rodada e é imune a doenças mundanas."
+        },
+        "efeitos_por_versao": {
+            "BASE": [
+                {
+                    "alvo": "CURA_ACELERADA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP"
+                        }
+                    ]
+                }
+            ],
+            "GRAU 2": [
+                {
+                    "alvo": "CURA_ACELERADA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 2
+                        }
+                    ]
+                }
+            ],
+            "GRAU 1": [
+                {
+                    "alvo": "CURA_ACELERADA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 3
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 2
+                        }
+                    ]
+                }
+            ],
+            "ESPECIAL": [
+                {
+                    "alvo": "CURA_ACELERADA",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "variavel",
+                            "valor": "NEX"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        "id": "custom_5c1385"
+    },
+    {
+        "nome": "Tenacidade",
+        "tipo": "Passiva",
+        "classe": "Inato",
+        "grau_base": "3",
+        "descricao_base": "Seu corpo desenvolveu a capacidade de suportar rigores extremos. Você recebe treinamento em Fortitude ou, se já for treinado nesta perícia, recebe +2 nela.",
+        "versoes": {
+            "GRAU 1": "Ao estar morrendo, mas consciente (com pelo menos 1 PV), você pode fazer um teste de Fortitude (DT 40 + 10+LP por teste anterior na mesma cena) como ação livre. Se for bem-sucedido, encerra a condição morrendo",
+            "GRAU 2": "Recebe +3 em Fortitude a cada 15% de NEX",
+            "GRAU ESPECIAL": "Altera o bônus para +5 em Fortitude a cada 15% de NEX"
+        },
+        "efeitos_por_versao": {
+            "GRAU 1": [
+                {
+                    "alvo": "PERICIA_FORTITUDE",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 2
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "+"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 3
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "*"
+                        },
+                        {
+                            "tipo": "variavel",
+                            "valor": "LP_NATURAL"
+                        },
+                        {
+                            "tipo": "operador",
+                            "valor": "/"
+                        },
+                        {
+                            "tipo": "constante",
+                            "valor": 3
+                        }
+                    ]
+                }
+            ]
+        },
+        "id": "custom_968d58"
+    },
+    {
+        "nome": "Energia de Combate",
+        "tipo": "Ativa",
+        "classe": "Inato",
+        "grau_base": "1",
+        "descricao_base": "Você gasta 10 PE para dobrar o efeito de Energia Amaldiçoada; Req: ancião em Energia Amaldiçoada.",
+        "versoes": {},
+        "efeitos_por_versao": {},
+        "id": "custom_7f92ea"
     }
 ]

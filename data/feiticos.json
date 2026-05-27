@@ -287,15 +287,15 @@
     ],
     "GRAU 2": [
         {"alvo": "DADO_CORPO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 10}]},
-        {"alvo": "PASSO_DANO_ARMADO_DESARMADO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 1}]}
+        {"alvo": "PASSO_DANO_CORPO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 1}]}
     ],
     "GRAU 1": [
         {"alvo": "DADO_CORPO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 20}]},
-        {"alvo": "PASSO_DANO_ARMADO_DESARMADO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 2}]}
+        {"alvo": "PASSO_DANO_CORPO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 2}]}
     ],
     "ESPECIAL": [
         {"alvo": "DADO_CORPO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 50}]},
-        {"alvo": "PASSO_DANO_ARMADO_DESARMADO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 4}]}
+        {"alvo": "PASSO_DANO_CORPO", "operacao": "+", "formula": [{"tipo": "constante", "valor": 4}]}
     ]
     }
   },
