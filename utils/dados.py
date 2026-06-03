@@ -127,8 +127,14 @@ def avaliar_dado_str(
     fator_percentual_especifico = 0.0
 
     if aplicar_passo:
+        # Substitua a função _get atual por esta:
         def _get(key, default=0):
-            return contexto.get(key, default)
+            if key in contexto:
+                return contexto[key]
+            # Fallback: busca direto em bonus_passivos da ficha
+            if ficha is not None:
+                return ficha.get("bonus_passivos", {}).get(key, default)
+            return default
 
         # Usamos sets para garantir que chaves repetidas não sejam somadas múltiplas vezes
         chaves_soma = {
@@ -164,6 +170,7 @@ def avaliar_dado_str(
         if chaves_geral["passo_dano"]: chaves_soma["passo_dano"].add(chaves_geral["passo_dano"])
         if chaves_geral["dado_extra"]: chaves_soma["dado_extra"].add(chaves_geral["dado_extra"])
         if chaves_geral["por_dado"]: chaves_soma["por_dado"].add(chaves_geral["por_dado"])
+        if chaves_geral["percentual"]: chaves_soma["percentual"].add(chaves_geral["percentual"])    
 
 
         # Aplica a soma real extraindo as chaves únicas
@@ -172,6 +179,12 @@ def avaliar_dado_str(
         for k in chaves_soma["dado_extra"]: bonus_dados_extra += int(_get(k))
         for k in chaves_soma["por_dado"]: bonus_por_dado += int(_get(k))
         for k in chaves_soma["percentual"]: fator_percentual_especifico += float(_get(k))
+        
+        print(f"lista_tipos: {lista_tipos}")
+        print(f"chaves_soma percentual: {chaves_soma['percentual']}")
+        for k in chaves_soma["percentual"]:
+            v = contexto.get(k, 'NAO_EXISTE')
+            print(f"  {k} = {v} (type: {type(v).__name__})")
 
 
     def rolar_dado(quant_str: str, faces_str: str) -> int:
@@ -255,8 +268,8 @@ def avaliar_dado_str(
             valor_final = int(valor_final * multiplicador)
 
     if aplicar_passo:
-        percentual_geral = float(contexto.get("DANO_PERCENTUAL_GERAL", 0))
-        fator_total = 1.0 + percentual_geral + fator_percentual_especifico
+        print(f"Bônus Passo: {bonus_passo}, bônus dado extra: {bonus_dados_extra}, bônus dano por dado: {bonus_por_dado}, fator percentual específico: {fator_percentual_especifico}")
+        fator_total = 1.0 + fator_percentual_especifico
         valor_final = int(valor_final * fator_total)
 
     return int(valor_final)

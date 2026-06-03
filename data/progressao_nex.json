@@ -8,7 +8,7 @@
     "35%":    { "graus_treinamento": 1, "lp": 7 },
     "40%":    { "habilidade_trilha": 1, "feiticos": 1, "lp": 8 },
     "45%":    { "feiticos": 1, "lp": 9 },
-    "50%":    { "pontos_atributo": 2, "afinidade": 1, "expansao_modo": 1, "lp": 10 },
+    "50%":    { "pontos_atributo": 1, "feiticos": 1, "afinidade": 1, "expansao_modo": 1, "lp": 10 },
     "55%":    { "feiticos": 1, "lp": 11 },
     "60%":    { "feiticos": 1, "lp": 12 },
     "65%":    { "habilidade_trilha": 1, "lp": 13 },

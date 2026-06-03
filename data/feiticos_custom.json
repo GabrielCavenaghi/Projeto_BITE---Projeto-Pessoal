@@ -289,5 +289,31 @@
         "versoes": {},
         "efeitos_por_versao": {},
         "id": "custom_7f92ea"
+    },
+    {
+        "nome": "Invocação favorita",
+        "tipo": "Passiva",
+        "classe": "Invocador",
+        "grau_base": "3",
+        "descricao_base": "Gasto de PE -1 para uma única invocação escolhida posteriormente.",
+        "versoes": {
+            "ESPECIAL": "Mude o efeito para +3 passos e 25% dos PV máximos em PV temporário.",
+            "GRAU 1": "A invocação recebe +1 passo de dano e no início de um combate ele recebe 10% dos PV máximos em PV temporário.\n+1(Especialista em Invocaçoes)"
+        },
+        "efeitos_por_versao": {
+            "GRAU 1": [
+                {
+                    "alvo": "PASSO_DANO_INVOCACAO",
+                    "operacao": "+",
+                    "formula": [
+                        {
+                            "tipo": "constante",
+                            "valor": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        "id": "custom_e7c507"
     }
 ]
